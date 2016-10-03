@@ -1,0 +1,97 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+    </ion-navbar>
+
+    <ion-toolbar primary no-border-top>
+        <ion-segment [(ngModel)]="tournamentView" light>
+            <ion-segment-button value="completed">
+                Completed
+            </ion-segment-button>
+            <ion-segment-button value="ongoing">
+                Ongoing
+            </ion-segment-button>
+            <ion-segment-button value="upcoming">
+                Upcoming
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <!--<div padding>-->
+        <!--<ion-segment [(ngModel)]="tournamentView">-->
+            <!--<ion-segment-button value="my">-->
+                <!--My Tournaments-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="all">-->
+                <!--All Tournaments-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</div>-->
+
+    <div [ngSwitch]="tournamentView">
+<div *ngSwitchCase="'ongoing'">
+
+        <ion-list>
+            <ion-list-header text-wrap>
+                <ion-avatar item-left>
+                    <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png" alt="">
+                </ion-avatar>
+                Zero Gravity Fall 2016 - New England Circut
+            </ion-list-header>
+
+            <ion-item text-wrap *ngFor="let tournament of myTournaments">
+            <!--<ion-thumbnail item-left>-->
+            <!--<img src="{{tournament.img}}">-->
+            <!--</ion-thumbnail>-->
+            <h2>{{tournament.name}}</h2>
+            <p>September 3 - 4, 2016</p>
+        </ion-item>
+
+        </ion-list>
+
+    <ion-list text-wrap>
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png" alt="">
+            </ion-avatar>
+            Zero Gravity Fall 2016 - New England Circut 2878237780074878872
+        </ion-item>
+        <a ion-item *ngFor="let tournament of myTournaments">
+            <h2>{{tournament.name}}</h2>
+            <p>September 3 - 4, 2016</p>
+        </a>
+    </ion-list>
+</div>
+
+        <ion-list *ngSwitchCase="'upcoming'">
+            <ion-list-header text-wrap>
+                <ion-avatar item-left>
+                    <img src="../../../../basketball.svg" alt="">
+                </ion-avatar>
+                Hoop Group Winter 2016
+            </ion-list-header>
+
+            <ion-item text-wrap *ngFor="let tournament of allTournaments">
+                <!--<ion-thumbnail item-left>-->
+                <!--<img src="{{tournament.img}}">-->
+                <!--</ion-thumbnail>-->
+                <h2>{{tournament.name}}</h2>
+                <p>12/12/12 - 4/4/4</p>
+            </ion-item>
+
+            <ion-item text-wrap *ngFor="let season of allSeasons">
+                <!--<ion-thumbnail item-left>-->
+                <!--<img src="{{tournament.img}}">-->
+                <!--</ion-thumbnail>-->
+                <h2>{{season.HoopGroup.name}}</h2>
+                <p>September 3 - 4, 2016</p>
+            </ion-item>
+        </ion-list>
+    </div>
+
+</ion-content>

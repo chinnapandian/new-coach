@@ -16,17 +16,17 @@ export class SelectPackPage {
 
   private packs: any = [
     {
-      name: 'Personal Pack',
+      name: 'Personal Pass',
       description: 'Get access for you and your player for the entire tournament season.',
       img: '../../../../personal-pack.svg',
       price: 2.99
     },{
-      name: 'Family Pack',
+      name: 'Family Pass',
       description: 'Lorem Ipsum',
       img: '../../../../family-pack.svg',
       price: 3.99
     },{
-      name: 'Team Pack',
+      name: 'Team Pass',
       description: 'Lorem Ipsum',
       img: '../../../../team-pack.svg',
       price: 1.99

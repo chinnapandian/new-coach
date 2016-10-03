@@ -5,7 +5,7 @@
                 <!--<ion-icon ios="ios-add-circle-outline" md="md-add"></ion-icon>-->
             <!--</button>-->
 
-            <button (click)="goToMenuPage()">
+            <button (click)="goToGenderPage()">
                 <ion-icon name="add"></ion-icon>
             </button>
         </ion-buttons>
@@ -26,33 +26,33 @@
 
 <ion-content class="teams">
 
-    <div (click)="presentTeamActionSheet()">
-        <img src="../../welcome-5.svg" alt="">
-    </div>
+    <!--<div (click)="presentTeamActionSheet()">-->
+        <!--<img src="../../welcome-5.svg" alt="">-->
+    <!--</div>-->
     <!--Basketball-->
-    <!--<ion-list>-->
+    <ion-list>
         <!--<ion-list-header>Basketball</ion-list-header>-->
 
-        <!--<ion-item-sliding  *ngFor="let basketballTeam of basketballTeams">-->
+        <ion-item-sliding  *ngFor="let basketballTeam of basketballTeams">
 
-            <!--<a ion-item text-wrap (click)="goToThisTeamPage()">-->
-                <!--<ion-thumbnail item-left>-->
-                    <!--<img src="{{basketballTeam.img}}">-->
-                <!--</ion-thumbnail>-->
-                <!--<h2 title>{{basketballTeam.name}}</h2>-->
-                <!--<p sub>Coach {{basketballTeam.coach}}</p>-->
-                <!--&lt;!&ndash;<p><span success>In Season</span></p>&ndash;&gt;-->
-            <!--</a>-->
+            <a ion-item text-wrap (click)="goToThisTeamPage()">
+                <ion-thumbnail item-left>
+                    <img src="{{basketballTeam.img}}">
+                </ion-thumbnail>
+                <h2 title>{{basketballTeam.name}}</h2>
+                <p sub>Coach {{basketballTeam.coach}}</p>
+                <!--<p><span success>In Season</span></p>-->
+            </a>
 
-            <!--<ion-item-options side="right">-->
-                <!--<button danger (click)="goToTournamentDetailsPage()">-->
-                    <!--<ion-icon name="remove-circle"></ion-icon>-->
-                    <!--Remove-->
-                <!--</button>-->
-            <!--</ion-item-options>-->
+            <ion-item-options side="right">
+                <button danger (click)="goToTournamentDetailsPage()">
+                    <ion-icon name="remove-circle"></ion-icon>
+                    Remove
+                </button>
+            </ion-item-options>
 
-        <!--</ion-item-sliding>-->
-    <!--</ion-list>-->
+        </ion-item-sliding>
+    </ion-list>
 
     <!--Soccer-->
     <!--<ion-list>-->

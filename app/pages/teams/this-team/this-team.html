@@ -27,16 +27,39 @@
     </ion-list>
 
     <ion-list>
-        <a ion-item text-wrap *ngFor="let teamPage of teamPages">
-            <ion-note item-right>{{teamPage.num}}</ion-note>
-            <h2 primary>{{teamPage.name}}</h2>
+        <a ion-item (click)="goToSeasonsPage()">
+            <h2>Tournaments</h2>
+        </a>
+        <a ion-item (click)="goToSeasonsPage()">
+            <h2>Leagues</h2>
         </a>
     </ion-list>
 
-    <div padding>
-        <button block outline>
-            Get Premium Access
-        </button>
-    </div>
+    <ion-list>
+        <a ion-item (click)="goToSeasonsPage()">
+            <h2>Message Board</h2>
+        </a>
+        <a ion-item (click)="goToSeasonsPage()">
+            <h2>Practice Schedule</h2>
+        </a>
+        <a ion-item (click)="goToSeasonsPage()">
+            <h2>Team Events</h2>
+        </a>
+        <a ion-item (click)="goToSeasonsPage()">
+            <h2>Roster</h2>
+        </a>
+    </ion-list>
+
+    <ion-list>
+        <a ion-item (click)="goToSeasonsPage()">
+            <h2>Player Stats</h2>
+        </a>
+    </ion-list>
+
+    <!--<div padding>-->
+        <!--<button block outline>-->
+            <!--Get Premium Access-->
+        <!--</button>-->
+    <!--</div>-->
 
 </ion-content>

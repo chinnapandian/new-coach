@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, ModalController} from 'ionic-angular';
-import {MessageBoardPage} from '../../message-board/message-board';
+import {SeasonsPage} from './seasons/seasons';
 
 @Component({
   templateUrl: 'build/pages/teams/this-team/this-team.html'
@@ -19,12 +19,12 @@ export class ThisTeamPage {
   
   private teamPages: any = [
     {
-      name: 'Tournaments',
-      num: 'Premium Access',
+      name: 'Seasons / Tournaments',
+      num: '',
       icon: 'trophy'
     },{
       name: 'Leagues',
-      num: 'Premium Access',
+      num: '',
       icon: 'calendar'
     },{
       name: 'Practice Schedule',
@@ -52,9 +52,9 @@ export class ThisTeamPage {
       private modalCtrl: ModalController) {
   }
 
-  // goToMessageBoardPage(){
-  //   this.navCtrl.push(MessageBoardPage);
-  // }
+  goToSeasonsPage(){
+    this.navCtrl.push(SeasonsPage);
+  }
 
   dismiss() {
     this.viewCtrl.dismiss();

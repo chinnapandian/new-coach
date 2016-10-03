@@ -119,9 +119,9 @@ export class TeamsPage {
     actionSheet.present();
   }
 
-  goToMenuPage() {
-    let selectTeamModal = this.modalCtrl.create(AddMenuPage);
-    selectTeamModal.present();
+  goToGenderPage() {
+    let x = this.modalCtrl.create(SelectGenderPage);
+    x.present();
   };
 
 }

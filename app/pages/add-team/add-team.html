@@ -1,8 +1,15 @@
 <ion-header>
     <ion-navbar primary>
 
-        <!--<ion-title>Find Your Team</ion-title>-->
-        <ion-searchbar (input)="getItems($event)" placeholder="Find Your Team"></ion-searchbar>
+        <ion-title>Find Your Team</ion-title>
+        <!--<ion-searchbar (input)="getItems($event)" placeholder="Find Your Team"></ion-searchbar>-->
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
 
     </ion-navbar>
 
@@ -29,10 +36,11 @@
             Spartans Organization
         </ion-list-header>
 
-        <a ion-item text-wrap *ngFor="let spartan of spartans" (click)="goToSelectedTeamPage()">
+        <ion-item text-wrap *ngFor="let spartan of spartans">
             <h2>{{spartan.name}}</h2>
             <p>Coach {{spartan.coach}}</p>
-        </a>
+            <button item-right outline (click)="dismiss()">Follow</button>
+        </ion-item>
     </ion-list>
 
     <!--List of teams, grouped by org-->
@@ -46,6 +54,7 @@
         <a ion-item text-wrap *ngFor="let warrior of warriors" (click)="goToTournamentPage()">
             <h2>{{warrior.name}}</h2>
             <p>Coach {{warrior.coach}}</p>
+            <button item-right outline>Follow</button>
         </a>
     </ion-list>
 

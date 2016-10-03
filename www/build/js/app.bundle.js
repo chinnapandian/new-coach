@@ -34,43 +34,7 @@ var MyApp = (function () {
 exports.MyApp = MyApp;
 ionic_angular_1.ionicBootstrap(MyApp);
 
-},{"./pages/teams/teams":17,"@angular/core":177,"ionic-angular":491,"ionic-native":518}],2:[function(require,module,exports){
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = require('@angular/core');
-var ionic_angular_1 = require('ionic-angular');
-var select_gender_1 = require('../add-team/select-gender/select-gender');
-var AddMenuPage = (function () {
-    function AddMenuPage(navCtrl, viewCtrl, modalCtrl) {
-        this.navCtrl = navCtrl;
-        this.viewCtrl = viewCtrl;
-        this.modalCtrl = modalCtrl;
-    }
-    AddMenuPage.prototype.goToSelectGenderPage = function () {
-        this.navCtrl.push(select_gender_1.SelectGenderPage);
-    };
-    AddMenuPage.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
-    };
-    AddMenuPage = __decorate([
-        core_1.Component({
-            templateUrl: 'build/pages/add-menu/add-menu.html'
-        }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.ViewController, ionic_angular_1.ModalController])
-    ], AddMenuPage);
-    return AddMenuPage;
-}());
-exports.AddMenuPage = AddMenuPage;
-
-},{"../add-team/select-gender/select-gender":5,"@angular/core":177,"ionic-angular":491}],3:[function(require,module,exports){
+},{"./pages/teams/teams":16,"@angular/core":177,"ionic-angular":491,"ionic-native":518}],2:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -177,7 +141,7 @@ var AddTeamPage = (function () {
 }());
 exports.AddTeamPage = AddTeamPage;
 
-},{"./selected-team/selected-team":9,"@angular/core":177,"ionic-angular":491}],4:[function(require,module,exports){
+},{"./selected-team/selected-team":8,"@angular/core":177,"ionic-angular":491}],3:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -240,7 +204,7 @@ var FilterSeachPage = (function () {
 }());
 exports.FilterSeachPage = FilterSeachPage;
 
-},{"../add-team":3,"@angular/core":177,"ionic-angular":491}],5:[function(require,module,exports){
+},{"../add-team":2,"@angular/core":177,"ionic-angular":491}],4:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -284,7 +248,7 @@ var SelectGenderPage = (function () {
 }());
 exports.SelectGenderPage = SelectGenderPage;
 
-},{"../select-state/select-state":7,"@angular/core":177,"ionic-angular":491}],6:[function(require,module,exports){
+},{"../select-state/select-state":6,"@angular/core":177,"ionic-angular":491}],5:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -311,17 +275,17 @@ var SelectPackPage = (function () {
         ];
         this.packs = [
             {
-                name: 'Personal Pack',
+                name: 'Personal Pass',
                 description: 'Get access for you and your player for the entire tournament season.',
                 img: '../../../../personal-pack.svg',
                 price: 2.99
             }, {
-                name: 'Family Pack',
+                name: 'Family Pass',
                 description: 'Lorem Ipsum',
                 img: '../../../../family-pack.svg',
                 price: 3.99
             }, {
-                name: 'Team Pack',
+                name: 'Team Pass',
                 description: 'Lorem Ipsum',
                 img: '../../../../team-pack.svg',
                 price: 1.99
@@ -379,7 +343,7 @@ var SelectPackPage = (function () {
 }());
 exports.SelectPackPage = SelectPackPage;
 
-},{"@angular/core":177,"ionic-angular":491}],7:[function(require,module,exports){
+},{"@angular/core":177,"ionic-angular":491}],6:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -660,7 +624,7 @@ var SelectStatePage = (function () {
 }());
 exports.SelectStatePage = SelectStatePage;
 
-},{"../add-team":3,"@angular/core":177,"ionic-angular":491}],8:[function(require,module,exports){
+},{"../add-team":2,"@angular/core":177,"ionic-angular":491}],7:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -752,7 +716,7 @@ var SelectedSeasonPage = (function () {
 }());
 exports.SelectedSeasonPage = SelectedSeasonPage;
 
-},{"../select-pack/select-pack":6,"@angular/core":177,"ionic-angular":491}],9:[function(require,module,exports){
+},{"../select-pack/select-pack":5,"@angular/core":177,"ionic-angular":491}],8:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -829,7 +793,7 @@ var SelectedTeamPage = (function () {
 }());
 exports.SelectedTeamPage = SelectedTeamPage;
 
-},{"../selected-season/selected-season":8,"@angular/core":177,"ionic-angular":491}],10:[function(require,module,exports){
+},{"../selected-season/selected-season":7,"@angular/core":177,"ionic-angular":491}],9:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -889,7 +853,7 @@ var HomePage = (function () {
 }());
 exports.HomePage = HomePage;
 
-},{"../settings/team-settings/team-settings":15,"../tournament/details/details":19,"../tournament/tabs/tabs":28,"@angular/core":177,"ionic-angular":491}],11:[function(require,module,exports){
+},{"../settings/team-settings/team-settings":14,"../tournament/details/details":19,"../tournament/tabs/tabs":28,"@angular/core":177,"ionic-angular":491}],10:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -920,7 +884,7 @@ var ComposePage = (function () {
 }());
 exports.ComposePage = ComposePage;
 
-},{"@angular/core":177,"ionic-angular":491}],12:[function(require,module,exports){
+},{"@angular/core":177,"ionic-angular":491}],11:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -992,7 +956,7 @@ var MessageBoardPage = (function () {
 }());
 exports.MessageBoardPage = MessageBoardPage;
 
-},{"./compose/compose":11,"@angular/core":177,"ionic-angular":491}],13:[function(require,module,exports){
+},{"./compose/compose":10,"@angular/core":177,"ionic-angular":491}],12:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1037,7 +1001,7 @@ var PracticeSchedulePage = (function () {
 }());
 exports.PracticeSchedulePage = PracticeSchedulePage;
 
-},{"@angular/core":177,"ionic-angular":491}],14:[function(require,module,exports){
+},{"@angular/core":177,"ionic-angular":491}],13:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1072,7 +1036,7 @@ var SettingsListPage = (function () {
 }());
 exports.SettingsListPage = SettingsListPage;
 
-},{"@angular/core":177,"ionic-angular":491}],15:[function(require,module,exports){
+},{"@angular/core":177,"ionic-angular":491}],14:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1126,7 +1090,7 @@ var TeamSettingsPage = (function () {
 }());
 exports.TeamSettingsPage = TeamSettingsPage;
 
-},{"@angular/core":177,"ionic-angular":491}],16:[function(require,module,exports){
+},{"@angular/core":177,"ionic-angular":491}],15:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1160,7 +1124,7 @@ var TeamTabsPage = (function () {
 }());
 exports.TeamTabsPage = TeamTabsPage;
 
-},{"../../home/home":10,"../../message-board/message-board":12,"../../practice-schedule/practice-schedule":13,"@angular/core":177,"ionic-angular":491}],17:[function(require,module,exports){
+},{"../../home/home":9,"../../message-board/message-board":11,"../../practice-schedule/practice-schedule":12,"@angular/core":177,"ionic-angular":491}],16:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1180,7 +1144,6 @@ var tabs_1 = require('./tabs/tabs');
 var this_team_1 = require('./this-team/this-team');
 var find_tourn_1 = require('../tournament/find/find-tourn');
 var select_gender_1 = require("../add-team/select-gender/select-gender");
-var add_menu_1 = require("../add-menu/add-menu");
 var TeamsPage = (function () {
     function TeamsPage(navCtrl, modalCtrl, asCtrl) {
         this.navCtrl = navCtrl;
@@ -1272,9 +1235,9 @@ var TeamsPage = (function () {
         });
         actionSheet.present();
     };
-    TeamsPage.prototype.goToMenuPage = function () {
-        var selectTeamModal = this.modalCtrl.create(add_menu_1.AddMenuPage);
-        selectTeamModal.present();
+    TeamsPage.prototype.goToGenderPage = function () {
+        var x = this.modalCtrl.create(select_gender_1.SelectGenderPage);
+        x.present();
     };
     ;
     TeamsPage = __decorate([
@@ -1287,7 +1250,7 @@ var TeamsPage = (function () {
 }());
 exports.TeamsPage = TeamsPage;
 
-},{"../add-menu/add-menu":2,"../add-team/filter-search/filter-search":4,"../add-team/select-gender/select-gender":5,"../settings/settings-list":14,"../tournament/details/details":19,"../tournament/find/find-tourn":25,"./tabs/tabs":16,"./this-team/this-team":18,"@angular/core":177,"ionic-angular":491}],18:[function(require,module,exports){
+},{"../add-team/filter-search/filter-search":3,"../add-team/select-gender/select-gender":4,"../settings/settings-list":13,"../tournament/details/details":19,"../tournament/find/find-tourn":25,"./tabs/tabs":15,"./this-team/this-team":18,"@angular/core":177,"ionic-angular":491}],17:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1300,6 +1263,107 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
+var SeasonsPage = (function () {
+    function SeasonsPage(navCtrl, viewCtrl, modalCtrl) {
+        this.navCtrl = navCtrl;
+        this.viewCtrl = viewCtrl;
+        this.modalCtrl = modalCtrl;
+        this.tournamentView = 'ongoing';
+        this.myTournaments = [
+            {
+                name: 'Zero Gravity Battle of the Baskets',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }, {
+                name: 'Zero Gravity Fall Showdown',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }, {
+                name: 'Zero Gravity King of the Coast',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }
+        ];
+        this.allSeasons = [
+            {
+                HoopGroup: [
+                    {
+                        name: 'Zero Gravity Battle of the Baskets',
+                        img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                        price: .99
+                    }
+                ],
+                StarGroup: [
+                    {
+                        name: 'Zero Gravity Battle of the Baskets',
+                        img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                        price: .99
+                    }
+                ],
+            }
+        ];
+        this.allTournaments = [
+            {
+                name: 'Zero Gravity Battle of the Baskets',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }, {
+                name: 'Zero Gravity Fall Showdown',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }, {
+                name: 'Zero Gravity King of the Coast',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }, {
+                name: 'Zero Gravity Rumble at The RIM',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }, {
+                name: 'Zero Gravity Fall Brawl',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }, {
+                name: 'Zero Gravity Live at The House',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }, {
+                name: 'Zero Gravity Beast of The East',
+                img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png',
+                price: .99
+            }
+        ];
+    }
+    // goToMessageBoardPage(){
+    //   this.navCtrl.push(MessageBoardPage);
+    // }
+    SeasonsPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
+    };
+    SeasonsPage = __decorate([
+        core_1.Component({
+            templateUrl: 'build/pages/teams/this-team/seasons/seasons.html'
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.ViewController, ionic_angular_1.ModalController])
+    ], SeasonsPage);
+    return SeasonsPage;
+}());
+exports.SeasonsPage = SeasonsPage;
+
+},{"@angular/core":177,"ionic-angular":491}],18:[function(require,module,exports){
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var ionic_angular_1 = require('ionic-angular');
+var seasons_1 = require('./seasons/seasons');
 var ThisTeamPage = (function () {
     function ThisTeamPage(navCtrl, viewCtrl, modalCtrl) {
         this.navCtrl = navCtrl;
@@ -1314,12 +1378,12 @@ var ThisTeamPage = (function () {
         ];
         this.teamPages = [
             {
-                name: 'Tournaments',
-                num: 'Premium Access',
+                name: 'Seasons / Tournaments',
+                num: '',
                 icon: 'trophy'
             }, {
                 name: 'Leagues',
-                num: 'Premium Access',
+                num: '',
                 icon: 'calendar'
             }, {
                 name: 'Practice Schedule',
@@ -1340,9 +1404,9 @@ var ThisTeamPage = (function () {
             }
         ];
     }
-    // goToMessageBoardPage(){
-    //   this.navCtrl.push(MessageBoardPage);
-    // }
+    ThisTeamPage.prototype.goToSeasonsPage = function () {
+        this.navCtrl.push(seasons_1.SeasonsPage);
+    };
     ThisTeamPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
     };
@@ -1356,7 +1420,7 @@ var ThisTeamPage = (function () {
 }());
 exports.ThisTeamPage = ThisTeamPage;
 
-},{"@angular/core":177,"ionic-angular":491}],19:[function(require,module,exports){
+},{"./seasons/seasons":17,"@angular/core":177,"ionic-angular":491}],19:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
