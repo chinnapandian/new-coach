@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <!--<ion-title>Find Your Team</ion-title>-->
+        <ion-searchbar (input)="getItems($event)" placeholder="Find Your Team"></ion-searchbar>
+
+    </ion-navbar>
+
+    <!--<ion-toolbar primary>-->
+        <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
+    <!--</ion-toolbar>-->
+
+</ion-header>
+
+<ion-content>
+
+    <!--<ion-toolbar>-->
+        <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
+    <!--</ion-toolbar>-->
+
+
+    <!--List of teams, grouped by org-->
+    <ion-list>
+
+        <ion-list-header>
+            <ion-avatar item-left>
+                <img src="http://meltonbasketball.com.au/wp-content/uploads/2011/12/Spartans.jpg">
+            </ion-avatar>
+            Spartans Organization
+        </ion-list-header>
+
+        <a ion-item text-wrap *ngFor="let spartan of spartans" (click)="goToSelectedTeamPage()">
+            <h2>{{spartan.name}}</h2>
+            <p>Coach {{spartan.coach}}</p>
+        </a>
+    </ion-list>
+
+    <!--List of teams, grouped by org-->
+    <ion-list>
+        <ion-list-header>
+            <ion-avatar item-left>
+                <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h20130516031215111ae120e164a8948/OSA.png">
+            </ion-avatar>
+            Warriors Organization
+        </ion-list-header>
+        <a ion-item text-wrap *ngFor="let warrior of warriors" (click)="goToTournamentPage()">
+            <h2>{{warrior.name}}</h2>
+            <p>Coach {{warrior.coach}}</p>
+        </a>
+    </ion-list>
+
+    <div padding>
+        <button outline block>Don't See Your Team?</button>
+    </div>
+
+</ion-content>

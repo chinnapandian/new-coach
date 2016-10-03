@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-navbar primary>
+        <ion-buttons start>
+            <!--<button (click)="goToFilterSeachPage()">-->
+                <!--<ion-icon ios="ios-add-circle-outline" md="md-add"></ion-icon>-->
+            <!--</button>-->
+
+            <button (click)="goToMenuPage()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>My Teams</ion-title>
+        <!--<ion-searchbar (input)="getItems($event)" placeholder="Search Tournaments"></ion-searchbar>-->
+        <ion-buttons end>
+            <button (click)="goToSettingsListPage()">
+                <ion-icon name="settings"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+    <!--<ion-toolbar primary>-->
+    <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
+    <!--</ion-toolbar>-->
+
+</ion-header>
+
+<ion-content class="teams">
+
+    <div (click)="presentTeamActionSheet()">
+        <img src="../../welcome-5.svg" alt="">
+    </div>
+    <!--Basketball-->
+    <!--<ion-list>-->
+        <!--<ion-list-header>Basketball</ion-list-header>-->
+
+        <!--<ion-item-sliding  *ngFor="let basketballTeam of basketballTeams">-->
+
+            <!--<a ion-item text-wrap (click)="goToThisTeamPage()">-->
+                <!--<ion-thumbnail item-left>-->
+                    <!--<img src="{{basketballTeam.img}}">-->
+                <!--</ion-thumbnail>-->
+                <!--<h2 title>{{basketballTeam.name}}</h2>-->
+                <!--<p sub>Coach {{basketballTeam.coach}}</p>-->
+                <!--&lt;!&ndash;<p><span success>In Season</span></p>&ndash;&gt;-->
+            <!--</a>-->
+
+            <!--<ion-item-options side="right">-->
+                <!--<button danger (click)="goToTournamentDetailsPage()">-->
+                    <!--<ion-icon name="remove-circle"></ion-icon>-->
+                    <!--Remove-->
+                <!--</button>-->
+            <!--</ion-item-options>-->
+
+        <!--</ion-item-sliding>-->
+    <!--</ion-list>-->
+
+    <!--Soccer-->
+    <!--<ion-list>-->
+        <!--<ion-list-header>Soccer</ion-list-header>-->
+
+        <!--<ion-item-sliding  *ngFor="let soccerTeam of soccerTeams">-->
+
+            <!--<a ion-item text-wrap (click)="presentTeamActionSheet()">-->
+                <!--<ion-thumbnail item-left>-->
+                    <!--<img src="{{soccerTeam.img}}">-->
+                <!--</ion-thumbnail>-->
+                <!--<h2>{{soccerTeam.name}}</h2>-->
+                <!--<p>Coach {{soccerTeam.coach}}</p>-->
+                <!--&lt;!&ndash;<p><span danger-lite>Out of Season</span></p>&ndash;&gt;-->
+            <!--</a>-->
+
+            <!--<ion-item-options side="right">-->
+                <!--<button danger (click)="goToTournamentDetailsPage()">-->
+                    <!--<ion-icon name="remove-circle"></ion-icon>-->
+                    <!--Remove-->
+                <!--</button>-->
+            <!--</ion-item-options>-->
+
+        <!--</ion-item-sliding>-->
+    <!--</ion-list>-->
+
+</ion-content>

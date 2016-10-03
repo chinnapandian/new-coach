@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-title>Select Pack</ion-title>
+
+        <ion-buttons end>
+            <button>
+                <ion-icon name="help-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngSwitch]="seasonOrTournament">
+
+    <ion-list>
+        <ion-item text-wrap *ngFor="let spartan of spartans" (click)="dismiss()">
+            <ion-thumbnail item-left>
+                <img src="{{spartan.img}}">
+            </ion-thumbnail>
+            <h2 title>{{spartan.name}}</h2>
+            <p sub>May 2 - 3, 2016</p>
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngFor="let pack of packs">
+        <ion-item text-wrap>
+            <ion-thumbnail item-left>
+                <img src="{{pack.img}}">
+            </ion-thumbnail>
+            <h2 title>{{pack.name}}</h2>
+            <p sub>{{pack.description}}</p>
+            <button item-right outline>${{pack.price}}</button>
+        </ion-item>
+    </ion-list>
+
+
+</ion-content>

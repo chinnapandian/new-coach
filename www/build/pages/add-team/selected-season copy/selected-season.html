@@ -1,0 +1,100 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+        <ion-buttons end>
+            <button>
+                <ion-icon name="help-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngSwitch]="seasonOrTournament">
+
+    <ion-list>
+        <ion-item text-wrap *ngFor="let spartan of spartans" (click)="dismiss()">
+            <ion-thumbnail item-left>
+                <img src="{{spartan.img}}">
+            </ion-thumbnail>
+            <h2 title>{{spartan.name}}</h2>
+            <p sub>May 2 - 3, 2016</p>
+        </ion-item>
+
+        <ion-item text-wrap>
+            <p>Select the tournament you want, or purchase access to all tournaments at once with a Season Pass, which gives you and your player access.</p>
+            <div padding-top>
+                <button block success>Get Season Pass</button>
+            </div>
+        </ion-item>
+    </ion-list>
+    <!--<div padding-horizontal padding-bottom>-->
+        <!--<ion-segment [(ngModel)]="seasonOrTournament">-->
+            <!--<ion-segment-button value="seasons">-->
+                <!--Seasons-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="tournaments">-->
+                <!--Tournaments-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</div>-->
+
+    <!--<ion-list *ngSwitchCase="'seasons'">-->
+
+        <!--<ion-item text-wrap>-->
+            <!--<h2>Basic Access</h2>-->
+            <!--<p>Get access to your teams practice schedules and message board with alters for each</p>-->
+            <!--<button item-right outline>Free</button>-->
+        <!--</ion-item>-->
+
+        <!--<ion-item text-wrap>-->
+            <!--<h2>Premium Access</h2>-->
+            <!--<p>Get access to everything from the basic team access, plus access every tournament schedule and standings data for every tournament they play in</p>-->
+            <!--<button item-right outline>4.99</button>-->
+        <!--</ion-item>-->
+        <!---->
+    <!--</ion-list>-->
+
+    <ion-list>
+        <ion-list-header>Tournaments in this season</ion-list-header>
+
+        <ion-item text-wrap *ngFor="let tournament of tournaments">
+            <!--<ion-thumbnail item-left>-->
+                <!--<img src="{{tournament.img}}">-->
+            <!--</ion-thumbnail>-->
+            <h2>{{tournament.name}}</h2>
+            <p>12/12/12 - 4/4/4</p>
+            <button item-right outline>${{tournament.price}}</button>
+        </ion-item>
+    </ion-list>
+
+    <!--<ion-list *ngSwitchCase="'tournaments'">-->
+        <!--<a ion-item text-wrap *ngFor="let tourn of tournaments" >-->
+            <!--<ion-thumbnail item-left>-->
+                <!--<img src="{{tourn.img}}">-->
+            <!--</ion-thumbnail>-->
+            <!--<span>{{tourn.name}}</span>-->
+            <!--<p>12/12/12 - 4/4/4</p>-->
+            <!--<button item-right outline>${{tourn.price}}</button>-->
+        <!--</a>-->
+
+    <!--</ion-list>-->
+
+</ion-content>
+
+
+<!--<ion-footer>-->
+    <!--<ion-toolbar>-->
+        <!--<ion-segment [(ngModel)]="seasonOrTournament">-->
+            <!--<ion-segment-button value="seasons">-->
+                <!--Seasons-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="tournaments">-->
+                <!--Tournaments-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</ion-toolbar>-->
+<!--</ion-footer>-->

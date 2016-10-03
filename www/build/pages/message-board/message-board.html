@@ -1,0 +1,43 @@
+<ion-header class="message-board">
+    <ion-navbar primary>
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+        <ion-buttons end>
+            <button (click)="goToComposePage()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="message-board">
+    <ion-list *ngFor="let message of messages">
+        <ion-item text-wrap>
+            <h2 class="message-title">{{message.title}}</h2>
+            <p class="message-timestamp">{{message.dateStamp}} @ {{message.timeStamp}}</p>
+            <span class="message-body">{{message.body}}</span>
+            <p class="message-author">- Coach {{message.author}}</p>
+            <!--<p class="message-timestamp">{{message.dateStamp}} @ {{message.timeStamp}}</p>-->
+        </ion-item>
+    </ion-list>
+
+</ion-content>
+
+<!--<ion-footer>-->
+    <!--<ion-toolbar position="bottom">-->
+        <!--<ion-segment [(ngModel)]="tournamentView">-->
+            <!--<ion-segment-button value="completed">-->
+                <!--Completed-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="ongoing">-->
+                <!--Ongoing-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="upcoming">-->
+                <!--Upcoming-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</ion-toolbar>-->
+<!--</ion-footer>-->

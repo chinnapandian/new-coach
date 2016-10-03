@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar primary>
+
+    <ion-title>King of The Coast</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+
+  <ion-list>
+    <ion-list-header>Select a Division</ion-list-header>
+
+    <a ion-item *ngFor="let division of divisions" (click)="goToTournamentPoolsPage()">
+      <h2>{{division.name}}</h2>
+    </a>
+
+
+  </ion-list>
+
+</ion-content>

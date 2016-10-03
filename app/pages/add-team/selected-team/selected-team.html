@@ -1,0 +1,101 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+        <ion-buttons end>
+            <button>
+                <ion-icon name="help-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngSwitch]="seasonOrTournament">
+
+    <ion-list>
+        <ion-item text-wrap *ngFor="let spartan of spartans" (click)="dismiss()">
+            <ion-thumbnail item-left>
+                <img src="{{spartan.img}}">
+            </ion-thumbnail>
+            <h2 title>{{spartan.name}}</h2>
+            <p sub>Coach {{spartan.coach}}</p>
+        </ion-item>
+        <ion-item text-wrap>
+            <p>Select from one of the available seasons this team is playing in to purchase season or individual tournament access. Optionally, just following the team will give you free access to your teams practice schedule and message board.</p>
+            <div padding-top>
+                <button block success>Follow Without Season Access</button>
+            </div>
+        </ion-item>
+    </ion-list>
+    <!--<div padding-horizontal padding-bottom>-->
+        <!--<ion-segment [(ngModel)]="seasonOrTournament">-->
+            <!--<ion-segment-button value="seasons">-->
+                <!--Seasons-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="tournaments">-->
+                <!--Tournaments-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</div>-->
+
+    <!--<ion-list *ngSwitchCase="'seasons'">-->
+
+        <!--<ion-item text-wrap>-->
+            <!--<h2>Basic Access</h2>-->
+            <!--<p>Get access to your teams practice schedules and message board with alters for each</p>-->
+            <!--<button item-right outline>Free</button>-->
+        <!--</ion-item>-->
+
+        <!--<ion-item text-wrap>-->
+            <!--<h2>Premium Access</h2>-->
+            <!--<p>Get access to everything from the basic team access, plus access every tournament schedule and standings data for every tournament they play in</p>-->
+            <!--<button item-right outline>4.99</button>-->
+        <!--</ion-item>-->
+        <!---->
+    <!--</ion-list>-->
+    <!--<ion-list-header text-wrap>Your team is playing in these seasons</ion-list-header>-->
+
+    <ion-list>
+        <ion-list-header>
+            <ion-avatar item-left>
+                <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
+            </ion-avatar>
+            Zero Gravity Seasons
+        </ion-list-header>
+        <a ion-item text-wrap *ngFor="let season of seasons" (click)="goToSelectedSeasonPage()">
+            <h2>{{season.name}}</h2>
+            <p>May 12 - August 25, 2016</p>
+            <!--<ion-note item-right>{{season.numOfTournaments}} Tournaments</ion-note>-->
+        </a>
+    </ion-list>
+
+    <!--<ion-list *ngSwitchCase="'tournaments'">-->
+        <!--<a ion-item text-wrap *ngFor="let tourn of tournaments" >-->
+            <!--<ion-thumbnail item-left>-->
+                <!--<img src="{{tourn.img}}">-->
+            <!--</ion-thumbnail>-->
+            <!--<span>{{tourn.name}}</span>-->
+            <!--<p>12/12/12 - 4/4/4</p>-->
+            <!--<button item-right outline>${{tourn.price}}</button>-->
+        <!--</a>-->
+
+    <!--</ion-list>-->
+
+</ion-content>
+
+
+<!--<ion-footer>-->
+    <!--<ion-toolbar>-->
+        <!--<ion-segment [(ngModel)]="seasonOrTournament">-->
+            <!--<ion-segment-button value="seasons">-->
+                <!--Seasons-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="tournaments">-->
+                <!--Tournaments-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</ion-toolbar>-->
+<!--</ion-footer>-->

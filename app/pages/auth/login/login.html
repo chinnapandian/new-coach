@@ -1,0 +1,57 @@
+<ion-content class="login">
+
+    <div padding class="login-logo-container">
+        <img src="../../../logo-lettering.svg" class="login-logo" alt="">
+    </div>
+
+    <ion-list>
+        <ion-item>
+            <ion-label primary stacked>Email</ion-label>
+            <ion-input></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label primary stacked>Password</ion-label>
+            <ion-input></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <div padding>
+        <button block round (click)="login()"> Log In</button>
+        <button block clear small (click)="goToSignUpPage()">Not A Member? Sign Up</button>
+    </div>
+
+    <ion-list-header>Or, log in with your social media profile</ion-list-header>
+
+    <div padding>
+        <button block outline round facebook>
+            <ion-icon name="logo-facebook"></ion-icon>
+            Log in with Facebook
+        </button>
+        <br>
+        <button block outline round twitter>
+            <ion-icon name="logo-twitter"></ion-icon>
+            Log in with Twitter
+        </button>
+        <br>
+        <button block outline round google>
+            <ion-icon name="logo-googleplus"></ion-icon>
+            Log in with Google Plus
+        </button>
+    </div>
+</ion-content>
+
+<!--<ion-footer>-->
+    <!--<ion-toolbar position="bottom">-->
+        <!--<ion-segment [(ngModel)]="tournamentView">-->
+            <!--<ion-segment-button value="completed">-->
+                <!--Completed-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="ongoing">-->
+                <!--Ongoing-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="upcoming">-->
+                <!--Upcoming-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</ion-toolbar>-->
+<!--</ion-footer>-->

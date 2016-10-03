@@ -1,0 +1,151 @@
+<ion-header class="team-info">
+    <ion-navbar primary>
+        <!--<ion-buttons start>-->
+            <!--<button (click)="dismiss()">-->
+                <!--<span showWhen="ios">Cancel</span>-->
+                <!--<ion-icon name="md-close" showWhen="android,windows"></ion-icon>-->
+            <!--</button>-->
+        <!--</ion-buttons>-->
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+        <!--<ion-buttons end>-->
+            <!--<button (click)="goToTeamSettingsPage()">-->
+                <!--<ion-icon name="switch"></ion-icon>-->
+            <!--</button>-->
+        <!--</ion-buttons>-->
+
+
+
+    </ion-navbar>
+
+    <!--<ion-item class=".header-item" text-wrap no-lines *ngFor="let team of selectedTeam">-->
+        <!--<ion-thumbnail item-left>-->
+            <!--<img src="{{team.img}}">-->
+        <!--</ion-thumbnail>-->
+        <!--<h2>{{team.name}}</h2>-->
+        <!--<p>Coach {{team.coach}}</p>-->
+        <!--<p><span success>In Season</span></p>-->
+    <!--</ion-item>-->
+
+
+</ion-header>
+
+<ion-content class="team-info">
+
+ <!--<ion-list>-->
+     <!--<ion-item text-wrap *ngFor="let basketballTeam of basketballTeams">-->
+         <!--<ion-thumbnail item-left>-->
+             <!--<img src="{{basketballTeam.img}}">-->
+         <!--</ion-thumbnail>-->
+         <!--<h1>{{basketballTeam.name}}</h1>-->
+         <!--<h3>Coach {{basketballTeam.coach}}</h3>-->
+         <!--<h2><span success>In Season</span></h2>-->
+     <!--</ion-item>-->
+ <!--</ion-list>-->
+
+
+    <ion-list>
+        <ion-list-header>Coaches</ion-list-header>
+        <ion-item text-wrap>
+            <h2>Head Coach</h2>
+            <ion-note item-right>Ryan Wilson</ion-note>
+        </ion-item>
+        <ion-item text-wrap>
+            <h2>Assistant Coach</h2>
+            <ion-note item-right>Tommy Buckets</ion-note>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header>Practice Schedule</ion-list-header>
+        <ion-item text-wrap>
+            <h2>Mondays</h2>
+            <p>Amherst Middle School</p>
+            <ion-note item-right>4:00 PM - 5:30 PM</ion-note>
+        </ion-item>
+        <ion-item text-wrap>
+            <h2>Thursdays</h2>
+            <p>Amherst Middle School</p>
+            <ion-note item-right>6:00 PM - 8:00 PM</ion-note>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header>Seasons</ion-list-header>
+        <ion-item text-wrap>
+            <h2>Winter</h2>
+            <ion-note item-right>Nov - Mar</ion-note>
+        </ion-item>
+        <ion-item text-wrap>
+            <h2 primary>Spring</h2>
+            <ion-note item-right>Mar - Jul</ion-note>
+        </ion-item>
+        <ion-item text-wrap>
+            <h2>Summer</h2>
+            <ion-note item-right>Jul - Sep</ion-note>
+        </ion-item>
+        <ion-item text-wrap>
+            <h2>Fall</h2>
+            <ion-note item-right>Sep - Nov</ion-note>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header>Notifications & Alerts</ion-list-header>
+        <ion-item>
+            <ion-label>Practice Schedule</ion-label>
+            <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Message Board</ion-label>
+            <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Tournament Schedules and Standings</ion-label>
+            <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+    </ion-list>
+
+    <!--<ion-list>-->
+        <!--<ion-list-header>Thursdays</ion-list-header>-->
+        <!--<ion-item text-wrap>-->
+            <!--<h2>Time</h2>-->
+            <!--<ion-note item-right>4:00 PM - 6:30 PM</ion-note>-->
+        <!--</ion-item>-->
+        <!--<ion-item text-wrap>-->
+            <!--<h2>Location</h2>-->
+            <!--<ion-note item-right><a href="">Middleton High School</a></ion-note>-->
+        <!--</ion-item>-->
+    <!--</ion-list>-->
+
+
+    <!--<ion-list>-->
+        <!--<ion-list-header>Thursdays</ion-list-header>-->
+        <!--<ion-item text-wrap>-->
+            <!--<h2>Time</h2>-->
+            <!--<ion-note item-right>4:00 PM - 6:30 PM</ion-note>-->
+        <!--</ion-item>-->
+        <!--<ion-item text-wrap>-->
+            <!--<h2>Location</h2>-->
+            <!--<ion-note item-right><a href="">Middleton High School</a></ion-note>-->
+        <!--</ion-item>-->
+    <!--</ion-list>-->
+
+</ion-content>
+
+<!--<ion-footer>-->
+    <!--<ion-toolbar position="bottom">-->
+        <!--<ion-segment [(ngModel)]="tournamentView">-->
+            <!--<ion-segment-button value="completed">-->
+                <!--Completed-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="ongoing">-->
+                <!--Ongoing-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="upcoming">-->
+                <!--Upcoming-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</ion-toolbar>-->
+<!--</ion-footer>-->

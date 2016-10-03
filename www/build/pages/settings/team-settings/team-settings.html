@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar primary>
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Team Settings</ion-title>
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Save</span>
+                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="team-settings">
+
+    <ion-list>
+        <ion-list-header>Notifications & Alerts</ion-list-header>
+        <ion-item>
+            <ion-label>Practice Schedule</ion-label>
+            <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Message Board</ion-label>
+            <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Tournament Schedules and Standings</ion-label>
+            <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

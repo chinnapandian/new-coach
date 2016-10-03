@@ -1,0 +1,30 @@
+.message-board {
+
+  .message-title{
+    font-weight: bold;
+    color: color($colors, success);
+    font-size: 1.8rem;
+  }
+
+  .message-body{
+    color: color($colors, dark-gray);
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+  }
+
+  .message-author {
+      text-align: right;
+      font-style: italic;
+      margin-top: 10px;
+      font-size: 1.5rem;
+      color: color($colors, gray);
+    }
+
+  .message-timestamp {
+    color: color($colors, gray);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+}

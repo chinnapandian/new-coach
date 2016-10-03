@@ -1,0 +1,191 @@
+<ion-header class="home">
+    <ion-navbar primary>
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+    </ion-navbar>
+
+
+</ion-header>
+
+<ion-content class="home">
+
+    <ion-list>
+        <ion-list-header>Upcoming Tournaments</ion-list-header>
+        <ion-item-sliding>
+            <a ion-item text-wrap (click)="goToTournamentPage()">
+                <ion-thumbnail item-left>
+                    <img src="../../../logo-icon.png">
+                </ion-thumbnail>
+                <h2 title>Special Olympics Basketball Tournament Fundraiser</h2>
+                <p>Jan 27 - 28, 2017</p>
+                <!--<p>CA • WA • NV</p>-->
+            </a>
+
+            <!--Hidden slider options-->
+            <ion-item-options side="right">
+                <button secondary (click)="goToTournamentDetailsPage()">
+                    <ion-icon name="information-circle"></ion-icon>
+                    Details
+                </button>
+                <button success>
+                    <ion-icon name="share"></ion-icon>
+                    Share
+                </button>
+            </ion-item-options>
+
+        </ion-item-sliding>
+</ion-list>
+
+    <ion-list>
+        <ion-list-header>Ongoing Tournaments</ion-list-header>
+        <ion-item-sliding>
+            <a ion-item text-wrap (click)="goToTournamentPage()">
+                <ion-thumbnail item-left>
+                    <img src="../../../logo-icon.png">
+                </ion-thumbnail>
+                <h2>Special Olympics Basketball Tournament Fundraiser</h2>
+                <p>Jan 27 - 28, 2017</p>
+                <p>CA • WA • NV</p>
+            </a>
+
+            <!--Hidden slider options-->
+            <ion-item-options side="right">
+                <button secondary (click)="goToTournamentDetailsPage()">
+                    <ion-icon name="information-circle"></ion-icon>
+                    Details
+                </button>
+                <button success>
+                    <ion-icon name="share"></ion-icon>
+                    Share
+                </button>
+            </ion-item-options>
+
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header>Completed Tournaments</ion-list-header>
+        <ion-item-sliding>
+            <a ion-item text-wrap (click)="goToTournamentPage()">
+                <ion-thumbnail item-left>
+                    <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
+                </ion-thumbnail>
+                <h2>Legacy Classic Presented By Zero Gravity</h2>
+                <p>September 12 - 14, 2016</p>
+                <p>VT</p>
+            </a>
+
+            <!--Hidden slider options-->
+            <ion-item-options side="right">
+                <button secondary (click)="goToTournamentDetailsPage()">
+                    <ion-icon name="information-circle"></ion-icon>
+                    Details
+                </button>
+                <button success>
+                    <ion-icon name="share"></ion-icon>
+                    Share
+                </button>
+            </ion-item-options>
+
+        </ion-item-sliding>
+        <ion-item-sliding>
+            <a ion-item text-wrap (click)="goToSelectTeamPage()">
+                <ion-thumbnail item-left>
+                    <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h20110912030921036840f8701e75f41/AIA%20140.png">
+                </ion-thumbnail>
+                <h2>Attack Boys Tournament Series #4</h2>
+                <p>Feb 25 - 26, 2017</p>
+                <p>IA</p>
+            </a>
+            <!--Hidden slider options-->
+            <ion-item-options side="right">
+                <button secondary (click)="goToTournamentDetailsPage()">
+                    <ion-icon name="information-circle"></ion-icon>
+                    Details
+                </button>
+                <button success>
+                    <ion-icon name="share"></ion-icon>
+                    Share
+                </button>
+            </ion-item-options>
+
+        </ion-item-sliding>
+        <ion-item-sliding>
+            <a ion-item text-wrap>
+                <ion-thumbnail item-left>
+                    <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
+                </ion-thumbnail>
+                <h2>Big Apple Summer Showcase</h2>
+                <p>Jul 13 - 14, 2016</p>
+                <p>MA • NH</p>
+            </a>
+            <!--Hidden slider options-->
+            <ion-item-options side="right">
+                <button secondary (click)="goToTournamentDetailsPage()">
+                    <ion-icon name="information-circle"></ion-icon>
+                    Details
+                </button>
+                <button success>
+                    <ion-icon name="share"></ion-icon>
+                    Share
+                </button>
+            </ion-item-options>
+
+        </ion-item-sliding>
+</ion-list>
+
+<ion-list>
+
+
+
+        <!--<a ion-item text-wrap>-->
+            <!--<ion-thumbnail item-left>-->
+                <!--<img src="../../../logo-icon.png">-->
+            <!--</ion-thumbnail>-->
+            <!--<h2>Midwest Spring Tune-Up - 2017</h2>-->
+            <!--<p>Apr 7 - 9, 2017</p>-->
+            <!--<p>IA</p>-->
+        <!--</a>-->
+        <!--<a ion-item text-wrap>-->
+            <!--<ion-thumbnail item-left>-->
+                <!--<img src="http://admin.tourneymachine.com/Public/CustomerFiles/h20130718092457367bac57f202c0142/IGRwhite.png">-->
+            <!--</ion-thumbnail>-->
+            <!--<h2>Midwest Spring Tune-Up - 2017</h2>-->
+            <!--<p>Apr 7 - 9, 2017</p>-->
+            <!--<p>IA</p>-->
+        <!--</a>-->
+        <!--<a ion-item text-wrap>-->
+            <!--<ion-thumbnail item-left>-->
+                <!--<img src="http://admin.tourneymachine.com/Public/CustomerFiles/h20130516031215111ae120e164a8948/OSA.png">-->
+            <!--</ion-thumbnail>-->
+            <!--<h2>OSA MAYB Elite Showcase 2016</h2>-->
+            <!--<p>Dec 28 - 31, 2016</p>-->
+            <!--<p>Omaha, NE</p>-->
+        <!--</a>-->
+        <!--<a ion-item text-wrap>-->
+            <!--<ion-thumbnail item-left>-->
+                <!--<img src="../../../logo-icon.png">-->
+            <!--</ion-thumbnail>-->
+            <!--<h2>Gym Rats Summer Brawl 2017</h2>-->
+            <!--<p>Jun 9 - 11, 2017</p>-->
+            <!--<p>IL • NH</p>-->
+        <!--</a>-->
+    </ion-list>
+</ion-content>
+
+<!--<ion-footer>-->
+    <!--<ion-toolbar position="bottom">-->
+        <!--<ion-segment [(ngModel)]="tournamentView">-->
+            <!--<ion-segment-button value="completed">-->
+                <!--Completed-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="ongoing">-->
+                <!--Ongoing-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="upcoming">-->
+                <!--Upcoming-->
+            <!--</ion-segment-button>-->
+        <!--</ion-segment>-->
+    <!--</ion-toolbar>-->
+<!--</ion-footer>-->
