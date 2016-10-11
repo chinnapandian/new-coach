@@ -1,26 +1,20 @@
 .player {
-  ion-grid.standings-grid {
 
-    padding: 0px !important;
+  div.padding-thin {
+    padding: 8px;
+  }
+  ion-grid.standings-grid {
+    padding: 0px;
+    //padding-left: 0px;
+    //padding-right: 0px;
 
     ion-row {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      //border-bottom: 1px solid rgba(0, 0, 0, 0.08);
       background: #fff;
     }
 
     ion-col {
       font-size: 1.4rem;
-      text-align: center;
-    }
-
-    ion-col[width-45] {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding-left: 10px;
-    }
-
-    ion-col[width-11] {
       text-align: center;
     }
 
@@ -34,6 +28,11 @@
         font-size: 1.2rem;
         font-weight: 700;
       }
+    }
+
+    ion-row.grid-content {
+      //line-height: 1.8rem;
+      padding-bottom: 5px;
     }
   }
 }

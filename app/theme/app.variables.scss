@@ -23,21 +23,22 @@
 // are different per mode.
 
 $colors: (
+
         primary:        #0397e5,
-        primary-dark:   #02679D,
-        secondary:      #4f4f4f,
+        //primary-dark:   #02679D,
+        //secondary:      #444,
         danger:         #FF3900,
-        danger-lite:    #db4f51,
-        //white:          #fff,
-        //light:          #f4f4f4,
-        light:          #fff,
-        light-gray:     #666666,
-        gray:           #444444,
-        dark:           #222,
-        dark-gray:      #444,
         warning:        #FFBA00,
         help:           #FF8B00,
-        success:        #3abc44,
+        success:        #0dac59,
+
+
+        light:          #fff,
+        light-gray:     #999999,
+        gray:           #666666,
+        dark-gray:      #444444,
+        dark:           #222,
+
         spartan:        #0a7a0f,
         facebook:       #3B5998,
         twitter:        #00aced,

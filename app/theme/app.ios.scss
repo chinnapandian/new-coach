@@ -25,6 +25,15 @@
   color: #444;
 }
 
+h3 {
+  font-size: 2rem;
+}
+.toolbar{
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
 .item-button, .button-outline {
   border-radius: 3px;
   //text-transform: uppercase;
@@ -56,13 +65,18 @@ ion-segment.wide > ion-segment-button {
 
 ion-segment.thin {
   ion-segment-button {
-    line-height: 2rem;
-    height: 2.3rem
-
+    line-height: 2.2rem;
+    height: 2.3rem;
+    font-size: 1.15rem;
+    width: 100%;
   }
 
   .ion-segement{
-}
+  }
+
+  div.padding-thin {
+    padding: 8px;
+  }
 
 }
 

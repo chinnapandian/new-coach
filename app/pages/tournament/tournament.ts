@@ -1,12 +1,15 @@
 import {Component} from '@angular/core';
-import {ViewController, ModalController} from 'ionic-angular';
+import {ViewController, ModalController, ActionSheetController} from 'ionic-angular';
 // import {SelectTeamPage} from './select-team/select-team';
 import {GamePage} from './game/game';
 import {TournamentDetailsPage} from './details/details';
+import {SelectTeamPage} from './select-team/select-team';
+import {scorekeeperPage} from '../scorekeeper/scorekeeper';
 
 @Component({
     templateUrl: 'build/pages/tournament/tournament.html'
 })
+
 export class TournamentPage {
 
     private tournamentView:string = 'schedule';
@@ -84,7 +87,8 @@ export class TournamentPage {
 
 
     constructor(private viewCtrl:ViewController,
-                private modalCtrl:ModalController) {
+                private modalCtrl:ModalController,
+                private actionCtrl: ActionSheetController){
     }
 
 // goToSelectTeamPage() {
@@ -92,17 +96,54 @@ export class TournamentPage {
 //   selectTeamModal.present();
 // };
 
+    presentGameActionSheet(){
+        let actionSheet = this.actionCtrl.create({
+            // title: 'Seacost United Girls 12U',
+            buttons: [
+                {
+                    text: 'Get Directions',
+                    handler: () => {
+                        let filterModal = this.modalCtrl.create(GamePage);
+                        filterModal.present();
+                    }
+                },{
+                    text: 'Record Stats',
+                    handler: () => {
+                        let scorekeeperModal = this.modalCtrl.create(scorekeeperPage);
+                        scorekeeperModal.present();
+                    }
+                },{
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    };
+
+
     goToGamePage() {
         let gameModal = this.modalCtrl.create(GamePage);
         gameModal.present();
-    }
-    ;
+    };
 
     goToDetailsPage() {
         let detailsModal = this.modalCtrl.create(TournamentDetailsPage);
         detailsModal.present();
-    }
-    ;
+    };
+    
+    goToSelectTeamPage() {
+        let selectTeamModal = this.modalCtrl.create(SelectTeamPage);
+        selectTeamModal.present();
+    };
+
+    // goToScorekeeperPage() {
+    //     let scorekeeperModal = this.modalCtrl.create(scorekeeperPage);
+    //     scorekeeperModal.present();
+    // };
 
     dismiss() {
         this.viewCtrl.dismiss();

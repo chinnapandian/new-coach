@@ -5,7 +5,7 @@
 
         <ion-buttons end>
             <button (click)="dismiss()">
-                <ion-icon name="md-add"></ion-icon>
+                <ion-icon name="add"></ion-icon>
             </button>
         </ion-buttons>
 
@@ -15,87 +15,98 @@
 
 <ion-content class="player">
 
-<ion-card class="custom-card">
-    <ion-list>
-        <ion-item>
-            <ion-avatar item-left>
-                <img class="circle" src="../../../../personal-pack.svg" alt="">
-            </ion-avatar>
-            <!--<button item-right outline>Game History</button>-->
-            <h2 title>Timmy Smith</h2>
-            <p>8 games played, 3 recorded</p>
-        </ion-item>
-    </ion-list>
+    <ion-card class="custom-card">
+        <ion-list>
+            <a ion-item>
+                <ion-avatar item-left>
+                    <img class="circle" src="../../../../personal-pack.svg" alt="">
+                </ion-avatar>
+                <!--<button item-right outline>Game History</button>-->
+                <h2 title>Timmy Smith</h2>
+                <p>8 games played, 3 recorded</p>
+            </a>
+        </ion-list>
 
-    <div padding-horizontal>
-        <ion-segment [(ngModel)]="scheduleView" gray class="wide thin">
-            <ion-segment-button value="game">
-                Average
-            </ion-segment-button>
-            <ion-segment-button value="practice">
-                Total
-            </ion-segment-button>
-        </ion-segment>
-    </div>
+        <div class="padding-thin">
+            <ion-segment [(ngModel)]="statsView" gray class="thin">
+                <ion-segment-button value="average">
+                    Average
+                </ion-segment-button>
+                <ion-segment-button value="total">
+                    Total
+                </ion-segment-button>
+            </ion-segment>
+        </div>
 
-    <!--<ion-list-header><b>Averages</b></ion-list-header>-->
-    <ion-grid class="standings-grid">
-        <ion-row class="grid-header">
-            <ion-col>PTS</ion-col>
-            <ion-col>FG%</ion-col>
-            <ion-col>3PT%</ion-col>
-            <ion-col>FT</ion-col>
-            <ion-col>AST</ion-col>
-            <ion-col>STL</ion-col>
-            <ion-col>REB</ion-col>
-            <ion-col>TO</ion-col>
-            <ion-col>PF</ion-col>
-        </ion-row>
-        <ion-row class="grid-content">
-            <ion-col>12.4</ion-col>
-            <ion-col>33.9%</ion-col>
-            <ion-col>12.5%</ion-col>
-            <ion-col>1.1</ion-col>
-            <ion-col>4</ion-col>
-            <ion-col>11.3</ion-col>
-            <ion-col>3.8</ion-col>
-            <ion-col>4.2</ion-col>
-            <ion-col>.7</ion-col>
-        </ion-row>
-    </ion-grid>
-    <!--<ion-list-header><b>Totals</b></ion-list-header>-->
-    <!--<ion-grid class="standings-grid">-->
+        <div class="padding-thin">
+            <ion-grid class="standings-grid" padding-bottom [ngSwitch]="statsView">
+                <ion-row class="grid-header">
+                    <ion-col>PTS</ion-col>
+                    <!--<ion-col>FG%</ion-col>-->
+                    <!--<ion-col>3PT%</ion-col>-->
+                    <ion-col>FT</ion-col>
+                    <ion-col>AST</ion-col>
+                    <ion-col>STL</ion-col>
+                    <ion-col>REB</ion-col>
+                    <ion-col>TO</ion-col>
+                    <ion-col>PF</ion-col>
+                </ion-row>
+                <ion-row class="grid-content" *ngSwitchCase="'average'">
+                    <ion-col>12.4</ion-col>
+                    <!--<ion-col>33.9%</ion-col>-->
+                    <!--<ion-col>12.5%</ion-col>-->
+                    <ion-col>1.1</ion-col>
+                    <ion-col>4</ion-col>
+                    <ion-col>11.3</ion-col>
+                    <ion-col>3.8</ion-col>
+                    <ion-col>4.2</ion-col>
+                    <ion-col>.7</ion-col>
+                </ion-row>
+                <ion-row class="grid-content" *ngSwitchCase="'total'">
+                    <ion-col>124</ion-col>
+                    <!--<ion-col>33.9%</ion-col>-->
+                    <!--<ion-col>12.5%</ion-col>-->
+                    <ion-col>23</ion-col>
+                    <ion-col>46</ion-col>
+                    <ion-col>174</ion-col>
+                    <ion-col>76</ion-col>
+                    <ion-col>45</ion-col>
+                    <ion-col>12</ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>    <!--<ion-list-header><b>Totals</b></ion-list-header>-->
+        <!--<ion-grid class="standings-grid">-->
         <!--<ion-row class="grid-header">-->
-            <!--<ion-col>PTS</ion-col>-->
-            <!--<ion-col>AST</ion-col>-->
-            <!--<ion-col>STL</ion-col>-->
-            <!--<ion-col>REB</ion-col>-->
-            <!--<ion-col>TO</ion-col>-->
-            <!--<ion-col>BLK</ion-col>-->
+        <!--<ion-col>PTS</ion-col>-->
+        <!--<ion-col>AST</ion-col>-->
+        <!--<ion-col>STL</ion-col>-->
+        <!--<ion-col>REB</ion-col>-->
+        <!--<ion-col>TO</ion-col>-->
+        <!--<ion-col>BLK</ion-col>-->
         <!--</ion-row>-->
         <!--<ion-row class="grid-content">-->
-            <!--<ion-col>128</ion-col>-->
-            <!--<ion-col>23</ion-col>-->
-            <!--<ion-col>38</ion-col>-->
-            <!--<ion-col>34</ion-col>-->
-            <!--<ion-col>12</ion-col>-->
-            <!--<ion-col>9</ion-col>-->
+        <!--<ion-col>128</ion-col>-->
+        <!--<ion-col>23</ion-col>-->
+        <!--<ion-col>38</ion-col>-->
+        <!--<ion-col>34</ion-col>-->
+        <!--<ion-col>12</ion-col>-->
+        <!--<ion-col>9</ion-col>-->
         <!--</ion-row>-->
-    <!--</ion-grid>-->
+        <!--</ion-grid>-->
 
-    <ion-grid>
-        <ion-row>
-            <ion-col width-50>
-                <button small block outline help>Record Stats</button>
-            </ion-col>
-            <ion-col width-50>
-                <button small block outline light-gray>Game History</button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+        <!--<ion-grid>-->
+        <!--<ion-row>-->
+        <!--<ion-col width-50>-->
+        <!--<button small block outline help>Record Stats</button>-->
+        <!--</ion-col>-->
+        <!--<ion-col width-50>-->
+        <!--<button small block outline light-gray>Game History</button>-->
+        <!--</ion-col>-->
+        <!--</ion-row>-->
+        <!--</ion-grid>-->
 
-    <!--<button small outline>Record Stats</button>-->
+        <!--<button small outline>Record Stats</button>-->
 
-</ion-card>
+    </ion-card>
 
 </ion-content>

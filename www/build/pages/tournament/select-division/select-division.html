@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Select a Division</ion-title>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-card class="custom-card">
+        <ion-list>
+            <!--<ion-list-header>Select a Division</ion-list-header>-->
+
+            <a ion-item *ngFor="let division of divisions" (click)="dismiss()">
+                <h2>{{division.name}}</h2>
+            </a>
+
+
+        </ion-list>
+    </ion-card>
+</ion-content>

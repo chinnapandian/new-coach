@@ -1,50 +1,59 @@
 <ion-header>
     <ion-navbar primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
         <!--<ion-title>Select Team</ion-title>-->
-        <ion-searchbar (input)="getItems($event)" placeholder="Find Your Teams"></ion-searchbar>
+        <ion-searchbar (input)="getItems($event)" placeholder="Search for a Team"></ion-searchbar>
     </ion-navbar>
 
     <!--<ion-toolbar primary>-->
-        <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
+    <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
     <!--</ion-toolbar>-->
 
 </ion-header>
 
 <ion-content>
 
-
+    <ion-list-header sticky>Boys 12U <span item-right>American Gold</span></ion-list-header>
     <!--Matchup-->
-    <ion-list>
-        <ion-list-header sticky>Boys 12U <span item-right>American Gold</span></ion-list-header>
-        <a ion-item (click)="goToTournamentPage()">
-            Boston Celtics
-            <p>Coach Dan Murray</p>
-        </a>
-        <a ion-item>
-            NY Knicks
-            <p>Coach Peter Helm</p>
-        </a>
-        <a ion-item>
-            Miami Heat
-            <p>Coach Peter Helm</p>
-        </a>
-        <a ion-item>
-            Miami Heat
-            <p>Coach Peter Helm</p>
-        </a>
-        <a ion-item>
-            LA Lakers
-            <p>Coach Peter Helm</p>
-        </a>
-        <a ion-item>
-            MN Timberwolves
-            <p>Coach Peter Helm</p>
-        </a>
-        <a ion-item>
-            Seattle Super Sonics
-            <p>Coach Peter Helm</p>
-        </a>
-    </ion-list>
+    <ion-card class="custom-card">
+        <ion-list>
+            <a ion-item (click)="goToTournamentPage()">
+                Boston Celtics
+                <p>Coach Dan Murray</p>
+            </a>
+            <a ion-item>
+                NY Knicks
+                <p>Coach Peter Helm</p>
+            </a>
+            <a ion-item>
+                Miami Heat
+                <p>Coach Peter Helm</p>
+            </a>
+            <a ion-item>
+                Miami Heat
+                <p>Coach Peter Helm</p>
+            </a>
+            <a ion-item>
+                LA Lakers
+                <p>Coach Peter Helm</p>
+            </a>
+            <a ion-item>
+                MN Timberwolves
+                <p>Coach Peter Helm</p>
+            </a>
+            <a ion-item>
+                Seattle Super Sonics
+                <p>Coach Peter Helm</p>
+            </a>
+        </ion-list>
+    </ion-card>
 
     <ion-list>
 
@@ -79,7 +88,7 @@
             <p>Coach Peter Helm</p>
         </a>
     </ion-list>
-        <ion-list>
+    <ion-list>
 
         <ion-list-header sticky>Boys 12U <span item-right>American Bronze</span></ion-list-header>
 

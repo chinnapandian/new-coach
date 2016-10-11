@@ -12,6 +12,7 @@
 @import "../pages/teams/teams";
 @import "../pages/teams/tabs/seasons/seasons";
 @import "../pages/tournament/tournament";
+@import "../pages/tournament/brackets/brackets";
 @import "../pages/tournament/details/details";
 @import "../pages/tournament/standings/standings";
 @import "../pages/practice-schedule/practice-schedule";
@@ -19,17 +20,17 @@
 ion-content {
   background: /* top, transparent red, faked with gradient */
           linear-gradient(
-                          rgba(255, 255, 255, 0.7),
-                          rgba(255, 255, 255, 0.7)
+                          rgba(240, 240, 240, 0.5),
+                          rgba(240, 240, 240, 0.5)
           ),
             /* bottom, image */
-          url("../../creampaper.png");
+          url("../../dots.png");
 
-  color: color($colors, gray);
+  color: color($colors, dark-gray);
 }
 
 ion-tabbar {
-  background: rgba(255,255,255,.3);
+  background: rgba(250, 250, 250, 0.4);
 }
 
 .item{
@@ -48,12 +49,16 @@ ion-card > .item {
 ion-card{
   margin: 8px !important;
   width: calc(100% - 16px);
-  background-color: rgba(255, 255, 255, .7)
+  background-color: rgba(255, 255, 255, .6)
 }
 
 .custom-card {
   box-shadow: none;
   border: 1px solid #e4e4e4;
+}
+
+div.padding-thin{
+  padding: 8px;
 }
 
 // creates custom column widths

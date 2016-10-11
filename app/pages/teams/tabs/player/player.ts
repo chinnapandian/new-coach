@@ -5,6 +5,8 @@ import {NavController, ViewController, ModalController} from 'ionic-angular';
   templateUrl: 'build/pages/teams/tabs/player/player.html'
 })
 export class PlayerPage {
+  
+  private statsView: string = 'average';
 
   private myTournaments: any = [
     {

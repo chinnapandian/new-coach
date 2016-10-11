@@ -22,7 +22,7 @@
     </ion-navbar>
 
     <ion-toolbar no-border-top primary>
-        <button light outline small block>Boys 12U</button>
+        <button light outline small block (click)="goToSelectDivisionPage()">Boys 12U</button>
     </ion-toolbar>
 
 </ion-header>
@@ -55,7 +55,8 @@
     </ion-card>
 
     <ion-list-header>
-        <b>AMERICAN GOLD</b>
+        <b gray>AMERICAN GOLD</b>
+        <ion-icon item-right name="star-outline" warning></ion-icon>
     </ion-list-header>
 
     <ion-card class="custom-card">

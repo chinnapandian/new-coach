@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController} from 'ionic-angular';
+import {NavController, ViewController, ModalController} from 'ionic-angular';
+import {SelectDivisionPage} from '../select-division/select-division'
+
 
 @Component({
   templateUrl: 'build/pages/tournament/standings/standings.html'
@@ -41,8 +43,14 @@ export class StandingsPage {
 
   constructor(
       private navCtrl: NavController,
-      private viewCtrl: ViewController) {
+      private viewCtrl: ViewController,
+      private modalCtrl: ModalController) {
   }
+
+  goToSelectDivisionPage() {
+    let selectDivisionModal = this.modalCtrl.create(SelectDivisionPage);
+    selectDivisionModal.present();
+  };
 
   dismiss() {
     this.viewCtrl.dismiss();

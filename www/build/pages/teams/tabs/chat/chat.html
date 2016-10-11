@@ -1,5 +1,5 @@
 <ion-header class="message-board">
-    <ion-navbar primary>
+    <ion-navbar primary no-border-bottom>
 
         <ion-title>Spartans Boys 12U</ion-title>
 
@@ -11,9 +11,22 @@
 
     </ion-navbar>
 
+    <!--<ion-toolbar primary no-border-top>-->
+        <!--<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>-->
+    <!--</ion-toolbar>-->
+
 </ion-header>
 
 <ion-content class="message-board">
+
+    <!--<ion-refresher (ionRefresh)="doRefresh($event)">-->
+        <!--<ion-refresher-content></ion-refresher-content>-->
+    <!--</ion-refresher>-->
+
+    <ion-toolbar primary no-border-top>
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    </ion-toolbar>
+
     <ion-card class="custom-card" *ngFor="let message of messages">
         <h2 class="message-title">{{message.title}}</h2>
         <p class="message-timestamp">{{message.dateStamp}} @ {{message.timeStamp}}</p>
@@ -22,16 +35,6 @@
         <p class="message-author">- Coach {{message.author}}</p>
         <!--<p class="message-timestamp">{{message.dateStamp}} @ {{message.timeStamp}}</p>-->
     </ion-card>
-
-    <ion-fab right bottom>
-        <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
-        <ion-fab-list side="left">
-            <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-            <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-            <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-            <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-        </ion-fab-list>
-    </ion-fab>
 
 </ion-content>
 

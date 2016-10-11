@@ -1,0 +1,106 @@
+.scorekeeper {
+
+  ion-col, ion-grid {
+    padding: 0px;
+  }
+
+  // Start Custom Card Styles
+  .custom-card {
+    box-shadow: none;
+    border: 1px solid #e4e4e4;
+
+    p {
+      font-size: 1.1rem;
+      color: #AAA;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    hr.divide {
+      float: right;
+      width: 85%;
+    }
+
+    ion-col.matchup {
+      margin-top: 7px !important;
+      margin-bottom: 7px !important;
+
+      ion-row {
+        //padding-top: 2px;
+        //padding-bottom: 2px;
+
+        h2 {
+          font-size: 1.4rem;
+        }
+
+        p {
+          color: #999;
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    ion-col[right-box] {
+      border-left: 1px solid rgba(0, 0, 0, 0.12);;
+    }
+
+    div[card-footer] {
+      //padding: 2px;
+      padding-left: 10px;
+      padding-right: 20px;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      //color: #747474;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      font-size: 1.2rem;
+
+      span[right] {
+        text-align: right;
+        float: right;
+      }
+    }
+
+    div[date-time] {
+      display: table;
+
+      p {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+
+    .aligner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+
+      .align-middle {
+        max-width: 100%;
+        text-align: center;
+        //line-height: 1.7;
+      }
+
+      .aligner-score {
+        font-weight: 400;
+        max-width: 100%;
+        font-size: 1.5rem;
+      }
+
+      .aligner-date-time {
+        max-width: 85%;
+        line-height: 1.7;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+
+      .aligner-img {
+        max-width: 55%;
+      }
+    }
+  }
+  // End Custom Card Styles
+
+}
