@@ -7,62 +7,79 @@
 @import "../pages/home/home";
 @import "../pages/teams/teams";
 @import "../pages/auth/login/login";
-@import "../pages/message-board/message-board";
+@import "../pages/teams/tabs/chat/chat";
+@import "../pages/teams/tabs/player/player";
+@import "../pages/teams/teams";
+@import "../pages/teams/tabs/seasons/seasons";
+@import "../pages/tournament/tournament";
+@import "../pages/tournament/details/details";
+@import "../pages/tournament/standings/standings";
 @import "../pages/practice-schedule/practice-schedule";
 
 ion-content {
-  background-color: #fafafa;
+  background: /* top, transparent red, faked with gradient */
+          linear-gradient(
+                          rgba(255, 255, 255, 0.7),
+                          rgba(255, 255, 255, 0.7)
+          ),
+            /* bottom, image */
+          url("../../creampaper.png");
+
+  color: color($colors, gray);
 }
 
-button.score1 {
-  margin-bottom: 10px;
+ion-tabbar {
+  background: rgba(255,255,255,.3);
 }
 
-button.score2 {
-  margin-top: 10px;
+.item{
+  padding-left: 8px;
 }
 
-ion-note.score{
-    border-width: 1px;
-    border-style: solid;
-    border-color: #c5c5c5;
-    padding: .2em .4em;
-    border-radius: 2px;
-
+ion-thumbnail > img.circle {
+  border-radius: 300px
 }
 
-ion-note.score.winner{
-  border-width: 1px;
-  border-style: solid;
-  padding: .2em .4em;
-  border-radius: 2px;
-  color: #0fa74c;
-  border-color: #0fa74c;
+//taking away the item bg because the card is already colored
+ion-card > .item {
+  background: none;
+}
+
+ion-card{
+  margin: 8px !important;
+  width: calc(100% - 16px);
+  background-color: rgba(255, 255, 255, .7)
+}
+
+.custom-card {
+  box-shadow: none;
+  border: 1px solid #e4e4e4;
 }
 
 // creates custom column widths
-ion-col[width-52] {
+
+ion-col[width-45] {
   -webkit-box-flex: 0;
-  -webkit-flex: 0 0 52%;
-  -ms-flex: 0 0 52%;
-  flex: 0 0 52%;
-  max-width: 52%;
+  -webkit-flex: 0 0 45%;
+  -ms-flex: 0 0 45%;
+  flex: 0 0 45%;
+  max-width: 45%;
 }
 
-ion-col[width-40] {
+ion-col[width-15] {
   -webkit-box-flex: 0;
-  -webkit-flex: 0 0 40%;
-  -ms-flex: 0 0 40%;
-  flex: 0 0 40%;
-  max-width: 40%;
+  -webkit-flex: 0 0 15%;
+  -ms-flex: 0 0 15%;
+  flex: 0 0 15%;
+  max-width: 15%;
 }
 
-ion-col[width-12] {
+ion-col[width-11] {
   -webkit-box-flex: 0;
-  -webkit-flex: 0 0 12%;
-  -ms-flex: 0 0 12%;
-  flex: 0 0 12%;
-  max-width: 12%;
+  -webkit-flex: 0 0 11%;
+  -ms-flex: 0 0 11%;
+  flex: 0 0 11%;
+  max-width: 11%;
 }
 
 ion-col[width-7] {
@@ -73,6 +90,14 @@ ion-col[width-7] {
   max-width: 7%;
 }
 
+ion-col[width-70] {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 70%;
+  -ms-flex: 0 0 70%;
+  flex: 0 0 70%;
+  max-width: 70%;
+}
+
 //Standings Table Styles
 
 // custom styles for the standings tables
@@ -80,7 +105,7 @@ ion-row.standings {
   border-bottom: 1px solid #eee;
   background-color: #fff;
 
-  ion-col{
+  ion-col {
     height: 44px;
     line-height: 44px;
     width: 100%;
@@ -91,33 +116,15 @@ ion-row.standings {
     color: #333;
   }
 
-  ion-col.standings-team{
+  ion-col.standings-team {
     font-weight: 500;
   }
 
 }
 
-// for the headers on the table
-ion-row.standings-head {
-  border-bottom: 2px solid #eee;
-  background: #323b44;
-  ion-col {
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    font-weight: bold;
-    font-size: 1.1rem;
-    line-height: 11px;
-    display: block;
-    color: white;
-  }
-}
+ion-grid.standings {
+  margin-top: 20px;
 
-ion-col.standings-data{
-  text-align: right;
-}
-
-ion-col.standings-team{
-  text-align: left;
 }
 
 .team-tabs-page .back-button {
@@ -132,7 +139,7 @@ ion-item.header-item {
   border-bottom: 4px solid #444 !important;
 }
 
-.item{
+.item {
   color: color($colors, secondary)
 }
 
@@ -141,6 +148,22 @@ h2[title] {
   font-size: 1.9rem;
 }
 
-p[sub] {
+p[subtitle] {
   font-size: 1.7rem;
 }
+
+.custom-header {
+  font-weight: 600;
+  color: color($colors, light-gray) !important;
+}
+
+//******************************************************************
+
+ion-card > ion-list > .item:last-child, ion-list > .item-wrapper:last-child .item {
+  border-bottom: none;
+}
+
+ion-thumbnail img {
+  border-radius: 2px;
+}
+

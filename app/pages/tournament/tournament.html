@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar primary>
+    <ion-navbar primary no-border-bottom>
 
         <ion-buttons start>
             <button (click)="dismiss()">
@@ -8,290 +8,333 @@
             </button>
         </ion-buttons>
 
-        <ion-title>Zero Gravity Tournament</ion-title>
+        <ion-title>ZG Beast of The East</ion-title>
 
-        <ion-buttons end>
-            <button (click)="goToDetailsPage()">
-                <!--<span showWhen="ios">Details</span>-->
-                <ion-icon ios="ios-information-circle-outline" md="md-information-circle"></ion-icon>
-            </button>
-        </ion-buttons>
+        <!--<ion-buttons end>-->
+            <!--<button (click)="goToDetailsPage()">-->
+                <!--&lt;!&ndash;<span showWhen="ios">Details</span>&ndash;&gt;-->
+                <!--<ion-icon ios="ios-information-circle-outline" md="md-information-circle"></ion-icon>-->
+            <!--</button>-->
+        <!--</ion-buttons>-->
 
     </ion-navbar>
-</ion-header>
 
-<ion-content [ngSwitch]="tournamentViewSegment">
-    <div *ngSwitchWhen="'schedule'">
+    <ion-toolbar no-border-top primary>
+    <button light outline small block>Spartans Boys 12U</button>
+    </ion-toolbar>
 
-
-        <!--<ion-card>-->
-            <!--<ion-list>-->
-                    <!--<a ion-item (click)="goToGamePage()">-->
-
-                        <!--<ion-avatar item-left>-->
-                            <!--<button outline block class="score1">-->
-                                <!--62-->
-                            <!--</button>-->
-                            <!--<button dark outline block class="score2">-->
-                                <!--36-->
-                            <!--</button>-->
-                        <!--</ion-avatar>-->
-
-                        <!--<span>Los Angeles Clippers</span>-->
-                        <!--<hr>-->
-                        <!--<span>NE Storm Vitulli/Doucas</span>-->
-                    <!--</a>-->
-            <!--</ion-list>-->
-        <!--</ion-card>-->
-
-        <ion-list (click)="goToGamePage()" *ngFor="let game of games">
-            <ion-list-header>{{game.dateStamp}} <span item-right>{{game.timeStamp}}</span></ion-list-header>
-
-            <ion-item>
-                <span>{{game.team1}}</span>
-                <p>{{game.team1Coach}}</p>
-                <ion-note item-right class="score winner">{{game.team1Score}}</ion-note>
-            </ion-item>
-
-            <ion-item>
-                <span>{{game.team2}}</span>
-                <p>{{game.team2Coach}}</p>
-                <ion-note item-right class="score">{{game.team2Score}}</ion-note>
-            </ion-item>
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-            <ion-list-header>Saturday, July 12 <span item-right>8:00 AM</span></ion-list-header>
-
-            <ion-item>
-                <span primary>Boston Celtics</span>
-                <p>Nick Helms</p>
-                <ion-note item-right class="score winner">46</ion-note>
-            </ion-item>
-
-            <ion-item>
-                <span>NY Knicks</span>
-                <p>Peter Whickets</p>
-                <ion-note class="score" item-right>40</ion-note>
-            </ion-item>
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-            <ion-list-header>Saturday, July 12 <span item-right>8:00 AM</span> </ion-list-header>
-
-            <ion-item>
-                <span>Miami Heat</span>
-                <ion-note item-right class="score winner">101</ion-note>
-            </ion-item>
-
-            <ion-item>
-                <span primary>Boston Celtics</span>
-                <ion-note class="score" item-right>68</ion-note>
-            </ion-item>
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-
-            <ion-item>
-                <span>Miami Heat</span>
-                <ion-note item-right class="score winner">101</ion-note>
-            </ion-item>
-
-            <ion-item>
-                <span primary>Boston Celtics</span>
-                <ion-note class="score" item-right>68</ion-note>
-            </ion-item>
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-
-            <ion-item>
-                <span>Miami Heat</span>
-                <ion-note item-right class="score winner">101</ion-note>
-            </ion-item>
-
-            <ion-item>
-                <span primary>Boston Celtics</span>
-                <ion-note class="score" item-right>68</ion-note>
-            </ion-item>
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-            <ion-list-header>Saturday, July 12 <span item-right>10:00 AM</span></ion-list-header>
-
-            <ion-item>
-                <span>Miami Heat</span>
-                <ion-note item-right class="score winner">101</ion-note>
-            </ion-item>
-
-            <ion-item>
-                <span primary>Boston Celtics</span>
-                <ion-note class="score" item-right>68</ion-note>
-            </ion-item>
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-            <ion-list-header>Sunday, July 13 <span item-right>12:00 PM</span></ion-list-header>
-
-            <ion-item>
-                <span>Seattle Super Sonics</span>
-            </ion-item>
-
-            <ion-item>
-                <span primary>Boston Celtics</span>
-            </ion-item>
-
-
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-            <ion-list-header>Sunday, July 13 <span item-right>7:00 PM</span></ion-list-header>
-
-            <ion-item>
-                <span>Seattle Super Sonics</span>
-            </ion-item>
-
-            <ion-item>
-                <span primary>Boston Celtics</span>
-            </ion-item>
-        </ion-list>
-
-
-    </div> <!-- / schedule segment -->
-
-    <div *ngSwitchWhen="'bracket'">
-        <ion-list (click)="goToGamePage()">
-            <ion-list-header>Sunday, July 13 <span item-right>6:00 PM</span></ion-list-header>
-
-            <ion-item>
-                <span primary>Boston Celtics</span>
-            </ion-item>
-
-            <ion-item>
-                <span>TBD</span>
-            </ion-item>
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-            <ion-list-header>Sunday, July 13 <span item-right>7:00 PM</span></ion-list-header>
-
-            <ion-item>
-                <span>TBD</span>
-            </ion-item>
-
-            <ion-item>
-                <span>TBD</span>
-            </ion-item>
-        </ion-list>
-
-        <ion-list (click)="goToGamePage()">
-            <ion-list-header>Sunday, July 13 <span item-right>8:00 PM</span></ion-list-header>
-
-            <ion-item>
-                <span>TBD</span>
-            </ion-item>
-
-            <ion-item>
-                <span>TBD</span>
-            </ion-item>
-        </ion-list>
-
-    </div> <!-- / bracket segment -->
-
-    <div *ngSwitchWhen="'standings'">
-        <!-- standings data -->
-
-        <!--<ion-card>-->
-            <ion-row class="standings-head">
-                <ion-col class="standings-team" width-50>Team</ion-col>
-                <ion-col class="standings-data" width-7>W</ion-col>
-                <ion-col class="standings-data" width-7>L</ion-col>
-                <ion-col class="standings-data" width-12>PD</ion-col>
-                <ion-col class="standings-data" width-12>PS</ion-col>
-                <ion-col class="standings-data" width-12>PA</ion-col>
-            </ion-row>
-            <ion-row class="standings">
-                <ion-col width-50 class="standings-team">RIM Spartans Boys 8th</ion-col>
-                <ion-col width-7 class="standings-data">3</ion-col>
-                <ion-col width-7 class="standings-data">0</ion-col>
-                <ion-col width-12 class="standings-data">-92</ion-col>
-                <ion-col width-12 class="standings-data">123</ion-col>
-                <ion-col width-12 class="standings-data">153</ion-col>
-            </ion-row>
-            <ion-row class="standings">
-                <ion-col width-50 class="standings-team">NE Storm</ion-col>
-                <ion-col width-7 class="standings-data">3</ion-col>
-                <ion-col width-7 class="standings-data">0</ion-col>
-                <ion-col width-12 class="standings-data">22</ion-col>
-                <ion-col width-12 class="standings-data">123</ion-col>
-                <ion-col width-12 class="standings-data">153</ion-col>
-            </ion-row>
-            <ion-row class="standings">
-                <ion-col width-50 class="standings-team">Boston Celtics</ion-col>
-                <ion-col width-7 class="standings-data">3</ion-col>
-                <ion-col width-7 class="standings-data">0</ion-col>
-                <ion-col width-12 class="standings-data">22</ion-col>
-                <ion-col width-12 class="standings-data">123</ion-col>
-                <ion-col width-12 class="standings-data">153</ion-col>
-            </ion-row>
-            <ion-row class="standings">
-                <ion-col width-50 class="standings-team">Middlesex Magic</ion-col>
-                <ion-col width-7 class="standings-data">2</ion-col>
-                <ion-col width-7 class="standings-data">1</ion-col>
-                <ion-col width-12 class="standings-data">-21</ion-col>
-                <ion-col width-12 class="standings-data">123</ion-col>
-                <ion-col width-12 class="standings-data">189</ion-col>
-            </ion-row>
-            <ion-row class="standings">
-                <ion-col width-50 class="standings-team">NE Playaz Academy</ion-col>
-                <ion-col width-7 class="standings-data">0</ion-col>
-                <ion-col width-7 class="standings-data">3</ion-col>
-                <ion-col width-12 class="standings-data">-34</ion-col>
-                <ion-col width-12 class="standings-data">123</ion-col>
-                <ion-col width-12 class="standings-data">263</ion-col>
-            </ion-row>
-            <ion-row class="standings">
-                <ion-col width-50 class="standings-team">EVO Elite - JR</ion-col>
-                <ion-col width-7 class="standings-data">0</ion-col>
-                <ion-col width-7 class="standings-data">3</ion-col>
-                <ion-col width-12 class="standings-data">-34</ion-col>
-                <ion-col width-12 class="standings-data">123</ion-col>
-                <ion-col width-12 class="standings-data">263</ion-col>
-            </ion-row>
-            <ion-row class="standings" primary>
-                <ion-col width-50 class="standings-team">U8 Mass Elite Ballers</ion-col>
-                <ion-col width-7 class="standings-data">0</ion-col>
-                <ion-col width-7 class="standings-data">3</ion-col>
-                <ion-col width-12 class="standings-data">-34</ion-col>
-                <ion-col width-12 class="standings-data">123</ion-col>
-                <ion-col width-12 class="standings-data">263</ion-col>
-            </ion-row>
-            <ion-row class="standings">
-                <ion-col width-50 class="standings-team">Taunton High School</ion-col>
-                <ion-col width-7 class="standings-data">0</ion-col>
-                <ion-col width-7 class="standings-data">3</ion-col>
-                <ion-col width-12 class="standings-data">-34</ion-col>
-                <ion-col width-12 class="standings-data">123</ion-col>
-                <ion-col width-12 class="standings-data">263</ion-col>
-            </ion-row>
-        <!--</ion-card>-->
-    </div>
-
-
-</ion-content>
-
-<!--<ion-footer>-->
-    <!--<ion-toolbar position="bottom">-->
-        <!--<ion-segment [(ngModel)]="tournamentViewSegment">-->
+    <!--<ion-toolbar no-border-top primary>-->
+        <!--<ion-segment [(ngModel)]="tournamentView" light class="">-->
             <!--<ion-segment-button value="schedule">-->
                 <!--Schedule-->
-            <!--</ion-segment-button>-->
-            <!--<ion-segment-button value="bracket">-->
-                <!--Bracket-->
             <!--</ion-segment-button>-->
             <!--<ion-segment-button value="standings">-->
                 <!--Standings-->
             <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="brackets">-->
+                <!--Brackets-->
+            <!--</ion-segment-button>-->
         <!--</ion-segment>-->
     <!--</ion-toolbar>-->
+</ion-header>
+
+<ion-content class="tournament" [ngSwitch]="tournamentView">
+
+    <!--<ion-list>-->
+    <!--<ion-item text-wrap *ngFor="let spartan of spartans" (click)="dismiss()">-->
+    <!--<ion-thumbnail item-left>-->
+    <!--<img src="{{spartan.img}}">-->
+    <!--</ion-thumbnail>-->
+    <!--<h2 title>{{spartan.name}}</h2>-->
+    <!--<p sub>May 2 - 3, 2016</p>-->
+    <!--</ion-item>-->
+    <!--</ion-list>-->
+
+    <div *ngSwitchWhen="'schedule'">
+
+
+        <ion-list-header sticky>
+            <span class="custom-header">POOL GAMES</span>
+            <span item-right>American Bronze II</span>
+        </ion-list-header>
+
+
+        <ion-card class="custom-card" *ngFor="let game of poolGames">
+            <!--container grid-->
+            <ion-grid>
+                <ion-row>
+                    <!--column for matchup-->
+                    <ion-col width-75 class="matchup">
+
+                        <!--TEAM 1-->
+                        <ion-row>
+                            <!--team image container-->
+                            <ion-col width-15 class="aligner">
+                                <div class="aligner-img">
+                                    <img class="team-img" src="../../../medal-outline.svg">
+                                </div>
+                            </ion-col>
+
+                            <ion-col width-70>
+                                <h2>{{game.team1}}</h2>
+                                <p>{{game.team1Rec}} {{game.team1Coach}}</p>
+                            </ion-col>
+
+                            <ion-col width-15 class="aligner">
+                                <div class="aligner-score">
+                                    <b primary>{{game.team1Score}}</b>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+
+                        <hr class="divide">
+                        <!--TEAM 2-->
+                        <ion-row>
+                            <!--team image container-->
+                            <ion-col width-15 class="aligner img-container">
+                                <div class="aligner-img">
+                                    <img src="../../../medal-outline.svg">
+                                </div>
+                            </ion-col>
+
+                            <ion-col width-70>
+                                <h2>{{game.team2}}</h2>
+                                <p subtitle>{{game.team2Rec}} {{game.team2Coach}}</p>
+                            </ion-col>
+
+                            <ion-col width-15 class="aligner">
+                                <div class="aligner-score">
+                                    <span>{{game.team2Score}}</span>
+                                </div>
+                            </ion-col>
+
+                        </ion-row>
+                    </ion-col>
+
+                    <!--DATE & TIME-->
+                    <ion-col right-box width-25 class="aligner">
+                        <div class="aligner-date-time">
+                            <span>
+                                {{game.dateStamp}} <br> {{game.timeStamp}}
+                            </span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <!--<hr>-->
+            <div card-footer>
+                <span>{{game.facility}} - Court {{game.court}}</span>
+                <!--<span right>Court {{game.court}}</span>-->
+                <!--<span right primary><ion-icon name="navigate"></ion-icon></span>-->
+            </div>
+        </ion-card>
+
+        <ion-list-header sticky>
+            <span class="custom-header">BRACKET GAMES</span>
+        </ion-list-header>
+
+        <ion-card class="custom-card" *ngFor="let game of bracketGames">
+            <!--container grid-->
+            <ion-grid>
+                <ion-row>
+                    <!--column for matchup-->
+                    <ion-col width-75 class="matchup">
+
+                        <!--TEAM 1-->
+                        <ion-row>
+                            <!--team image container-->
+                            <ion-col width-15 class="aligner">
+                                <div class="aligner-img">
+                                    <img class="team-img" src="../../../medal-outline.svg">
+                                </div>
+                            </ion-col>
+
+                            <ion-col width-80>
+                                <h2>{{game.team1}}</h2>
+                                <p>{{game.team1Rec}} {{game.team1Coach}}</p>
+                            </ion-col>
+
+                            <!--<ion-col width-20 class="aligner">-->
+                            <!--<div class="aligner-item">-->
+                            <!--<ion-note class="score">00</ion-note>-->
+                            <!--</div>-->
+                            <!--</ion-col>-->
+                        </ion-row>
+
+                        <hr class="divide">
+                        <!--TEAM 2-->
+                        <ion-row>
+                            <!--team image container-->
+                            <ion-col width-15 class="aligner img-container">
+                                <div class="aligner-img">
+                                    <img src="../../../medal-outline.svg">
+                                </div>
+                            </ion-col>
+
+                            <ion-col width-80>
+                                <h2>{{game.team2}}</h2>
+                                <p>{{game.team2Rec}} {{game.team2Coach}}</p>
+                            </ion-col>
+
+                            <!--<ion-col width-10>-->
+                            <!--<ion-note class="score">00</ion-note>-->
+                            <!--</ion-col>-->
+                        </ion-row>
+                    </ion-col>
+
+                    <!--DATE & TIME-->
+                    <ion-col right-box width-25 class="aligner">
+                        <div class="aligner-item">
+                            <p>
+                                {{game.dateStamp}} <br> {{game.timeStamp}}
+                            </p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <!--<hr>-->
+            <div card-footer>
+                <span>{{game.facility}} - Court {{game.court}}</span>
+                <!--<span right>Court {{game.court}}</span>-->
+                <span right primary><ion-icon name="navigate"></ion-icon></span>
+            </div>
+        </ion-card>
+    </div>
+
+    <div *ngSwitchWhen="'standings'">
+
+        <!--<table class="standings-table">-->
+        <!--<tr class="header">-->
+        <!--<th>TEAM</th>-->
+        <!--<th class="data">W</th>-->
+        <!--<th class="data">L</th>-->
+        <!--<th class="data">PD</th>-->
+        <!--<th class="data">PS</th>-->
+        <!--<th class="data">PA</th>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="team">Spartans Blue 12U</td>-->
+        <!--<td class="data">3</td>-->
+        <!--<td class="data">2</td>-->
+        <!--<td class="data">34</td>-->
+        <!--<td class="data">122</td>-->
+        <!--<td class="data">133</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="team">Spartans Blue 12U</td>-->
+        <!--<td class="data">3</td>-->
+        <!--<td class="data">2</td>-->
+        <!--<td class="data">34</td>-->
+        <!--<td class="data">122</td>-->
+        <!--<td class="data">133</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="team">Spartans Blue 12U</td>-->
+        <!--<td class="data">3</td>-->
+        <!--<td class="data">2</td>-->
+        <!--<td class="data">34</td>-->
+        <!--<td class="data">122</td>-->
+        <!--<td class="data">133</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="team" nowrap>-->
+        <!--<div>Spartans Blue 12U Organge G342 ASFD DHD</div>-->
+        <!--</td>-->
+        <!--<td class="data">3</td>-->
+        <!--<td class="data">2</td>-->
+        <!--<td class="data">34</td>-->
+        <!--<td class="data">122</td>-->
+        <!--<td class="data">133</td>-->
+        <!--</tr>-->
+        <!--</table>-->
+
+        <ion-list-header>
+            <b>AMERICAN BRONZE II</b>
+        </ion-list-header>
+
+        <ion-grid class="standings-grid">
+            <ion-row class="grid-header">
+                <ion-col width-45>TEAM</ion-col>
+                <ion-col width-11>W</ion-col>
+                <ion-col width-11>L</ion-col>
+                <ion-col width-11>PD</ion-col>
+                <ion-col width-11>PS</ion-col>
+                <ion-col width-11>PA</ion-col>
+            </ion-row>
+            <ion-row class="grid-content" *ngFor="let team of teams">
+                <ion-col width-45>{{team.name}}</ion-col>
+                <ion-col width-11>{{team.w}}</ion-col>
+                <ion-col width-11>{{team.l}}</ion-col>
+                <ion-col width-11>{{team.ps}}</ion-col>
+                <ion-col width-11>{{team.pa}}</ion-col>
+                <ion-col width-11>{{team.pd}}</ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list-header>
+            <b>AMERICAN GOLD</b>
+        </ion-list-header>
+
+        <ion-grid class="standings-grid">
+            <ion-row class="grid-header">
+                <ion-col width-45>TEAM</ion-col>
+                <ion-col width-11>W</ion-col>
+                <ion-col width-11>L</ion-col>
+                <ion-col width-11>PD</ion-col>
+                <ion-col width-11>PS</ion-col>
+                <ion-col width-11>PA</ion-col>
+            </ion-row>
+            <ion-row class="grid-content" *ngFor="let team of teams">
+                <ion-col width-45>{{team.name}}</ion-col>
+                <ion-col width-11>{{team.w}}</ion-col>
+                <ion-col width-11>{{team.l}}</ion-col>
+                <ion-col width-11>{{team.ps}}</ion-col>
+                <ion-col width-11>{{team.pa}}</ion-col>
+                <ion-col width-11>{{team.pd}}</ion-col>
+            </ion-row>
+        </ion-grid>
+
+
+        <ion-list-header>
+            <b>AMERICAN SILVER</b>
+        </ion-list-header>
+
+        <ion-grid class="standings-grid">
+            <ion-row class="grid-header">
+                <ion-col width-45>TEAM</ion-col>
+                <ion-col width-11>W</ion-col>
+                <ion-col width-11>L</ion-col>
+                <ion-col width-11>PD</ion-col>
+                <ion-col width-11>PS</ion-col>
+                <ion-col width-11>PA</ion-col>
+            </ion-row>
+            <ion-row class="grid-content" *ngFor="let team of teams">
+                <ion-col width-45>{{team.name}}</ion-col>
+                <ion-col width-11>{{team.w}}</ion-col>
+                <ion-col width-11>{{team.l}}</ion-col>
+                <ion-col width-11>{{team.ps}}</ion-col>
+                <ion-col width-11>{{team.pa}}</ion-col>
+                <ion-col width-11>{{team.pd}}</ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+    <div *ngSwitchWhen="'brackets'"></div>
+
+</ion-content>
+
+<!--<ion-footer>-->
+<!--<ion-toolbar position="bottom">-->
+<!--<ion-segment [(ngModel)]="tournamentViewSegment">-->
+<!--<ion-segment-button value="schedule">-->
+<!--Schedule-->
+<!--</ion-segment-button>-->
+<!--<ion-segment-button value="bracket">-->
+<!--Bracket-->
+<!--</ion-segment-button>-->
+<!--<ion-segment-button value="standings">-->
+<!--Standings-->
+<!--</ion-segment-button>-->
+<!--</ion-segment>-->
+<!--</ion-toolbar>-->
 <!--</ion-footer>-->

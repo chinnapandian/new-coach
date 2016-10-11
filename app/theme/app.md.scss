@@ -29,3 +29,8 @@
 // App Material Design Only Sass
 // --------------------------------------------------
 // CSS that should only apply to the Material Design app
+
+
+ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
+  border-top: none;
+}

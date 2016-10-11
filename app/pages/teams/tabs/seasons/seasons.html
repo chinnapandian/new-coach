@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-navbar no-border-bottom primary>
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+    </ion-navbar>
+
+    <ion-toolbar primary no-border-top>
+        <ion-segment [(ngModel)]="scheduleView" light class="wide">
+            <ion-segment-button value="game">
+                Seasons
+            </ion-segment-button>
+            <ion-segment-button value="practice">
+                Practices
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="seasons">
+
+    <!--<div padding>-->
+    <!--<ion-segment [(ngModel)]="tournamentView">-->
+    <!--<ion-segment-button value="my">-->
+    <!--My Tournaments-->
+    <!--</ion-segment-button>-->
+    <!--<ion-segment-button value="all">-->
+    <!--All Tournaments-->
+    <!--</ion-segment-button>-->
+    <!--</ion-segment>-->
+    <!--</div>-->
+
+    <div [ngSwitch]="scheduleView">
+
+        <div *ngSwitchCase="'game'">
+            <ion-list-header text-wrap>Zero Gravity Fall 2016 - New England Circut</ion-list-header>
+
+            <ion-card class="custom-card">
+                <ion-list text-wrap>
+                    <a ion-item text-wrap *ngFor="let tournament of myTournaments" (click)="goToTournament()">
+                        <ion-thumbnail item-left>
+                            <img src="{{tournament.img}}">
+                        </ion-thumbnail>
+                        <h2 title>{{tournament.name}}</h2>
+                        <p subtitle>{{tournament.date}}</p>
+                        <!--<button outline item-right (click)="goToPurchaseSeasonPage()">Get</button>-->
+                    </a>
+                </ion-list>
+                <div padding>
+                    <button block outline small primary (click)="goToPurchaseSeasonPage()">
+                        Get them all with a Season Pass
+                    </button>
+                    <!--<h2 primary>Get them all with a Season Pass</h2>-->
+                </div>
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'practice'">
+            <h1 danger text-center padding-top>Oops!</h1>
+            <p padding text-center>It looks like your coach hasn't input your teams practice schedule.</p>
+            <div padding>
+                <button block outline success>Create Practice Schedule</button>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

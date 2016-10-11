@@ -3,11 +3,12 @@
 
         <ion-title>Select Season Pass</ion-title>
 
-        <!--<ion-buttons end>-->
-            <!--<button>-->
-                <!--<ion-icon name="help-circle"></ion-icon>-->
-            <!--</button>-->
-        <!--</ion-buttons>-->
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
 
     </ion-navbar>
 
@@ -25,16 +26,20 @@
         </ion-item>
     </ion-list>
 
-    <ion-list *ngFor="let pack of packs">
-        <ion-item text-wrap>
-            <ion-thumbnail item-left>
-                <img src="{{pack.img}}">
-            </ion-thumbnail>
-            <h2 title>{{pack.name}}</h2>
-            <p sub>{{pack.description}}</p>
-            <button item-right outline>${{pack.price}}</button>
-        </ion-item>
-    </ion-list>
-
+    <ion-card class="custom-card" *ngFor="let pack of packs">
+        <ion-list text-wrap>
+            <ion-item>
+                <ion-avatar item-left>
+                    <img src="{{pack.img}}">
+                </ion-avatar>
+                <h2>{{pack.name}}</h2>
+                <button item-right outline>${{pack.price}}</button>
+            </ion-item>
+            <ion-item>
+                <b>{{pack.info}}</b>
+                <p>{{pack.description}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-card>
 
 </ion-content>

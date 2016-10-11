@@ -1,9 +1,84 @@
-.teams {
-  //h2[title]{
-  //  font-weight: 500;
-  //}
+.card-background-page {
 
-  .getting-started {
-    //padding: 22px;
+  ion-card {
+    position: relative;
+    text-align: center;
+    height: 200px;
+  }
+
+  .card-title {
+    position: absolute;
+    opacity: .9;
+    top: 15%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #444;
+  }
+
+  .card-subtitle {
+    font-size: 1.1em;
+    opacity: .9;
+    font-weight: 500;
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    color: #5e5e5e;
+  }
+
+  img.team-logo {
+    display: block;
+    margin: auto;
+    max-width: 85px;
+    margin-top: 10px;
+    //opacity: .9;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  .team-card-basketball {
+    background: url("../../..//wood.jpg");
+    background-size: cover;
+    opacity: .8;
+  }
+
+  .team-card-soccer {
+    background: url("../../..//grass.jpg");
+    background-size: cover;
+  }
+
+  .aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .aligner-content {
+      max-width: 100%;
+      text-align: center;
+      color: #222222;
+
+      .header {
+        font-size: 2.0em;
+        font-weight: bold;
+        text-align: center;
+        opacity: .9;
+      }
+      .subtitle {
+        font-size: 1.2em;
+        opacity: .9;
+      }
+
+      img.logo {
+        max-width: 95px;
+        display: block;
+        margin: auto;
+        margin-top: 10px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+      }
+
+    }
   }
 }

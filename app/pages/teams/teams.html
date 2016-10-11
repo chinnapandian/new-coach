@@ -2,7 +2,7 @@
     <ion-navbar primary>
         <ion-buttons start>
             <!--<button (click)="goToFilterSeachPage()">-->
-                <!--<ion-icon ios="ios-add-circle-outline" md="md-add"></ion-icon>-->
+            <!--<ion-icon ios="ios-add-circle-outline" md="md-add"></ion-icon>-->
             <!--</button>-->
 
             <button (click)="goToGenderPage()">
@@ -24,59 +24,77 @@
 
 </ion-header>
 
-<ion-content class="teams">
+<ion-content class="card-background-page">
 
-    <!--<div (click)="presentTeamActionSheet()">-->
-        <!--<img src="../../welcome-5.svg" alt="">-->
-    <!--</div>-->
-    <!--Basketball-->
-    <ion-list>
-        <!--<ion-list-header>Basketball</ion-list-header>-->
+    <!--<ion-list-header>Besketball Teams</ion-list-header>-->
 
-        <ion-item-sliding  *ngFor="let basketballTeam of basketballTeams">
+    <!--<ion-card *ngFor="let team of basketballTeams" (click)="goToTeamTabPage()">-->
 
-            <a ion-item text-wrap (click)="goToThisTeamPage()">
-                <ion-thumbnail item-left>
-                    <img src="{{basketballTeam.img}}">
-                </ion-thumbnail>
-                <h2 title>{{basketballTeam.name}}</h2>
-                <p sub>Coach {{basketballTeam.coach}}</p>
-                <!--<p><span success>In Season</span></p>-->
-            </a>
+        <!--<img src="../../../purty_wood.png">-->
 
-            <ion-item-options side="right">
-                <button danger (click)="goToTournamentDetailsPage()">
-                    <ion-icon name="remove-circle"></ion-icon>
-                    Remove
-                </button>
-            </ion-item-options>
+        <!--<div class="card-title">-->
+            <!--{{team.name}}-->
+        <!--</div>-->
 
-        </ion-item-sliding>
-    </ion-list>
+        <!--<div class="card-subtitle">-->
+
+            <!--Coach {{team.coach}}-->
+
+            <!--<div class="Aligner">-->
+                <!--<div class="Aligner-img">-->
+                    <!--<img class="team-logo" src="{{team.img}}">-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</ion-card>-->
+
+    <ion-list-header>Basketball Teams</ion-list-header>
+
+
+    <ion-card class="team-card-basketball aligner" *ngFor="let team of basketballTeams" (click)="goToTeamTabPage()">
+            <div class="aligner-content">
+                <div class="header">{{team.name}}</div>
+                <span class="subtitle">Coach {{team.coach}}</span>
+                <img class="team-logo" src="{{team.img}}">
+            </div>
+    </ion-card>
+
+    <ion-list-header>Soccer Teams</ion-list-header>
+
+
+    <ion-card class="team-card-soccer aligner" *ngFor="let team of soccerTeams" (click)="goToTeamTabPage()">
+            <div class="aligner-content">
+                <div class="header">{{team.name}}</div>
+                <span class="subtitle">Coach {{team.coach}}</span>
+                <img class="logo" src="{{team.img}}">
+            </div>
+    </ion-card>
+
 
     <!--Soccer-->
     <!--<ion-list>-->
-        <!--<ion-list-header>Soccer</ion-list-header>-->
+    <!--<ion-list-header>Soccer</ion-list-header>-->
 
-        <!--<ion-item-sliding  *ngFor="let soccerTeam of soccerTeams">-->
+    <!--<ion-item-sliding  *ngFor="let soccerTeam of soccerTeams">-->
 
-            <!--<a ion-item text-wrap (click)="presentTeamActionSheet()">-->
-                <!--<ion-thumbnail item-left>-->
-                    <!--<img src="{{soccerTeam.img}}">-->
-                <!--</ion-thumbnail>-->
-                <!--<h2>{{soccerTeam.name}}</h2>-->
-                <!--<p>Coach {{soccerTeam.coach}}</p>-->
-                <!--&lt;!&ndash;<p><span danger-lite>Out of Season</span></p>&ndash;&gt;-->
-            <!--</a>-->
+    <!--<a ion-item text-wrap (click)="presentTeamActionSheet()">-->
+    <!--<ion-thumbnail item-left>-->
+    <!--<img src="{{soccerTeam.img}}">-->
+    <!--</ion-thumbnail>-->
+    <!--<h2>{{soccerTeam.name}}</h2>-->
+    <!--<p>Coach {{soccerTeam.coach}}</p>-->
+    <!--&lt;!&ndash;<p><span danger-lite>Out of Season</span></p>&ndash;&gt;-->
+    <!--</a>-->
 
-            <!--<ion-item-options side="right">-->
-                <!--<button danger (click)="goToTournamentDetailsPage()">-->
-                    <!--<ion-icon name="remove-circle"></ion-icon>-->
-                    <!--Remove-->
-                <!--</button>-->
-            <!--</ion-item-options>-->
+    <!--<ion-item-options side="right">-->
+    <!--<button danger (click)="goToTournamentDetailsPage()">-->
+    <!--<ion-icon name="remove-circle"></ion-icon>-->
+    <!--Remove-->
+    <!--</button>-->
+    <!--</ion-item-options>-->
 
-        <!--</ion-item-sliding>-->
+    <!--</ion-item-sliding>-->
     <!--</ion-list>-->
 
 </ion-content>

@@ -1,0 +1,37 @@
+<ion-header class="message-board">
+    <ion-navbar primary>
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+        <ion-buttons end>
+            <button (click)="goToComposePage()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="message-board">
+    <ion-card class="custom-card" *ngFor="let message of messages">
+        <h2 class="message-title">{{message.title}}</h2>
+        <p class="message-timestamp">{{message.dateStamp}} @ {{message.timeStamp}}</p>
+        <hr>
+        <span class="message-body">{{message.body}}</span>
+        <p class="message-author">- Coach {{message.author}}</p>
+        <!--<p class="message-timestamp">{{message.dateStamp}} @ {{message.timeStamp}}</p>-->
+    </ion-card>
+
+    <ion-fab right bottom>
+        <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
+        <ion-fab-list side="left">
+            <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+            <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+            <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+            <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+        </ion-fab-list>
+    </ion-fab>
+
+</ion-content>
+

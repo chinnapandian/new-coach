@@ -1,2 +1,211 @@
-.home {
+.tournament {
+
+  ion-col, ion-grid {
+    padding: 0px;
+  }
+
+  // Start Custom Card Styles
+  .custom-card {
+    box-shadow: none;
+    border: 1px solid #e4e4e4;
+
+    p {
+      font-size: 1.1rem;
+      color: #AAA;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    hr.divide {
+      float: right;
+      width: 85%;
+    }
+
+    ion-col.matchup {
+      margin-top: 7px !important;
+      margin-bottom: 7px !important;
+
+      ion-row {
+        //padding-top: 2px;
+        //padding-bottom: 2px;
+
+        h2 {
+          font-size: 1.4rem;
+        }
+
+        p {
+          color: #999;
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    ion-col[right-box] {
+      border-left: 1px solid rgba(0, 0, 0, 0.12);;
+    }
+
+    div[card-footer] {
+      //padding: 2px;
+      padding-left: 10px;
+      padding-right: 20px;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      //color: #747474;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      font-size: 1.2rem;
+
+      span[right] {
+        text-align: right;
+        float: right;
+      }
+    }
+
+    div[date-time] {
+      display: table;
+
+      p {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+
+    .aligner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+
+      .align-middle {
+        max-width: 100%;
+        text-align: center;
+        //line-height: 1.7;
+      }
+
+      .aligner-score {
+        font-weight: 400;
+        max-width: 100%;
+        font-size: 1.5rem;
+      }
+
+      .aligner-date-time {
+        max-width: 85%;
+        line-height: 1.7;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+
+      .aligner-img {
+        max-width: 55%;
+      }
+    }
+  }
+  // End Custom Card Styles
+
+  table, td, th {
+    width: 100%;
+    //margin-top: 20px;
+    //margin-bottom: 5px;
+  }
+
+  table {
+    border-collapse: collapse;
+    //table-layout: fixed;
+    //margin:auto 0;
+    //width: 80%;
+    //padding-left: 10px;
+    //padding-right: 10px;
+    //border: 1px solid #eee;
+  }
+
+  tr {
+    line-height: 3rem;
+  }
+
+  tr.header {
+    line-height: 2rem;
+  }
+
+  tr:nth-child(even) {
+    background-color: #fff;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #f6f6f6;
+  }
+
+  th {
+    color: #fff;
+    background: color($colors, warning);
+  }
+
+  td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    //white-space: nowrap;
+    //display: inline-block;
+  }
+
+  td.team {
+
+    max-width:10vw;
+
+    div {
+      width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  th, td {
+    text-align: left;
+    padding: 5px;
+  }
+
+  th.data, td.data {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+  }
+
+  ion-row.header {
+    //padding-top: 7px;
+    //padding-bottom: 7px;
+    background: color($colors, primary);
+
+    ion-col.data-header {
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 11px;
+      display: block;
+      color: white;
+      text-align: center;
+    }
+
+    ion-col.team-header {
+      text-align: left;
+      line-height: 3.7rem;
+    }
+
+    .align-middle {
+
+    }
+  }
+
+  ion-row.standings-content {
+
+    ion-col.data {
+      text-align: center;
+    }
+
+    ion-col.team {
+      text-align: left;
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+  }
+
 }

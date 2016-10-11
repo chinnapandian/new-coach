@@ -1,0 +1,38 @@
+.message-board {
+
+  .custom-card{
+    padding: 8px;
+  }
+
+  h1{
+    font-size: 2rem;
+  }
+
+  .message-title{
+    font-weight: bold;
+    color: color($colors, primary);
+    font-size: 1.6rem;
+  }
+
+  .message-body{
+    color: color($colors, dark-gray);
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+  }
+
+  .message-author {
+    text-align: right;
+    font-style: italic;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: color($colors, gray);
+  }
+
+  .message-timestamp {
+    color: color($colors, secondary);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+}

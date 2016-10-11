@@ -1,57 +1,61 @@
 <ion-header>
-  <ion-navbar primary>
+    <ion-navbar primary>
 
-    <ion-buttons start>
-      <button (click)="dismiss()">
-        <span showWhen="ios">Done</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-      </button>
-    </ion-buttons>
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
 
-    <ion-title>Tournament Details</ion-title>
+        <ion-title>Tournament Details</ion-title>
 
-  </ion-navbar>
+    </ion-navbar>
 </ion-header>
 
 <ion-content class="details">
 
-  <ion-list>
     <ion-list-header>Important Info</ion-list-header>
-    <ion-item text-wrap>
-      <span>{{description}}</span>
-    </ion-item>
-  </ion-list>
+    <ion-card class="custom-card">
+        <ion-list>
+            <ion-item text-wrap>
+                <span>{{description}}</span>
+            </ion-item>
+        </ion-list>
+    </ion-card>
 
-  <!--Dates-->
-  <ion-list>
-    <ion-list-header>Date Range</ion-list-header>
-    <ion-item>
-      <span>Start Date</span>
-      <ion-note item-right>Saturday, Nov 8, 2016</ion-note>
-    </ion-item>
-    <ion-item>
-      <span>End Date</span>
-      <ion-note item-right>Sunday, Nov 9, 2016</ion-note>
-    </ion-item>
-  </ion-list>
+    <!--Dates-->
+        <ion-list-header>Date Range</ion-list-header>
+    <ion-card class="custom-card">
+        <ion-list>
+            <ion-item>
+                <span>Start Date</span>
+                <ion-note item-right>Saturday, Nov 8, 2016</ion-note>
+            </ion-item>
+            <ion-item>
+                <span>End Date</span>
+                <ion-note item-right>Sunday, Nov 9, 2016</ion-note>
+            </ion-item>
+        </ion-list>
+    </ion-card>
 
 
-  <ion-list>
-    <ion-list-header>Locations</ion-list-header>
+    <ion-list>
+        <ion-list-header>Locations</ion-list-header>
 
-    <a ion-item *ngFor="let facility of facilities" (click)="goToTournamentLocationPage()">
-      <span>{{facility.name}}</span>
-    </a>
+        <a ion-item *ngFor="let facility of facilities" (click)="goToTournamentLocationPage()">
+            <span>{{facility.name}}</span>
+        </a>
 
-  </ion-list>
+    </ion-list>
 
-  <ion-list>
-    <ion-list-header>Divisions</ion-list-header>
+    <ion-list>
+        <ion-list-header>Divisions</ion-list-header>
 
-    <a ion-item *ngFor="let div of divisions" (click)="goToTournamentDivisionPage()">
-      <span>{{div.name}}</span>
-    </a>
+        <a ion-item *ngFor="let div of divisions" (click)="goToTournamentDivisionPage()">
+            <span>{{div.name}}</span>
+        </a>
 
-  </ion-list>
+    </ion-list>
 
 </ion-content>

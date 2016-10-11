@@ -1,22 +1,21 @@
 import {Component} from '@angular/core';
 import {NavController, ModalController, ActionSheetController} from 'ionic-angular';
+import {StandingsPage} from "../standings/standings";
 import {TournamentPage} from "../tournament";
-import {TournamentDetailsPage} from "../details/details";
-import {GamePage} from "../game/game";
-import {TournamentStandingsPage} from "../standings/standings";
+import {BracketsPage} from "../brackets/brackets";
 
 @Component({
   templateUrl: 'build/pages/tournament/tabs/tabs.html'
 })
 
 export class TournamentTabsPage {
-  tournamentTab1: any;
-  // tournamentTab2: any;
-  tournamentTab3: any;
+  scheduleTab: any;
+  bracketTab: any;
+  standingsTab: any;
 
   constructor() {
-    this.tournamentTab1 = TournamentPage;
-    // this.tournamentTab2 = TournamentDetailsPage;
-    this.tournamentTab3 = TournamentStandingsPage;
+    this.scheduleTab = TournamentPage;
+    this.bracketTab = BracketsPage;
+    this.standingsTab = StandingsPage;
   }
 }

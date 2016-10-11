@@ -7,11 +7,12 @@ import {AddTeamPage} from '../add-team/add-team';
 import {SelectSportPage} from '../add-team/select-sport/select-sport';
 import {SelectOrgPage} from '../add-team/select-org/select-org';
 import {FilterSeachPage} from '../add-team/filter-search/filter-search';
-import {TeamTabsPage} from './tabs/tabs'
-import {ThisTeamPage} from './this-team/this-team'
+// import {ThisTeamPage} from './this-team/this-team'
 import {FindTournamentPage} from '../tournament/find/find-tourn'
 import {SelectGenderPage} from "../add-team/select-gender/select-gender";
 import {AddMenuPage} from "../add-menu/add-menu";
+import {TeamTabsPage} from "./tabs/tabs";
+
 
 
 @Component({
@@ -37,6 +38,8 @@ export class TeamsPage {
       foo: true
     }
   ];
+
+
 
   private basketballTeams: any = [
     {
@@ -81,15 +84,13 @@ export class TeamsPage {
     filterModal.present();
   }
 
-  goToTeamTabsPage(){
-    // let teamTabsModal = this.modalCtrl.create(TeamTabsPage);
-    // teamTabsModal.present();
-    this.navCtrl.push(TeamTabsPage);
-  }
+  // goToThisTeamPage(){
+  //   this.navCtrl.push(ThisTeamPage);
+  // }
 
-  goToThisTeamPage(){
-    this.navCtrl.push(ThisTeamPage);
-  }
+    goToTeamTabPage(){
+        this.navCtrl.push(TeamTabsPage);
+    }
 
   presentTeamActionSheet() {
     let actionSheet = this.asCtrl.create({

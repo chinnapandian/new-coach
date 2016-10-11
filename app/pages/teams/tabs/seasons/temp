@@ -1,0 +1,33 @@
+<div *ngSwitchCase="'completed'">
+
+<ion-list text-wrap>
+<ion-list-header text-wrap>
+    Hoop Group Summer 2016
+    <!--<button item-right (click)="goToPurchaseSeasonPage()">Get Season Pass</button>-->
+</ion-list-header>
+
+<ion-item text-wrap *ngFor="let tournament of myTournaments">
+<ion-avatar item-left>
+    <img src="../../../../basketball.svg" alt="">
+</ion-avatar>
+<h2>{{tournament.name}}</h2>
+<p>{{tournament.date}}</p>
+<!--<ion-icon name="checkmark" item-right></ion-icon>-->
+<!--<button outline item-right>Get</button>-->
+</ion-item>
+
+
+<ion-item>
+<button block (click)="goToPurchaseSeasonPage()">Get Season Pass</button>
+        </ion-item>
+
+        </ion-list>
+
+<ion-list>
+<a ion-item>
+    <h2>Spartans Annual NH Playoff Smash</h2>
+    <p>May 25 - 26, 2016</p>
+    <button outline item-right>$0.99</button>
+</a>
+</ion-list>
+        </div>
