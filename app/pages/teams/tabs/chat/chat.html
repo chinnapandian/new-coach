@@ -7,6 +7,9 @@
             <button (click)="goToComposePage()">
                 <ion-icon name="create"></ion-icon>
             </button>
+            <button (click)="goToComposePage()">
+                <ion-icon name="camera"></ion-icon>
+            </button>
         </ion-buttons>
 
     </ion-navbar>
@@ -23,17 +26,20 @@
         <!--<ion-refresher-content></ion-refresher-content>-->
     <!--</ion-refresher>-->
 
-    <ion-toolbar primary no-border-top>
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    </ion-toolbar>
+    <!--<ion-toolbar primary no-border-top>-->
+        <!--<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>-->
+    <!--</ion-toolbar>-->
 
+    <ion-card class="custom-card" *ngFor="let img of images">
+        <img src="{{img.img}}" alt="">
+    </ion-card>
     <ion-card class="custom-card" *ngFor="let message of messages">
         <h2 class="message-title">{{message.title}}</h2>
         <p class="message-timestamp">{{message.dateStamp}} @ {{message.timeStamp}}</p>
         <hr>
         <span class="message-body">{{message.body}}</span>
+        <img src="{{message.img}}" alt="">
         <p class="message-author">- Coach {{message.author}}</p>
-        <!--<p class="message-timestamp">{{message.dateStamp}} @ {{message.timeStamp}}</p>-->
     </ion-card>
 
 </ion-content>

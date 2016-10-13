@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar primary>
+    <ion-navbar dark-gray>
 
         <ion-title>Find Your Team</ion-title>
         <!--<ion-searchbar (input)="getItems($event)" placeholder="Find Your Team"></ion-searchbar>-->
@@ -14,34 +14,31 @@
     </ion-navbar>
 
     <!--<ion-toolbar primary>-->
-        <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
+    <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
     <!--</ion-toolbar>-->
 
 </ion-header>
 
 <ion-content>
 
-    <!--<ion-toolbar>-->
-        <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
-    <!--</ion-toolbar>-->
+    <ion-card class="custom-card">
+        <ion-list>
 
+            <ion-list-header>
+                <ion-avatar item-left>
+                    <img src="http://meltonbasketball.com.au/wp-content/uploads/2011/12/Spartans.jpg">
+                </ion-avatar>
+                Spartans Organization
+            </ion-list-header>
 
-    <!--List of teams, grouped by org-->
-    <ion-list>
+            <ion-item text-wrap *ngFor="let spartan of spartans">
+                <h2 title>{{spartan.name}}</h2>
+                <p>Coach {{spartan.coach}}</p>
+                <button item-right outline (click)="dismiss()">Follow</button>
+            </ion-item>
+        </ion-list>
 
-        <ion-list-header>
-            <ion-avatar item-left>
-                <img src="http://meltonbasketball.com.au/wp-content/uploads/2011/12/Spartans.jpg">
-            </ion-avatar>
-            Spartans Organization
-        </ion-list-header>
-
-        <ion-item text-wrap *ngFor="let spartan of spartans">
-            <h2>{{spartan.name}}</h2>
-            <p>Coach {{spartan.coach}}</p>
-            <button item-right outline (click)="dismiss()">Follow</button>
-        </ion-item>
-    </ion-list>
+    </ion-card>
 
     <!--List of teams, grouped by org-->
     <ion-list>

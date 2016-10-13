@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar primary>
+    <ion-navbar dark-gray>
 
         <ion-buttons start>
             <button (click)="dismiss()">
@@ -13,26 +13,25 @@
     </ion-navbar>
 
     <!--<ion-toolbar primary>-->
-        <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
+    <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
     <!--</ion-toolbar>-->
 
 </ion-header>
 
 <ion-content>
 
-
-    <!--Matchup-->
-    <ion-list>
-        <ion-list-header>What kind of team are you looking for?</ion-list-header>
-        <a ion-item (click)="goToStatePage()">
-            <!--<ion-icon name="male" item-left></ion-icon>-->
-            Boys Team
-        </a>
-        <a ion-item (click)="goToStatePage()">
-            <!--<ion-icon name="female" item-left></ion-icon>-->
-            Girls Team
-        </a>
-    </ion-list>
-
+    <ion-list-header>What kind of team are you looking for?</ion-list-header>
+    <ion-card class="custom-card">
+        <ion-list>
+            <a ion-item (click)="goToStatePage()">
+                <!--<ion-icon name="male" item-left></ion-icon>-->
+                Boys Team
+            </a>
+            <a ion-item (click)="goToStatePage()">
+                <!--<ion-icon name="female" item-left></ion-icon>-->
+                Girls Team
+            </a>
+        </ion-list>
+    </ion-card>
 
 </ion-content>

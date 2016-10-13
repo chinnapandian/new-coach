@@ -10093,6 +10093,13 @@ body {
   margin-bottom: 10px;
   font-weight: bold; }
 
+.player .player {
+  font-size: 2.5rem;
+  font-weight: 500; }
+
+.player .meta {
+  font-size: 1.5rem; }
+
 .player div.padding-thin {
   padding: 8px; }
 
@@ -10185,9 +10192,6 @@ body {
       margin-top: 10px;
       border-radius: 5px; }
 
-.seasons h2 {
-  font-size: 1.4rem !important; }
-
 .seasons p {
   font-size: 1.2rem !important; }
 
@@ -10230,34 +10234,6 @@ body {
     .tournament .custom-card div[date-time] p {
       display: table-cell;
       vertical-align: middle; }
-  .tournament .custom-card .aligner {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    color: #666; }
-    .tournament .custom-card .aligner .align-middle {
-      max-width: 100%;
-      text-align: center; }
-    .tournament .custom-card .aligner .aligner-score {
-      font-weight: 400;
-      max-width: 100%;
-      font-size: 1.5rem; }
-    .tournament .custom-card .aligner .aligner-date-time {
-      max-width: 85%;
-      line-height: 1.7;
-      text-align: center;
-      font-size: 1.2rem; }
-    .tournament .custom-card .aligner .aligner-img {
-      max-width: 55%; }
 
 .brackets ion-col, .brackets ion-grid {
   padding: 0px; }
@@ -10361,33 +10337,117 @@ body {
   font-size: 2rem; }
 
 ion-content {
-  background: -webkit-linear-gradient(rgba(240, 240, 240, 0.5), rgba(240, 240, 240, 0.5)), url("../../dots.png");
-  background: linear-gradient(rgba(240, 240, 240, 0.5), rgba(240, 240, 240, 0.5)), url("../../dots.png");
-  color: #444444; }
+  background: -webkit-linear-gradient(rgba(240, 240, 240, 0.4), rgba(240, 240, 240, 0.4)), url("../../dots.png");
+  background: linear-gradient(rgba(240, 240, 240, 0.4), rgba(240, 240, 240, 0.4)), url("../../dots.png"); }
+
+ion-content {
+  background-color: #f8f8f8;
+  color: #444; }
 
 ion-tabbar {
   background: rgba(250, 250, 250, 0.4); }
 
 .item {
   padding-left: 8px; }
+  .item h2[title] {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #444; }
+  .item p {
+    font-size: 1.2rem; }
 
-ion-thumbnail > img.circle {
+ion-avatar.square {
+  margin-right: 8px; }
+  ion-avatar.square img {
+    border-radius: 2px !important;
+    max-width: 6rem;
+    max-height: 6rem; }
+
+ion-thumbnail.circle img {
   border-radius: 300px; }
 
 ion-card > .item {
-  background: none; }
+  background: #fff; }
 
 ion-card {
   margin: 8px !important;
   width: calc(100% - 16px);
-  background-color: rgba(255, 255, 255, 0.6); }
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #666666; }
 
-.custom-card {
+ion-card.custom-card {
   box-shadow: none;
   border: 1px solid #e4e4e4; }
+  ion-card.custom-card h2 [title] {
+    font-weight: 500; }
+  ion-card.custom-card [item-right] {
+    margin-right: 0px; }
 
 div.padding-thin {
   padding: 8px; }
+
+.align-left {
+  line-height: 1.7; }
+
+ion-col.bullet {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+  ion-col.bullet div.bullet-img {
+    max-width: 85%;
+    text-align: center; }
+
+ion-col.bullet-item > h2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 2rem; }
+
+.aligner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: #666;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+  .aligner .align-middle {
+    max-width: 100%;
+    text-align: center; }
+  .aligner .aligner-score {
+    font-weight: 400;
+    max-width: 100%;
+    font-size: 1.5rem; }
+  .aligner .aligner-date-time {
+    max-width: 85%;
+    line-height: 1.7;
+    text-align: center;
+    font-size: 1.2rem; }
+  .aligner .aligner-img {
+    max-width: 55%; }
+
+ion-col[width-73] {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 73%;
+  -ms-flex: 0 0 73%;
+  flex: 0 0 73%;
+  max-width: 73%; }
 
 ion-col[width-45] {
   -webkit-box-flex: 0;
@@ -10424,39 +10484,11 @@ ion-col[width-70] {
   flex: 0 0 70%;
   max-width: 70%; }
 
-ion-row.standings {
-  border-bottom: 1px solid #eee;
-  background-color: #fff; }
-  ion-row.standings ion-col {
-    height: 44px;
-    line-height: 44px;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    display: block;
-    text-overflow: ellipsis;
-    color: #333; }
-  ion-row.standings ion-col.standings-team {
-    font-weight: 500; }
-
-ion-grid.standings {
-  margin-top: 20px; }
-
-.team-tabs-page .back-button {
-  display: inline-block; }
-
-.item p {
-  font-size: 1.4rem; }
-
 ion-item.header-item {
   border-bottom: 4px solid #444 !important; }
 
-h2[title] {
-  font-weight: 500;
-  font-size: 1.9rem; }
-
 p[subtitle] {
-  font-size: 1.7rem; }
+  font-size: 1.4rem; }
 
 .custom-header {
   font-weight: 600;

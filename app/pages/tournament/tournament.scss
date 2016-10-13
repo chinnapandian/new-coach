@@ -71,35 +71,6 @@
       }
     }
 
-    .aligner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-
-      .align-middle {
-        max-width: 100%;
-        text-align: center;
-        //line-height: 1.7;
-      }
-
-      .aligner-score {
-        font-weight: 400;
-        max-width: 100%;
-        font-size: 1.5rem;
-      }
-
-      .aligner-date-time {
-        max-width: 85%;
-        line-height: 1.7;
-        text-align: center;
-        font-size: 1.2rem;
-      }
-
-      .aligner-img {
-        max-width: 55%;
-      }
-    }
   }
   // End Custom Card Styles
 

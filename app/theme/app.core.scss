@@ -9,6 +9,7 @@
 @import "../pages/auth/login/login";
 @import "../pages/teams/tabs/chat/chat";
 @import "../pages/teams/tabs/player/player";
+@import "../pages/add-team/select-pack/select-pack";
 @import "../pages/teams/teams";
 @import "../pages/teams/tabs/seasons/seasons";
 @import "../pages/tournament/tournament";
@@ -20,48 +21,151 @@
 ion-content {
   background: /* top, transparent red, faked with gradient */
           linear-gradient(
-                          rgba(240, 240, 240, 0.5),
-                          rgba(240, 240, 240, 0.5)
+                          rgba(240, 240, 240, 0.4),
+                          rgba(240, 240, 240, 0.4)
           ),
             /* bottom, image */
           url("../../dots.png");
+}
 
-  color: color($colors, dark-gray);
+ion-content {
+  background-color: #f8f8f8;
+  color: #444;
 }
 
 ion-tabbar {
   background: rgba(250, 250, 250, 0.4);
 }
 
-.item{
+.item {
+
+  h2[title] {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #444;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
   padding-left: 8px;
 }
 
-ion-thumbnail > img.circle {
-  border-radius: 300px
+// Global styles for custom avatars and thumbnails
+
+ion-avatar.square {
+  margin-right: 8px;
+
+  img {
+    border-radius: 2px !important;
+    max-width: 6rem;
+    max-height: 6rem;
+  }
 }
 
-//taking away the item bg because the card is already colored
+ion-thumbnail.circle {
+  img {
+    border-radius: 300px
+  }
+}
+
 ion-card > .item {
-  background: none;
+  background: #fff;
 }
 
-ion-card{
+// End
+
+// Global styles for cards
+
+ion-card {
   margin: 8px !important;
   width: calc(100% - 16px);
-  background-color: rgba(255, 255, 255, .6)
+  background-color: rgba(255, 255, 255, .9);
+  color: color($colors, gray)
 }
 
-.custom-card {
+span [title] {
+
+}
+
+ion-card.custom-card {
   box-shadow: none;
   border: 1px solid #e4e4e4;
+
+  h2 [title] {
+    font-weight: 500;
+  }
+
+  [item-right] {
+    margin-right: 0px;
+  }
+
 }
 
-div.padding-thin{
+div.padding-thin {
   padding: 8px;
 }
 
+.align-left {
+  line-height: 1.7;
+}
+
+ion-col.bullet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div.bullet-img {
+    max-width: 85%;
+    text-align: center;
+  }
+}
+
+ion-col.bullet-item > h2{
+  display: flex;
+  line-height: 2rem;
+}
+
+.aligner {
+  display: flex;
+  color: #666;
+  align-items: center;
+  justify-content: center;
+
+  .align-middle {
+    max-width: 100%;
+    text-align: center;
+    //line-height: 1.7;
+  }
+
+  .aligner-score {
+    font-weight: 400;
+    max-width: 100%;
+    font-size: 1.5rem;
+  }
+
+  .aligner-date-time {
+    max-width: 85%;
+    line-height: 1.7;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .aligner-img {
+    max-width: 55%;
+  }
+}
+
 // creates custom column widths
+
+ion-col[width-73] {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 73%;
+  -ms-flex: 0 0 73%;
+  flex: 0 0 73%;
+  max-width: 73%;
+}
 
 ion-col[width-45] {
   -webkit-box-flex: 0;
@@ -103,58 +207,58 @@ ion-col[width-70] {
   max-width: 70%;
 }
 
-//Standings Table Styles
-
-// custom styles for the standings tables
-ion-row.standings {
-  border-bottom: 1px solid #eee;
-  background-color: #fff;
-
-  ion-col {
-    height: 44px;
-    line-height: 44px;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    display: block;
-    text-overflow: ellipsis;
-    color: #333;
-  }
-
-  ion-col.standings-team {
-    font-weight: 500;
-  }
-
-}
-
-ion-grid.standings {
-  margin-top: 20px;
-
-}
-
-.team-tabs-page .back-button {
-  display: inline-block;
-}
-
-.item p {
-  font-size: 1.4rem;
-}
+////Standings Table Styles
+//
+//// custom styles for the standings tables
+//ion-row.standings {
+//  border-bottom: 1px solid #eee;
+//  background-color: #fff;
+//
+//  ion-col {
+//    height: 44px;
+//    line-height: 44px;
+//    width: 100%;
+//    overflow: hidden;
+//    white-space: nowrap;
+//    display: block;
+//    text-overflow: ellipsis;
+//    color: #333;
+//  }
+//
+//  ion-col.standings-team {
+//    font-weight: 500;
+//  }
+//
+//}
+//
+//ion-grid.standings {
+//  margin-top: 20px;
+//
+//}
+//
+//.team-tabs-page .back-button {
+//  display: inline-block;
+//}
+//
+//.item p {
+//  font-size: 1.4rem;
+//}
 
 ion-item.header-item {
   border-bottom: 4px solid #444 !important;
 }
 
-.item {
-  color: color($colors, secondary)
-}
+//.item {
+//  color: color($colors, gray)
+//}
 
-h2[title] {
-  font-weight: 500;
-  font-size: 1.9rem;
-}
+//h2[title] {
+//  font-weight: 500;
+//  font-size: 1.9rem;
+//}
 
 p[subtitle] {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
 }
 
 .custom-header {
@@ -171,4 +275,6 @@ ion-card > ion-list > .item:last-child, ion-list > .item-wrapper:last-child .ite
 ion-thumbnail img {
   border-radius: 2px;
 }
+
+
 
