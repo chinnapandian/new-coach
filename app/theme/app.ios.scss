@@ -5,7 +5,7 @@
 // --------------------------------------------------
 // Shared Sass variables go in the app.variables.scss file
 @import "app.variables";
-
+//@import "../pages/post-scores/post-scores";
 
 // App iOS Variables
 // --------------------------------------------------
@@ -30,7 +30,72 @@
 // --------------------------------------------------
 // CSS that should only apply to the iOS app
 
+//@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Open+Sans:400,600,700|Oswald|PT+Sans:400,700|Roboto:400,500,700');
+//$font-family-ios-base: ("Oswald", sans-serif) !default;
 
-.item {
-  color: #444;
+// IOS Floating dark-6 Style
+
+.item-label-stacked .text-input, .item-label-floating .text-input{
+  color: color($colors, primary);
+  font-weight: 500;
+  font-size: 2rem;
 }
+
+// IOS Card Styles
+
+ion-card{
+  border-radius: 6px;
+}
+
+// IOS Segment styles for wide segment
+
+.toolbar.has-segment {
+
+.segment-button {
+  max-width: 100%;
+}
+
+  ion-segment.wide {
+    margin-right: 8px;
+    margin-left: 8px;
+    width: calc(100% - 16px);
+  }
+
+}
+
+.segment-button{
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.toolbar{
+  .button-block{
+    margin-right: 4px;
+    margin-left: 4px;
+    width: calc(100% - 8px);
+  }
+}
+
+ion-searchbar {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.toast-wrapper{
+  background: rgba(68, 68, 68, .95) ;
+  border-radius: 8px;
+  font-weight: 600;
+  line-height: 3rem;
+  font-family: "proxima-nova-soft",sans-serif;
+
+  .toast-message{
+    font-size: 1.6rem;
+  }
+
+  .toast-button{
+    color: #fff
+  }
+}
+
+
+
+

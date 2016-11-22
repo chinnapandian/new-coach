@@ -1,0 +1,142 @@
+<ion-header>
+    <ion-navbar primary no-border-bottom>
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Get Access</ion-title>
+    </ion-navbar>
+
+    <ion-toolbar class="has-segment" primary no-border-top>
+        <ion-segment [(ngModel)]="purchaseView" class="wide" light>
+            <ion-segment-button value="tournament">
+                Tournament Pass
+            </ion-segment-button>
+            <ion-segment-button value="season">
+                Season Pass
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="purchase">
+
+
+
+    <div [ngSwitch]="purchaseView">
+        <div *ngSwitchCase="'tournament'">
+            <ion-list-header>
+                <span>Tournament Access</span>
+            </ion-list-header>
+            <ion-card class="" *ngFor="let tournament of tournament">
+                <ion-list text-wrap>
+                    <ion-item>
+                        <ion-avatar class="A-6-S" item-left>
+                            <img src="{{tournament.img}}">
+                        </ion-avatar>
+                        <h2 title>{{tournament.name}}</h2>
+                        <p>{{tournament.date}}</p>
+                        <button item-right primary outline>$.99</button>
+                    </ion-item>
+                </ion-list>
+                <ion-list>
+                    <ion-list-header padding-top dark>Tournament Features</ion-list-header>
+                    <ion-item *ngFor="let item of bulletList">
+                        <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
+                        <h2>{{item}}</h2>
+                    </ion-item>
+                </ion-list>
+                <!--<button block outline>Get Access</button>-->
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'season'">
+            <ion-list-header>
+                Full Season Access
+            </ion-list-header>
+
+            <ion-card class="">
+                <ion-list text-wrap>
+                    <ion-item no-lines>
+                        <!--<ion-avatar class="square" item-left>-->
+                        <!--<img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">-->
+                        <!--</ion-avatar>-->
+                        <h2 title>Zero Gravity Fall 2016 - New England Circuit</h2>
+                        <p>
+                            <span>May 5 2016</span>
+                            <small>
+                                <ion-icon md="md-arrow-round-forward" ios="md-arrow-round-forward"></ion-icon>
+                            </small>
+                            <span>July 26, 2016</span>
+                        </p>
+                        <!--<p>Presented by Zero Gravity</p>-->
+                        <button item-right outline>$2.99</button>
+                    </ion-item>
+                </ion-list>
+                <ion-list text-wrap>
+                    <ion-list-header dark>Included Tournaments</ion-list-header>
+                    <ion-item *ngFor="let tournament of season">
+                        <ion-avatar class="A-6-S" item-left>
+                            <img src="{{tournament.img}}">
+                        </ion-avatar>
+                        <h2 title>{{tournament.name}}</h2>
+                        <p>{{tournament.date}}</p>
+                        <!--<button item-right outline>$.99</button>-->
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+            <ion-list-header>
+                <span>Frequently Asked Questions</span>
+            </ion-list-header>
+            <ion-card>
+                <ion-list text-wrap>
+                    <ion-list-header orange>What Is A Season Pass?</ion-list-header>
+                    <ion-item>
+                        <!--<ion-icon item-left name="help-circle" primary></ion-icon>-->
+                        <h2>
+                            A Season Pass is a collection of tournaments within a given date range.
+                        </h2>
+                    </ion-item>
+                </ion-list>
+
+                <ion-list text-wrap>
+                    <ion-list-header padding-top orange>Who Is A Season Pass For?</ion-list-header>
+                    <ion-item>
+                        <!--<ion-icon item-left name="help-circle" primary></ion-icon>-->
+                        <h2>
+                            A Season Pass is for anyone planning to
+                            attend three or more tournaments within a defined season.
+                        </h2>
+                    </ion-item>
+                </ion-list>
+
+                <ion-list text-wrap>
+                    <ion-list-header padding-top orange>Why Season Pass?</ion-list-header>
+                    <ion-item>
+                        <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
+                        <h2>
+                            Save time by purchasing all of your tournaments at once
+                        </h2>
+                    </ion-item>
+                    <ion-item>
+                        <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
+                        <h2>
+                            Save money by paying a low one-time rate
+                        </h2>
+                    </ion-item>
+                    <ion-item>
+                        <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
+
+                        <h2>
+                            Stay informed by receiving tournament updates as soon as they're ready
+                        </h2>
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+        </div>
+    </div>
+
+</ion-content>

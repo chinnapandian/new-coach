@@ -1,15 +1,17 @@
 
 .login {
-  //background : color($colors, primary);
-}
+
+  background: color($colors, primary);
 
 .login-logo-container {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .login-logo {
-  width: 80%;
-  margin: 0 auto;
-  display: block;
+  width: 20%;
+  //margin: 0 auto;
+  //display: block;
+}
+
 }

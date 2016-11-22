@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar dark-gray>
+
+        <ion-title>Team Type</ion-title>
+
+    </ion-navbar>
+
+    <!--<ion-toolbar primary>-->
+    <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
+    <!--</ion-toolbar>-->
+
+</ion-header>
+
+<ion-content>
+    <ion-list-header>What kind of team are you looking for?</ion-list-header>
+    <ion-card class="">
+        <ion-list>
+            <a ion-item (click)="goToFilterTeamStatePage()">
+                <!--<ion-icon name="male" item-left></ion-icon>-->
+                Boys Team
+            </a>
+            <a ion-item (click)="goToFilterTeamStatePage()">
+                <!--<ion-icon name="female" item-left></ion-icon>-->
+                Girls Team
+            </a>
+        </ion-list>
+    </ion-card>
+
+</ion-content>

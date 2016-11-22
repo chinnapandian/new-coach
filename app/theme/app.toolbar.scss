@@ -1,0 +1,18 @@
+.toolbar.clear > div.toolbar-background {
+  background: color($colors, trans);
+}
+
+// adds 4px to each side to match padding of content of
+ion-toolbar.has-button > div.toolbar-content {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+ion-toolbar.has-three-buttons > div.toolbar-content > ion-grid > ion-row > ion-col[width-33] {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.toolbar-background{
+  //background: color($colors, primary)
+}

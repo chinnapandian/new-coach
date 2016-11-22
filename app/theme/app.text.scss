@@ -1,0 +1,25 @@
+
+h2{
+  //color: color($colors, dark2);
+  font-weight: 600;
+}
+
+h2{
+  //color: color($colors, dark2);
+  font-weight: 600;
+}
+
+p{
+  font-weight: 500;
+}
+
+h1.winner {
+  color: color($colors, primary);
+  font-weight: 800 !important;
+}
+
+h1.loser {
+  color: color($colors, dark-6);
+  font-weight: 800 !important;
+}
+

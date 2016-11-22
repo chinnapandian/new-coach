@@ -1,0 +1,113 @@
+<ion-header class="message-board">
+    <ion-navbar primary no-border-bottom>
+
+        <ion-title>
+            Message Board
+            <!--<ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>-->
+        </ion-title>
+
+        <ion-buttons end>
+            <button (click)="goToComposeMessagePage()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <!--<ion-toolbar primary no-border-top>-->
+    <!--<button outline light small block>-->
+    <!--All Teams-->
+    <!--<ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>-->
+    <!--</button>-->
+    <!--</ion-toolbar>-->
+
+</ion-header>
+
+<ion-content class="message-board">
+
+    <ion-toolbar class="clear" no-border-top no-border-bottom>
+        <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+    </ion-toolbar>
+
+    <ion-card class="message-card" *ngFor="let message of messages">
+        <ion-grid>
+            <ion-row class="message-header">
+                <ion-col width-30>
+                    <p>
+                        <small>
+                            <ion-icon name="md-calendar"></ion-icon>
+                        </small>
+                        {{message.dateStamp}}
+                    </p>
+                </ion-col>
+                <ion-col width-30>
+                    <p>
+                        <small>
+                            <ion-icon name="ios-clock"></ion-icon>
+                        </small>
+                        {{message.timeStamp}}
+                    </p>
+                </ion-col>
+                <ion-col width-40 class="">
+                    <p>
+                        <small>
+                            <ion-icon name="md-basketball"></ion-icon>
+                        </small>
+                        <span>Spartans Boys 12U</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="message-title">
+                <ion-col width-85>
+                    <h1>{{message.title}}</h1>
+                    <p class="message-info">
+                        <small>
+                            <ion-icon name="md-person"></ion-icon>
+                        </small>
+                        <span>{{message.author}}</span>
+                    </p>
+                    <div class="accent-bar"></div>
+                </ion-col>
+                <ion-col width-15>
+                    <img src="medal-shadow.png" class="A-3" alt="">
+                </ion-col>
+            </ion-row>
+            <ion-row class="message-body">
+                <ion-col>
+                    <p>{{message.body}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="message-footer">
+                <ion-col>
+                    <!--<button class="message-comment" clear small>-->
+                        <!--<ion-icon name="undo"></ion-icon>-->
+                        <!--Reply-->
+                    <!--</button>-->
+                    <button class="message-comment" clear primary small>
+                        <ion-icon name="chatbubbles"></ion-icon>
+                        3 comments
+                    </button>
+
+                </ion-col>
+            </ion-row>
+            <!--<ion-row class="message-body">-->
+            <!--<ion-col width-15 class="team-logo">-->
+            <!--<img src="team-logos/spartans.jpeg" class="A-3" alt="">-->
+            <!--</ion-col>-->
+            <!--<ion-col width-85>-->
+            <!--<div class="title">-->
+            <!--<h1>{{message.title}}</h1>-->
+            <!--<p class="message-info">-->
+            <!--<small>-->
+            <!--<ion-icon name="md-person"></ion-icon>-->
+            <!--</small>-->
+            <!--<span>{{message.author}}</span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--<p>{{message.body}}</p>-->
+            <!--</ion-col>-->
+            <!--</ion-row>-->
+        </ion-grid>
+    </ion-card>
+</ion-content>
+

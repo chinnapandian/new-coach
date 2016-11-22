@@ -1,0 +1,252 @@
+<ion-header>
+    <ion-navbar primary no-border-bottom>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span>Done</span>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Player Profile</ion-title>
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span>Edit</span>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <ion-toolbar class="has-segment" no-border-top primary>
+        <ion-segment [(ngModel)]="statsView" class="wide" light>
+            <ion-segment-button value="total">
+                Total
+            </ion-segment-button>
+            <ion-segment-button value="perGame">
+                Per Game
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="selected-player">
+
+    <ion-card class="player-card">
+        <ion-grid>
+            <ion-row class="player-img">
+                <ion-col width-25>
+                    <h1 class="number">34</h1>
+                </ion-col>
+                <ion-col width-50>
+                    <img src="avatars/boys/joe.svg" class="shadow bg" alt="">
+                </ion-col>
+                <ion-col width-25>
+                    <h1 class="number">PG</h1>
+                </ion-col>
+            </ion-row>
+            <ion-row class="player-info">
+                <ion-col>
+                    <h1>Tommy Smith</h1>
+                    <h2>Spartans Boys 12U</h2>
+                    <!--<p class="pos"><b>#34</b> | Point Guard</p>-->
+                    <p>ID: 83H4K9</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <!--<ion-list-header>Points</ion-list-header>-->
+                <ion-grid>
+                    <ion-row>
+                        <ion-col *ngFor="let stat of statPTS">
+                            <ion-card class="stat-card">
+                                <ion-grid>
+                                    <ion-row class="stat-card-header">
+                                        <ion-col>
+                                            <div>{{stat.header}}</div>
+                                        </ion-col>
+                                    </ion-row>
+
+                                    <ion-row class="stat-card-data">
+                                        <ion-col>
+                                            <div>{{stat.value}}</div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+
+            <!--right col-->
+            <ion-col>
+                <!--<ion-list-header>Games Played</ion-list-header>-->
+                <ion-grid>
+                    <ion-row>
+                        <ion-col *ngFor="let stat of statGP">
+                            <ion-card class="stat-card">
+                                <ion-grid>
+                                    <ion-row class="stat-card-header">
+                                        <ion-col>
+                                            <div>{{stat.header}}</div>
+                                        </ion-col>
+                                    </ion-row>
+
+                                    <ion-row class="stat-card-data">
+                                        <ion-col>
+                                            <div>{{stat.value}}</div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list-header>2-Point Shooting</ion-list-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let stat of statFG2">
+                <ion-card class="stat-card">
+                    <ion-grid>
+                        <ion-row class="stat-card-header">
+                            <ion-col>
+                                <div>{{stat.header}}</div>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="stat-card-data">
+                            <ion-col>
+                                <div>{{stat.value}}</div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list-header>3-Point Shooting</ion-list-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let stat of statFG3">
+                <ion-card class="stat-card">
+                    <ion-grid>
+                        <ion-row class="stat-card-header">
+                            <ion-col>
+                                <div>{{stat.header}}</div>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="stat-card-data">
+                            <ion-col>
+                                <div>{{stat.value}}</div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list-header>Combine Shooting</ion-list-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let stat of statFG">
+                <ion-card class="stat-card">
+                    <ion-grid>
+                        <ion-row class="stat-card-header">
+                            <ion-col>
+                                <div>{{stat.header}}</div>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="stat-card-data">
+                            <ion-col>
+                                <div>{{stat.value}}</div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list-header>Free Throw Shooting</ion-list-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let stat of statFT">
+                <ion-card class="stat-card">
+                    <ion-grid>
+                        <ion-row class="stat-card-header">
+                            <ion-col>
+                                <div>{{stat.header}}</div>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="stat-card-data">
+                            <ion-col>
+                                <div>{{stat.value}}</div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list-header>Rebounding</ion-list-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let stat of statRB">
+                <ion-card class="stat-card">
+                    <ion-grid>
+                        <ion-row class="stat-card-header">
+                            <ion-col>
+                                <div>{{stat.header}}</div>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="stat-card-data">
+                            <ion-col>
+                                <div>{{stat.value}}</div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list-header>Ball Control</ion-list-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let stat of statBC">
+                <ion-card class="stat-card">
+                    <ion-grid>
+                        <ion-row class="stat-card-header">
+                            <ion-col>
+                                <div>{{stat.header}}</div>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="stat-card-data">
+                            <ion-col>
+                                <div>{{stat.value}}</div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

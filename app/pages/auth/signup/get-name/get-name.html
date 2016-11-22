@@ -1,0 +1,60 @@
+<ion-header class="clear">
+    <ion-navbar primary class="clear" no-border-bottom>
+        <ion-title>
+            Step 1 of 2
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="signup">
+
+    <div>
+        <h1 class="big-message">
+            What's your name?
+        </h1>
+    </div>
+
+    <!--<ion-card class="error">-->
+        <!--<ion-grid>-->
+            <!--<ion-row>-->
+                <!--<ion-col width-10>-->
+                    <!--<ion-icon name="alert" class="error-icon"></ion-icon>-->
+                <!--</ion-col>-->
+                <!--<ion-col width-90>-->
+                    <!--<span>You forgot your first name!</span>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+        <!--</ion-grid>-->
+    <!--</ion-card>-->
+
+    <!--<ion-card class="error">-->
+        <!--<ion-grid>-->
+            <!--<ion-row>-->
+                <!--<ion-col width-10>-->
+                    <!--<ion-icon name="alert" class="error-icon"></ion-icon>-->
+                <!--</ion-col>-->
+                <!--<ion-col width-90>-->
+                    <!--<span>You forgot your last name!</span>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+        <!--</ion-grid>-->
+    <!--</ion-card>-->
+
+    <ion-list class="auth-list">
+        <ion-item>
+            <ion-label stacked>First Name</ion-label>
+            <ion-input class="signup-name" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Last Name</ion-label>
+            <ion-input class="signup-name" type="text"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <button round block light (click)="goToGetEmailPage()">
+        <span>Next</span>
+        <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+    </button>
+
+</ion-content>

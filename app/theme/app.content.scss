@@ -1,0 +1,23 @@
+ion-content {
+  //background-image: -webkit-linear-gradient(rgba(252, 252, 252, 0.8),
+  //        rgba(250, 250, 250, 0.3)),
+  //url(../../geo.png);
+
+  //background-image: linear-gradient(rgba(252, 252, 252, .0),
+  //        rgba(250, 250, 250, .0)),
+  //url(../../geo.png);
+
+  background-color: color($colors, background);
+  color: color($colors, dark-3);
+
+  p{
+    font-weight: 500;
+    color: color($colors, dark-6);
+  }
+
+  .item{
+    h2{
+      color: color($colors, dark-3);
+    }
+  }
+}

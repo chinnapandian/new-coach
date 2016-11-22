@@ -1,0 +1,332 @@
+@import "app.variables";
+
+// removes 5px padding from all grids
+ion-col, ion-grid {
+  padding: 0px;
+}
+
+ion-col.date-time {
+  // center alignment
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  // left border
+  border-left: 1px solid color($colors, line);
+
+  //
+  p {
+    max-width: 90%;
+    text-align: center;
+
+    .date {
+      font-size: 1.8rem;
+      color: color($colors, primary);
+      text-transform: uppercase;
+    }
+    .time {
+      color: color($colors, secondary);
+      line-height: 2.1rem;
+      font-weight: 600;
+    }
+  }
+}
+
+// Footer styles used foo game location
+ion-row.footer {
+  border-top: 1px solid color($colors, line);
+
+  ion-col {
+    padding-left: 8px;
+    padding-top: 2px;
+
+    p {
+      line-height: 2.8rem;
+      //color: color($colors, secondary)
+    }
+  }
+
+  span.right {
+    text-align: right;
+    float: right;
+  }
+}
+
+// End Footer styles
+
+// Header styles
+ion-row.header {
+  border-bottom: 1px solid color($colors, line);
+
+  button.header-right {
+    float: right;
+    margin: 8px;
+  }
+
+  ion-col {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+
+    p {
+      line-height: 4rem;
+      //color: color($colors, secondary)
+    }
+  }
+
+  .right {
+    text-align: right;
+    float: right;
+  }
+}
+
+ion-card.standings-card {
+
+  ion-grid {
+
+    ion-col.team {
+      padding-left: 8px;
+      font-weight: 500;
+    }
+
+    ion-col.data {
+      text-align: center;
+      font-weight: 500;
+    }
+
+    //Header Row
+    ion-row.standings-header {
+      color: color($colors, primary);
+      border-bottom: 1px solid color($colors, line);
+
+      ion-col {
+        line-height: 2.6rem;
+        font-size: 1.4rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .04rem;
+      }
+    }
+
+    ion-row.standings-data:nth-child(even) {
+      //background-color: rgba(154, 125, 0, 0.02);
+    }
+
+    //Data Row
+    ion-row.standings-data {
+      border-bottom: 1px solid color($colors, line);
+
+      ion-col {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 3.8rem;
+      }
+    }
+
+    ion-row.standings-data:last-child {
+      border-bottom: none;
+    }
+
+  }
+}
+
+ion-grid.stats-matchup {
+
+  //used for scorecard
+  ion-row.player {
+    margin-top: 1rem;
+    ion-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        background-color: #f9f9f9;
+        width: 7rem;
+        border-radius: 10rem;
+      }
+    }
+  }
+
+  ion-row.stats-matchup {
+
+    padding-top: 8px;
+    margin-bottom: 10px;
+
+    // all columns within div
+
+    ion-col {
+      text-align: center;
+      div {
+        h2 {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: 600;
+          font-size: 1.6rem;
+        }
+
+        p{
+          line-height: 1.4rem;
+          color: color($colors, dark-6)
+        }
+        width: 85%;
+      }
+    }
+
+    ion-col.left-team {
+      border-right: 1px solid color($colors, line);
+    }
+
+    ion-col {
+
+      div {
+        max-width: 100%;
+        text-align: center;
+        margin: auto;
+
+        img {
+          width: 6rem;
+          margin: auto;
+          border-radius: 10rem;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+
+  ion-row.has-button {
+    padding: 8px
+  }
+
+}
+
+ion-grid.stats-grid {
+  margin-top: 10px;
+  padding: 0px;
+  //padding-left: 8px;
+  //padding-right: 8px;
+
+  // all rows
+  ion-row {
+    //border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fff;
+  }
+
+  // all columns
+  ion-col {
+    font-size: 1.4rem;
+    text-align: center;
+
+    .has-min-width {
+      min-width: 60px;
+    }
+  }
+
+  ion-row.grid-header {
+    color: color($colors, primary);
+    //background: #fff;
+
+    // header cols
+    ion-col {
+      line-height: 1.6rem;
+      //font-size: 1.4rem;
+      font-weight: 800;
+      border-bottom: 1px solid color($colors, line);
+
+    }
+
+  }
+
+  ion-row.grid-content {
+    ion-col {
+      span {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+// used for buttons on bracket page to switch between rounds
+
+ion-grid.bracket-rounds {
+
+  ion-col {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+}
+
+ion-card.team-card{
+  padding: 8px;
+  ion-grid{
+    ion-row.team-img{
+
+      ion-col{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+          border-radius: 10rem;
+          width: 10rem;
+        }
+      }
+    }
+    ion-row.team-info{
+      ion-col{
+        text-align: center;
+      }
+    }
+  }
+}
+
+ion-card.player-card{
+  background: linear-gradient( 45deg, #ffb600, #ffdb00);
+  padding: 8px;
+  ion-grid{
+    color: color($colors, light);
+    ion-row.player-img{
+      margin-bottom: 5px;
+      h1{
+        font-family: co-headline, sans-serif;
+        font-size: 3rem;
+        font-weight: lighter;
+      }
+      ion-col{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+          border-radius: 10rem;
+          width: 10rem;
+        }
+      }
+    }
+    ion-row.player-info{
+      ion-col{
+        h1{
+          font-size: 3.2rem;
+          line-height: 3.4rem;
+          font-weight: 500;
+        }
+        h2{
+          font-size: 2rem;
+          font-weight: 500;
+        }
+        p{
+          color: color($colors, light);
+        }
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+
+
+
+

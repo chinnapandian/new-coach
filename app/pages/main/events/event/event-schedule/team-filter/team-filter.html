@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar primary no-border-bottom>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                Cancel
+            </button>
+        </ion-buttons>
+
+        <ion-title>Select a Team</ion-title>
+
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span>Apply</span>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <ion-toolbar class="" primary no-border-top>
+        <button small light outline block (click)="presentPopover($event)">Boys 12U</button>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-list-header sticky>American Saphire</ion-list-header>
+
+    <ion-card>
+        <ion-list radio-group class="normalize">
+            <ion-item *ngFor="let team of teams">
+                <ion-avatar item-left class="A-6-S">
+                    <img [src]="team.img">
+                </ion-avatar>
+                <ion-label>
+                    <span class="radio-label">{{team.name}}</span>
+                    <p>Coach {{team.coach}}</p>
+                </ion-label>
+                <ion-radio checked="false" value="0"></ion-radio>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+</ion-content>

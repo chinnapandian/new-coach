@@ -1,0 +1,139 @@
+<ion-header>
+    <ion-navbar primary no-border-bottom>
+
+        <!--<ion-title>Events</ion-title>-->
+
+        <ion-segment [(ngModel)]="scheduleView" light>
+            <ion-segment-button value="tournament">
+                Tournaments
+            </ion-segment-button>
+            <ion-segment-button value="league">
+                Leagues
+            </ion-segment-button>
+        </ion-segment>
+
+        <ion-buttons end>
+            <button>
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <!--<ion-toolbar class="has-segment" primary no-border-top>-->
+        <!--<ion-segment [(ngModel)]="scheduleView" class="wide" light>-->
+            <!--<ion-segment-button value="tournament">-->
+                <!--Tournaments-->
+            <!--</ion-segment-button>-->
+            <!--<ion-segment-button value="league">-->
+                <!--Leagues-->
+            <!--</ion-segment-button>-->
+            <!--&lt;!&ndash;<ion-segment-button value="practice">&ndash;&gt;-->
+                <!--&lt;!&ndash;Practices&ndash;&gt;-->
+            <!--&lt;!&ndash;</ion-segment-button>&ndash;&gt;-->
+        <!--</ion-segment>-->
+    <!--</ion-toolbar>-->
+
+</ion-header>
+
+<ion-content class="events">
+
+
+    <div [ngSwitch]="scheduleView">
+
+        <div *ngSwitchCase="'tournament'">
+            <ion-list-header text-wrap>Zero Gravity Fall 2016 - NE Circuit</ion-list-header>
+            <ion-card class="">
+                <ion-list text-wrap>
+                    <a ion-item text-wrap *ngFor="let tournament of myTournaments" (click)="goToSelectedEventPage()">
+                        <ion-avatar class="A-6-S" item-left>
+                            <img src="{{tournament.img}}">
+                        </ion-avatar>
+                        <h2 title>{{tournament.name}}</h2>
+                        <p subtitle>{{tournament.date}}</p>
+                        <!--<ion-note item-right>3 - 0</ion-note>-->
+                        <!--<button outline item-right (click)="goToPurchaseSeasonPage()">Get</button>-->
+                    </a>
+                </ion-list>
+                <div padding-thin b-t>
+                    <button block outline small primary>
+                        View All Tournaments
+                    </button>
+                </div>
+                <div padding-thin b-t>
+                    <button block outline small primary (click)="goToPurchaseEventPage()">
+                        Payment
+                    </button>
+                </div>
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'league'">
+            <ion-list-header text-wrap>Zero Gravity Fall 2016 - New England Circut</ion-list-header>
+
+            <ion-card class="">
+                <ion-list>
+                    <a ion-item text-wrap *ngFor="let league of myLeagues.ZG">
+                        <ion-avatar class="A-6-S" item-left>
+                            <img src="{{league.img}}">
+                        </ion-avatar>
+                        <h2 title>{{league.name}}</h2>
+                        <p subtitle>{{league.date}}</p>
+                    </a>
+                </ion-list>
+            </ion-card>
+
+
+            <ion-list-header text-wrap>Hoop Group Winter 2016</ion-list-header>
+
+            <ion-card class="">
+                <ion-list>
+                    <a ion-item text-wrap *ngFor="let league of myLeagues.HG">
+                        <ion-avatar class="A-6-S" item-left>
+                            <img src="{{league.img}}">
+                        </ion-avatar>
+                        <h2 title>{{league.name}}</h2>
+                        <p subtitle>{{league.date}}</p>
+                    </a>
+                </ion-list>
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'practice'">
+
+            <ion-list-header text-wrap>Mondays</ion-list-header>
+            <ion-card>
+                <ion-list>
+                    <ion-item>
+                        <h2 item-right>8:00 PM</h2>
+                        <ion-note item-left>Time</ion-note>
+                    </ion-item>
+                    <ion-item>
+                        <h2 item-right>Milford High School</h2>
+                        <ion-note item-left>Location</ion-note>
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+
+            <ion-list-header text-wrap>Thursdays</ion-list-header>
+            <ion-card>
+                <ion-list>
+                    <ion-item>
+                        <h2 item-right>6:00 PM</h2>
+                        <ion-note item-left>Time</ion-note>
+                    </ion-item>
+                    <ion-item>
+                        <h2 item-right>Milford High School</h2>
+                        <ion-note item-left>Location</ion-note>
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+            <!--<h1 help text-center padding-top>Oh No!</h1>-->
+            <!--<h3 padding text-center>Your coach hasn't input the practice schedule.</h3>-->
+            <!--<div class="padding">-->
+                <!--<button block>Create Practice Schedule</button>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+</ion-content>

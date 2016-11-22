@@ -1,0 +1,54 @@
+
+ion-scroll.stat-cards {
+  min-height: 80px;
+  white-space: nowrap;
+  ion-grid {
+    ion-row {
+      ion-col.view-full-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        ion-card{
+          padding-top: 3px;
+          padding-bottom: 3px;
+        }
+      }
+      ion-col {
+        ion-card {
+          min-width: 75px;
+          text-align: center;
+          ion-grid {
+            ion-row.stat-card-header {
+              border-bottom: 1px solid color($colors, line);
+              ion-col {
+                div {
+                  color: color($colors, primary);
+                  font-size: 1.4rem;
+                  font-weight: 800;
+                  line-height: 2.6rem;
+                  letter-spacing: .04rem;
+                }
+              }
+            }
+            ion-row.stat-card-data {
+              ion-col {
+                div{
+                  font-size: 1.8rem;
+                  line-height: 3.2rem;
+                  padding-left: 8px;
+                  padding-right: 8px;
+
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+

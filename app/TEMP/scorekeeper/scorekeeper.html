@@ -1,0 +1,146 @@
+<ion-header>
+
+    <ion-navbar no-border-bottom primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>ZG Beast of The East</ion-title>
+
+
+    </ion-navbar>
+
+    <ion-toolbar no-border-top primary>
+        <button light outline small block (click)="goToSelectDivisionPage()">Sammy Davis</button>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="scorekeeper">
+    <ion-card class="">
+        <ion-list text-wrap no-lines>
+            <ion-item class="my-header">
+                <ion-note item-right>
+                    #12
+                </ion-note>
+                <h2>Jeremy Nemec Junior</h2>
+                <p>Mass Elite Ballers <b>vs</b> Inner City Celtics</p>
+                <!-- <button clear item-right>
+                  <ion-icon name="swap"></ion-icon>
+                </button> -->
+            </ion-item>
+            <ion-item>
+                <h3>Committed an offensive foul</h3>
+                <button clear item-right danger>
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+                <button clear item-left gray>
+                    <ion-icon name="return-right"></ion-icon>
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-grid class="standings-grid" padding-bottom [ngSwitch]="statsView">
+        <ion-row class="grid-header">
+            <ion-col>PTS</ion-col>
+            <!--<ion-col>FG%</ion-col>-->
+            <!--<ion-col>3PT%</ion-col>-->
+            <ion-col>FT</ion-col>
+            <ion-col>AST</ion-col>
+            <ion-col>STL</ion-col>
+            <ion-col>REB</ion-col>
+            <ion-col>TO</ion-col>
+            <ion-col>PF</ion-col>
+        </ion-row>
+        <ion-row class="grid-content" *ngSwitchCase="'average'">
+            <ion-col>12.4</ion-col>
+            <!--<ion-col>33.9%</ion-col>-->
+            <!--<ion-col>12.5%</ion-col>-->
+            <ion-col>1.1</ion-col>
+            <ion-col>4</ion-col>
+            <ion-col>11.3</ion-col>
+            <ion-col>3.8</ion-col>
+            <ion-col>4.2</ion-col>
+            <ion-col>.7</ion-col>
+        </ion-row>
+        <ion-row class="grid-content" *ngSwitchCase="'total'">
+            <ion-col>124</ion-col>
+            <!--<ion-col>33.9%</ion-col>-->
+            <!--<ion-col>12.5%</ion-col>-->
+            <ion-col>23</ion-col>
+            <ion-col>46</ion-col>
+            <ion-col>174</ion-col>
+            <ion-col>76</ion-col>
+            <ion-col>45</ion-col>
+            <ion-col>12</ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-list-header class="header-bar">Points</ion-list-header>
+        <ion-row no-padding>
+            <ion-col>
+                <button small block outline success>Made 2</button>
+                <button small block outline danger>Missed 2</button>
+            </ion-col>
+            <ion-col>
+                <button small block outline success>Made 3</button>
+                <button small block outline danger>Missed 3</button>
+            </ion-col>
+            <ion-col>
+                <button small block outline success>Made FT</button>
+                <button small block outline danger>Missed FT</button>
+            </ion-col>
+        </ion-row>
+
+        <ion-list-header class="header-bar">Ball Controll</ion-list-header>
+        <ion-row no-padding>
+            <ion-col>
+                <button small block outline primary>Rebound</button>
+            </ion-col>
+            <ion-col>
+                <button small block outline primary>Foul</button>
+            </ion-col>
+        </ion-row>
+        <ion-row no-padding>
+            <ion-col>
+                <button small block outline secondary>Assist</button>
+            </ion-col>
+            <ion-col>
+                <button small block outline secondary>Steal</button>
+            </ion-col>
+            <ion-col>
+                <button small block outline secondary>Turnover</button>
+            </ion-col>
+            <ion-col>
+                <button small block outline secondary>Block</button>
+            </ion-col>
+        </ion-row>
+        <!--<ion-list-header class="header-bar">Rebounds</ion-list-header>-->
+        <!--<ion-row no-padding>-->
+            <!--<ion-col>-->
+                <!--<button small block outline dark-gray>Off. Reb</button>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+                <!--<button small block outline dark-gray>Deff. Reb</button>-->
+            <!--</ion-col>-->
+        <!--</ion-row>-->
+        <!--<ion-list-header class="header-bar">Fouls</ion-list-header>-->
+        <!--<ion-row no-padding>-->
+            <!--<ion-col>-->
+                <!--<button small block outline warning>Off. Foul</button>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+                <!--<button small block outline warning>Deff. Foul</button>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+                <!--<button small block outline warning>Tech. Foul</button>-->
+            <!--</ion-col>-->
+        <!--</ion-row>-->
+    </ion-grid>
+</ion-content>

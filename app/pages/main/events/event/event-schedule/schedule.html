@@ -1,0 +1,134 @@
+<ion-header>
+    <ion-navbar primary no-border-bottom>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span>Close</span>
+            </button>
+        </ion-buttons>
+
+        <ion-title>ZG Beast of The East</ion-title>
+
+    </ion-navbar>
+
+    <ion-toolbar class="" no-border-top primary>
+        <button small light outline block (click)="goToFilterTeamPage()">Spartans Boys 12U</button>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="tournament">
+
+    <!--<ion-refresher (ionRefresh)="doRefresh($event)">-->
+    <!--<ion-refresher-content></ion-refresher-content>-->
+    <!--</ion-refresher>-->
+
+    <ion-list-header>Completed Pool Games</ion-list-header>
+
+    <ion-card class="matchup" *ngFor="let game of completedPoolGames">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-list>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team1}}</h2>
+                            <p>{{game.team1Coach}}</p>
+                            <h1 item-right class="winner">{{game.team1Score}}</h1>
+                        </ion-item>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team2}}</h2>
+                            <p>{{game.team2Coach}}</p>
+                            <h1 item-right class="loser">{{game.team2Score}}</h1>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+    <ion-list-header>Ongoing Pool Games</ion-list-header>
+
+
+    <ion-card class="matchup" *ngFor="let game of ongoingPoolGames" (click)="goToGameDetailsPage()">
+        <ion-grid>
+            <ion-row>
+                <ion-col width-75>
+                    <ion-list>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team1}}</h2>
+                            <p>{{game.team1Coach}}</p>
+                        </ion-item>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team2}}</h2>
+                            <p>{{game.team2Coach}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col with-25 class="date-time">
+                    <p>
+                        <span class="date">{{game.dateStamp}}</span>
+                        <br>
+                        <span class="time">{{game.timeStamp}}</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+            <!--<ion-row class="footer">-->
+                <!--<ion-col>-->
+                    <!--<p><small><ion-icon name="pin"></ion-icon></small> {{game.facility}} - Court {{game.court}}</p>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+        </ion-grid>
+    </ion-card>
+
+    <ion-list-header>Upcoming Pool Games</ion-list-header>
+
+    <ion-card class="matchup" *ngFor="let game of upcomingPoolGames">
+        <ion-grid>
+            <ion-row>
+                <ion-col width-75>
+                    <ion-list no-wrap>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team1}}</h2>
+                            <p>{{game.team1Coach}}</p>
+                        </ion-item>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team2}}</h2>
+                            <p>{{game.team2Coach}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col with-25 class="date-time">
+                    <p>
+                        <span class="date">{{game.dateStamp}}</span>
+                        <br>
+                        <span class="time">{{game.timeStamp}}</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+            <!--<ion-row class="footer">-->
+                <!--<ion-col>-->
+                    <!--<p><small><ion-icon name="pin"></ion-icon></small> {{game.facility}} - Court {{game.court}}</p>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+        </ion-grid>
+    </ion-card>
+
+</ion-content>

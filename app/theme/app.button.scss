@@ -1,0 +1,9 @@
+.button{
+  font-weight: 600;
+  line-height: 3rem;
+}
+
+.button-outline-light{
+  border-color: color($colors, light);
+  color: color($colors, light);
+}

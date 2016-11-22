@@ -29,3 +29,33 @@
 // App Material Design Only Sass
 // --------------------------------------------------
 // CSS that should only apply to the Material Design app
+
+ion-thumbnail{
+  max-width: 7rem !important;
+  max-height: 7rem !important;
+}
+
+
+ion-card > ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
+  border-top: none;
+}
+
+ion-icon[item-left] + .item-inner, ion-icon[item-left] + .item-input{
+  margin-left: 8px
+}
+
+ion-title.title-img {
+  text-align: center;
+  img {
+    max-width: 160px;
+    padding-top: 6px;
+  }
+}
+
+ion-card{
+  border-radius: 4px;
+}
+
+ion-header.clear::after{
+  background-image: none;
+}

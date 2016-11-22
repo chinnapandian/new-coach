@@ -1,0 +1,146 @@
+
+
+ion-card.error {
+
+  background-color: color($colors, light); // secondary #444
+  border: none;
+  color: color($colors, danger);
+  padding: 8px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  //box-shadow: none;
+  margin-bottom: 12px;
+  margin-top: 12px;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+
+  .error-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+ion-card.login {
+  margin-bottom: 12px;
+}
+
+ion-card.auth-form {
+  margin-bottom: 12px;
+
+  ion-list > ion-item > .item-inner > .input-wrapper > ion-input > input {
+    font-weight: normal !important;
+  }
+
+}
+
+.landing, .login, .signup {
+  background: color($colors, primary);
+  background-image: url("../../basketball-corner.svg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+
+  .button-light {
+    color: color($colors, primary);
+  }
+
+  .toolbar.title-dark{
+    color: color($colors, primary-dark) !important;
+  }
+
+  ion-card.error-message{
+    border: none;
+    padding: 0px;
+    margin: 0;
+    width: 100%;
+
+    ion-list{
+      margin: 0;
+      ion-item{
+        ion-icon{
+          color: color($colors, danger);
+        }
+        p{
+          color: color($colors, danger);
+          font-weight: 600;
+          font-size: 1.4rem;
+
+        }
+      }
+    }
+  }
+
+  // Gives the auth pages a fat padding
+  scroll-content {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  h1.big-message {
+    font-family: "co-headline", sans-serif;
+    color: #fff;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    margin-top: 10px;
+
+    span.myludus {
+      font-size: 5rem;
+      span.my {
+        font-weight: 800;
+        color: color($colors, dark-3);
+      }
+    }
+
+  }
+
+} // end global auth styles
+
+.signup, .login {
+
+  ion-list.auth-list {
+
+    margin-top: 10px;
+
+    .item-input ion-input, .item-input ion-textarea {
+      border-bottom: 1px solid color($colors, light)
+    }
+
+    ion-item {
+
+      ion-input > .text-input{
+        color: color($colors, gold);
+        font-size: 2.8rem;
+      }
+
+      ion-input.signup-name {
+          .text-input {
+            text-transform: capitalize;
+          }
+        }
+
+      .name {
+        text-transform: capitalize;
+      }
+    }
+
+    .item:first-child, .item:last-child, .item-inner {
+      border-top: none;
+      border-bottom: none;
+      margin-top: 15px
+    }
+
+    .item {
+      background: none;
+      color: color($colors, light);
+    }
+
+    ion-label[stacked] {
+      color: color($colors, light);
+      font-size: 1.8rem;
+      text-transform: uppercase;
+    }
+
+  }
+
+} //end signup and login styles

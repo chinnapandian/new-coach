@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-title>Find Your Team</ion-title>
+        <!--<ion-searchbar (input)="getItems($event)" placeholder="Find Your Team"></ion-searchbar>-->
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <!--<ion-toolbar primary>-->
+    <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
+    <!--</ion-toolbar>-->
+
+</ion-header>
+
+<ion-content>
+
+    <!--<ion-toolbar class="clear">-->
+        <!--<button block outline small dark-6>New Hampshire</button>-->
+    <!--</ion-toolbar>-->
+
+
+    <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
+        <ion-segment [(ngModel)]="teamGender" class="wide" primary>
+            <ion-segment-button value="boys">
+               NH Boys Teams
+            </ion-segment-button>
+            <ion-segment-button value="girls">
+               NH Girls Teams
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+    <div>
+        <ion-list-header>
+            <ion-avatar item-left class="square-small">
+                <img src="http://meltonbasketball.com.au/wp-content/uploads/2011/12/Spartans.jpg">
+            </ion-avatar>
+            Spartans Organization
+        </ion-list-header>
+        <ion-card>
+            <ion-list>
+                <ion-item text-wrap *ngFor="let spartan of spartans">
+                    <h2 title>{{spartan.name}}</h2>
+                    <p>Coach {{spartan.coach}}</p>
+                    <button item-right outline (click)="dismiss()">Follow</button>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+    </div>
+
+    <ion-list-header>
+        <ion-avatar item-left class="square-small">
+            <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h20130516031215111ae120e164a8948/OSA.png">
+        </ion-avatar>
+        Warriors Organization
+    </ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item text-wrap *ngFor="let warrior of warriors" (click)="goToTournamentPage()">
+                <h2>{{warrior.name}}</h2>
+                <p>Coach {{warrior.coach}}</p>
+                <button item-right outline>Follow</button>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <!--<div padding>-->
+        <!--<button outline block>Don't See Your Team?</button>-->
+    <!--</div>-->
+
+</ion-content>

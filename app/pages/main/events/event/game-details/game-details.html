@@ -1,0 +1,186 @@
+<ion-header>
+    <ion-navbar primary>
+        <ion-title>Game Details</ion-title>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Share</span>
+                <ion-icon name="md-share" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngFor="let game of matchup">
+        <ion-grid class="stats-matchup">
+
+            <ion-row class="stats-matchup">
+
+                <ion-col width-50 class="left-team">
+                    <div class="A-6">
+                        <img src="medal-shadow.png" alt="">
+                        <h2>{{game.team1}}</h2>
+                        <p>{{game.team1Coach}}</p>
+                        <p>(0 - 1)</p>
+                    </div>
+                </ion-col>
+
+                <ion-col width-50 class="right-team">
+                    <div class="A-6">
+                        <img src="medal-shadow.png" alt="">
+                        <h2>{{game.team2}}</h2>
+                        <p>{{game.team1Coach}}</p>
+                        <p>(0 - 1)</p>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="has-button">
+                <button class="header-right" block small outline danger (click)="goToRecordStatsPage()">
+                    Record Stats
+                </button>
+            </ion-row>
+            <ion-row>
+                <button class="header-right" small block clear dark-6 (click)="goToRecordStatsPage()">
+                    View Recorded Stats
+                </button>
+            </ion-row>
+
+        </ion-grid>
+    </ion-card>
+
+    <ion-list-header>Location</ion-list-header>
+
+    <ion-card>
+        <div class="map">
+            <button><ion-icon name="navigate"></ion-icon></button>
+        </div>
+        <ion-list radio-group>
+            <ion-item>
+                <h2 title>Madison Square Garden</h2>
+                <p>Court 5</p>
+            </ion-item>
+        </ion-list>
+        <div padding-thin>
+            <button block small outline>
+                <ion-icon name="navigate"></ion-icon>
+                Get Direction
+            </button>
+        </div>
+    </ion-card>
+
+    <!--<ion-card>-->
+        <!--<ion-list text-wrap>-->
+            <!--<ion-item>-->
+                <!--<ion-avatar class="A-5" item-left>-->
+                    <!--<img src="facility.svg" style="background-color: #f8f8f8" alt="">-->
+                <!--</ion-avatar>-->
+                <!--<h2>Above The RIM Sports Complex</h2>-->
+                <!--<p>Court 4</p>-->
+                <!--&lt;!&ndash;<button item-right clear>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<ion-icon name="navigate"></ion-icon>&ndash;&gt;-->
+                <!--&lt;!&ndash;</button>&ndash;&gt;-->
+            <!--</ion-item>-->
+        <!--</ion-list>-->
+        <!--<div padding-thin>-->
+            <!--<button block small outline>-->
+                <!--<ion-icon name="navigate"></ion-icon>-->
+                <!--Get Direction-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</ion-card>-->
+
+    <ion-list-header>Date</ion-list-header>
+
+    <ion-card>
+        <ion-list text-wrap>
+            <ion-item>
+                <ion-avatar class="A-5" item-left>
+                    <img src="calendar.svg" style="background-color: #f8f8f8" alt="">
+                </ion-avatar>
+                <h2 title>Sunday</h2>
+                <p>November 12, 2016</p>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Time</ion-list-header>
+
+    <ion-card>
+        <ion-list text-wrap>
+            <ion-item>
+                <ion-avatar class="A-5" item-left>
+                    <img src="time.svg" style="background-color: #f8f8f8" alt="">
+                </ion-avatar>
+                <h2 title>8:00 PM</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <!--<ion-list-header>Time</ion-list-header>-->
+
+    <!--<ion-card>-->
+        <!--<ion-list text-wrap>-->
+            <!--<ion-item>-->
+                <!--<ion-avatar class="A-5" item-left>-->
+                    <!--<img src="time.svg" style="background-color: #eee" alt="">-->
+                <!--</ion-avatar>-->
+                <!--<h2 title>8:00 PM</h2>-->
+                <!--&lt;!&ndash;<p>November 12, 2016</p>&ndash;&gt;-->
+            <!--</ion-item>-->
+        <!--</ion-list>-->
+    <!--</ion-card>-->
+
+
+    <!--Division Pool-->
+    <ion-list-header>Division</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <h2 title>Boys 12U</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <!--Division Pool-->
+    <ion-list-header>Pool</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <h2 title>Division II American Silver</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <!--Alerts & Reminders-->
+    <ion-list-header>Alerts / Reminders</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+
+            <ion-item>
+                <ion-label>Reminders</ion-label>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Alerts</ion-label>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+
+        </ion-list>
+    </ion-card>
+
+</ion-content>

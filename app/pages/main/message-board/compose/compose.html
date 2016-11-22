@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Compose Message</ion-title>
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span>Post</span>
+                <!--<ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>-->
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card>
+        <ion-list>
+            <ion-item (click)="goToSelectTeamPage()">
+                <ion-avatar class="A-5" item-left>
+                    <img src="team-logos/spartans.jpeg" alt="">
+                </ion-avatar>
+                <h2>Spartans Boys 12U</h2>
+            </ion-item >
+
+            <ion-item>
+                <ion-label floating>Subject</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Message</ion-label>
+                <ion-textarea rows="10"></ion-textarea>
+            </ion-item>
+
+        </ion-list>
+    </ion-card>
+
+</ion-content>

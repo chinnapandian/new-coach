@@ -1,0 +1,22 @@
+.toolbar > ion-segment.wide .segment-button {
+  max-width: 150px;
+}
+
+
+ion-segment{
+  font-weight: 600;
+
+  .segment-button{
+    font-weight: 600;
+  }
+}
+
+
+ion-segment.thin {
+  ion-segment-button {
+    line-height: 2.2rem;
+    height: 2.3rem;
+    font-size: 1.15rem;
+    width: 100%;
+  }
+}

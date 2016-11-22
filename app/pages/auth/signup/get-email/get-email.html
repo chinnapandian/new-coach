@@ -1,0 +1,63 @@
+<ion-header class="clear">
+    <ion-navbar primary class="clear" no-border-bottom>
+        <ion-title class="title-dark">
+            Step 2 of 2
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="signup">
+
+    <div>
+        <h1 class="big-message">
+            Create your username and password
+        </h1>
+    </div>
+
+    <!--<ion-card class="error">-->
+        <!--<ion-grid>-->
+            <!--<ion-row>-->
+                <!--<ion-col width-10>-->
+                    <!--<ion-icon name="alert" class="error-icon"></ion-icon>-->
+                <!--</ion-col>-->
+                <!--<ion-col width-90>-->
+                    <!--<span>Please enter a valid email address</span>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+        <!--</ion-grid>-->
+    <!--</ion-card>-->
+
+    <!--<ion-card class="error">-->
+        <!--<ion-grid>-->
+            <!--<ion-row>-->
+                <!--<ion-col width-10>-->
+                    <!--<ion-icon name="alert" class="error-icon"></ion-icon>-->
+                <!--</ion-col>-->
+                <!--<ion-col width-90>-->
+                    <!--<span>Your password must be at least 6 character long</span>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+        <!--</ion-grid>-->
+    <!--</ion-card>-->
+
+    <ion-list class="name auth-list">
+        <ion-item>
+            <ion-label stacked>
+                Email
+                <!--<span class="error" text-right>Invalid Email</span>-->
+            </ion-label>
+            <ion-input class="signup-email" type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input class="signup-password" type="password"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <button round block light (click)="goToMyTeamsPage()">
+        All Done. Let's Get Started!
+    </button>
+
+
+</ion-content>

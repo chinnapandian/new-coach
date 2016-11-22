@@ -1,0 +1,53 @@
+//.standings {
+//
+//  ion-grid.standings-grid {
+//
+//    padding: 0px !important;
+//
+//    ion-row {
+//      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+//      background: #fff;
+//    }
+//
+//    ion-col {
+//      font-size: 1.4rem;
+//    }
+//
+//    ion-col[width-45] {
+//      overflow: hidden;
+//      text-overflow: ellipsis;
+//      white-space: nowrap;
+//      padding-left: 10px;
+//    }
+//
+//    ion-col[width-11] {
+//      text-align: center;
+//    }
+//
+//    ion-row.grid-header {
+//      color: color($colors, primary);
+//      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+//      //background: #fff;
+//
+//      ion-col {
+//        line-height: 1.4rem;
+//        font-size: 1.2rem;
+//        font-weight: 700;
+//      }
+//    }
+//
+//    //ion-row.grid-content:nth-child(even) ion-col {
+//    //  background-color: #fafafa;
+//    //}
+//    ion-row.grid-content:last-child {
+//      border-bottom: none;
+//    }
+//
+//    ion-row.grid-content {
+//
+//      ion-col {
+//        line-height: 2.4rem;
+//      }
+//    }
+//  }
+//}

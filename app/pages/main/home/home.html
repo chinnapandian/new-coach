@@ -1,0 +1,119 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <!--<ion-buttons start>-->
+        <!--<button (click)="goToFilterTeamGenderPage()">-->
+        <!--<ion-icon name="add-circle"></ion-icon>-->
+        <!--</button>-->
+        <!--</ion-buttons>-->
+
+        <ion-segment [(ngModel)]="homeView" class="" light>
+            <ion-segment-button value="teams">
+                My Teams
+            </ion-segment-button>
+            <ion-segment-button value="players">
+                My Players
+            </ion-segment-button>
+        </ion-segment>
+
+        <!--<ion-title>My Teams</ion-title>-->
+
+        <ion-buttons end>
+            <button (tap)="presentPopover($event)">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <!--<ion-toolbar primary no-border-top>-->
+    <!--<button outline light small block>-->
+    <!--All Teams-->
+    <!--<ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>-->
+    <!--</button>-->
+    <!--</ion-toolbar>-->
+
+</ion-header>
+
+<ion-content [ngSwitch]="homeView">
+
+    <div *ngSwitchCase="'teams'">
+        <div *ngFor="let team of basketballTeams">
+            <!--<ion-list-header>{{team.org}}</ion-list-header>-->
+            <ion-card>
+                <ion-list no-wrap>
+                    <a ion-item (click)="goToTeamPage()">
+                        <ion-avatar item-left class="A-6-S">
+                            <img [src]="team.img">
+                        </ion-avatar>
+                        <h1>{{team.name}}</h1>
+                        <p>Coach {{team.coach}}</p>
+                    </a>
+                </ion-list>
+            </ion-card>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'players'">
+        <ion-card>
+            <ion-list>
+                <a ion-item (click)="goToPlayerTabs()">
+                    <ion-avatar class="A-6" item-left>
+                        <img src="avatars/boys/joe.svg" alt="">
+                    </ion-avatar>
+                    <h1 title>Timmy Smith</h1>
+                    <h2>Spartans Boys 12U</h2>
+                    <p class="pos"><b>#34</b> | Point Guard</p>
+                    <!--<p class="pos"><b>&nbsp;ID:</b> H34J7L</p>-->
+                    <!--<p>8 Games Played | 4 Recorded</p>-->
+                </a>
+            </ion-list>
+
+            <ion-scroll class="stat-cards" scrollX="true">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col *ngFor="let stat of statCard">
+                            <ion-card>
+                                <ion-grid>
+                                    <ion-row class="stat-card-header">
+                                        <ion-col>
+                                            <div>{{stat.header}}</div>
+                                        </ion-col>
+                                    </ion-row>
+
+                                    <ion-row class="stat-card-data">
+                                        <ion-col>
+                                            <div>{{stat.value}}</div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-card>
+                        </ion-col>
+                        <ion-col class="view-full-stats">
+                            <ion-card>
+                                <button block clear (click)="goToFullStatsPage()">
+                                    Full Player Stats
+                                    <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+                                </button>
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-scroll>
+
+            <div padding-thin b-t>
+                <button block danger small outline>Record Stats</button>
+            </div>
+
+        </ion-card>
+    </div>
+
+
+    <!--<div padding-horizontal>-->
+    <!--<button outline block small>-->
+    <!--&lt;!&ndash;<ion-icon name="add-circle-outline"></ion-icon>&ndash;&gt;-->
+    <!--<span>Add Another Team</span>-->
+    <!--</button>-->
+    <!--</div>-->
+
+</ion-content>

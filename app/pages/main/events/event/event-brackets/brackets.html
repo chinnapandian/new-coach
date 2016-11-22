@@ -1,0 +1,149 @@
+<ion-header>
+
+    <ion-navbar no-border-bottom primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span>Close</span>
+            </button>
+        </ion-buttons>
+
+        <ion-title>ZG Beast of The East</ion-title>
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <ion-icon ios="ios-swap" md="md-swap"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <ion-toolbar no-border-top primary>
+        <button small light outline block (click)="presentPopover($event)">Boys 12U Division</button>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="brackets">
+
+    <ion-toolbar class="clear" no-border-top no-border-bottom>
+        <ion-grid class="bracket-rounds">
+            <ion-row>
+                <ion-col>
+                    <button small primary block>Round 1</button>
+                </ion-col>
+                <ion-col>
+                    <button small primary clear block>Round 2</button>
+                </ion-col>
+                <ion-col>
+                    <button small primary clear block>Round 3</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+
+    <ion-list-header>A Bracket</ion-list-header>
+
+    <ion-card class="matchup" *ngFor="let game of bracketGames.round1">
+        <ion-grid>
+            <ion-row>
+                <ion-col width-75>
+                    <ion-list no-wrap>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team1}}</h2>
+                            <p>{{game.team1Coach}}</p>
+                        </ion-item>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team2}}</h2>
+                            <p>{{game.team2Coach}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col with-25 class="date-time">
+                    <p>
+                        <span class="date">{{game.dateStamp}}</span>
+                        <br>
+                        <span class="time">{{game.timeStamp}}</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+    <ion-list-header>B Bracket <span item-right light-gray>Round 1</span></ion-list-header>
+
+    <ion-card class="matchup" *ngFor="let game of bracketGames.round2">
+        <ion-grid>
+            <ion-row>
+                <ion-col width-75>
+                    <ion-list no-wrap>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team1}}</h2>
+                            <p>{{game.team1Coach}}</p>
+                        </ion-item>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team2}}</h2>
+                            <p>{{game.team2Coach}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col with-25 class="date-time">
+                    <p>
+                        <span class="date">{{game.dateStamp}}</span>
+                        <br>
+                        <span class="time">{{game.timeStamp}}</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+
+    <ion-list-header>C Bracket <span item-right>Championship</span></ion-list-header>
+
+
+    <ion-card class="matchup" *ngFor="let game of bracketGames.round3">
+        <ion-grid>
+            <ion-row>
+                <ion-col width-75>
+                    <ion-list no-wrap>
+                        <ion-item no-wrap>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team1}}</h2>
+                            <p>{{game.team1Coach}}</p>
+                        </ion-item>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                            <h2 title>{{game.team2}}</h2>
+                            <p>{{game.team2Coach}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col with-25 class="date-time">
+                    <p>
+                        <span class="date">{{game.dateStamp}}</span>
+                        <br>
+                        <span class="time">{{game.timeStamp}}</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+</ion-content>

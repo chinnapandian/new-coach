@@ -1,0 +1,105 @@
+<ion-header>
+    <ion-navbar primary>
+
+
+        <ion-title>
+            Timmy Smith
+        </ion-title>
+
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="stats-event">
+
+
+    <ion-card>
+        <ion-list text-wrap>
+            <ion-item text-wrap *ngFor="let tournament of selectedTournament">
+                <ion-avatar class="A-6-S" item-left>
+                    <img src="{{tournament.img}}">
+                </ion-avatar>
+                <h2 title>{{tournament.name}}</h2>
+                <p subtitle>{{tournament.date}}</p>
+            </ion-item>
+        </ion-list>
+
+        <ion-scroll class="stat-cards" scrollX="true">
+            <ion-grid>
+                <ion-row>
+                    <ion-col *ngFor="let stat of statCard">
+                        <ion-card>
+                            <ion-grid>
+                                <ion-row class="stat-card-header">
+                                    <ion-col>
+                                        <div>{{stat.header}}</div>
+                                    </ion-col>
+                                </ion-row>
+
+                                <ion-row class="stat-card-data">
+                                    <ion-col>
+                                        <div>{{stat.value}}</div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col class="view-full-stats">
+                        <ion-card>
+                            <button block clear primary (click)="goToFullStatsPage()">
+                                Full Player Stats
+                                <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+                            </button>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-scroll>
+    </ion-card>
+
+    <ion-list-header>
+        Saturday 11/8 at 12:30PM
+    </ion-list-header>
+
+
+    <ion-card *ngFor="let game of poolGames">
+        <ion-grid class="stats-matchup">
+
+            <ion-row class="stats-matchup">
+
+                <ion-col width-50 class="left-team">
+                    <div>
+                        <img src="medal-shadow.png" alt="">
+                        <h2>{{game.team1}}</h2>
+                        <p>(0 - 1)</p>
+                    </div>
+                </ion-col>
+
+                <ion-col width-50 class="right-team">
+                    <div>
+                        <img src="medal-shadow.png" alt="">
+                        <h2>{{game.team2}}</h2>
+                        <p>(0 - 1)</p>
+                    </div>
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row class="has-button">
+                <button class="header-right" block small outline danger (click)="goToRecordStatsPage()">
+                    Record Stats
+                </button>
+            </ion-row>
+            <ion-row>
+                <button class="header-right" small block clear dark-6 (click)="goToRecordStatsPage()">
+                    View Recorded Stats
+                </button>
+            </ion-row>
+
+        </ion-grid>
+
+    </ion-card>
+
+</ion-content>

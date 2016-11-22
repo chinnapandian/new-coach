@@ -4,143 +4,44 @@
 // These are the imports which make up the design of this app.
 // By default each design mode includes these shared imports.
 // App Shared Sass variables belong in app.variables.scss.
-@import "../pages/home/home";
-@import "../pages/teams/teams";
 @import "../pages/auth/login/login";
-@import "../pages/message-board/message-board";
-@import "../pages/practice-schedule/practice-schedule";
+@import "../pages/auth/landing/landing";
+@import "../pages/record-stats/record-stats";
+@import "../pages/main/settings/settings-list";
+@import "../pages/root-page/root-page";
+@import "../pages/main/message-board/message-board";
+//@import "../pages/main/my-players/my-players";
+//@import "../pages/main/my-players/selected-player/player-profile/player-profile";
+//@import "../pages/main/my-players/selected-player/stat-events/selected-stat-event/selected-stat-event";
 
-ion-content {
-  background-color: #fafafa;
-}
+// import scss files
+@import "app.variables";
+@import "app.content";
+@import "app.header";
+@import "app.scroll";
+@import "app.grid";
+@import "app.helper";
+@import "app.col";
+@import "app.card";
+@import "app.padding";
+@import "app.item";
+@import "app.text";
+@import "app.content";
+@import "app.toolbar";
+@import "app.segment";
+@import "app.button";
+@import "app.auth";
+@import "app.avatar";
+@import "app.thumbnail";
 
-button.score1 {
-  margin-bottom: 10px;
-}
+// import fonts from Google
+//@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500,700');
+//@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,700');
+//@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+//@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,700');
 
-button.score2 {
-  margin-top: 10px;
-}
 
-ion-note.score{
-    border-width: 1px;
-    border-style: solid;
-    border-color: #c5c5c5;
-    padding: .2em .4em;
-    border-radius: 2px;
-
-}
-
-ion-note.score.winner{
-  border-width: 1px;
-  border-style: solid;
-  padding: .2em .4em;
-  border-radius: 2px;
-  color: #0fa74c;
-  border-color: #0fa74c;
-}
-
-// creates custom column widths
-ion-col[width-52] {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 52%;
-  -ms-flex: 0 0 52%;
-  flex: 0 0 52%;
-  max-width: 52%;
-}
-
-ion-col[width-40] {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 40%;
-  -ms-flex: 0 0 40%;
-  flex: 0 0 40%;
-  max-width: 40%;
-}
-
-ion-col[width-12] {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 12%;
-  -ms-flex: 0 0 12%;
-  flex: 0 0 12%;
-  max-width: 12%;
-}
-
-ion-col[width-7] {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 7%;
-  -ms-flex: 0 0 7%;
-  flex: 0 0 7%;
-  max-width: 7%;
-}
-
-//Standings Table Styles
-
-// custom styles for the standings tables
-ion-row.standings {
-  border-bottom: 1px solid #eee;
-  background-color: #fff;
-
-  ion-col{
-    height: 44px;
-    line-height: 44px;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    display: block;
-    text-overflow: ellipsis;
-    color: #333;
-  }
-
-  ion-col.standings-team{
-    font-weight: 500;
-  }
-
-}
-
-// for the headers on the table
-ion-row.standings-head {
-  border-bottom: 2px solid #eee;
-  background: #323b44;
-  ion-col {
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    font-weight: bold;
-    font-size: 1.1rem;
-    line-height: 11px;
-    display: block;
-    color: white;
-  }
-}
-
-ion-col.standings-data{
-  text-align: right;
-}
-
-ion-col.standings-team{
-  text-align: left;
-}
-
-.team-tabs-page .back-button {
-  display: inline-block;
-}
-
-.item p {
-  font-size: 1.4rem;
-}
-
-ion-item.header-item {
-  border-bottom: 4px solid #444 !important;
-}
-
-.item{
-  color: color($colors, secondary)
-}
-
-h2[title] {
-  font-weight: 500;
-  font-size: 1.9rem;
-}
-
-p[sub] {
-  font-size: 1.7rem;
+body {
+  font-family: "proxima-nova-soft",sans-serif;
+  color: color($colors, dark-3)
 }

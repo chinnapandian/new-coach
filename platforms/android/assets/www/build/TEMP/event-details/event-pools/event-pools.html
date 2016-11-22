@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar primary>
+
+    <ion-title>American Silver II</ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+
+
+  <ion-list>
+    <ion-list-header>Teams</ion-list-header>
+
+    <a ion-item *ngFor="let team of teams" (click)="goToTournamentPoolPage()">
+      <span>{{team.name}}</span>
+    </a>
+
+  </ion-list>
+
+</ion-content>

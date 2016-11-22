@@ -26,18 +26,34 @@
 // are different per mode.
 
 $colors: (
-  primary:    #0397e5,
-  secondary: #4f4f4f,
-  danger:     #f53d3d,
-  danger-lite: #db4f51,
-  light:      #f4f4f4,
-  gray:       #666666,
-  dark:       #222,
-  dark-gray:  #444,
-  warning:    #d6a223,
-  success:    #69BB7B,
-  spartan:    #0a7a0f,
-  facebook:   #3B5998,
-  twitter:   #00aced,
-  google:   #d34836,
+
+  //      Dark Colors
+        dark:           #222,
+        dark-2:         #222,
+        dark-3:         #3f3f3f,
+        dark-4:         #444,
+        dark-5:         #555,
+        dark-6:         #666,
+        dark-8:         #888,
+        dark-a:         #aaa,
+
+  //      Light Colors
+        light:          #FFF,
+        light-ef:        #efefef,
+
+
+
+  //      Bright Colors
+        primary:        #0397e5,
+        primary-dark:   #02507A,
+        success:        #28A344,
+        gold:           #ffba00,
+        orange:         #FF8B00,
+        secondary:      #444444,
+        danger:         #EA4335,
+
+  //      Background
+        background: #fbfbfb,
+
+        line:           #e4e4e4,
 );

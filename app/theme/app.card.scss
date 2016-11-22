@@ -1,0 +1,77 @@
+@import "app.variables";
+
+ion-card {
+  margin: 8px 8px 16px 8px;
+  width: calc(100% - 16px);
+  //background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0), 0 5px 7px -2px rgba(0, 0, 0, 0.05), 0 1px 5px 0 rgba(0, 0, 0, 0.02);
+  border: 1px solid color($colors, line);
+
+  //h2 {
+  //  color: color($colors, secondary) !important;
+  //}
+
+  //p {
+  //  color: color($colors, label) !important;
+  //}
+
+  ion-list > .item:first-child {
+    border-top: none !important;
+  }
+
+  ion-list .item .item-inner {
+    border-bottom-color: color($colors, line);;
+  }
+
+  ion-list > .item:last-child, ion-list > .item-wrapper:last-child .item {
+    border-bottom: none;
+  }
+
+  [item-right] {
+    margin: 8px 8px 8px 8px;
+  }
+}
+
+ion-card.stats-card {
+  width: 75px;
+}
+
+//ion-card.matchup{
+//  h2{
+//    font-weight: 500;
+//  }
+//}
+
+ion-card.stat-card{
+  text-align: center;
+  ion-row.stat-card-header {
+    border-bottom: 1px solid color($colors, line);
+    ion-col {
+      div {
+        color: color($colors, primary);
+        font-size: 1.6rem;
+        font-weight: 800;
+        line-height: 2.6rem;
+        letter-spacing: .04rem;
+      }
+    }
+  }
+  ion-row.stat-card-data {
+    ion-col {
+      div{
+        color: color($colors, dark-3);
+        font-size: 2rem;
+        line-height: 4.2rem;
+        padding-left: 8px;
+        padding-right: 8px;
+
+      }
+    }
+  }
+}
+
+ion-card > div.map{
+  height: 200px;
+  background-image: url("../../boston-map.png");
+  background-size: cover;
+}

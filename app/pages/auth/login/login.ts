@@ -1,24 +1,19 @@
 import {Component} from '@angular/core';
 import {NavController, ModalController} from 'ionic-angular';
-import {SignUpPage} from '../signup/signup';
-import {TeamsPage} from "../../teams/teams";
+import {MainTabs} from "../../main/tabs/main-tabs";
 
 @Component({
   templateUrl: 'build/pages/auth/login/login.html'
 })
+
 export class LoginPage {
 
   constructor(private navCtrl: NavController,
               private modalCtrl: ModalController) {
   }
 
-  goToSignUpPage(){
-    let signUpPageModal = this.modalCtrl.create(SignUpPage);
-    signUpPageModal.present();
-  }
-
   login(){
-    this.navCtrl.push(TeamsPage);
+    this.navCtrl.setRoot(MainTabs);
   }
 
 

@@ -1,0 +1,100 @@
+.stats-event {
+
+  .player {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+
+  .meta {
+    font-size: 1.5rem;
+  }
+
+  div.padding-thin {
+    padding: 8px;
+  }
+
+  ion-grid.stats-grid {
+    margin-top: 10px;
+    padding: 0px;
+    //padding-left: 8px;
+    //padding-right: 8px;
+
+    // all rows
+    ion-row {
+      //border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      background: #fff;
+    }
+
+    // all columns
+    ion-col {
+      font-size: 1.4rem;
+      text-align: center;
+      min-width: 50px;
+    }
+
+    ion-row.grid-header {
+      color: color($colors, primary);
+      //background: #fff;
+
+      // header cols
+      ion-col {
+        line-height: 1.8rem;
+        //font-size: 1.4rem;
+        font-weight: 800;
+        border-bottom: 1px solid color($colors, line);
+      }
+    }
+
+    ion-row.grid-content {
+      //line-height: 1.8rem;
+      padding-bottom: 5px;
+
+      ion-col{
+        line-height: 2.8rem;
+      }
+
+    }
+  }
+
+  ion-scroll.player-stats {
+    white-space: nowrap;
+    height: 67px
+  }
+
+  ion-grid.stats-matchup {
+
+    ion-row.stats-matchup {
+
+      padding: 8px;
+
+      // all columns within div
+
+      ion-col{
+        //display: flex;
+        //align-items: center;
+        //justify-content: center;
+        text-align: center;
+      }
+
+      ion-col{
+
+        div {
+          max-width: 100%;
+          text-align: center;
+          margin: auto;
+
+        }
+
+      }
+
+      ion-col.vs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        //line-height: 2rem;
+      }
+
+    }
+
+  }
+}

@@ -1,0 +1,29 @@
+
+ion-thumbnail.cricle {
+  img {
+    border-radius: 300px
+  }
+}
+
+ion-thumbnail.large {
+  max-width: 7rem;
+  max-height: 7rem;
+
+  img {
+    max-width: 7rem;
+    max-height: 7rem;
+  }
+}
+
+ion-thumbnail.circle-large {
+  img {
+    background-color: #f8f8f8;
+    border-radius: 300px;
+    max-width: 7rem;
+    max-height: 7rem;
+  }
+}
+
+ion-thumbnail[item-left]{
+  margin-right: 12px
+}

@@ -1,0 +1,44 @@
+@import "app.variables";
+
+ion-list-header {
+  border-bottom-color: color($colors, line);
+  padding-left: 12px;
+}
+
+ion-list-header > div.item-inner > div.input-wrapper > ion-label {
+  //font-family: "co-headline", Sans-Serif;
+  color: color($colors, dark-6) !important;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: .04rem;
+  text-transform: uppercase;
+  margin: 0px 8px 0 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ion-list-header[primary] > div.item-inner > div.input-wrapper > ion-label{
+  color: color($colors, primary) !important;
+}
+
+ion-list-header[gold] > div.item-inner > div.input-wrapper > ion-label{
+  color: color($colors, gold) !important;
+}
+
+ion-list-header[orange] > div.item-inner > div.input-wrapper > ion-label{
+  color: color($colors, orange) !important;
+}
+
+ion-list-header[secondary] > div.item-inner > div.input-wrapper > ion-label{
+  color: color($colors, secondary) !important;
+}
+
+ion-list-header[dark-2] > div.item-inner > div.input-wrapper > ion-label{
+  color: color($colors, dark-2) !important;
+}
+
+ion-list-header[dark-8] > div.item-inner > div.input-wrapper > ion-label{
+  color: color($colors, dark-8) !important;
+}

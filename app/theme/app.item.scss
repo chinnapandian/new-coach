@@ -1,0 +1,100 @@
+.item {
+  color: color($colors, dark-2);
+  padding-left: 8px;
+  //padding-right: 0px;
+
+
+  // H1 Styles
+  h1 {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  h1[title] {
+    font-size: 2.2rem;
+    font-weight: 500;
+  }
+
+  // H2 Styles
+  h2 {
+    //color: color($colors, dark2);
+    font-weight: 500;
+  }
+
+  h2[title] {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  h2[title-bold] {
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+
+  // Paragraph Styles
+  p {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+}
+
+[item-left] {
+  margin: 8px 8px 8px 0;
+}
+
+//  h1[title] {
+//    color: color($colors, secondary);
+//    font-size: 2rem;
+//    font-weight: 600;
+//  }
+//
+//  h2 {
+//    color: color($colors, secondary);
+//    font-weight: 500;
+//    font-size: 1.6rem;
+//  }
+//
+//  h2[title] {
+//    font-size: 1.6rem;
+//    font-weight: 600;
+//  }
+//
+//  h2[title] {
+//    font-size: 1.7rem;
+//    font-weight: 600;
+//  }
+//
+//  p {
+//    font-size: 1.4rem;
+//    font-weight: 500;
+//
+//  }
+//
+//  p [subtitle] {
+//    //font-size: 1.4rem;
+//    font-weight: 500;
+//  }
+//
+//  padding-left: 8px;
+//}
+
+//ion-label{
+//  //font-size: 1.8rem;
+//  font-weight: 500;
+//  margin-right: 0px
+//}
+
+.radio-label{
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: color($colors, dark-2);
+}
+
+ion-list[no-wrap] > ion-item > div.item-inner > div.input-wrapper > ion-label > h2, h1{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+

@@ -1,0 +1,233 @@
+<ion-header>
+
+    <ion-navbar primary no-border-bottom>
+
+        <ion-title>Scorekeeper</ion-title>
+
+        <ion-buttons end>
+            <button ion-button (click)="goToMenu()">
+                <ion-icon name="undo"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <ion-toolbar primary no-border-top class="stats-toolbar">
+        <ion-grid>
+            <ion-row class="grid-header">
+                <ion-col *ngFor="let header of statsHeadings">
+                    <span>{{header}}</span>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="grid-content">
+                <ion-col *ngFor="let stat of recordedStats">
+                    <span>{{stat}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content id="appcontent" class="record-stats">
+
+    <ion-card class="record-stats-header-card">
+        <ion-grid class="stats-matchup">
+
+            <ion-row class="player">
+                <ion-col>
+                    <img src="avatars/boys/joe.svg" alt="">
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="player">
+                <ion-col>
+                    <p>
+                        <ion-icon name="radio-button-on" danger></ion-icon>
+                        <ion-icon name="radio-button-on" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                    </p>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="stats-matchup">
+
+                <ion-col width-50 class="left-team">
+                    <div>
+                        <img src="medal-shadow.png" alt="">
+                        <h2>Spartans U12</h2>
+                        <p>(0 - 1)</p>
+                    </div>
+                </ion-col>
+
+                <ion-col width-50 class="right-team">
+                    <div>
+                        <img src="medal-shadow.png" alt="">
+                        <h2>C4 Blast U12</h2>
+                        <p>(0 - 1)</p>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <!--<ion-grid class="stats-grid" padding-bottom>-->
+        <!--<ion-row class="grid-header">-->
+        <!--<ion-col *ngFor="let header of statsHeadings">-->
+        <!--<span>{{header}}</span>-->
+        <!--</ion-col>-->
+        <!--</ion-row>-->
+
+        <!--<ion-row class="grid-content">-->
+        <!--<ion-col *ngFor="let stat of recordedStats">-->
+        <!--<span>{{stat}}</span>-->
+        <!--</ion-col>-->
+        <!--</ion-row>-->
+        <!--</ion-grid>-->
+
+    </ion-card>
+
+    <ion-card>
+        <ion-list-header>Scoring</ion-list-header>
+        <ion-grid class="record-stats-grid">
+
+            <ion-row>
+                <ion-col width-50>
+                    <button block outline success (click)="presentToast()">
+                        <!--<ion-icon ios="md-checkmark-circle" md="md-checkmark-circle"></ion-icon>-->
+                        Made 2
+                    </button>
+                </ion-col>
+                <ion-col width-50>
+                    <button block outline danger>
+                        <!--<ion-icon ios="md-close-circle" md="md-close-circle"></ion-icon>-->
+                        Missed 2
+                    </button>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col width-50>
+                    <button block outline success>
+                        <!--<ion-icon ios="md-checkmark-circle" md="md-checkmark-circle"></ion-icon>-->
+                        Made 3
+                    </button>
+                </ion-col>
+                <ion-col width-50>
+                    <button block outline danger>
+                        <!--<ion-icon ios="md-close-circle" md="md-close-circle"></ion-icon>-->
+                        Missed 3
+                    </button>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col width-50>
+                    <button block outline success>
+                        <!--<ion-icon ios="md-checkmark-circle" md="md-checkmark-circle"></ion-icon>-->
+                        Made FT
+                    </button>
+                </ion-col>
+                <ion-col width-50>
+                    <button block outline danger>
+                        <!--<ion-icon ios="md-close-circle" md="md-close-circle"></ion-icon>-->
+                        Missed FT
+                    </button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    <!--</ion-card>-->
+    <!--<ion-card>-->
+        <ion-list-header>Ball Controll</ion-list-header>
+
+        <ion-grid class="record-stats-grid">
+            <ion-row>
+                <ion-col width-25>
+                    <button block outline orange>Assist</button>
+                </ion-col>
+                <ion-col width-25>
+                    <button block outline orange>Steal</button>
+                </ion-col>
+                <ion-col width-25>
+                    <button block outline orange>Turn.</button>
+                </ion-col>
+                <ion-col width-25>
+                    <button block outline orange>Block</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
+        <ion-list-header>Rebounding</ion-list-header>
+
+        <!--<ion-card>-->
+        <ion-grid class="record-stats-grid">
+
+            <ion-row>
+                <ion-col width-50>
+                    <button block outline secondary>
+                        <!--<ion-icon ios="md-checkmark-circle" md="md-checkmark-circle"></ion-icon>-->
+                        Def. Rebound
+                    </button>
+                </ion-col>
+                <ion-col width-50>
+                    <button block outline primary>
+                        <!--<ion-icon ios="md-close-circle" md="md-close-circle"></ion-icon>-->
+                        Off. Rebound
+                    </button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+        <!--</ion-card>-->
+
+        <ion-list-header>Fouls</ion-list-header>
+
+        <!--<ion-card>-->
+        <ion-grid class="record-stats-grid">
+
+            <ion-row>
+                <ion-col>
+                    <button block outline danger>
+                        <!--<ion-icon name="hand"></ion-icon>-->
+                        Foul
+                    </button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+        <!--</ion-card>-->
+
+    </ion-card>
+
+</ion-content>
+
+
+<!--<ion-footer>-->
+<!--<ion-toolbar>-->
+
+<!--<ion-buttons Start>-->
+<!--<button ion-button danger>-->
+<!--<ion-icon name="undo"></ion-icon>-->
+<!--</button>-->
+<!--</ion-buttons>-->
+
+<!--<p>Timmy commited an offensive foul</p>-->
+
+<!--&lt;!&ndash;<ion-title>&ndash;&gt;-->
+<!--&lt;!&ndash;<ion-icon name="timer" dark-6></ion-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;Offensive Foul&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-title>&ndash;&gt;-->
+
+<!--<ion-buttons end>-->
+<!--<button ion-button menuToggle>-->
+<!--<ion-icon name="stats"></ion-icon>-->
+<!--</button>-->
+<!--</ion-buttons>-->
+
+<!--</ion-toolbar>-->
+<!--</ion-footer>-->
+

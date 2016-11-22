@@ -1,0 +1,30 @@
+.landing {
+
+  .terms-message{
+    text-align: center;
+    margin-bottom: 60px;
+    opacity: .9;
+
+    a {
+      color: color($colors, light);
+      text-decoration: underline;
+    }
+  }
+
+  .create-account{
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+.landing-logo-container {
+  margin-top: 45px;
+  margin-bottom: 25px;
+}
+
+.landing-logo {
+  width: 25%;
+  //margin: 0 auto;
+  //display: block;
+}
+
+}
