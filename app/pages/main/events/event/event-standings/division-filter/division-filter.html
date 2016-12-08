@@ -1,11 +1,14 @@
-<ion-list radio-group>
-    <ion-list-header orange>Select a Division</ion-list-header>
-    <ion-item *ngFor="let division of divisions">
-        <ion-label>
-            <span class="">{{division.name}}</span>
-            <!--<p>{{division.pools}} Pools</p>-->
-        </ion-label>
-        <ion-radio checked="false" value=""></ion-radio>
-    </ion-item>
-</ion-list>
 
+<ion-list [(ngModel)]="divisionFilter"  radio-group (ionChange)="setSelectedDivision(divisionFilter)">
+
+    <ion-list-header>
+        Select a Division
+        <button item-right outline (click)="dismiss()">Apply</button>
+    </ion-list-header>
+
+    <ion-item *ngFor="let division of divisions">
+      <ion-label>{{division.DivisionName}}</ion-label>
+      <ion-radio  value={{division.DivisionName}}></ion-radio>
+    </ion-item>
+   
+</ion-list>

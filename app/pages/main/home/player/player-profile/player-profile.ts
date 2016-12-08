@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, ModalController} from 'ionic-angular';
-// import {SelectedStatEventPage} from "./selected-stat-event/selected-stat-event"
-// import {FullStatsPage} from "./full-stats/full-stats"    
+import {SelectedStatEventPage} from "../stat-events/selected-stat-event/selected-stat-event";
+import {UpdatePlayerPage} from "../../../../main/home/update-player/update-player";
+//import {FullStatsPage} from "./full-stats/full-stats"    
 //import {FullPlayerStatsPage} from "./full-player-stats/full-player-stats"
 
 @Component({
@@ -252,20 +253,24 @@ export class PlayerProfilePage {
     ];
 
 
-
+    private SelectedPlayerId;
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
                 private modalCtrl:ModalController) {
+        this.SelectedPlayerId = localStorage.getItem("SelectedPlayerId");
     }
 
-    // goToSelectedStatEventPage(){
-    //   this.navCtrl.push(SelectedStatEventPage);
-    // }
+     goToSelectedStatEventPage(){
+       this.navCtrl.push(SelectedStatEventPage);
+     }
 
     goToFullStatsPage(){
-   //   this.navCtrl.push(FullPlayerStatsPage);
+  //   this.navCtrl.push(FullPlayerStatsPage);
     }
-
+    
+    goToEditPlayer() {
+        this.navCtrl.push(UpdatePlayerPage);
+    }
 
     dismiss() {
         this.viewCtrl.dismiss();

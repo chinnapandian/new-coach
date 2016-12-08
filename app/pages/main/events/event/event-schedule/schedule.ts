@@ -1,163 +1,283 @@
 import {Component} from '@angular/core';
-import {ViewController, ModalController, NavController, ActionSheetController} from 'ionic-angular';
-import {TeamFilterPage} from './team-filter/team-filter';
+import {TeamFilterPage} from './popovers/team/team';
 import {GameDetailsPage} from '../game-details/game-details';
+import {Page, Modal, NavController, ViewController, ModalController,PopoverController, ActionSheetController, ActionSheet, NavParams, Alert} from 'ionic-angular';
+import {TournamentDataService} from '../../../../../services/tournament';
+import {LoginService} from '../../../../../services/login';
+import {SortPipe} from '../../../../../pipes/sort';
 // import {scorekeeperPage} from '../scorekeeper/scorekeeper';
+import {TempCurrDateService} from  '../../../../../services/tempcurrdate';
+
 
 @Component({
-    templateUrl: 'build/pages/main/events/event/event-schedule/schedule.html'
+    templateUrl: 'build/pages/main/events/event/event-schedule/schedule.html',
+    providers : [TournamentDataService,TempCurrDateService],
+    pipes :[SortPipe]
 })
 
 export class EventSchedulePage {
 
     private tournamentView:string = 'schedule';
-
-    private completedPoolGames:any = [
-        {
-            team2: 'Mass Elite - Red',
-            team2Coach: 'M. Wilks',
-            team2Rec: '(2 - 2)',
-            team1: 'Spartans Boys 12U',
-            team1Coach: 'T. Filborbn',
-            team1Rec: '(3 - 1)',
-            team1Score: '67',
-            team2Score: '61',
-            dateStamp: 'Final',
-            timeStamp: '',
-            facility: 'Nashua Sports Academy',
-            court: '1'
-        }
-    ];
-    
-    private ongoingPoolGames:any = [
-        {
-            team2: 'BGCN Pride 10',
-            team2Coach: 'R. Pierce',
-            team2Rec: '(3 - 0)',
-            team1: 'Spartans Boys 12U',
-            team1Coach: 'F. Underwood',
-            team1Rec: '(3 - 1)',
-            team1Score: '',
-            team2Score: '',
-            dateStamp: 'Sun',
-            timeStamp: '12:30 PM',
-            facility: 'Madison Square Garden',
-            court: '5'
-        }
-    ];
-
-    private upcomingPoolGames:any = [
-        {
-            team2: 'C4 - Blue',
-            team2Coach: 'J. Danny',
-            team2Rec: '(0 - 2)',
-            team1: 'Spartans Boys 12U',
-            team1Coach: 'F. Coates',
-            team1Rec: '(3 - 1)',
-            team1Score: '',
-            team2Score: '',
-            dateStamp: 'Sun',
-            timeStamp: '5:30 PM',
-            facility: 'Above The RIM Sports Complex',
-            court: '3'
-        }
-    ];
-    
-    private bracketGames:any = [
-        {
-            team2: 'C4 - Blue',
-            team2Coach: 'J. Danny',
-            team2Rec: '(0 - 2)',
-            team1: 'Winner of American Silver I',
-            team1Coach: '',
-            team1Rec: '',
-            team1Score: '44',
-            team2Score: '17',
-            dateStamp: 'Sununday 10/20',
-            timeStamp: '5:30 PM',
-            facility: 'Above The RIM Sports Complex',
-            court: '3'
-        }, {
-            team2: 'Winner of Game 12',
-            team2Coach: 'Johnny Danny',
-            team1: 'Winner of American Silver II',
-            team1Coach: 'Frank Underwood',
-            team1Score: '0',
-            team2Score: '0',
-            dateStamp: 'Sun 10/20',
-            timeStamp: '6:00 PM',
-            facility: 'RIM',
-            court: '5'
-        }
-    ];
-
+    private completedPoolGames:any = [];   
+    private ongoingPoolGames:any = [];
+    private upcomingPoolGames:any = [];
+    private filteredCompletedPoolGames:any = [];   
+    private filteredOngoingPoolGames:any = [];
+    private filteredUpcomingPoolGames:any = [];
+    private tournament;
+    private games;
+    private division: string;
+    private pool: string;
+    private dataLoading = true;
+    private today;
+    private schedules = [];
+    private brackets = [];
+    private standings = [];
+    private followedTeams = [];
+    private followedTeamsSchedules = [];
+    private tournamentId;
+    private tournamentName;
+    private teamFilter;
 
     constructor(private viewCtrl:ViewController,
                 private modalCtrl:ModalController,
                 private navCtrl: NavController,
-                private actionCtrl: ActionSheetController){
+                private actionCtrl: ActionSheetController,
+                private _tournamentData: TournamentDataService,
+                private _loginService: LoginService,
+                private _navParams : NavParams,
+                private _tempCurrDate : TempCurrDateService,
+                private teamPopoverCtrl: PopoverController,
+                private navParams: NavParams){
+          // Get tournament data
+          this.tournamentId = localStorage.getItem('SelectedTournamentId');
+          this.tournamentName = localStorage.getItem("SelectedTournamentName");
+          this.followedTeams = this._loginService.getFollowedTeams();
+          this.teamFilter=(this.navParams.get('teamFilter')==null?'All Teams':this.navParams.get('teamFilter'));
+          console.log(this.teamFilter);
+          console.log(this.tournamentId);
+       //   console.log(this.tournamentName);
+          console.log(this.followedTeams);
+          this.getSelectedTournament();
     }
 
-goToFilterTeamPage() {
-  let selectTeamModal = this.modalCtrl.create(TeamFilterPage);
-  selectTeamModal.present();
-};
+    presentTeamPopover(teamEvent) {
+       
+        let teamPopover = this.teamPopoverCtrl.create(TeamFilterPage,{
+        TeamFilter : this.teamFilter
+        });
+        teamPopover.onDidDismiss(data => {
+            console.log(data);
+            this.teamFilter=data;
+            this.filteredCompletedPoolGames = this.filterTeam(this.completedPoolGames);
+            this.filteredOngoingPoolGames = this.filterTeam(this.ongoingPoolGames);
+            this.filteredUpcomingPoolGames = this.filterTeam(this.upcomingPoolGames);          
+        });
+        teamPopover.present({
+        ev: teamEvent
+        });
+   }
 
-    // presentGameActionSheet(){
-    //     let actionSheet = this.actionCtrl.create({
-    //         // title: 'Seacost United Girls 12U',
-    //         buttons: [
-    //             {
-    //                 text: 'Get Directions',
-    //                 handler: () => {
-    //                     let filterModal = this.modalCtrl.create(GamePage);
-    //                     filterModal.present();
-    //                 }
-    //             },{
-    //                 text: 'Record Stats',
-    //                 handler: () => {
-    //                     let scorekeeperModal = this.modalCtrl.create(scorekeeperPage);
-    //                     scorekeeperModal.present();
-    //                 }
-    //             },{
-    //                 text: 'Cancel',
-    //                 role: 'cancel',
-    //                 handler: () => {
-    //                     console.log('Cancel clicked');
-    //                 }
-    //             }
-    //         ]
-    //     });
-    //     actionSheet.present();
-    // };
-
-
-    // goToGamePage() {
-    //     let gameModal = this.modalCtrl.create(GamePage);
-    //     gameModal.present();
-    // };
+   filterTeam(games){
+     if(this.teamFilter!='All Teams'){
+        return games.filter(item => 
+                      (item.Team1Name.toLowerCase().indexOf(this.teamFilter.toString().toLowerCase()) > -1)||
+                      (item.Team2Name.toLowerCase().indexOf(this.teamFilter.toString().toLowerCase()) > -1));
+     }
+     else
+        return games;
+        
+   }
 
     goToGameDetailsPage() {
         let detailsModal = this.modalCtrl.create(GameDetailsPage);
         detailsModal.present();
     };
 
-    // goToSelectTeamPage() {
-    //     let selectTeamModal = this.modalCtrl.create(SelectTeamPage);
-    //     selectTeamModal.present();
-    // };
-
-    // goToScorekeeperPage() {
-    //     let scorekeeperModal = this.modalCtrl.create(scorekeeperPage);
-    //     scorekeeperModal.present();
-    // };
-
     dismiss() {
         this.viewCtrl.dismiss();
     }
-    
-    // goToGameDetailsPage() {
-    //     this.navCtrl.push(GameDetailsPage);
-    // }
+ 
+    getSelectedTournament() {
+      var orgid = this._loginService.getUserInfo().Context.User.OrgId;
+      var userid =  this._loginService.getUserInfo().Context.User.UserId;
+      var tournamentid = this.tournamentId;
+      var sports = "basketball";
+      console.log(tournamentid,userid);
+      this._tournamentData.getTournamentScheduleStandings(orgid,userid,tournamentid,sports)
+      .subscribe(
+        data => {
+        console.log(data);
+        this._loginService.setTournamentScheduleStandings(data.GameResults,data.Brackets, data.Standings);
+        this.schedules = this._loginService.getTournamentSchedules();
+        console.log(this._loginService.getTournamentSchedules());
+        console.log(this._loginService.getTournamentStandings());
+        console.log(this._loginService.getTournamentBrackets());
+        this.getTeamSchedules();
+        this.getTeamGames();
+      });  
+  }
 
+  getTeamSchedules(){
+     this.followedTeams.forEach(team => {
+        this.schedules.forEach(schedule => {
+          if((schedule.TeamId1==team.TeamId)||(schedule.TeamId2==team.TeamId)){
+              this.followedTeamsSchedules.push(schedule);
+          }
+        });
+     });
+     console.log(this.followedTeamsSchedules);
+  }
+
+  getTeamGames(){  
+    this._tempCurrDate.getTempCurrDate()
+            .subscribe(data => {
+                this.today = data;  
+                console.log(this.today);
+                // Fill past, current and future tournaments in respective arrays
+                this.followedTeamsSchedules.forEach(schedule => {
+                   if ((schedule.GameDate < this.today)||
+                    (((schedule.GameDate == this.today))&&
+                    (schedule.EndDateTime.toString().substring(11,13)<new Date().toString().substring(16,18)))) {
+                    //to get all games of current tournaments
+                        this.completedPoolGames.push(schedule);                        
+                    }
+                    else if ((schedule.GameDate == this.today)&&
+                    (schedule.StartDateTime.toString().substring(11,13)<new Date().toString().substring(16,18))&&
+                    (schedule.EndDateTime.toString().substring(11,13)>new Date().toString().substring(16,18))){
+                        //to get all games of past tournaments
+                        this.ongoingPoolGames.push(schedule);
+                    }
+                    else  if ((schedule.GameDate > this.today)||
+                    (((schedule.GameDate == this.today))&&
+                    (schedule.StartDateTime.toString().substring(11,13)>new Date().toString().substring(16,18)))){
+                        //to get all games of future tournaments
+                        this.upcomingPoolGames.push(schedule);
+                    }
+                });
+                this.filteredCompletedPoolGames = this.completedPoolGames;
+                this.filteredOngoingPoolGames = this.ongoingPoolGames;
+                this.filteredUpcomingPoolGames = this.upcomingPoolGames;
+                this.dataLoading =  false;
+            });
+   // new Date().toString().substring(16,18) == this.gametimes[i].StartTime.toString().substring(11,13)
+
+  }
+  getDate(dt: string) {
+    return this.getFormattedDate(new Date(dt.substr(0, 19)));
+  }
+
+  getTime(dt: string) {
+    return new Date(dt.substr(0, 19));
+  }
+
+ getFormattedDate(date) {
+       var weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+       var months =['January','February','March','April','May','June','July','August','September','October','November','December'];
+        var year = date.getFullYear();
+        var month = (1 + date.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+        var day = date.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        return (weekdays[date.getDay()]+ ", " + months[date.getMonth()] + ' ' + day);
+  }
+
+  convertToAmPm(dt){
+          var ampm = (parseInt(dt.substr(0,2)) >= 12) ? "PM" : "AM";
+          var hours;
+          if (parseInt(dt.substr(0,2)) == 12)
+            hours = 12;
+          else if (parseInt(dt.substr(0,2)) > 12)
+            hours =  parseInt(dt.substr(0,2))-12;
+          else
+            hours = parseInt(dt.substr(0,2));
+          var min = dt.substr(2,3);
+          return(hours + "" + min + " " + ampm);
+   }
+
+  getWin(record: string) {
+    return record.split('-')[0];
+  }
+
+  getLoss(record: string) {
+    return record.split('-')[1];
+  }
+
+  goToGameDetails(gameId) {
+   /* console.log(gameId);
+    this.gameDetails = this.schedules.filter((v) => {
+
+      if (v.GameId === gameId) {
+        return true;
+      }
+      return false;
+    })
+
+    this._navController.push(GameDetailsPage,
+      { gameDetails: this.gameDetails });*/
+  }
+
+  chooseFilter(filter) {
+  /*  let self = this;
+    let alert = Alert.create();
+    alert.setTitle(filter[0].toUpperCase() + filter.slice(1));
+
+    if (filter == 'division') {
+      this.tournament.Divisions.forEach(function (div) {
+        let input = {
+          type: 'radio',
+          label: div.DivisionName,
+          value: div.DivisionName,
+          checked: false
+        };
+        if (div.DivisionName == self.division) {
+          input.checked = true;
+        }
+        alert.addInput(input);
+      });
+    }
+    else if (filter == 'pool') {
+      this.tournament.Pools.forEach(function (pool) {
+        let input = {
+          type: 'radio',
+          label: pool.PoolName,
+          value: pool.PoolName,
+          checked: false
+        };
+        if (pool.PoolName == self.pool) {
+          input.checked = true;
+        }
+        alert.addInput(input);
+      });
+    }
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        if (filter == 'division') {
+          this.division = data;
+        }
+        else if (filter == 'pool') {
+          this.pool = data;
+        }
+      }
+    });
+
+    this._navController.present(alert);*/
+  }
+
+  showTeamDetails() {
+    // TODO
+  }
+
+  goToTournamentDetails(){
+  /*  this._navController.push(TournamentDetailsPage,{
+      tournamentId :this.tournamentId
+     });*/
+  }
+
+  close() {
+    this.viewCtrl.dismiss();
+  }
 }

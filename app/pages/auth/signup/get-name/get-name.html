@@ -15,44 +15,30 @@
         </h1>
     </div>
 
-    <!--<ion-card class="error">-->
-        <!--<ion-grid>-->
-            <!--<ion-row>-->
-                <!--<ion-col width-10>-->
-                    <!--<ion-icon name="alert" class="error-icon"></ion-icon>-->
-                <!--</ion-col>-->
-                <!--<ion-col width-90>-->
-                    <!--<span>You forgot your first name!</span>-->
-                <!--</ion-col>-->
-            <!--</ion-row>-->
-        <!--</ion-grid>-->
-    <!--</ion-card>-->
-
-    <!--<ion-card class="error">-->
-        <!--<ion-grid>-->
-            <!--<ion-row>-->
-                <!--<ion-col width-10>-->
-                    <!--<ion-icon name="alert" class="error-icon"></ion-icon>-->
-                <!--</ion-col>-->
-                <!--<ion-col width-90>-->
-                    <!--<span>You forgot your last name!</span>-->
-                <!--</ion-col>-->
-            <!--</ion-row>-->
-        <!--</ion-grid>-->
-    <!--</ion-card>-->
-
     <ion-list class="auth-list">
+       <form   [formGroup]="getNameForm" (ngSubmit)="onSubmit(getNameForm.value)">
         <ion-item>
             <ion-label stacked>First Name</ion-label>
-            <ion-input class="signup-name" type="text"></ion-input>
+            <ion-input  class="signup-name" [formControl]="getNameForm.controls['firstName']" type="text" value=""></ion-input>
         </ion-item>
+        <div *ngIf ="getNameForm.controls['firstName'].touched">
+            <div *ngIf ="!getNameForm.controls['firstName'].valid" class = "alert-danger">
+            <strong>&nbsp;&nbsp;First name is required</strong>
+            </div>  
+        </div>
         <ion-item>
             <ion-label stacked>Last Name</ion-label>
-            <ion-input class="signup-name" type="text"></ion-input>
+            <ion-input  class="signup-name"  [formControl]="getNameForm.controls['lastName']"  type="text" value=""></ion-input>
         </ion-item>
+        <div *ngIf ="getNameForm.controls['lastName'].touched">
+            <div *ngIf ="!getNameForm.controls['lastName'].valid" class = "alert-danger">
+            <strong>&nbsp;&nbsp;Last name is required</strong>
+            </div>  
+        </div>
+          </form>
     </ion-list>
 
-    <button round block light (click)="goToGetEmailPage()">
+    <button type="submit"  [disabled]="!getNameForm.valid" round block light (click)="goToGetEmailPage()">
         <span>Next</span>
         <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
     </button>

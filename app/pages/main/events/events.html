@@ -39,34 +39,191 @@
 <ion-content class="events">
 
 
-    <div [ngSwitch]="scheduleView">
+  <div [ngSwitch]="scheduleView">
 
-        <div *ngSwitchCase="'tournament'">
-            <ion-list-header text-wrap>Zero Gravity Fall 2016 - NE Circuit</ion-list-header>
-            <ion-card class="">
+    <div *ngSwitchCase="'tournament'">
+           <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
+                <ion-segment [(ngModel)]="timeView" class="wide" dark-6>
+                    <ion-segment-button value="completed">
+                        Completed
+                    </ion-segment-button>
+                    <ion-segment-button value="ongoing">
+                        Ongoing
+                    </ion-segment-button>
+                    <ion-segment-button value="upcoming">
+                        Upcoming
+                    </ion-segment-button>
+                </ion-segment>
+            </ion-toolbar>
+            <div [ngSwitch]="timeView">
+            <div *ngSwitchCase="'completed'">
+            <ion-card  text-wrap *ngFor="let tournaments of pastTournaments | grouppasttournaments">
+                <ion-list-header>{{tournaments.SeasonName}}</ion-list-header>
+                <ion-list>
+                        <ion-item text-wrap  *ngFor="let tourn of tournaments.pastTournaments">
+                            <ion-avatar class="square" item-left>
+                            <!--  <img src="{{tourn.img}}">-->
+                            <ion-thumbnail item-left>
+                                <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
+                            </ion-thumbnail>
+                            </ion-avatar>
+                        <a (click)="goToSelectedEventPage(tourn)">
+                            <h2 title>{{tourn.TournamentName}}</h2>
+                            <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
+                        </a>
+                        </ion-item>
+                    </ion-list>
+            </ion-card>
+            </div>
+            <div  *ngIf="dataLoading==false">
+            <div *ngSwitchCase="'ongoing'">
+            <ion-card  text-wrap *ngFor="let tournaments of currentTournaments | groupcurrenttournaments">
+                <ion-list-header>{{tournaments.SeasonName}}</ion-list-header>
+                <ion-list>
+                        <ion-item text-wrap  *ngFor="let tourn of currentTournaments">
+                            <ion-avatar class="square" item-left>
+                            <!--  <img src="{{tourn.img}}">-->
+                            <ion-thumbnail item-left>
+                                <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
+                            </ion-thumbnail>
+                            </ion-avatar>
+                        <a (click)="goToSelectedEventPage(tourn)">
+                            <h2 title>{{tourn.TournamentName}}</h2>
+                            <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
+                        </a>
+                        </ion-item>
+                    </ion-list>
+            </ion-card>
+            </div>
+            </div>
+            <div *ngSwitchCase="'upcoming'">
+            <ion-card  text-wrap *ngFor="let tournaments of futureTournaments | groupfuturetournaments">
+                <ion-list-header>{{tournaments.SeasonName}}</ion-list-header>
+                <ion-list>
+                        <ion-item text-wrap  *ngFor="let tourn of futureTournaments">
+                            <ion-avatar class="square" item-left>
+                            <!--  <img src="{{tourn.img}}">-->
+                            <ion-thumbnail item-left>
+                                <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
+                            </ion-thumbnail>
+                            </ion-avatar>
+                        <a (click)="goToSelectedEventPage(tourn)">
+                            <h2 title>{{tourn.TournamentName}}</h2>
+                            <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
+                        </a>
+                      
+                        </ion-item>
+                    </ion-list>
+            </ion-card>
+            </div>
+            <div class="card" *ngSwitchCase="'completed'" [style.display]="((pastTournaments.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+            <div class="item">
+                <h3>No completed tournament(s) found.</h3>
+            </div>
+            </div>
+            <div class="card" *ngSwitchCase="'ongoing'" [style.display]="((currentTournaments.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+            <div class="item">
+                <h3>No ongoing tournament(s) found.</h3>
+            </div>
+            </div>
+            <div class="card" *ngSwitchCase="'upcoming'" [style.display]="((futureTournaments.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+            <div class="item">
+                <h3>No upcoming tournament(s) found.</h3>
+            </div>
+            </div>  
+            </div>
+   <!--  <div class="card" *ngSwitchCase="'completed'" [style.display]="pastKeys == 0? 'visible' : 'none'">
+        <div class="item">
+          <h3>No completed tournament(s) found.</h3>
+        </div>
+      </div>
+      <div *ngFor="let pKey of pastKeys">
+        <ion-card *ngSwitchCase="'completed'">
+          <ion-list text-wrap>
+                         <a ion-item text-wrap (click)="goToSelectedStatEventPage()">
+                        <h2 title>{{pKey}}</h2>
+                        <p subtitle>{{getDate(tournamentsPast[pKey][0].StartDate)}} - {{getDate(tournamentsPast[pKey][0].EndDate)}}</p>
+             </a>
+            <ion-item>
+                <button [style.display]="tournamentsPast[pKey]? 'visible' : 'none'" success outline item-right (click)="presentTournActSheet(pKey, 'past')">
+                    <ion-icon name="eye"></ion-icon>
+                    <div>View</div>
+                </button>
+                <button [style.display]="tournamentsPast[pKey]? 'none' : 'visible'" item-right outline success (click)="showAddTournament()">
+                    Get
+                </button>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </div> 
+
+      <!-- ongoing tournaments
+      <div class="card" *ngSwitchCase="'ongoing'" [style.display]="currentKeys == 0? 'visible' : 'none'">
+        <div class="item">
+          <h3>No ongoing tournament(s) found.</h3>
+        </div>
+      </div>
+      <div *ngFor="let cKey of currentKeys">
+        <ion-card *ngSwitchCase="'ongoing'">
+          <ion-list text-wrap>
+                        <a ion-item text-wrap (click)="goToSelectedStatEventPage()">
+                        <h2 title>{{cKey}}</h2>
+                        <p subtitle>{{getDate(tournamentsPast[pKey][0].StartDate)}} - {{getDate(tournamentsPast[pKey][0].EndDate)}}</p>
+             </a> 
+            <ion-item>
+                <button [style.display]="tournamentsCurrent[cKey]? 'visible' : 'none'" success outline item-right (click)="presentTournActSheet(cKey, 'current')">
+                <ion-icon name="eye"></ion-icon>
+                <div>View</div>
+                </button>
+                <button [style.display]="tournamentsCurrent[cKey]? 'none' : 'visible'" item-right outline success (click)="showAddTournament()">
+                    Get
+                </button>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </div>
+
+      <!-- future  tournaments
+      <div class="card" *ngSwitchCase="'upcoming'" [style.display]="futureKeys == 0? 'visible' : 'none'">
+        <div class="item">
+          <h3>No upcoming tournament(s) found.</h3>
+        </div>
+      </div>
+
+      <div *ngFor="let fKey of futureKeys">
+        <ion-card *ngSwitchCase="'upcoming'">
+          <ion-list text-wrap>
+                       <a ion-item text-wrap (click)="goToSelectedStatEventPage()">
+                        <h2 title>{{fKey}}</h2>
+                        <p subtitle>{{getDate(tournamentsPast[pKey][0].StartDate)}} - {{getDate(tournamentsPast[pKey][0].EndDate)}}</p>
+             </a>
+            <ion-item>
+                <button [style.display]="tournamentsFuture[fKey]? 'visible' : 'none'" success outline item-right (click)="presentTournActSheet(fKey, 'future')">
+                    <ion-icon name="eye"></ion-icon>
+                    <div>View</div>
+                </button>
+                <button [style.display]="tournamentsFuture[fKey]? 'none' : 'visible'" item-right outline success (click)="showAddTournament()">
+                    Get
+                </button>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </div>
+          <ion-list-header>Zero Gravity 2016 Fall Season - NE Circuit</ion-list-header>
+            <ion-card>
                 <ion-list text-wrap>
-                    <a ion-item text-wrap *ngFor="let tournament of myTournaments" (click)="goToSelectedEventPage()">
+                    <a ion-item text-wrap (click)="goToSelectedStatEventPage()"
+                    *ngFor="let tournament of myTournaments">
                         <ion-avatar class="A-6-S" item-left>
                             <img src="{{tournament.img}}">
                         </ion-avatar>
                         <h2 title>{{tournament.name}}</h2>
                         <p subtitle>{{tournament.date}}</p>
-                        <!--<ion-note item-right>3 - 0</ion-note>-->
-                        <!--<button outline item-right (click)="goToPurchaseSeasonPage()">Get</button>-->
                     </a>
                 </ion-list>
-                <div padding-thin b-t>
-                    <button block outline small primary>
-                        View All Tournaments
-                    </button>
-                </div>
-                <div padding-thin b-t>
-                    <button block outline small primary (click)="goToPurchaseEventPage()">
-                        Payment
-                    </button>
-                </div>
-            </ion-card>
-        </div>
+            </ion-card>-->
+      <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+    </div>
 
         <div *ngSwitchCase="'league'">
             <ion-list-header text-wrap>Zero Gravity Fall 2016 - New England Circut</ion-list-header>

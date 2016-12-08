@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {NavController, ModalController, ActionSheetController, AlertController, PopoverController} from 'ionic-angular';
+import {NavController, ModalController, ActionSheetController, Loading, AlertController, PopoverController} from 'ionic-angular';
 import {FilterTeamStatePage} from './follow-teams/filter-state/filter-state';
 import {AddPopoverPage} from './add-popover/add-popover';
 import {PlayerTabs} from './player/player-tabs';
 import {AddPlayerPage} from './add-player/add-player';
 import {TeamPage} from './team/team';
+import {LoginService} from '../../../services/login';
 
 @Component({
   templateUrl: 'build/pages/main/home/home.html'
@@ -13,27 +14,13 @@ import {TeamPage} from './team/team';
 export class HomePage {
 
   // Defining variable
-
+  private dataLoading=true;
   private homeView: string = 'teams';
   public testRadioOpen: any = false;
   public testRadioResult: any;
-
-  private basketballTeams: any = [
-    {
-      name: 'Spartans Boys 15U',
-      org: 'NH Spartans',
-      coach: 'Ryan Wilson',
-      img: 'http://meltonbasketball.com.au/wp-content/uploads/2011/12/Spartans.jpg',
-      sport: 'basketball',
-    },
-    {
-      name: 'Warroiors Boys 15U',
-      org: 'MA Warroiors',
-      coach: 'Ryan Wilson',
-      img: 'https://pbs.twimg.com/profile_images/415334320619130880/jz1mwqe_.jpeg',
-      sport: 'basketball',
-    },
-  ];
+  private FollowedTeamsPlayers: any = [];
+  private FollowedTeams: any = [];
+  private FollowedPlayers: any = [];
 
   private statCard: any = [
     {
@@ -56,34 +43,63 @@ export class HomePage {
       value: '72.1%'
     }
   ];
-
+  private teams : Object = []; private boysteams = []; private girlsteams = [];
   constructor(private navCtrl: NavController,
               public modalCtrl: ModalController,
               public popoverCtrl: PopoverController,
               public alertCtrl: AlertController,
-              public asCtrl: ActionSheetController) {
+              public asCtrl: ActionSheetController,
+              private loginService : LoginService) {
+
+    this.FollowedTeamsPlayers = this.loginService.getRegUserPlayers();
+    this.FollowedTeams = this.removeDuplicates(this.FollowedTeamsPlayers, "TeamId");
+    this.loginService.setFollowedTeams(this.FollowedTeams);   
+    console.log(this.FollowedTeams);  
+       
+    this.FollowedTeams.forEach(obj => {
+      if(obj.PlayerUserId!=0)
+        this.FollowedPlayers.push(obj);
+    });  
+    console.log(this.FollowedPlayers);
+    this.dataLoading = false;
   }
 
   // presentPopover() {
   //   let popover = this.popoverCtrl.create(PopoverPage);
   //   popover.present();
   // }
+  removeDuplicates(originalArray, prop) {
+        var newArray = [];
+        var lookupObject  = {};
 
+        for(var i in originalArray) {
+            lookupObject[originalArray[i][prop]] = originalArray[i];
+        }
+
+        for(i in lookupObject) {
+            newArray.push(lookupObject[i]);
+        }
+          return newArray;
+    }
 
   presentPopover(event) {
     let popover = this.popoverCtrl.create(AddPopoverPage);
     popover.present({
       ev: event
     });
+
   }
 
-  goToPlayerTabs(){
+  goToPlayerTabs(player){
+    localStorage.setItem("SelectedPlayerId", player.PlayerUserId);
     let playerModal = this.modalCtrl.create(PlayerTabs);
     playerModal.present();
   }
 
-  goToTeamPage(){
-    let teamModal = this.modalCtrl.create(TeamPage);
+  goToTeamPage(team){
+    let teamModal = this.modalCtrl.create(TeamPage,{
+      SelectedTeam : team
+    });
     teamModal.present();
   }
 

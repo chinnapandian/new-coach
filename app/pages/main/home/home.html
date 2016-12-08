@@ -38,37 +38,44 @@
 <ion-content [ngSwitch]="homeView">
 
     <div *ngSwitchCase="'teams'">
-        <div *ngFor="let team of basketballTeams">
+       <div *ngIf="dataLoading==false">
+        <div *ngFor="let team of FollowedTeams">
             <!--<ion-list-header>{{team.org}}</ion-list-header>-->
             <ion-card>
                 <ion-list no-wrap>
-                    <a ion-item (click)="goToTeamPage()">
-                        <ion-avatar item-left class="A-6-S">
+                    <a ion-item (click)="goToTeamPage(team)">
+                      <!--  <ion-avatar item-left class="A-6-S">
                             <img [src]="team.img">
-                        </ion-avatar>
-                        <h1>{{team.name}}</h1>
-                        <p>Coach {{team.coach}}</p>
+                        </ion-avatar> -->
+                        <h2 title>{{team.TeamName}}</h2>
+                        <p>{{team.CoachFirstName + " " + team.CoachLastName}}</p>
                     </a>
                 </ion-list>
             </ion-card>
         </div>
+       </div>
+         <div class="card" [style.display]="((FollowedTeams.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+            <div class="item">
+            <h3>Click on the + icon at the top to start following Teams</h3>
+      </div>
+    </div> 
     </div>
 
     <div *ngSwitchCase="'players'">
-        <ion-card>
+        <ion-card *ngFor="let followedplayer of FollowedPlayers">
             <ion-list>
-                <a ion-item (click)="goToPlayerTabs()">
+                <a ion-item (click)="goToPlayerTabs(followedplayer)">
                     <ion-avatar class="A-6" item-left>
                         <img src="avatars/boys/joe.svg" alt="">
                     </ion-avatar>
-                    <h1 title>Timmy Smith</h1>
-                    <h2>Spartans Boys 12U</h2>
-                    <p class="pos"><b>#34</b> | Point Guard</p>
+                    <h2 title>{{followedplayer.FirstName + " " + followedplayer.LastName}}</h2>
+                    <h3>{{followedplayer.TeamName}}</h3>
+                    <p class="pos"><b>#{{followedplayer.JerseyNumber}}</b> | Point Guard</p>
                     <!--<p class="pos"><b>&nbsp;ID:</b> H34J7L</p>-->
                     <!--<p>8 Games Played | 4 Recorded</p>-->
                 </a>
             </ion-list>
-
+ 
             <ion-scroll class="stat-cards" scrollX="true">
                 <ion-grid>
                     <ion-row>
@@ -115,5 +122,5 @@
     <!--<span>Add Another Team</span>-->
     <!--</button>-->
     <!--</div>-->
-
+    <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

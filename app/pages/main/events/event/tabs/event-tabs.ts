@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, ModalController, ActionSheetController} from 'ionic-angular';
+import {NavController, ModalController, ViewController, NavParams} from 'ionic-angular';
 import {EventSchedulePage} from "../event-schedule/schedule";
 import {EventBracketsPage} from "../event-brackets/brackets";
 import {EventStandingsPage} from "../event-standings/standings";
@@ -17,7 +17,7 @@ export class SelectedEventTabs {
   eventStandingsTab: any;
   eventInfoTab: any;
 
-  constructor() {
+  constructor(private navParams: NavParams) {
     // this.mainTab = TournamentMainPage;
     this.eventScheduleTab = EventSchedulePage;
     this.eventBracketTab = EventBracketsPage;

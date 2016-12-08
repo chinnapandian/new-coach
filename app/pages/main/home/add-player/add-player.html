@@ -10,7 +10,7 @@
         <ion-title>Add Player</ion-title>
 
         <ion-buttons end>
-            <button (click)="dismiss()">
+            <button  type="submit" (click)="savePlayer()">
                 <span>Save</span>
             </button>
         </ion-buttons>
@@ -20,9 +20,6 @@
 </ion-header>
 
 <ion-content class="add-player">
-
-    <!--<ion-list-header>Player Avatar</ion-list-header>-->
-
     <ion-list-header>Player Profile</ion-list-header>
 
     <ion-card>
@@ -37,74 +34,66 @@
             </ion-item>
         </ion-list>
     </ion-card>
-
-    <ion-card>
-        <ion-list>
-            <ion-item>
-                <ion-label floating>First Name</ion-label>
-                <ion-input type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Last Name</ion-label>
-                <ion-input type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Email</ion-label>
-                <ion-input type="email"></ion-input>
-            </ion-item>
-        </ion-list>
-    </ion-card>
-
-
-    <ion-card>
-        <ion-list>
-            <ion-item>
-                <ion-label floating>Jersey Number</ion-label>
-                <ion-input type="number"></ion-input>
-            </ion-item>
-            <!--<ion-item>-->
-                <!--<ion-label>Position</ion-label>-->
-                <!--<ion-select [(ngModel)]="gaming">-->
-                    <!--<ion-option value="pg">Point Gaurd</ion-option>-->
-                    <!--<ion-option value="sg">Shooting Gaurd</ion-option>-->
-                    <!--<ion-option value="sf">Small Forward</ion-option>-->
-                    <!--<ion-option value="pf">Power Forward</ion-option>-->
-                    <!--<ion-option value="c">Center</ion-option>-->
-                <!--</ion-select>-->
-            <!--</ion-item>-->
-        </ion-list>
-    </ion-card>
-
-    <ion-card>
-        <ion-list radio-group>
-
-            <ion-item>
-                <ion-label>Point Gaurd</ion-label>
-                <ion-radio checked="true" value="pg"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Shooting Gaurd</ion-label>
-                <ion-radio value="sg"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Small Forward</ion-label>
-                <ion-radio value="sf"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Power Forward</ion-label>
-                <ion-radio value="pf"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Center</ion-label>
-                <ion-radio value="c"></ion-radio>
-            </ion-item>
-        </ion-list>
-    </ion-card>
+      <ion-card>
+            <ion-list>
+                <ion-item>
+                    <ion-label floating>Team Name</ion-label>
+                    <ion-select  [(ngModel)]="TeamId">
+                        <ion-option value="-1">Choose a Team
+                        </ion-option>
+                        <ion-option *ngFor="let team of followedTeams" [value]="team.TeamId">{{team.TeamName}}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+                <div *ngIf="((TeamId==-1)&&(save==1))" style="color:red">
+                            <strong>&nbsp;&nbsp;Team name is required</strong>
+                    </div>
+            </ion-list>
+        </ion-card>
+         <ion-card>
+            <ion-list>
+                <ion-item>
+                    <ion-label stacked>First Name</ion-label>
+                    <ion-input class="signup-name" [(ngModel)]="firstName" type="text" value=""></ion-input>
+                </ion-item>
+                <div *ngIf="((firstName=='')&&(save==1))" style="color:red">
+                        <strong>&nbsp;&nbsp;First name is required</strong>
+                </div>
+                <ion-item>
+                    <ion-label stacked>Last Name</ion-label>
+                    <ion-input class="signup-name" [(ngModel)]="lastName" type="text" value=""></ion-input>
+                </ion-item>
+                <div *ngIf="((lastName=='')&&(save==1))" style="color:red">
+                            <strong>&nbsp;&nbsp;Last name is required</strong>
+                    </div>
+                <ion-item>
+                    <ion-label stacked>Email</ion-label>
+                    <ion-input class="signup-email" [(ngModel)]="Email" type="email" value=""></ion-input>
+                </ion-item>
+                <div *ngIf="((Email=='')&&(save==1))" style="color:red">
+                        <strong>&nbsp;&nbsp;Email is required</strong>
+                </div>
+            </ion-list>
+        </ion-card>
 
 
+        <ion-card>
+            <ion-list>
+                <ion-item>
+                    <ion-label floating >Jersey Number</ion-label>
+                    <ion-input type="number" [(ngModel)]="JerseyNumber" value=""></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+        <ion-card>
+            <ion-list radio-group [(ngModel)]="playerposition" *ngFor="let position of positions">
+                <ion-item>
+                    <ion-label>{{position.Name}}</ion-label>
+                    <ion-radio value={{position.Code}}></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+    <ion-spinner name="bubbles" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 
 </ion-content>

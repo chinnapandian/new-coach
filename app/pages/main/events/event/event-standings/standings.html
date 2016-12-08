@@ -1,121 +1,41 @@
 <ion-header>
-
     <ion-navbar no-border-bottom primary>
-
         <ion-buttons start>
             <button (click)="dismiss()">
                 <span>Close</span>
             </button>
         </ion-buttons>
-
-        <ion-title>ZG Beast of The East</ion-title>
-
-
-        <!--<ion-buttons end>-->
-        <!--<button (click)="dismiss()">-->
-        <!--<span showWhen="ios">Share</span>-->
-        <!--<ion-icon name="md-share" showWhen="android,windows"></ion-icon>-->
-        <!--</button>-->
-        <!--</ion-buttons>-->
-
+        <ion-title>{{SelectedTournamentName}}</ion-title>
     </ion-navbar>
-
     <ion-toolbar no-border-top primary>
-        <button small light outline block (click)="presentPopover($event)">Boys 12U Division</button>
+        <button small light outline block (click)="goToSelectDivisionPage($event)">{{divisionFilter}}</button>
     </ion-toolbar>
-
 </ion-header>
 
 <ion-content class="standings">
-
-
-    <ion-list-header>
-        <b>American Bronze II</b>
-    </ion-list-header>
-
-    <!--<ion-card>-->
-        <!--<ion-list>-->
-            <!--<a ion-item *ngFor="let team of teams">-->
-                <!--<ion-avatar item-left class="A-4">-->
-                    <!--<img src="medal-shadow.png" alt="">-->
-                <!--</ion-avatar>-->
-                <!--<h2>{{team.name}}</h2>-->
-                <!--&lt;!&ndash;<p>({{team.w}} – {{team.l}})</p>&ndash;&gt;-->
-                <!--<h1 item-right>1</h1>-->
-            <!--</a>-->
-        <!--</ion-list>-->
-    <!--</ion-card>-->
-
-
-
-    <ion-card class="standings-card">
-        <ion-grid>
-            <ion-row class="standings-header">
-                <ion-col class="team" width-45>TEAM</ion-col>
-                <ion-col class="data" width-11>W</ion-col>
-                <ion-col class="data" width-11>L</ion-col>
-                <ion-col class="data" width-11>PS</ion-col>
-                <ion-col class="data" width-11>PA</ion-col>
-                <ion-col class="data" width-11>PD</ion-col>
-            </ion-row>
-            <ion-row class="standings-data" *ngFor="let team of teams">
-                <ion-col class="team" width-45>{{team.name}}</ion-col>
-                <ion-col class="data" width-11>{{team.w}}</ion-col>
-                <ion-col class="data" width-11>{{team.l}}</ion-col>
-                <ion-col class="data" width-11>{{team.ps}}</ion-col>
-                <ion-col class="data" width-11>{{team.pa}}</ion-col>
-                <ion-col class="data" width-11>{{team.pd}}</ion-col>
-            </ion-row>
-        </ion-grid>
+    <ion-card *ngFor="let pool of followedTeamsStandings | groupteambypool">
+        <ion-list-header>
+            <b>{{pool.PoolName}}</b>
+        </ion-list-header>
+        <ion-card class="standings-card">
+            <ion-grid>
+                <ion-row class="standings-header">
+                    <ion-col class="team" width-45>TEAM</ion-col>
+                    <ion-col class="data" width-11>W</ion-col>
+                    <ion-col class="data" width-11>L</ion-col>
+                    <ion-col class="data" width-11>PS</ion-col>
+                    <ion-col class="data" width-11>PA</ion-col>
+                    <ion-col class="data" width-11>PD</ion-col>
+                </ion-row>
+                <ion-row class="standings-data" *ngFor="let team of pool.selectedTournStandings">
+                    <ion-col class="team" width-45>{{team.TeamName}}</ion-col>
+                    <ion-col class="data" width-11>{{team.WIN}}</ion-col>
+                    <ion-col class="data" width-11>{{team.LOSS}}</ion-col>
+                    <ion-col class="data" width-11>{{team.PS}}</ion-col>
+                    <ion-col class="data" width-11>{{team.PA}}</ion-col>
+                    <ion-col class="data" width-11>{{team.PD}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
     </ion-card>
-
-    <ion-list-header>
-        <span>American Gold</span>
-        <ion-icon item-right ios="md-star" md="md-star" gold></ion-icon>
-    </ion-list-header>
-
-    <ion-card class="standings-card">
-        <ion-grid>
-            <ion-row class="standings-header">
-                <ion-col class="team" width-45>TEAM</ion-col>
-                <ion-col class="data" width-11>W</ion-col>
-                <ion-col class="data" width-11>L</ion-col>
-                <ion-col class="data" width-11>PS</ion-col>
-                <ion-col class="data" width-11>PA</ion-col>
-                <ion-col class="data" width-11>PD</ion-col>
-            </ion-row>
-            <ion-row class="standings-data" *ngFor="let team of teams">
-                <ion-col class="team" width-45>{{team.name}}</ion-col>
-                <ion-col class="data" width-11>{{team.w}}</ion-col>
-                <ion-col class="data" width-11>{{team.l}}</ion-col>
-                <ion-col class="data" width-11>{{team.ps}}</ion-col>
-                <ion-col class="data" width-11>{{team.pa}}</ion-col>
-                <ion-col class="data" width-11>{{team.pd}}</ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-card>
-
-    <ion-list-header>American Silver</ion-list-header>
-
-    <ion-card class="standings-card">
-        <ion-grid>
-            <ion-row class="standings-header">
-                <ion-col class="team" width-45>TEAM</ion-col>
-                <ion-col class="data" width-11>W</ion-col>
-                <ion-col class="data" width-11>L</ion-col>
-                <ion-col class="data" width-11>PS</ion-col>
-                <ion-col class="data" width-11>PA</ion-col>
-                <ion-col class="data" width-11>PD</ion-col>
-            </ion-row>
-            <ion-row class="standings-data" *ngFor="let team of teams">
-                <ion-col class="team" width-45>{{team.name}}</ion-col>
-                <ion-col class="data" width-11>{{team.w}}</ion-col>
-                <ion-col class="data" width-11>{{team.l}}</ion-col>
-                <ion-col class="data" width-11>{{team.ps}}</ion-col>
-                <ion-col class="data" width-11>{{team.pa}}</ion-col>
-                <ion-col class="data" width-11>{{team.pd}}</ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-card>
-
 </ion-content>

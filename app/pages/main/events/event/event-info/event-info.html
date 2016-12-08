@@ -8,7 +8,7 @@
             </button>
         </ion-buttons>
 
-        <ion-title>ZG Beast of The East</ion-title>
+        <ion-title>{{SelectedTournamentName}}</ion-title>
 
     </ion-navbar>
 
@@ -28,7 +28,7 @@
 
     <ion-list-header>Facilities</ion-list-header>
 
-    <ion-card>
+    <!--<ion-card>
         <div class="map">
             <button><ion-icon name="navigate"></ion-icon></button>
         </div>
@@ -48,7 +48,23 @@
                 <ion-radio value="python"></ion-radio>
             </ion-item>
         </ion-list>
-    </ion-card>
+    </ion-card>-->
 
+  <div *ngFor="let facility of facilities">
+        <ion-list-header>{{facility.LocationName}}</ion-list-header>
+
+        <ion-card>
+            <ion-list text-wrap>
+                <ion-item>
+                    <p>{{facility.Address1}} , {{facility.Address2}}</p>
+                    <p>{{facility.City}} , {{facility.State}} {{facility.Zip}}</p>
+                    <button item-right outline (click)="loadMap(facility.Address)">
+                        <ion-icon name="navigate"></ion-icon>
+                        Get Directions
+                    </button>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+    </div>
 
 </ion-content>

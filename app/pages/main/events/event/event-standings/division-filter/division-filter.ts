@@ -1,54 +1,55 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController, ModalController} from 'ionic-angular';
+import {NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
+import {EventStandingsPage} from '../standings';
+import {LoginService} from '../../../../../../services/login';
 
 @Component({
-  templateUrl: 'build/pages/selected-event/event-standings/division-filter/division-filter.html'
+  templateUrl: 'build/pages/main/events/event/event-standings/division-filter/division-filter.html'
 })
 export class StandingsDivisionFilterPage {
+  private selectedTournStandings = [];
+  private divisionFilter;
+  private divisionName;
+  private selecteddivision;
+  private divisions = [];
+  
+  private ev;
+  constructor(private navCtrl: NavController,
+              private viewCtrl: ViewController,
+              private navParams : NavParams,
+              private loginService : LoginService) {
+        
+        this.selectedTournStandings = this.navParams.get("SelectedTournStandings");
+        this.divisions.push({DivisionId:-1,DivisionName:'All Divisions'});
+        (this.removeDuplicates(this.selectedTournStandings,"DivisionId")).forEach(t => {
+          this.divisions.push({DivisionId: t.DivisionId, DivisionName: t.DivisionName});
+        });
+        this.divisionFilter = this.navParams.get("SelectedDivision");
+        console.log(this.divisionFilter);
+  }
 
-  private divisions: any = [
-    {
-      name: 'Boys 8U'
-    },{
-      name: 'Boys 10U'
-    },{
-      name: 'Boys 12U'
-    },{
-      name: 'Boys 13U'
-    },{
-      name: 'Boys 14U'
-    },{
-      name: 'Boys 15U'
-    },{
-      name: 'Boys 16U'
-    },{
-      name: 'Boys Varsity'
-    },{
-      name: 'Girls 8U'
-    },{
-      name: 'Girls 10U'
-    },{
-      name: 'Girls 12U'
-    },{
-      name: 'Girls 13U'
-    },{
-      name: 'Girls 14U'
-    },{
-      name: 'Girls 15U'
-    },{
-      name: 'Girls 16U'
-    },{
-      name: 'Girls Varsity'
-    }
-  ];
+  removeDuplicates(originalArray, prop) {
+      var newArray = [];
+      var lookupObject  = {};
 
-  constructor(
-      private navCtrl: NavController,
-      private viewCtrl: ViewController) {
+      for(var i in originalArray) {
+          lookupObject[originalArray[i][prop]] = originalArray[i];
+      }
+
+      for(i in lookupObject) {
+          newArray.push(lookupObject[i]);
+      }
+        return newArray;
+  }
+
+ setSelectedDivision(division){
+       this.selecteddivision = division;
+       this.divisionFilter = division;
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    console.log(this.divisionFilter);
+  this.viewCtrl.dismiss(this.divisionFilter);
   }
 
 }

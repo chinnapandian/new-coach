@@ -14,21 +14,20 @@
 
 </ion-header>
 
-<ion-content>
-
-    <ion-toolbar class="clear" no-border-top no-border-bottom>
-        <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+<ion-content class="filter-state">
+    <ion-toolbar no-border-top no-border-bottom class="clear">
+            <ion-searchbar [(ngModel)]="SearchKeyword" (input)="onInput($event)"></ion-searchbar>
     </ion-toolbar>
 
     <ion-list-header>Where's your team from?</ion-list-header>
-
+    
     <ion-card class="">
         <ion-list>
-            <a ion-item text-wrap *ngFor="let state of states" (click)="goToFollowTeamsPage()">
-                <h2>{{state.name}}</h2>
+            <a ion-item text-wrap *ngFor="let state of states | searchstates : SearchKeyword" (click)="goToFollowTeamsPage(state)">
+                <h2>{{state.StateName}}</h2>
                 <!--<img item-left style="width: 20px;" src="../../../../wisconsin.svg">-->
             </a>
         </ion-list>
     </ion-card>
-
+     <ion-spinner style="display:block;margin:auto" name="bubbles" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

@@ -1,2 +1,9 @@
-.contact {
+ion-content.follow-teams {
+  ion-card > ion-list > a.item {
+    h2{
+      font-weight: 500;
+    }
+  }
 }
+
+

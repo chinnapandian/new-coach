@@ -6,58 +6,38 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content class="signup">
 
     <div>
         <h1 class="big-message">
-            Create your username and password
+            Create Username & Password
         </h1>
     </div>
 
-    <!--<ion-card class="error">-->
-        <!--<ion-grid>-->
-            <!--<ion-row>-->
-                <!--<ion-col width-10>-->
-                    <!--<ion-icon name="alert" class="error-icon"></ion-icon>-->
-                <!--</ion-col>-->
-                <!--<ion-col width-90>-->
-                    <!--<span>Please enter a valid email address</span>-->
-                <!--</ion-col>-->
-            <!--</ion-row>-->
-        <!--</ion-grid>-->
-    <!--</ion-card>-->
-
-    <!--<ion-card class="error">-->
-        <!--<ion-grid>-->
-            <!--<ion-row>-->
-                <!--<ion-col width-10>-->
-                    <!--<ion-icon name="alert" class="error-icon"></ion-icon>-->
-                <!--</ion-col>-->
-                <!--<ion-col width-90>-->
-                    <!--<span>Your password must be at least 6 character long</span>-->
-                <!--</ion-col>-->
-            <!--</ion-row>-->
-        <!--</ion-grid>-->
-    <!--</ion-card>-->
-
     <ion-list class="name auth-list">
+       <form   [formGroup]="getEmailForm" (ngSubmit)="onSubmit(getEmailForm.value)">
         <ion-item>
-            <ion-label stacked>
-                Email
-                <!--<span class="error" text-right>Invalid Email</span>-->
-            </ion-label>
-            <ion-input class="signup-email" type="email"></ion-input>
+            <ion-label stacked>Email</ion-label>
+            <ion-input  class="signup-email" [formControl]="getEmailForm.controls['Email']" type="email" value=""></ion-input>
         </ion-item>
+        <div *ngIf ="getEmailForm.controls['Email'].touched">
+            <div *ngIf ="!getEmailForm.controls['Email'].valid" class = "alert-danger">
+            <strong>&nbsp;&nbsp;Invalid Email</strong>
+            </div>  
+        </div>
         <ion-item>
             <ion-label stacked>Password</ion-label>
-            <ion-input class="signup-password" type="password"></ion-input>
+            <ion-input  class="signup-password"  [formControl]="getEmailForm.controls['Password']"  type="password" value=""></ion-input>
         </ion-item>
+        <div *ngIf ="getEmailForm.controls['Password'].touched">
+            <div *ngIf ="!getEmailForm.controls['Password'].valid" class = "alert-danger">
+            <strong>&nbsp;&nbsp;Password is required</strong>
+            </div> 
+        </div>
+          </form>
     </ion-list>
 
-    <button round block light (click)="goToMyTeamsPage()">
+    <button  type="submit"  [disabled]="!getEmailForm.valid" round block light (click)="goToMyTeamsPage()">
         All Done. Let's Get Started!
     </button>
-
-
 </ion-content>

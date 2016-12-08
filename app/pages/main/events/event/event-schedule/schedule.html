@@ -7,12 +7,12 @@
             </button>
         </ion-buttons>
 
-        <ion-title>ZG Beast of The East</ion-title>
+        <ion-title>{{tournamentName}}</ion-title>
 
     </ion-navbar>
 
     <ion-toolbar class="" no-border-top primary>
-        <button small light outline block (click)="goToFilterTeamPage()">Spartans Boys 12U</button>
+        <button  small light outline  block (click)="presentTeamPopover($event)">{{teamFilter}}</button>
     </ion-toolbar>
 
 </ion-header>
@@ -23,9 +23,9 @@
     <!--<ion-refresher-content></ion-refresher-content>-->
     <!--</ion-refresher>-->
 
-    <ion-list-header>Completed Pool Games</ion-list-header>
+    <ion-list-header *ngIf="dataLoading==false">Completed Pool Games</ion-list-header>
 
-    <ion-card class="matchup" *ngFor="let game of completedPoolGames">
+    <ion-card class="matchup" *ngFor="let game of filteredCompletedPoolGames">
         <ion-grid>
             <ion-row>
                 <ion-col>
@@ -34,28 +34,32 @@
                             <ion-avatar class="A-4" item-left>
                                 <img src="medal-shadow.png" alt="">
                             </ion-avatar>
-                            <h2 title>{{game.team1}}</h2>
-                            <p>{{game.team1Coach}}</p>
-                            <h1 item-right class="winner">{{game.team1Score}}</h1>
+                            <h2 title>{{game.Team1Name}}</h2>
+                            <p>{{game.Coach1Name}}</p>
+                            <h1 item-right class="winner">{{game.TournTeamId1Score}}</h1>
                         </ion-item>
                         <ion-item>
                             <ion-avatar class="A-4" item-left>
                                 <img src="medal-shadow.png" alt="">
                             </ion-avatar>
-                            <h2 title>{{game.team2}}</h2>
-                            <p>{{game.team2Coach}}</p>
-                            <h1 item-right class="loser">{{game.team2Score}}</h1>
+                            <h2 title>{{game.Team2Name}}</h2>
+                            <p>{{game.Coach2Name}}</p>
+                            <h1 item-right class="loser">{{game.TournTeamId2Score}}</h1>
                         </ion-item>
                     </ion-list>
                 </ion-col>
             </ion-row>
         </ion-grid>
     </ion-card>
+    <div class="card" *ngIf="((filteredCompletedPoolGames.length == 0)&&(dataLoading==false))">
+       <div class="item">
+          <h3 title>No Completed Pool Game(s) found.</h3>
+       </div>
+   </div>
+ 
+    <ion-list-header *ngIf="dataLoading==false">Ongoing Pool Games</ion-list-header>
 
-    <ion-list-header>Ongoing Pool Games</ion-list-header>
-
-
-    <ion-card class="matchup" *ngFor="let game of ongoingPoolGames" (click)="goToGameDetailsPage()">
+    <ion-card class="matchup" *ngFor="let game of filteredOngoingPoolGames" (click)="goToGameDetailsPage()">
         <ion-grid>
             <ion-row>
                 <ion-col width-75>
@@ -64,23 +68,23 @@
                             <ion-avatar class="A-4" item-left>
                                 <img src="medal-shadow.png" alt="">
                             </ion-avatar>
-                            <h2 title>{{game.team1}}</h2>
-                            <p>{{game.team1Coach}}</p>
+                            <h2 title>{{game.Team1Name}}</h2>
+                            <p>{{game.Coach1Name}}</p>
                         </ion-item>
                         <ion-item>
                             <ion-avatar class="A-4" item-left>
                                 <img src="medal-shadow.png" alt="">
                             </ion-avatar>
-                            <h2 title>{{game.team2}}</h2>
-                            <p>{{game.team2Coach}}</p>
+                            <h2 title>{{game.Team2Name}}</h2>
+                            <p>{{game.Coach2Name}}</p>
                         </ion-item>
                     </ion-list>
                 </ion-col>
                 <ion-col with-25 class="date-time">
-                    <p>
-                        <span class="date">{{game.dateStamp}}</span>
+                     <p>
+                        <span class="date">{{game.FormatGameDate}}</span>
                         <br>
-                        <span class="time">{{game.timeStamp}}</span>
+                        <span class="time">{{convertToAmPm(game.StartDateTime.substring(11,16))}}</span>
                     </p>
                 </ion-col>
             </ion-row>
@@ -91,10 +95,14 @@
             <!--</ion-row>-->
         </ion-grid>
     </ion-card>
+    <div class="card" *ngIf="((filteredOngoingPoolGames.length == 0)&&(dataLoading==false))">
+       <div class="item">
+          <h3 title>No Ongoing Pool Game(s) found.</h3>
+       </div>
+   </div>
+    <ion-list-header *ngIf="dataLoading==false">Upcoming Pool Games</ion-list-header>
 
-    <ion-list-header>Upcoming Pool Games</ion-list-header>
-
-    <ion-card class="matchup" *ngFor="let game of upcomingPoolGames">
+    <ion-card class="matchup" *ngFor="let game of filteredUpcomingPoolGames">
         <ion-grid>
             <ion-row>
                 <ion-col width-75>
@@ -103,23 +111,23 @@
                             <ion-avatar class="A-4" item-left>
                                 <img src="medal-shadow.png" alt="">
                             </ion-avatar>
-                            <h2 title>{{game.team1}}</h2>
-                            <p>{{game.team1Coach}}</p>
+                            <h2 title>{{game.Team1Name}}</h2>
+                            <p>{{game.Coach1Name}}</p>
                         </ion-item>
                         <ion-item>
                             <ion-avatar class="A-4" item-left>
                                 <img src="medal-shadow.png" alt="">
                             </ion-avatar>
-                            <h2 title>{{game.team2}}</h2>
-                            <p>{{game.team2Coach}}</p>
+                            <h2 title>{{game.Team2Name}}</h2>
+                            <p>{{game.Coach2Name}}</p>
                         </ion-item>
                     </ion-list>
                 </ion-col>
                 <ion-col with-25 class="date-time">
                     <p>
-                        <span class="date">{{game.dateStamp}}</span>
+                        <span class="date">{{game.FormatGameDate}}</span>
                         <br>
-                        <span class="time">{{game.timeStamp}}</span>
+                        <span class="time">{{convertToAmPm(game.StartDateTime.substring(11,16))}}</span>
                     </p>
                 </ion-col>
             </ion-row>
@@ -130,5 +138,10 @@
             <!--</ion-row>-->
         </ion-grid>
     </ion-card>
-
+      <div class="card" *ngIf="((filteredUpcomingPoolGames.length == 0)&&(dataLoading==false))">
+       <div class="item">
+          <h3 title>No Upcoming Pool Game(s) found.</h3>
+       </div>
+   </div>
+ <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

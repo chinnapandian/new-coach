@@ -2,10 +2,10 @@
     <ion-navbar primary>
 
         <ion-buttons start>
-        <button (click)="dismiss()">Done</button>
+        <button (click)="dismiss()">Cancel</button>
         </ion-buttons>
 
-        <ion-title>Spartans Boys 12U</ion-title>
+        <ion-title>{{SelectedTeam.TeamName}}</ion-title>
 
         <!--<ion-buttons end>-->
             <!--<button (tap)="presentPopover($event)">-->
@@ -32,9 +32,9 @@
             </ion-row>
             <ion-row class="team-info">
                 <ion-col>
-                    <h1 title>Spartans Boys 12U</h1>
-                    <p>Joe McCool</p>
-                    <button small>Following</button>
+                    <h1 title>{{SelectedTeam.TeamName}}</h1>
+                    <p>{{SelectedTeam.CoachFirstName + ' ' + SelectedTeam.CoachLastName}}</p>
+                    <button small (click)="unFollow(SelectedTeam.TeamId)">UnFollow</button>
                 </ion-col>
             </ion-row>
         </ion-grid>

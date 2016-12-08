@@ -1,22 +1,50 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController, ModalController} from 'ionic-angular';
+import {NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
+import {AvatarsListService} from  '../../../../../services/getavatars';
+import {MyPlayerConfigService} from  '../../../../../services/config';
+import {AddPlayerPage} from "../../add-player/add-player";
 
 @Component({
-  templateUrl: 'build/pages/main/home/add-player/add-avatar/add-avatar.html'
+  templateUrl: 'build/pages/main/home/add-player/add-avatar/add-avatar.html',
+  providers : [AvatarsListService]
 })
 export class AddPlayerAvatarPage {
 
   private avatarGender: string = 'boys';
+  private boyavatars = [];
+  private girlavatars = [];
+  private imagePath;
+  private selectedavatar;
 
   constructor(
       private navCtrl: NavController,
       private viewCtrl: ViewController,
-      private modalCtrl: ModalController) {
-  }
+      private modalCtrl: ModalController,
+      private avatars : AvatarsListService,
+      private navParams : NavParams,
+      private _config: MyPlayerConfigService) {
 
+        this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/";
 
+        this.avatars.getAvatarsList("boys")
+        .subscribe(data =>{
+            this.boyavatars = data;
+        })
+        this.avatars.getAvatarsList("girls")
+        .subscribe(data =>{
+            this.girlavatars = data;
+        })
+
+}
+ 
+ setAvatar(name){
+    this.selectedavatar=name;
+    console.log(this.selectedavatar);
+ }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    this.navCtrl.push(AddPlayerPage,{
+      SelectedAvatar : this.selectedavatar
+    });
   }
 }

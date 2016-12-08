@@ -5,7 +5,7 @@
         <!--<ion-searchbar (input)="getItems($event)" placeholder="Find Your Team"></ion-searchbar>-->
 
         <ion-buttons end>
-            <button (click)="dismiss()">
+            <button *ngIf="((boysteamsFollowed.length!=0)||(girlsteamsFollowed.length!==0))" (click)="saveFollowedTeams()">
                 <span showWhen="ios">Done</span>
                 <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
             </button>
@@ -19,61 +19,63 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content class="follow-teams">
 
     <!--<ion-toolbar class="clear">-->
         <!--<button block outline small dark-6>New Hampshire</button>-->
-    <!--</ion-toolbar>-->
-
+    <!--</ion-toolbalr>-->
 
     <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
-        <ion-segment [(ngModel)]="teamGender" class="wide" primary>
+        <ion-segment  [(ngModel)]="teamGender" class="wide" primary>
             <ion-segment-button value="boys">
-               NH Boys Teams
+               {{selectedState.StateCode}} Boys Teams
             </ion-segment-button>
             <ion-segment-button value="girls">
-               NH Girls Teams
+               {{selectedState.StateCode}} Girls Teams
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
-
-    <div>
-        <ion-list-header>
-            <ion-avatar item-left class="square-small">
-                <img src="http://meltonbasketball.com.au/wp-content/uploads/2011/12/Spartans.jpg">
-            </ion-avatar>
-            Spartans Organization
-        </ion-list-header>
-        <ion-card>
-            <ion-list>
-                <ion-item text-wrap *ngFor="let spartan of spartans">
-                    <h2 title>{{spartan.name}}</h2>
-                    <p>Coach {{spartan.coach}}</p>
-                    <button item-right outline (click)="dismiss()">Follow</button>
+    
+    <div [ngSwitch]="teamGender">
+     <div *ngSwitchCase="'boys'">
+          <div *ngIf="dataLoading==false">
+            <ion-card text-wrap *ngFor="let boysteam of boysteams| groupboysteamsbyorgid">
+                <ion-list-header>{{boysteam.OrgName}}</ion-list-header>
+                <ion-list>
+                    <ion-item text-wrap *ngFor="let team of boysteam.boysteams">
+                            <h2 title>{{team.TeamName}}</h2>
+                            <p>Coach {{team.CoachFirstName + ' ' + team.CoachLastName}} </p>
+                            <button *ngIf="true == !checkBoysFollowedTeams(team.TeamId)" item-right  (click)="followBoysTeams(team)">Follow</button>
+                            <button *ngIf="true == checkBoysFollowedTeams(team.TeamId)" primary item-right outline (click)="unfollowBoysTeams(team)">UnFollow</button>
+                        </ion-item>
+                    </ion-list>
+            </ion-card>
+      </div>
+      <div class="card" [style.display]="((boysteams.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+      <div class="item">
+        <h3>No boys team(s) found.</h3>
+      </div>
+    </div>
+    </div>
+    <div *ngSwitchCase="'girls'">
+      <ion-card  text-wrap *ngFor="let girlsteam of girlsteams | groupgirlsteamsbyorgid">
+           <ion-list-header>{{girlsteam.OrgName}}</ion-list-header>
+           <ion-list>
+               <ion-item text-wrap *ngFor="let team of girlsteam.girlsteams">
+                    <h2 title>{{team.TeamName}}</h2>
+                    <p>Coach {{team.CoachFirstName + ' ' + team.CoachLastName}} </p>
+                     <button *ngIf="true == !checkGirlsFollowedTeams(team.TeamId)" item-right  (click)="followGirlsTeams(team)">Follow</button>
+                     <button *ngIf="true == checkGirlsFollowedTeams(team.TeamId)" primary item-right outline (click)="unfollowGirlsTeams(team)">UnFollow</button>                                    
                 </ion-item>
             </ion-list>
-        </ion-card>
-    </div>
+      </ion-card>
+      <div class="card" [style.display]="((girlsteams.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+      <div class="item">
+        <h3>No girls team(s) found.</h3>
+      </div>
+    </div> 
 
-    <ion-list-header>
-        <ion-avatar item-left class="square-small">
-            <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h20130516031215111ae120e164a8948/OSA.png">
-        </ion-avatar>
-        Warriors Organization
-    </ion-list-header>
-
-    <ion-card>
-        <ion-list>
-            <ion-item text-wrap *ngFor="let warrior of warriors" (click)="goToTournamentPage()">
-                <h2>{{warrior.name}}</h2>
-                <p>Coach {{warrior.coach}}</p>
-                <button item-right outline>Follow</button>
-            </ion-item>
-        </ion-list>
-    </ion-card>
-
-    <!--<div padding>-->
-        <!--<button outline block>Don't See Your Team?</button>-->
-    <!--</div>-->
-
+ </div> 
+ </div>  
+  <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

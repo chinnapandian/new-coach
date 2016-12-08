@@ -1,2 +1,13 @@
-.contact {
+.filter-state {
+     .ion-spinner {
+    display: block;
+    margin: auto;
+  }
+  .spinnerCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    height: 100%;
+}
 }

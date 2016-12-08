@@ -1,8 +1,15 @@
 <ion-header>
+
     <ion-navbar primary>
         <ion-title>Add Avatar</ion-title>
-    </ion-navbar>
 
+     <ion-buttons end>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+            </button>
+      </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 <ion-content class="add-player">
@@ -20,22 +27,38 @@
 
     <div [ngSwitch]="avatarGender">
         <ion-card *ngSwitchCase="'boys'">
-            <ion-list radio-group>
-
+     <!--       <ion-list radio-group *ngFor="let avatar of boyavatars">
                 <ion-item>
                     <ion-thumbnail class="circle" item-left>
-                        <img src="./avatars/boys/joe.svg" alt="">
+                        <img src='{{imagePath}}{{avatar}}' alt="">
                     </ion-thumbnail>
-                    <ion-label>Joe</ion-label>
-                    <ion-radio checked="true" value="Joe"></ion-radio>
+                    <ion-label>{{avatar}}</ion-label>
+                    <ion-radio value="{{avatar}}"></ion-radio>
                 </ion-item>
+            </ion-list>
+            
+            sample code
+            <ion-list radio-group [(ngModel)]="selectLocationName">
+     <ion-list-header *ngIf="!selectLocationName">
+         Where are you located?</ion-list-header>
+     <ion-list-header *ngIf="selectLocationName">
+         Selected Location:
+         <p< {{selectLocationName}}</p>
+     </ion-list-header>
+     <ion-item *ngFor="let location of locations">
+         <ion-label>{{location.name}}</ion-label>
+         <ion-radio [value]="location.name"</ion-radio>
+     </ion-item>
+ </ion-list>
+            -->
+              <ion-list radio-group>
 
                 <ion-item>
                     <ion-thumbnail class="circle" item-left>
-                        <img src="./avatars/boys/zack.svg" alt="">
+                        <img src="./avatars/boys/charlie.svg" alt="">
                     </ion-thumbnail>
-                    <ion-label>Zack</ion-label>
-                    <ion-radio value="zack"></ion-radio>
+                    <ion-label>Charlie</ion-label>
+                    <ion-radio checked="true" value="charlie" (click)="setAvatar('charlie')"></ion-radio>
                 </ion-item>
 
                 <ion-item>
@@ -43,31 +66,7 @@
                         <img src="./avatars/boys/chris.svg" alt="">
                     </ion-thumbnail>
                     <ion-label>Chris</ion-label>
-                    <ion-radio value="chris"></ion-radio>
-                </ion-item>
-
-                <ion-item>
-                    <ion-thumbnail class="circle" item-left>
-                        <img src="./avatars/boys/tyler.svg" alt="">
-                    </ion-thumbnail>
-                    <ion-label>Tyler</ion-label>
-                    <ion-radio value="tyler"></ion-radio>
-                </ion-item>
-
-                <ion-item>
-                    <ion-thumbnail class="circle" item-left>
-                        <img src="./avatars/boys/jeremy.svg" alt="">
-                    </ion-thumbnail>
-                    <ion-label>Jeremy</ion-label>
-                    <ion-radio value="jeremy"></ion-radio>
-                </ion-item>
-
-                <ion-item>
-                    <ion-thumbnail class="circle" item-left>
-                        <img src="./avatars/boys/tommy.svg" alt="">
-                    </ion-thumbnail>
-                    <ion-label>Tommy</ion-label>
-                    <ion-radio value="tommy"></ion-radio>
+                    <ion-radio value="chris" (click)="setAvatar('charlie')"></ion-radio>
                 </ion-item>
 
                 <ion-item>
@@ -75,7 +74,23 @@
                         <img src="./avatars/boys/cody.svg" alt="">
                     </ion-thumbnail>
                     <ion-label>Cody</ion-label>
-                    <ion-radio value="cody"></ion-radio>
+                    <ion-radio value="cody" (click)="setAvatar('cody')"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/jeremy.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Jeremy</ion-label>
+                    <ion-radio value="jeremy" (click)="setAvatar('jeremy')"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/joe.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Joe</ion-label>
+                    <ion-radio value="joe" (click)="setAvatar('joe')"></ion-radio>
                 </ion-item>
 
                 <ion-item>
@@ -83,15 +98,7 @@
                         <img src="./avatars/boys/john.svg" alt="">
                     </ion-thumbnail>
                     <ion-label>John</ion-label>
-                    <ion-radio value="john"></ion-radio>
-                </ion-item>
-
-                <ion-item>
-                    <ion-thumbnail class="circle" item-left>
-                        <img src="./avatars/boys/steve.svg" alt="">
-                    </ion-thumbnail>
-                    <ion-label>Steve</ion-label>
-                    <ion-radio value="steve"></ion-radio>
+                    <ion-radio value="john" (click)="setAvatar('john')"></ion-radio>
                 </ion-item>
 
                 <ion-item>
@@ -99,23 +106,7 @@
                         <img src="./avatars/boys/matt.svg" alt="">
                     </ion-thumbnail>
                     <ion-label>Matt</ion-label>
-                    <ion-radio value="matt"></ion-radio>
-                </ion-item>
-
-                <ion-item>
-                    <ion-thumbnail class="circle" item-left>
-                        <img src="./avatars/boys/sean.svg" alt="">
-                    </ion-thumbnail>
-                    <ion-label>Sean</ion-label>
-                    <ion-radio value="sean"></ion-radio>
-                </ion-item>
-
-                <ion-item>
-                    <ion-thumbnail class="circle" item-left>
-                        <img src="./avatars/boys/sam.svg" alt="">
-                    </ion-thumbnail>
-                    <ion-label>Sam</ion-label>
-                    <ion-radio value="sam"></ion-radio>
+                    <ion-radio value="matt" (click)="setAvatar('matt')"></ion-radio>
                 </ion-item>
 
                 <ion-item>
@@ -123,7 +114,61 @@
                         <img src="./avatars/boys/peter.svg" alt="">
                     </ion-thumbnail>
                     <ion-label>Peter</ion-label>
-                    <ion-radio value="peter"></ion-radio>
+                    <ion-radio value="peter" (click)="setAvatar('peter')"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/sam.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Sam</ion-label>
+                    <ion-radio value="sam" (click)="setAvatar('sam')"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/sean.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Sean</ion-label>
+                    <ion-radio value="sean" (click)="setAvatar('sean')"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/steve.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Steve</ion-label>
+                    <ion-radio value="steve" (click)="setAvatar('steve')"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/tommy.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Tommy</ion-label>
+                    <ion-radio value="tommy" (click)="setAvatar('tommy')"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/tony.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Tony</ion-label>
+                    <ion-radio value="tony" (click)="setAvatar('tony')"></ion-radio>
+                </ion-item>
+                 <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/tyler.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Tyler</ion-label>
+                    <ion-radio value="tyler" (click)="setAvatar('tyler')"></ion-radio>
+                </ion-item>
+                 <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/zack.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Zack</ion-label>
+                    <ion-radio value="zack" (click)="setAvatar('zack')"></ion-radio>
                 </ion-item>
 
             </ion-list>

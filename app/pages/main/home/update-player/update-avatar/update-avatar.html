@@ -1,0 +1,267 @@
+<ion-header>
+    <ion-navbar primary>
+        <ion-title>Add Avatar</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="add-player">
+
+    <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
+        <ion-segment [(ngModel)]="avatarGender" class="wide" primary>
+            <ion-segment-button value="boys">
+                Boy Avatars
+            </ion-segment-button>
+            <ion-segment-button value="girls">
+                Girl Avatars
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+    <div [ngSwitch]="avatarGender">
+        <ion-card *ngSwitchCase="'boys'">
+       <!--     <ion-list radio-group *ngFor="let avatar of boyavatars">
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src='{{imagePath}}{{avatar}}' alt="">
+                    </ion-thumbnail>
+                    <ion-label>{{avatar}}</ion-label>
+                    <ion-radio value="{{avatar}}"></ion-radio>
+                </ion-item>
+            </ion-list>-->
+              <ion-list radio-group>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/charlie.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Charlie</ion-label>
+                    <ion-radio  checked="true" value="charlie"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/chris.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Chris</ion-label>
+                    <ion-radio value="chris"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/cody.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Cody</ion-label>
+                    <ion-radio value="cody"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/jeremy.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Jeremy</ion-label>
+                    <ion-radio value="jeremy"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/joe.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Joe</ion-label>
+                    <ion-radio value="joe"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/john.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>John</ion-label>
+                    <ion-radio value="john"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/matt.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Matt</ion-label>
+                    <ion-radio value="matt"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/peter.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Peter</ion-label>
+                    <ion-radio value="peter"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/sam.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Sam</ion-label>
+                    <ion-radio value="sam"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/sean.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Sean</ion-label>
+                    <ion-radio value="sean"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/steve.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Steve</ion-label>
+                    <ion-radio value="steve"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/tommy.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Tommy</ion-label>
+                    <ion-radio value="tommy"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/tony.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Tony</ion-label>
+                    <ion-radio value="tony"></ion-radio>
+                </ion-item>
+                 <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/tyler.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Tyler</ion-label>
+                    <ion-radio value="tyler"></ion-radio>
+                </ion-item>
+                 <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/boys/zack.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Zack</ion-label>
+                    <ion-radio value="zack"></ion-radio>
+                </ion-item>
+
+            </ion-list>
+        </ion-card>
+
+        <ion-card *ngSwitchCase="'girls'">
+            <ion-list radio-group>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/caroline.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Caroline</ion-label>
+                    <ion-radio checked="true" value="caroline"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/heidi.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Heidi</ion-label>
+                    <ion-radio value="heidi"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/zoey.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Zoey</ion-label>
+                    <ion-radio value="zoey"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/emily.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Emily</ion-label>
+                    <ion-radio value="emily"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/sophia.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Sophia</ion-label>
+                    <ion-radio value="sophia"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/rachel.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Rachel</ion-label>
+                    <ion-radio value="rachel"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/hannah.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Hannah</ion-label>
+                    <ion-radio value="hannah"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/margot.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Margot</ion-label>
+                    <ion-radio value="margot"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/joanna.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Joanna</ion-label>
+                    <ion-radio value="joanna"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/paige.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Paige</ion-label>
+                    <ion-radio value="paige"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/molly.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>molly</ion-label>
+                    <ion-radio value="molly"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/mia.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Mia</ion-label>
+                    <ion-radio value="mia"></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                    <ion-thumbnail class="circle" item-left>
+                        <img src="./avatars/girls/kim.svg" alt="">
+                    </ion-thumbnail>
+                    <ion-label>Kim</ion-label>
+                    <ion-radio value="kim"></ion-radio>
+                </ion-item>
+
+            </ion-list>
+
+        </ion-card>
+    </div>
+
+</ion-content>

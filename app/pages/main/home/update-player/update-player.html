@@ -1,0 +1,126 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span>Cancel</span>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Update Player</ion-title>
+
+        <ion-buttons end>
+            <button type="submit" (click)="savePlayer('A')">
+                <span>Save</span>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="add-player">
+    <ion-list-header>Player Profile</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-thumbnail class="circle-large" item-left>
+                    <img src="avatars/boys/sam.svg" alt="">
+                </ion-thumbnail>
+                <button item-right outline small (click)="goToUpdatePlayerAvatarPage()">
+                    <ion-icon name="refresh"></ion-icon>
+                    Swap Avatars</button>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Team Name</ion-label>
+                <ion-select [(ngModel)]="TeamId">
+                    <ion-option value="-1">Choose a Team
+                    </ion-option>
+                    <ion-option *ngFor="let team of followedTeams" [value]="team.TeamId">{{team.TeamName}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+            <div *ngIf="((TeamId==-1)&&(save==1))" style="color:red">
+                <strong>&nbsp;&nbsp;Team name is required</strong>
+            </div>
+        </ion-list>
+    </ion-card>
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label stacked>First Name</ion-label>
+                <ion-input class="signup-name" [(ngModel)]="firstName" type="text" value=""></ion-input>
+            </ion-item>
+            <div *ngIf="((firstName==null)&&(save==1))" style="color:red">
+                <strong>&nbsp;&nbsp;First name is required</strong>
+            </div>
+            <ion-item>
+                <ion-label stacked>Last Name</ion-label>
+                <ion-input class="signup-name" [(ngModel)]="lastName" type="text" value=""></ion-input>
+            </ion-item>
+            <div *ngIf="((lastName==null)&&(save==1))" style="color:red">
+                <strong>&nbsp;&nbsp;Last name is required</strong>
+            </div>
+            <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input class="signup-email" [(ngModel)]="Email" type="email" value=""></ion-input>
+            </ion-item>
+            <div *ngIf="((Email==null)&&(save==1))" style="color:red">
+                <strong>&nbsp;&nbsp;Email is required</strong>
+            </div>
+        </ion-list>
+    </ion-card>
+
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Jersey Number</ion-label>
+                <ion-input type="number" [(ngModel)]="JerseyNumber" value=""></ion-input>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list>
+            <ion-list-header>Toggle notifications for this player</ion-list-header>
+            <ion-item>
+                <ion-icon primary item-left ios="ios-alert-outline" md="md-alert"></ion-icon>
+                <ion-label>Alerts</ion-label>
+                <ion-toggle item-right [(ngModel)]="alerts"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-icon primary item-left ios="ios-notifications-outline" md="md-notifications"></ion-icon>
+                <ion-label>Reminders</ion-label>
+                <ion-toggle [(ngModel)]="reminders"></ion-toggle>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list radio-group [(ngModel)]="playerposition" *ngFor="let position of positions">
+            <ion-item>
+                <ion-label>{{position.Name}}</ion-label>
+                <ion-radio value={{position.Code}}></ion-radio>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list>
+            <ion-item class="center">
+                <button block danger outline small (click)="savePlayer('I')">
+                <h2 style="color:red" danger>Remove Player</h2></button>
+                
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-spinner name="bubbles" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+
+</ion-content>
