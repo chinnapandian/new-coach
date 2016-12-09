@@ -15,7 +15,88 @@
 
   <!-- This is Ionic's root component, where the app will load -->
   <ion-app></ion-app>
+    <script id="bracket-template" type="text/x-handlebars-template">
+    <div id="bracketGameTemplate" class="card">
+        <main id="{{htmlElementId}}">
+            
+            {{#each games}}
+            <ul id="level-{{level}}" class="round round-{{level}}">
+                {{#matchup}}
 
+                {{#repeat prefixGameSpacer bracketSize level}}
+                <li class="spacer">&nbsp;</li>
+                {{/repeat}}
+                
+                <li class="spacer team{{bracketSize}}-level{{level}}-spacer-top">&nbsp;</li>
+
+                <li class="game game-top li-display-inline">
+                    <select id="source1-{{gameId}}" class="select2Dropdown select-box" disabled="disabled"  data-dependent-id="standing1-{{gameId}}" onchange="bracketSourceChanged(this);">
+                       {{#ifWinner team1Name}}
+                            <option value="team:winner">Winner</option>
+                        {{else}}
+                            {{#displayTeamPool team1Name team1PoolName}}
+                            {{/displayTeamPool}}
+                        {{/ifWinner}}
+                    </select>
+                    {{#ifStanding team1PoolPlace}}
+                    <select id="standing1-{{gameId}}" disabled="disabled" class="select2Dropdown myludusDisplayNone select-box">
+                        <option value="{{team1PoolPlace}}">{{team1PoolPlace}}</option>
+                    </select> 
+                    {{/ifStanding}}&nbsp;                   
+                    {{#ifScore gameId team1Score team2Score}}{{/ifScore}}
+                </li>
+                
+                <li id="loccourt-{{gameId}}" class="game game-spacer leftalign team{{bracketSize}}-level{{level}}-spacer-middle">
+                    {{#displayLocation locationAbb courtName}}
+                    {{/displayLocation}}
+                    <span class="gameid" id="{{gameId}}">B{{gameId}}</span><br />
+                    {{#displayDateTime gameDate startTime}}
+                    {{/displayDateTime}}
+                    
+                </li>
+                <li class=" game game-bottom li-display-inline">
+                    <select id="source2-{{gameId}}" class="select2Dropdown select-box" disabled="disabled" data-dependent-id="standing2-{{gameId}}" onchange="bracketSourceChanged(this);">
+                        {{#ifWinner team2Name}}
+                        <option value="team:winner">Winner</option>
+                        {{else}}
+                         {{#displayTeamPool team2Name team2PoolName}}
+                         {{/displayTeamPool}}
+                        {{/ifWinner}}
+                    </select>
+                    {{#ifStanding team2PoolPlace}}
+                    <select id="standing2-{{gameId}}" disabled="disabled" class="select2Dropdown myludusDisplayNone select-box">
+                         <option value="{{team2PoolPlace}}">{{team2PoolPlace}}</option>
+                    </select>
+                    {{/ifStanding}}&nbsp;                   
+                    {{#ifScore gameId team2Score team1Score}}{{/ifScore}}
+                </li>
+
+                {{#repeat suffixGameSpacer bracketSize level}}
+                    <li class="spacer team-level-spacer-bottom">&nbsp;</li>
+                {{/repeat}}
+                {{/matchup}}
+            </ul>
+            {{/each}}
+
+            {{#if championshipLevel}}
+            <ul id="lastround-{{championshipLevel}}" class="round round-{{championshipLevel}} team{{bracketSize}}-lastround">
+                <text id="winnername-{{htmlElementId}}" class="winner-name"></text>
+               <!-- <input id="champ-{{htmlElementId}}" type="checkbox" disabled="disabled" class="champ-checkbox" checked="checked" /> -->
+                <li class="game game-top winner">
+
+                    <p id="title-{{htmlElementId}}" class=" champ-title display">Champion</p>                  
+                    <input id="iptitle-{{htmlElementId}}" type="text" class="edit" style="display:none" />
+                </li>
+            </ul>
+            {{/if}}
+
+        </main>
+    </div>
+  </script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <script src="build/js/external-libraries.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
   <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
   <!-- Polyfill needed for platforms without Promise and Collection support -->

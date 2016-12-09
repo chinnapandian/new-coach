@@ -2,15 +2,21 @@ import {Component} from '@angular/core';
 import {NavController, ViewController, ModalController} from 'ionic-angular';
 import {SelectedStatEventPage} from "../stat-events/selected-stat-event/selected-stat-event";
 import {UpdatePlayerPage} from "../../../../main/home/update-player/update-player";
+import {LoginService} from "../../../../../services/login";
+import {AvatarsListService} from  '../../../../../services/getavatars';
+import {MyPlayerConfigService} from  '../../../../../services/config';
 //import {FullStatsPage} from "./full-stats/full-stats"    
 //import {FullPlayerStatsPage} from "./full-player-stats/full-player-stats"
 
 @Component({
-    templateUrl: 'build/pages/main/home/player/player-profile/player-profile.html'
+    templateUrl: 'build/pages/main/home/player/player-profile/player-profile.html',
+    providers :[AvatarsListService]
 })
 
 export class PlayerProfilePage {
-
+    private imagePath;
+    private boyavatars = [];
+    private girlavatars = [];
     private statsView:string = 'total';
 
     private timeView:string = 'ongoing';
@@ -254,12 +260,42 @@ export class PlayerProfilePage {
 
 
     private SelectedPlayerId;
+    private followedTeams;
+    private SelectedPlayer;
+    
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
-                private modalCtrl:ModalController) {
+                private modalCtrl:ModalController,
+                private loginService:LoginService,
+                private avatars : AvatarsListService,
+                private _config: MyPlayerConfigService) {
+
         this.SelectedPlayerId = localStorage.getItem("SelectedPlayerId");
+        this.followedTeams = this.loginService.getFollowedTeams();
+        this.followedTeams.forEach(player => {
+            if(player.PlayerUserId = this.SelectedPlayerId){
+                this.SelectedPlayer = player;
+                this.getImagePath();
+            }
+        });
     }
 
+    getImagePath(){
+
+      var gender='';
+      this.avatars.getAvatarsList("boys")
+          .subscribe(data =>{
+              this.boyavatars = data;
+              this.boyavatars.forEach(avatar => {
+              if(avatar == this.SelectedPlayer.Avatar){
+                gender='boys'; 
+              }      
+              });
+              gender = (gender=='')?'girls':'boys';
+              this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/" + gender + "/";
+              console.log(this.imagePath);
+          })  
+    }
      goToSelectedStatEventPage(){
        this.navCtrl.push(SelectedStatEventPage);
      }

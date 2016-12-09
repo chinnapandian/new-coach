@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, ModalController, PopoverController} from 'ionic-angular';
-import {BracketsDivisionFilterPage} from './division-filter/division-filter'
+import {BracketDivisionsPage} from './divisions/select-div';
+import {BracketImagePage} from './bracketimage'
 
 @Component({
     templateUrl: 'build/pages/main/events/event/event-brackets/brackets.html'
@@ -121,17 +122,22 @@ export class EventBracketsPage {
 
 
     goToBracketsDivisionFilterPage() {
-        let selectDivisionModal = this.modalCtrl.create(BracketsDivisionFilterPage);
+        let selectDivisionModal = this.modalCtrl.create(BracketDivisionsPage);
         selectDivisionModal.present();
     };
 
     presentPopover(event) {
-        let popover = this.popoverCtrl.create(BracketsDivisionFilterPage);
+        let popover = this.popoverCtrl.create(BracketDivisionsPage);
         popover.present({
             ev: event
         });
     }
-
+     openBracketImage(event) {
+        let popover = this.popoverCtrl.create(BracketImagePage);
+        popover.present({
+            ev: event
+        });
+    }
     dismiss() {
         this.viewCtrl.dismiss();
     }

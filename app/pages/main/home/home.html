@@ -65,9 +65,10 @@
         <ion-card *ngFor="let followedplayer of FollowedPlayers">
             <ion-list>
                 <a ion-item (click)="goToPlayerTabs(followedplayer)">
-                    <ion-avatar class="A-6" item-left>
-                        <img src="avatars/boys/joe.svg" alt="">
-                    </ion-avatar>
+                    <ion-thumbnail class="circle" item-left>
+                        <img *ngIf="followedplayer.Gender=='M'" src="{{imagePath+'boys/'+followedplayer.Avatar}}" alt="">
+                        <img *ngIf="followedplayer.Gender=='F'" src="{{imagePath+'girls/'+followedplayer.Avatar}}" alt="">
+                    </ion-thumbnail>
                     <h2 title>{{followedplayer.FirstName + " " + followedplayer.LastName}}</h2>
                     <h3>{{followedplayer.TeamName}}</h3>
                     <p class="pos"><b>#{{followedplayer.JerseyNumber}}</b> | Point Guard</p>

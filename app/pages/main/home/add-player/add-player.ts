@@ -4,6 +4,9 @@ import {AddPlayerAvatarPage} from "./add-avatar/add-avatar";
 import {LoginService} from '../../../../services/login';
 import {PlayerPositionListService} from  '../../../../services/getplayerposition';
 import {SavePlayerService} from  '../../../../services/saveplayer';
+import {MyPlayerConfigService} from  '../../../../services/config';
+import {TitlePipe} from  '../../../../pipes/title';
+import {AvatarsListService} from  '../../../../services/getavatars';
 import {MainTabs} from "../../../main/tabs/main-tabs";
 
 @Injectable()
@@ -20,11 +23,13 @@ export class PlayerData {
   FirstName;
   LastName;
   EmailAddress;
+  SelectedAvatar;
 }
 
 @Component({
   templateUrl: 'build/pages/main/home/add-player/add-player.html',
-  providers : [PlayerPositionListService, SavePlayerService]
+  providers : [PlayerPositionListService, SavePlayerService, AvatarsListService],
+  pipes : [TitlePipe]
 })
 
 export class AddPlayerPage {
@@ -40,6 +45,10 @@ export class AddPlayerPage {
   private Email;
   private save=0;
   private playerUserId;
+  private SelectedAvatar;
+  private imagePath;
+  private boyavatars = [];
+  private girlavatars = [];
 
   constructor(
       private navCtrl: NavController,
@@ -49,8 +58,12 @@ export class AddPlayerPage {
       private _playerposition : PlayerPositionListService,
       private _saveplayer : SavePlayerService,
       private alertCtrl : AlertController,
-      private navParams : NavParams) {
+      private avatars : AvatarsListService,
+      private navParams : NavParams,
+      private _config: MyPlayerConfigService) {
 
+        this.SelectedAvatar = (this.navParams.get("SelectedAvatar")==null?"joe.svg":this.navParams.get("SelectedAvatar"));
+        this.getImagePath();
         this.followedTeams = this._loginService.getFollowedTeams();
         this._playerposition.getPositionsList()
         .subscribe(data => {
@@ -62,15 +75,40 @@ export class AddPlayerPage {
           this.Email="";
           this.JerseyNumber="";
           this.dataLoading=false;
+          
         })      
   }
 
+  getImagePath(){
+
+    var gender='';
+    this.avatars.getAvatarsList("boys")
+        .subscribe(data =>{
+            this.boyavatars = data;
+            this.boyavatars.forEach(avatar => {
+            if(avatar == this.SelectedAvatar){
+              gender='boys'; 
+            }      
+            });
+            gender = (gender=='')?'girls':'boys';
+            this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/" + gender + "/";
+            console.log(this.imagePath);
+        })  
+  }
+
   goToAddPlayerAvatarPage(){
-    this.navCtrl.push(AddPlayerAvatarPage);
+   let AddPlayerAvatarModal = this.modalCtrl.create(AddPlayerAvatarPage);
+   AddPlayerAvatarModal.present();
+   AddPlayerAvatarModal.onDidDismiss(data =>
+   {
+     this.SelectedAvatar = data;
+   })
+  //  this.navCtrl.push(AddPlayerAvatarPage);
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
+    this.navCtrl.setRoot(MainTabs);
   }
 
  savePlayer(){
@@ -83,7 +121,7 @@ export class AddPlayerPage {
               _playerData.PlayerUserId = 0;
               _playerData.UserId = this._loginService.getUserInfo().Context.User.UserId;          
               _playerData.TeamId = this.TeamId;
-              _playerData.Avatar = this.navParams.get("SelectedAvatar");
+              _playerData.Avatar = this.SelectedAvatar;
               _playerData.FirstName = this.firstName;
               _playerData.LastName =  this.lastName;
               _playerData.EmailAddress =  this.Email;

@@ -36,21 +36,21 @@
         <ion-grid>
             <ion-row class="player-img">
                 <ion-col width-25>
-                    <h1 class="number">34</h1>
+                    <h1 class="number">{{SelectedPlayer.JerseyNumber}}</h1>
                 </ion-col>
                 <ion-col width-50>
-                    <img src="avatars/boys/joe.svg" class="shadow bg" alt="">
+                    <img src='{{imagePath}}{{SelectedPlayer.Avatar}}' alt="">
                 </ion-col>
                 <ion-col width-25>
-                    <h1 class="number">PG</h1>
+                    <h1 class="number">{{SelectedPlayer.Position}}</h1>
                 </ion-col>
             </ion-row>
             <ion-row class="player-info">
                 <ion-col>
-                    <h1>Tommy Smith</h1>
-                    <h2>Spartans Boys 12U</h2>
-                    <!--<p class="pos"><b>#34</b> | Point Guard</p>-->
-                    <p>ID: 83H4K9</p>
+                    <h1>{{SelectedPlayer.FirstName + " " + SelectedPlayer.LastName}}</h1>
+                    <h2>{{SelectedPlayer.TeamName}}</h2>
+                    <!--<p class="pos"><b>#34</b> | Point Guard</p>
+                    <p>ID: 83H4K9</p>-->
                 </ion-col>
             </ion-row>
         </ion-grid>

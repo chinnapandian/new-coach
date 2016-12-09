@@ -1,0 +1,352 @@
+/*
+ *  Bracket CSS
+*/
+div.ui-selected {
+  padding: 20px;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-width: 2px;
+  border-radius: 3px;
+  border-color: #ce4844;
+}
+/*
+ *  Flex Layout Specifics
+*/
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.round {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+.round .spacer {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.round .spacer:first-child,
+.round .spacer:last-child {
+  -webkit-box-flex: .5;
+      -ms-flex-positive: .5;
+          flex-grow: .5;
+}
+.round .game-spacer {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+/*
+ *  General Styles
+*/
+
+li.game {
+  padding-left: 10px;
+}
+li.game.winner {
+  font-weight: bold;
+}
+li.game span {
+  float: right;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+li.game-top {
+  border-bottom: 1px solid #aaa;
+}
+li.game-spacer {
+  border-right: 1px solid #aaa;
+  min-height: 40px;
+}
+li.game-bottom {
+  border-top: 1px solid #aaa;
+}
+
+.ulscroll-w {
+  width: auto;
+}
+.ulscroll-w200 {
+  width: 200px !important;
+}
+.ulscroll-w137 {
+  width: 137px !important;
+}
+.ulscroll-h150 {
+  height: 150px !important;
+}
+.ulscroll-h380 {
+  height: 380px !important;
+}
+.ulscroll {
+  width: auto;
+  height: 300px;
+  overflow: auto;
+}
+.ulscroll-h {
+  width: auto;
+  height: auto;
+}
+.ulscroll-auto {
+  width: auto;
+  height: auto;
+  overflow: auto;
+}
+.champ-checkbox {
+  margin-top: 10px !important;
+  margin-left: -30px !important;
+  position: absolute;
+}
+.champ-checkbox-false {
+  margin-left: -23px !important;
+  margin-top: 9px !important;
+  position: absolute;
+}
+.champ-title {
+  margin: 0 0 0px;
+}
+.champ-title-empty {
+  margin: 19px 0 0px;
+}
+.champ-title-disabled {
+  background-color: white !important;
+  border: 0 !important;
+}
+.bracket-group {
+  border: outset;
+}
+.game-loc-court {
+  text-align: center;
+}
+.team2-level1-spacer-middle {
+  text-align: center;
+  padding-top: 10px;
+}
+.team3-level1-spacer-middle {
+  text-align: center;
+  padding-top: 20px;
+}
+.team3-level2-spacer-middle {
+  text-align: center;
+  padding-top: 20px;
+}
+.team4-level2-spacer-top {
+  height: 20px;
+}
+.team4-level1-spacer-middle {
+  text-align: center;
+  padding-top: 20px;
+}
+.team4-level2-spacer-middle {
+  text-align: center;
+  height: 86px;
+  padding-top: 47px;
+}
+.team5-lastround {
+  padding-bottom: 17px;
+}
+.team5-level3-spacer-top {
+  height: 37px;
+}
+.team5-level3-spacer-bottom {
+  height: 37px;
+}
+.team5-level1-spacer-middle {
+  text-align: center;
+  padding-top: 20px;
+}
+.team5-level2-spacer-middle {
+  text-align: center;
+  padding-top: 40px;
+}
+.team5-level3-spacer-middle {
+  text-align: center;
+  padding-top: 85px;
+}
+.team6-lastround {
+  padding-top: 20px;
+}
+.team6-level3-spacer-top {
+  height: 40px;
+}
+.team6-level3-spacer-bottom {
+  height: 0px;
+}
+.team6-level1-spacer-middle {
+  text-align: center;
+  padding-top: 20px;
+}
+.team6-level2-spacer-middle {
+  text-align: center;
+  padding-top: 10px;
+}
+.team6-level3-spacer-middle {
+  text-align: center;
+  height: 70px;
+  padding-top: 50px;
+}
+.team7-level2-spacer-top {
+  height: 20px;
+}
+.team7-level2-spacer-bottom {
+  height: 16px;
+}
+.team7-level3-spacer-top {
+  height: 43px;
+}
+.team7-level3-spacer-bottom {
+  height: 38px;
+}
+.team7-level1-spacer-middle {
+  text-align: center;
+  padding-top: 10px;
+}
+.team7-level2-spacer-middle {
+  text-align: center;
+  padding-top: 45px;
+}
+.team7-level3-spacer-middle {
+  text-align: center;
+  padding-top: 95px;
+}
+.team8-level3-spacer-top {
+  height: 43px;
+}
+.team8-level3-spacer-bottom {
+  height: 40px;
+}
+.team8-level1-spacer-middle {
+  text-align: center;
+  padding-top: 10px;
+}
+.team8-level2-spacer-middle {
+  text-align: center;
+  padding-top: 50px;
+}
+.team8-level3-spacer-middle {
+  text-align: center;
+  padding-top: 95px;
+}
+.team9-level2-spacer-top {
+  height: 30px;
+}
+.team9-level3-spacer-top {
+  height: 40px;
+}
+.team9-level4-spacer-top {
+  height: 74px;
+}
+.team9-level4-spacer-bottom {
+  height: 58px;
+}
+.team9-level3-spacer-bottom {
+  height: 28px;
+}
+.team9-level1-spacer-middle {
+  text-align: center;
+  padding-top: 10px;
+}
+.team9-level2-spacer-middle {
+  text-align: center;
+  padding-top: 25px;
+}
+.team9-level3-spacer-middle {
+  text-align: center;
+  padding-top: 75px;
+}
+.team9-level4-spacer-middle {
+  text-align: center;
+  padding-top: 145px;
+}
+.team10-level2-spacer-top {
+  height: 30px;
+}
+.team10-level3-spacer-top {
+  height: 30px;
+}
+.team10-level4-spacer-top {
+  height: 75px;
+}
+.team10-level4-spacer-bottom {
+  height: 60px;
+}
+.team10-level1-spacer-middle {
+  text-align: center;
+  padding-top: 10px;
+}
+.team10-level2-spacer-middle {
+  text-align: center;
+  padding-top: 28px;
+}
+.team10-level3-spacer-middle {
+  text-align: center;
+  height: 80px;
+  padding-top: 75px;
+}
+.team10-level4-spacer-middle {
+  text-align: center;
+  padding-top: 150px;
+}
+.winner-name {
+  margin-left: 10px;
+}
+.score-show {
+  display: inline;
+}
+.score-hide {
+  display: none;
+}
+.addteam-org {
+  margin-top: 5px;
+}
+.btn-create-team {
+  margin-bottom: 10px;
+}
+
+.li-display-inline {
+  display:flex;
+}
+
+.select-box {
+  border-radius: 4px;
+}
+
+.winner {
+        color: #0397e5;
+        font-weight: 600; }
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+    transition: 0.2s;
+}
+
+
+/* Add some padding inside the card container */
+.container {
+    padding: 2px 16px;
+}
+
+.leftalign {
+  text-align :left;
+}
+
+.gameid{
+  padding-left:50px;
+  font-weight: bold;
+}

@@ -57,7 +57,6 @@ export class SettingsListPage {
                 this._config.setAuthToken('');
                 localStorage.setItem('AdminAuthToken', '');
                 this.navCtrl.setRoot(LoginPage);
-
             } else {
               
             }

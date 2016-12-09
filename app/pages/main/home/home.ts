@@ -6,9 +6,12 @@ import {PlayerTabs} from './player/player-tabs';
 import {AddPlayerPage} from './add-player/add-player';
 import {TeamPage} from './team/team';
 import {LoginService} from '../../../services/login';
+import {AvatarsListService} from  '../../../services/getavatars';
+import {MyPlayerConfigService} from  '../../../services/config';
 
 @Component({
-  templateUrl: 'build/pages/main/home/home.html'
+  templateUrl: 'build/pages/main/home/home.html',
+  providers :[AvatarsListService]
 })
 
 export class HomePage {
@@ -21,6 +24,9 @@ export class HomePage {
   private FollowedTeamsPlayers: any = [];
   private FollowedTeams: any = [];
   private FollowedPlayers: any = [];
+  private imagePath;
+  private boyavatars = [];
+  private girlavatars = [];
 
   private statCard: any = [
     {
@@ -49,20 +55,29 @@ export class HomePage {
               public popoverCtrl: PopoverController,
               public alertCtrl: AlertController,
               public asCtrl: ActionSheetController,
-              private loginService : LoginService) {
-
-    this.FollowedTeamsPlayers = this.loginService.getRegUserPlayers();
-    this.FollowedTeams = this.removeDuplicates(this.FollowedTeamsPlayers, "TeamId");
-    this.loginService.setFollowedTeams(this.FollowedTeams);   
-    console.log(this.FollowedTeams);  
-       
-    this.FollowedTeams.forEach(obj => {
-      if(obj.PlayerUserId!=0)
-        this.FollowedPlayers.push(obj);
-    });  
-    console.log(this.FollowedPlayers);
-    this.dataLoading = false;
+              private avatars : AvatarsListService,
+              private loginService : LoginService,
+              private _config: MyPlayerConfigService) {
+                  this.avatars.getAvatarsList("boys")
+                            .subscribe(data =>{
+                                this.boyavatars = data;
+                    });
+                    this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
+                    this.FollowedTeamsPlayers = this.loginService.getRegUserPlayers();
+                    this.FollowedTeams = this.removeDuplicates(this.FollowedTeamsPlayers, "TeamId");
+                    console.log(this.FollowedTeams);
+                    this.loginService.setFollowedTeams(this.FollowedTeams);   
+                    console.log(this.FollowedTeams);  
+                      
+                    this.FollowedTeams.forEach(obj => {
+                      if(obj.PlayerUserId!=0)
+                        this.FollowedPlayers.push(obj);
+                        console.log(this.FollowedPlayers);
+                        this.dataLoading = false;
+                    });  
+                    
   }
+ 
 
   // presentPopover() {
   //   let popover = this.popoverCtrl.create(PopoverPage);

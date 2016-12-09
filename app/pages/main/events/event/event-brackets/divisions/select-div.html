@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-title>Divisions</ion-title>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+
+    <ion-list-header>Select a Division</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <a ion-item *ngFor="let division of poolsOfDivisions" (click)="goToPoolsPage(division)">
+                <ion-note item-right>{{division.Pools.length}} pools</ion-note>
+                <h2>{{division.DivisionName}}</h2>
+            </a>
+        </ion-list>
+    </ion-card>
+
+</ion-content>

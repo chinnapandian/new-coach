@@ -1,9 +1,12 @@
 import {Component,Injectable} from '@angular/core';
-import {NavController, ViewController, ModalController, AlertController} from 'ionic-angular';
+import {NavController, ViewController, ModalController, AlertController, NavParams} from 'ionic-angular';
 import {UpdatePlayerAvatarPage} from "./update-avatar/update-avatar";
 import {LoginService} from '../../../../services/login';
 import {PlayerPositionListService} from  '../../../../services/getplayerposition';
 import {SavePlayerService} from  '../../../../services/saveplayer';
+import {MyPlayerConfigService} from  '../../../../services/config';
+import {TitlePipe} from  '../../../../pipes/title';
+import {AvatarsListService} from  '../../../../services/getavatars';
 import {MainTabs} from "../../../main/tabs/main-tabs";
 
 @Injectable()
@@ -24,7 +27,8 @@ export class PlayerData {
 
 @Component({
   templateUrl: 'build/pages/main/home/update-player/update-player.html',
-  providers : [PlayerPositionListService, SavePlayerService]
+  providers : [PlayerPositionListService, SavePlayerService, AvatarsListService],
+  pipes : [TitlePipe]
 })
 
 export class UpdatePlayerPage {
@@ -42,6 +46,10 @@ export class UpdatePlayerPage {
   private playerUserId;
   private reminders: boolean;
   private alerts: boolean;
+  private SelectedAvatar;
+  private imagePath;
+  private boyavatars = [];
+  private girlavatars = [];
 
   constructor(
       private navCtrl: NavController,
@@ -50,19 +58,40 @@ export class UpdatePlayerPage {
       private _loginService : LoginService,
       private _playerposition : PlayerPositionListService,
       private _saveplayer : SavePlayerService,
-      private alertCtrl : AlertController) {
+      private alertCtrl : AlertController,
+      private avatars : AvatarsListService,
+      private navParams : NavParams,
+      private _config: MyPlayerConfigService) {
 
+        this.SelectedAvatar = (this.navParams.get("SelectedAvatar")==null?"joe.svg":this.navParams.get("SelectedAvatar"));
         this.playerUserId = (localStorage.getItem("SelectedPlayerId")!=null?localStorage.getItem("SelectedPlayerId"):0);
         this.followedTeams = this._loginService.getFollowedTeams();
         this._playerposition.getPositionsList()
         .subscribe(data => {
               this.positions = data;
               this.fillPlayerData();
+              this.getImagePath();
               this.dataLoading=false;
         })
 
       
   }
+  getImagePath(){
+
+      var gender='';
+      this.avatars.getAvatarsList("boys")
+          .subscribe(data =>{
+              this.boyavatars = data;
+              this.boyavatars.forEach(avatar => {
+              if(avatar == this.SelectedAvatar){
+                gender='boys'; 
+              }      
+              });
+              gender = (gender=='')?'girls':'boys';
+              this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/" + gender + "/";
+              console.log(this.imagePath);
+          })  
+    }
 
   fillPlayerData(){
     console.log(this.playerUserId);
@@ -73,20 +102,27 @@ export class UpdatePlayerPage {
                this.firstName = team.FirstName;
                this.lastName = team.LastName;
                this.Email = team.EmailAddress;
+               this.SelectedAvatar = team.Avatar;
                this.JerseyNumber = team.JerseyNumber;
                this.alerts=(team.SuspendAlerts==""||team.SuspendAlerts=='N')?false:true;
                this.reminders=(team.SuspendNotification==""||team.SuspendNotification=='N')?false:true;
-
             }
           });
   }
 
   goToUpdatePlayerAvatarPage(){
-    this.navCtrl.push(UpdatePlayerAvatarPage);
+
+     let UpdatePlayerAvatarModal = this.modalCtrl.create(UpdatePlayerAvatarPage);
+     UpdatePlayerAvatarModal.present();
+     UpdatePlayerAvatarModal.onDidDismiss(data =>
+        {
+          this.SelectedAvatar = data;
+        })
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
+    this.navCtrl.setRoot(MainTabs);
   }
 
  savePlayer(status){
@@ -99,7 +135,7 @@ export class UpdatePlayerPage {
               _playerData.PlayerUserId = parseInt(this.playerUserId);
               _playerData.UserId = this._loginService.getUserInfo().Context.User.UserId;          
               _playerData.TeamId = this.TeamId;
-              _playerData.Avatar = "test";
+              _playerData.Avatar = this.SelectedAvatar;
               _playerData.FirstName = this.firstName;
               _playerData.LastName =  this.lastName;
               _playerData.EmailAddress =  this.Email;
