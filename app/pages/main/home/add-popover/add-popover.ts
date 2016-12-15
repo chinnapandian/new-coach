@@ -25,5 +25,7 @@ export class AddPopoverPage {
   //  this.appCtrl.getRootNav().push(FilterTeamStatePage);
     
   }
-
+  dismiss(){
+    this.navCtrl.pop();
+  }
 }

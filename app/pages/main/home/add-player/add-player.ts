@@ -62,8 +62,8 @@ export class AddPlayerPage {
       private navParams : NavParams,
       private _config: MyPlayerConfigService) {
 
-        this.SelectedAvatar = (this.navParams.get("SelectedAvatar")==null?"joe.svg":this.navParams.get("SelectedAvatar"));
-        this.getImagePath();
+        this.SelectedAvatar = (this.navParams.get("SelectedAvatar")==null?"boys/joe.svg":this.navParams.get("SelectedAvatar"));
+        this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
         this.followedTeams = this._loginService.getFollowedTeams();
         this._playerposition.getPositionsList()
         .subscribe(data => {
@@ -79,25 +79,12 @@ export class AddPlayerPage {
         })      
   }
 
-  getImagePath(){
-
-    var gender='';
-    this.avatars.getAvatarsList("boys")
-        .subscribe(data =>{
-            this.boyavatars = data;
-            this.boyavatars.forEach(avatar => {
-            if(avatar == this.SelectedAvatar){
-              gender='boys'; 
-            }      
-            });
-            gender = (gender=='')?'girls':'boys';
-            this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/" + gender + "/";
-            console.log(this.imagePath);
-        })  
-  }
 
   goToAddPlayerAvatarPage(){
-   let AddPlayerAvatarModal = this.modalCtrl.create(AddPlayerAvatarPage);
+   let AddPlayerAvatarModal = this.modalCtrl.create(AddPlayerAvatarPage,
+   {
+     SelectedAvatar : this.SelectedAvatar
+   });
    AddPlayerAvatarModal.present();
    AddPlayerAvatarModal.onDidDismiss(data =>
    {
@@ -113,6 +100,7 @@ export class AddPlayerPage {
 
  savePlayer(){
    this.save=1;
+   localStorage.setItem('homeView','players');
    console.log(this.validateData());
    if(this.validateData()==true)
    {
@@ -137,8 +125,9 @@ export class AddPlayerPage {
                 if(data.IsSuccess==true)
                   {
                       console.log(data);
-                      this._loginService.setRegUserTournaments(data.RegUserTournaments);
-                      this._loginService.setRegUserPlayers(data.RegUserPlayers); 
+                   //   this._loginService.setRegUserTournaments(data.RegUserTournaments);
+                   //   this._loginService.setRegUserPlayers(data.RegUserPlayers); 
+                      this.viewCtrl.dismiss();
                       this.navCtrl.setRoot(MainTabs);         
                   }
                   else

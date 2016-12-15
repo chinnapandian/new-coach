@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, ModalController, LoadingController} from 'ionic-angular';
 import {FollowTeamsPage} from '../follow-teams';
+import {HomePage} from '../../../home/home';
 import {StatesListService} from "../../../../../services/getstates";
 import {SearchStatesPipe} from '../../../../../pipes/searchstates';
 
@@ -46,6 +47,7 @@ export class FilterTeamStatePage {
     }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    localStorage.setItem('homeView','teams');
+    this.navCtrl.setRoot(HomePage);
   }
 }

@@ -22,7 +22,7 @@ export class LandingPage {
   }
   
   goToLoginPage(){
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.setRoot(LoginPage);
   }
 
 

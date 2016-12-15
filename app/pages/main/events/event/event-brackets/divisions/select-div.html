@@ -1,24 +1,12 @@
-<ion-header>
-    <ion-navbar primary>
+<ion-list [(ngModel)]="divisionFilter"  radio-group >
 
-        <ion-title>Divisions</ion-title>
+    <ion-list-header>
+        Select a Division
+        <button item-right outline (click)="dismiss()">Apply</button>
+    </ion-list-header>
 
-    </ion-navbar>
-
-</ion-header>
-
-<ion-content>
-
-
-    <ion-list-header>Select a Division</ion-list-header>
-
-    <ion-card>
-        <ion-list>
-            <a ion-item *ngFor="let division of poolsOfDivisions" (click)="goToPoolsPage(division)">
-                <ion-note item-right>{{division.Pools.length}} pools</ion-note>
-                <h2>{{division.DivisionName}}</h2>
-            </a>
-        </ion-list>
-    </ion-card>
-
-</ion-content>
+    <ion-item *ngFor="let division of divisions">
+      <ion-label>{{division.DivisionName}}</ion-label>
+      <ion-radio  value={{division.DivisionName}}></ion-radio>
+    </ion-item>
+</ion-list>

@@ -8,7 +8,8 @@ import {PurchaseEventPage} from './pages/main/events/purchase/event/purchase-eve
 import {RootPage} from './pages/root-page/root-page'
 import {RecordStatsPage} from './pages/record-stats/record-stats'
 import {MainTabs} from './pages/main/tabs/main-tabs'
-import {EventSchedulePage} from './pages/main/events/event/event-schedule/schedule'
+import {EventSchedulePage} from './pages/main/events/event/event-schedule/schedule';
+import {EventBracketsPage} from './pages/main/events/event/event-brackets/brackets';
 // import {SelectedPlayerPage} from 'pages/main/my-players/selected-player/tabs'
 import {MyPlayerConfigService} from './services/config';
 import {Device, Cordova} from 'ionic-native';
@@ -83,11 +84,16 @@ export class MyApp {
     console.log(Device.device.uuid);
     console.log(Device.device.platform);
    
-      
-    if(this._config.getAuthToken()==null || this._config.getAuthToken()=='')    
+     
+    if(this._config.getAuthToken() == null || this._config.getAuthToken() == '')    
           this.rootPage = LandingPage;
      else
-          this.rootPage = MainTabs;
+     {
+        localStorage.setItem('homeView','teams');
+         this.rootPage = MainTabs;
+      //this.rootPage = EventBracketsPage;
+     }
+         
   }
 
 

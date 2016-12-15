@@ -16,10 +16,10 @@
 
     <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
         <ion-segment [(ngModel)]="avatarGender" class="wide" primary>
-            <ion-segment-button value="boys" (click)="setDefault('boys')">
+            <ion-segment-button value="boys">
                 Boy Avatars
             </ion-segment-button>
-            <ion-segment-button value="girls" (click)="setDefault('girls')">
+            <ion-segment-button value="girls">
                 Girl Avatars
             </ion-segment-button>
         </ion-segment>
@@ -29,10 +29,10 @@
         <ion-card *ngSwitchCase="'boys'">
             <ion-list radio-group  [(ngModel)]="selectedavatar">
                 <ion-item *ngFor="let avatar of boyavatars">
-                    <ion-thumbnail class="circle" item-left>
-                        <img src='{{boysImagePath}}{{avatar}}' alt="">
+                    <ion-thumbnail class="circle" item-right>
+                        <img src='{{imagePath}}{{avatar}}' alt="">
                     </ion-thumbnail>
-                    <ion-label>{{(avatar.substring(0,avatar.indexOf('.'))) | title}}</ion-label>
+                  <!--  <ion-label>{{(avatar.substring(avatar.indexOf('/')+1,avatar.indexOf('.'))) | title}}</ion-label>-->
                     <ion-radio value="{{avatar}}"></ion-radio>
                 </ion-item>
             </ion-list>
@@ -41,10 +41,10 @@
         <ion-card *ngSwitchCase="'girls'">
             <ion-list radio-group  [(ngModel)]="selectedavatar">
                 <ion-item *ngFor="let avatar of girlavatars">
-                    <ion-thumbnail class="circle" item-left>
-                        <img src='{{girlsImagePath}}{{avatar}}' alt="">
+                    <ion-thumbnail class="circle" item-right>
+                        <img src='{{imagePath}}{{avatar}}' alt="">
                     </ion-thumbnail>
-                    <ion-label>{{(avatar.substring(0,avatar.indexOf('.'))) | title}}</ion-label>
+                  <!--  <ion-label>{{(avatar.substring(avatar.indexOf('/')+1,avatar.indexOf('.'))) | title}}</ion-label>-->
                     <ion-radio value="{{avatar}}"></ion-radio>
                 </ion-item>
             </ion-list>

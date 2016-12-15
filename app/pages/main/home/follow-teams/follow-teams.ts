@@ -6,7 +6,9 @@ import {LoginService} from '../../../../services/login';
 import {FollowTeamsService} from '../../../../services/followteams';
 import {GroupBoysTeamsByOrgPipe} from '../../../../pipes/groupboysteamsbyorgid';
 import {GroupGirlsTeamsByOrgPipe} from '../../../../pipes/groupgirlsteamsbyorgid';
-import {HomePage} from '../../../../pages/main/home/home';
+import {MainTabs} from '../../../../pages/main/tabs/main-tabs';
+import {SearchTeamsPipe} from '../../../../pipes/searchteam';
+import {SortPipe} from '../../../../pipes/sort';
 
 @Injectable()
 export class FollowTeam {  
@@ -16,7 +18,7 @@ export class FollowTeam {
 @Page({
   templateUrl: 'build/pages/main/home/follow-teams/follow-teams.html',
   providers : [TeamsListService,FollowTeamsService],
-  pipes : [GroupBoysTeamsByOrgPipe, GroupGirlsTeamsByOrgPipe]
+  pipes : [GroupBoysTeamsByOrgPipe, GroupGirlsTeamsByOrgPipe,SearchTeamsPipe,SortPipe]
 })
 
 export class FollowTeamsPage {
@@ -29,7 +31,9 @@ export class FollowTeamsPage {
   private boysteamsFollowed = [];
   private girlsteamsFollowed = [];
   private dataLoading = true;
-
+  private SearchKeyword='';
+  private showHideBoysHeader=[];
+  private showHideGirlsHeader = [];
 
   constructor(
       private navCtrl: NavController,
@@ -39,7 +43,7 @@ export class FollowTeamsPage {
       private teamsList : TeamsListService,
       private config : MyPlayerConfigService,
       private loginService : LoginService,
-      private followTeamsService : FollowTeamsService) {
+      private followTeamsService : FollowTeamsService) {                
                 this.fillteams();
       }
 
@@ -61,13 +65,64 @@ export class FollowTeamsPage {
                       this.girlsteams.push(this.teams[i]);
                 }
             }
-           console.log(this.boysteams);
-           console.log(this.girlsteams);
+
+           var bindex=0;
+           this.boysteams.forEach(team => {
+             this.showHideBoysHeader[bindex]=false;
+             bindex++;
+           });
+            var gindex=0;
+           this.girlsteams.forEach(team => {
+             this.showHideGirlsHeader[gindex]=false;
+             gindex++;
+           });
            this.dataLoading = false;
         })
         
   }
 
+  onInput(key)
+    {
+        this.SearchKeyword = key.target.value.toString().toLowerCase();
+        if(this.SearchKeyword == ''){
+           this.visibleBoysOrgInList(this.boysteams,false);
+           this.visibleGirlsOrgInList(this.girlsteams, false);
+        }else{
+            this.visibleBoysOrgInList(this.boysteams,true);
+           this.visibleGirlsOrgInList(this.girlsteams, true);         
+        }
+    }
+ visibleBoysOrgInList(team, value){
+         var index=0;
+           team.forEach(t => {
+             this.showHideBoysHeader[index]=value;
+             index++;
+           });
+    }
+
+ visibleGirlsOrgInList(team, value){
+         var index=0;
+           team.forEach(t => {
+             this.showHideGirlsHeader[index]=value;
+             index++;
+           });
+    }
+
+showhideBoysteam(index){
+  if(this.showHideBoysHeader[index]==false)
+     this.showHideBoysHeader[index]=true;
+  else
+     this.showHideBoysHeader[index]=false;
+  return this.showHideBoysHeader[index];
+}
+
+showhideGirlsteam(index){
+  if(this.showHideGirlsHeader[index]==false)
+     this.showHideGirlsHeader[index]=true;
+  else
+     this.showHideGirlsHeader[index]=false;
+  return this.showHideGirlsHeader[index];
+}
 
   followBoysTeams(team){
        this.boysteamsFollowed.push({TeamId: team.TeamId, UserId: this.loginService.getUserInfo().Context.User.UserId});
@@ -152,6 +207,7 @@ export class FollowTeamsPage {
   }
   
   saveFollowedTeams(){
+    localStorage.setItem('homeView','teams');
     var followTeamObj = new FollowTeam();
     followTeamObj.FollowUpTeams = this.boysteamsFollowed.concat(this.girlsteamsFollowed);
     console.log(followTeamObj);
@@ -161,11 +217,12 @@ export class FollowTeamsPage {
       console.log(data);
       this.loginService.setRegUserTournaments(data.RegUserTournaments);
       this.loginService.setRegUserPlayers(data.RegUserPlayers);
-      this.navCtrl.push(HomePage);
+      this.navCtrl.push(MainTabs);
     })
   }
 
   dismiss() {
+    localStorage.setItem('homeView','teams');
     this.viewCtrl.dismiss();
   }
 }

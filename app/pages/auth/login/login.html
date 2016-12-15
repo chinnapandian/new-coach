@@ -16,7 +16,7 @@
         </ion-list>
     </ion-card>
      <ion-list class="name auth-list">
-       <form [formGroup]="getEmailForm" (ngSubmit)="onSubmit(getEmailForm.value)">
+       <form [formGroup]="getEmailForm" (submit)="login($event)">
         <ion-item>
             <ion-label stacked>Email</ion-label>
             <ion-input  class="signup-email"  [(ngModel)]="Email" [formControl]="getEmailForm.controls['Email']" type="email" value=""></ion-input>
@@ -34,14 +34,15 @@
             <div *ngIf ="!getEmailForm.controls['Password'].valid && validUser==true" class = "alert-danger">
             <strong>&nbsp;&nbsp;Password is required</strong>
             </div> 
-        </div>
+        </div>   
+        <br/>
+        <button type="submit" [disabled]="!getEmailForm.valid" block round blue-text light>
+                Log In
+       </button>
       </form>
+      <button margin-vertical round block small clear light (click)="goToForgotPassword()">Forgot Password?</button>
     </ion-list>
-    <button margin-vertical round block small clear light (click)="goToForgotPassword()">Forgot Password?</button>
-    <button type="submit" [disabled]="!getEmailForm.valid" block round blue-text light (click)="login()">
-        Log In
-    </button>
-
+    
  
 </ion-content>
 

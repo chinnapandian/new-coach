@@ -25,8 +25,8 @@
     <ion-card>
         <ion-list>
             <ion-item>
-                <ion-thumbnail class="circle-large" item-left>
-                      <img src='{{imagePath}}{{SelectedAvatar}}' alt="">
+                  <ion-thumbnail class="circle-large" item-left>
+                    <img src='{{imagePath}}{{SelectedAvatar}}' alt="">
                 </ion-thumbnail>
                 <button item-right outline small (click)="goToUpdatePlayerAvatarPage()">
                     <ion-icon name="refresh"></ion-icon>
@@ -88,15 +88,15 @@
 
     <ion-card>
         <ion-list>
-            <ion-list-header>Toggle notifications for this player</ion-list-header>
+            <h3>Toggle notifications for this player</h3>
             <ion-item>
                 <ion-icon primary item-left ios="ios-alert-outline" md="md-alert"></ion-icon>
-                <ion-label>Alerts</ion-label>
+                <ion-label>Suspend Alerts</ion-label>
                 <ion-toggle item-right [(ngModel)]="alerts"></ion-toggle>
             </ion-item>
             <ion-item>
                 <ion-icon primary item-left ios="ios-notifications-outline" md="md-notifications"></ion-icon>
-                <ion-label>Reminders</ion-label>
+                <ion-label>Suspend Reminders</ion-label>
                 <ion-toggle [(ngModel)]="reminders"></ion-toggle>
             </ion-item>
         </ion-list>

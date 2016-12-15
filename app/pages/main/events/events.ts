@@ -46,28 +46,35 @@ export class EventsPage {
          //Get current date ( for testing ) from db
         this._tempCurrDate.getTempCurrDate()
             .subscribe(data => {
+
                 this.today = data;  
                 console.log(this.today);
                 // Fill past, current and future tournaments in respective arrays
-                for (var i = 0; i < this.RegUserTournaments.length; i++) {
-                    if ((this.RegUserTournaments[i].StartDate <= this.today) && (this.RegUserTournaments[i].EndDate >= this.today)) {
-                    //to get all games of current tournaments
-                    this.currentTournaments.push(this.RegUserTournaments[i]);                        
+                if(this.RegUserTournaments == null){               
+                        this.dataLoading = false;
+                }else{
+                    for (var i = 0; i < this.RegUserTournaments.length; i++) {
+                            if ((this.RegUserTournaments[i].StartDate <= this.today) && (this.RegUserTournaments[i].EndDate >= this.today)) {
+                            //to get all games of current tournaments
+                            this.currentTournaments.push(this.RegUserTournaments[i]);                        
+                            }
+                            else if (this.RegUserTournaments[i].EndDate < this.today){
+                                //to get all games of past tournaments
+                                this.pastTournaments.push(this.RegUserTournaments[i]);
+                            }
+                            else if (this.RegUserTournaments[i].StartDate > this.today){
+                                //to get all games of future tournaments
+                                this.futureTournaments.push(this.RegUserTournaments[i]);
+                            }
                     }
-                    else if (this.RegUserTournaments[i].EndDate < this.today){
-                        //to get all games of past tournaments
-                        this.pastTournaments.push(this.RegUserTournaments[i]);
-                    }
-                    else if (this.RegUserTournaments.StartDate > this.today){
-                        //to get all games of future tournaments
-                        this.futureTournaments.push(this.RegUserTournaments[i]);
-                    }
-                }
-                console.log(this.currentTournaments);
-                console.log(this.pastTournaments);
-                console.log(this.futureTournaments); 
-                this.dataLoading = false;            
+                    
+                    console.log(this.currentTournaments.length);
+                    console.log(this.pastTournaments);
+                    console.log(this.futureTournaments); 
+                    this.dataLoading = false;
+                }                        
             });
+              
       
     }
 

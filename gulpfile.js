@@ -14,6 +14,7 @@ gulp.task('serve:before', ['watch']);
 gulp.task('emulate:before', ['build']);
 gulp.task('deploy:before', ['build']);
 gulp.task('build:before', ['build']);
+gulp.task('upload:before', ['build']);
 
 // we want to 'watch' when livereloading
 var shouldWatch = argv.indexOf('-l') > -1 || argv.indexOf('--livereload') > -1;
@@ -33,15 +34,18 @@ var copyHTML = require('ionic-gulp-html-copy');
 var copyFonts = require('ionic-gulp-fonts-copy');
 var copyScripts = require('ionic-gulp-scripts-copy');
 var tslint = require('ionic-gulp-tslint');
+var gulpConcat = require('gulp-concat');
 
 var isRelease = argv.indexOf('--release') > -1;
 
 gulp.task('watch', ['clean'], function(done){
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
+    ['sass', 'html', 'fonts', 'scripts', 'extlibs'],
     function(){
       gulpWatch('app/**/*.scss', function(){ gulp.start('sass'); });
       gulpWatch('app/**/*.html', function(){ gulp.start('html'); });
+      gulpWatch('app/**/*.ts', function(){ gulp.start('scripts'); });
+      gulpWatch('app/**/*.js', function(){ gulp.start('extlibs'); });
       buildBrowserify({ watch: true }).on('end', done);
     }
   );
@@ -49,7 +53,7 @@ gulp.task('watch', ['clean'], function(done){
 
 gulp.task('build', ['clean'], function(done){
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
+    ['sass', 'html', 'fonts', 'scripts', 'extlibs'],
     function(){
       buildBrowserify({
         minify: isRelease,
@@ -62,6 +66,12 @@ gulp.task('build', ['clean'], function(done){
       }).on('end', done);
     }
   );
+});
+
+gulp.task('extlibs', function() {
+    return gulp.src(['app/**/*.js'])
+        .pipe(gulpConcat('external-libraries.js'))
+        .pipe(gulp.dest('www/build/js'));
 });
 
 gulp.task('sass', buildSass);

@@ -4,6 +4,7 @@ import {FilterTeamStatePage} from './follow-teams/filter-state/filter-state';
 import {AddPopoverPage} from './add-popover/add-popover';
 import {PlayerTabs} from './player/player-tabs';
 import {AddPlayerPage} from './add-player/add-player';
+import {LoginPage} from '../../../pages/auth/login/login';
 import {TeamPage} from './team/team';
 import {LoginService} from '../../../services/login';
 import {AvatarsListService} from  '../../../services/getavatars';
@@ -58,24 +59,37 @@ export class HomePage {
               private avatars : AvatarsListService,
               private loginService : LoginService,
               private _config: MyPlayerConfigService) {
-                  this.avatars.getAvatarsList("boys")
-                            .subscribe(data =>{
-                                this.boyavatars = data;
-                    });
+                        
+                    this.homeView = (localStorage.getItem('homeView')==null?this.homeView:localStorage.getItem('homeView'));
                     this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
-                    this.FollowedTeamsPlayers = this.loginService.getRegUserPlayers();
-                    this.FollowedTeams = this.removeDuplicates(this.FollowedTeamsPlayers, "TeamId");
-                    console.log(this.FollowedTeams);
-                    this.loginService.setFollowedTeams(this.FollowedTeams);   
-                    console.log(this.FollowedTeams);  
-                      
-                    this.FollowedTeams.forEach(obj => {
-                      if(obj.PlayerUserId!=0)
-                        this.FollowedPlayers.push(obj);
-                        console.log(this.FollowedPlayers);
-                        this.dataLoading = false;
-                    });  
-                    
+                    this.loginService.login(this.loginService.getLoginData())      
+                    .subscribe(data => {
+                          console.log(data);
+                          this._config.setAuthToken(data.AuthToken);
+                          this.loginService.setUserInfo(data);
+                          this.loginService.setRegUserTournaments(data.RegUserTournaments);
+                          this.loginService.setRegUserPlayers(data.RegUserPlayers); 
+                          this.FollowedTeamsPlayers = this.loginService.getRegUserPlayers();
+                          console.log(this.FollowedTeamsPlayers.length);
+                          if(this.FollowedTeamsPlayers.length == 0)
+                          {
+                            this.dataLoading = false;
+                            this.FollowedTeams = null;
+                            this.loginService.setFollowedTeams(null); 
+                          }  
+                          else
+                          {
+                            this.FollowedTeams = this.removeDuplicates(this.FollowedTeamsPlayers, "TeamId");
+                            this.loginService.setFollowedTeams(this.FollowedTeams);       
+                            this.FollowedTeamsPlayers.forEach(obj => {
+                              if(obj.PlayerUserId!=0)
+                                this.FollowedPlayers.push(obj);
+                                console.log(this.FollowedPlayers);
+                                
+                            });  
+                            this.dataLoading = false;
+                          }                          
+                    });                                  
   }
  
 
@@ -83,6 +97,8 @@ export class HomePage {
   //   let popover = this.popoverCtrl.create(PopoverPage);
   //   popover.present();
   // }
+
+  
   removeDuplicates(originalArray, prop) {
         var newArray = [];
         var lookupObject  = {};

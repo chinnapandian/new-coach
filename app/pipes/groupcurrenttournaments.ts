@@ -5,7 +5,7 @@ export class GroupCurrentTournamentsPipe implements PipeTransform {
   transform(value, args:string[]) : any {
     var grouptournaments = {};
     value.forEach(function(o) {
-      var groupid=o.SeasonId+ " " + o.Circuit;
+      var groupid=o.SeasonId;
       grouptournaments[groupid] = grouptournaments[groupid] ? grouptournaments[groupid] : 
                                                             { SeasonName : o.SeasonName,
                                                               TournamentId : o.TournamentId,

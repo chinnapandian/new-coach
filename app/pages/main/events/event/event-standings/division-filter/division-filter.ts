@@ -22,7 +22,7 @@ export class StandingsDivisionFilterPage {
         this.selectedTournStandings = this.navParams.get("SelectedTournStandings");
         this.divisions.push({DivisionId:-1,DivisionName:'All Divisions'});
         (this.removeDuplicates(this.selectedTournStandings,"DivisionId")).forEach(t => {
-          this.divisions.push({DivisionId: t.DivisionId, DivisionName: t.DivisionName});
+            this.divisions.push({DivisionId: t.DivisionId, DivisionName: t.DivisionName});
         });
         this.divisionFilter = this.navParams.get("SelectedDivision");
         console.log(this.divisionFilter);

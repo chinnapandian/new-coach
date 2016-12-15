@@ -1,15 +1,20 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController, ModalController, PopoverController} from 'ionic-angular';
+import {NavController, ViewController, ModalController, PopoverController, NavParams} from 'ionic-angular';
 import {BracketDivisionsPage} from './divisions/select-div';
-import {BracketImagePage} from './bracketimage'
+import {BracketImagePage} from "./bracketimage";
+import {BracketService} from '../../../../../services/bracket';
+import {LoginService} from '../../../../../services/login';
+import {FillPipe} from '../../../../../pipes/fill';
 
 @Component({
-    templateUrl: 'build/pages/main/events/event/event-brackets/brackets.html'
+    templateUrl: 'build/pages/main/events/event/event-brackets/brackets.html',
+    providers: [BracketService],
+    pipes : [FillPipe]
 })
 
 export class EventBracketsPage {
-
-    public bracketGames:any =
+    private bracketGamesOfRound = [];
+    public bracketGames1:any =
         {
             round1: [
                 {
@@ -113,32 +118,79 @@ export class EventBracketsPage {
             ]
         }
     ;
+    private SelectedTournamentName;
+    private SelectedTournamentId;
+    private bracketGames = [];
+    private maxround=0;
+    private divisionFilter;
 
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
                 private popoverCtrl:PopoverController,
-                private modalCtrl:ModalController) {
+                private modalCtrl:ModalController,
+                private _bracketService : BracketService,
+                private loginService:LoginService,
+                private navParams : NavParams) {
+
+   //     var games = this.loginService.getTournamentBrackets();
+   //     console.log(games);
+         this.divisionFilter=(this.navParams.get('divisionFilter')==null?'All Divisions':this.navParams.get('divisionFilter'));
+        this.SelectedTournamentName = localStorage.getItem("SelectedTournamentName");
+        this.SelectedTournamentId = localStorage.getItem("SelectedTournamentId");
+         this.getBracketData();
+        
     }
 
-
-    goToBracketsDivisionFilterPage() {
-        let selectDivisionModal = this.modalCtrl.create(BracketDivisionsPage);
-        selectDivisionModal.present();
-    };
+    getBracketData(){
+     //   this.divisionFilter = 22;
+     //   this._bracketService.getBracketsDetails(25, 62, "BasketBall")
+        this._bracketService.getBracketsDetails(13, 22, "BasketBall")
+                .subscribe(data => {
+                    this.bracketGames = data;
+                    console.log(data);
+                    this.bracketGames.forEach(bracketgame => {
+                        if(bracketgame.BracketLevel > this.maxround)
+                            this.maxround = bracketgame.BracketLevel;
+                    });
+                    this.showBracketGames(0);
+                })
+    }
+    getDayOfDate(dt) {
+        var weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        return (weekdays[new Date(dt).getDay()]);
+    }
 
     presentPopover(event) {
-        let popover = this.popoverCtrl.create(BracketDivisionsPage);
-        popover.present({
-            ev: event
+         let divisionPopover = this.popoverCtrl.create(BracketDivisionsPage,{
+            BracketGames : this.bracketGames,
+            SelectedDivision : this.divisionFilter
         });
-    }
-     openBracketImage(event) {
-        let popover = this.popoverCtrl.create(BracketImagePage);
-        popover.present({
+        divisionPopover.onDidDismiss(data => {
+                console.log(data);
+                this.divisionFilter=data;
+                this.getBracketData();            
+         });
+        divisionPopover.present({
             ev: event
-        });
+         });       
     }
+
+     openBracketImage() {
+        let bracketsModal = this.modalCtrl.create(BracketImagePage);
+        bracketsModal.present();
+    }
+
     dismiss() {
         this.viewCtrl.dismiss();
     }
+
+    showBracketGames(roundindex){
+        this.bracketGamesOfRound = [];
+        this.bracketGames.forEach(bracketgame => {
+
+            if(bracketgame.BracketLevel == (roundindex+1))
+                  this.bracketGamesOfRound.push(bracketgame);
+            });
+    }
+    
 }

@@ -1,14 +1,18 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
+import {App, NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
 // import {SelectTeamPage} from '../tournament/select-team/select-team';
 import {ResetPasswordPage} from '../../auth/reset-password/reset-password';
 import {MyPlayerConfigService} from '../../../services/config';
 import {LogoutService} from '../../../services/logout';
 import {LoginService} from '../../../services/login';
-import {LoginPage} from '../../auth/login/login';
+import {HomePage} from '../../main/home/home';
+import {LandingPage} from '../../auth/landing/landing';
 import {PrivacyPage} from "./app/privacy/privacy";
+import {ProfilePage} from "./app/profile/profile";
 import {TermsPage} from "./app/terms/terms";
 import {FeedbackPage} from "./app/feedback/feedback";
+import {RemindersPage} from "./app/reminders/reminders";
+import {NotificationsPage} from "./app/notifications/notifications";
 import {FAQPage} from "./app/faq/faq";
 
 
@@ -31,14 +35,18 @@ export class SettingsListPage {
               private navParams : NavParams,
               private _config: MyPlayerConfigService,
               private _logoutService: LogoutService,
-              private _loginService : LoginService) {
+              private _loginService : LoginService,
+              private appCtrl : App) {
 
      this.userInfo = this._loginService.getUserInfo();
      this.userName = this.userInfo.Context.User.UserName;
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    var t = this.navCtrl.parent;
+    t.select(0);
+    this.navCtrl.setRoot(HomePage);
+    
   }
 
    goToResetPasswordPage() {
@@ -50,13 +58,20 @@ export class SettingsListPage {
         modal.present();
     }
 
+   goToProfile(){
+      console.log("Profilepage");
+      let modal = this.modalCtrl.create(ProfilePage,
+       {
+         UserInfo : this.userInfo
+       });
+        modal.present();
+   }
      logOut() {
         this._logoutService.logout()
           .subscribe(data => {
             if (data) {
-                this._config.setAuthToken('');
-                localStorage.setItem('AdminAuthToken', '');
-                this.navCtrl.setRoot(LoginPage);
+                this._config.setAuthToken(null);
+                this.appCtrl.getRootNav().push(LandingPage);
             } else {
               
             }
@@ -67,7 +82,14 @@ export class SettingsListPage {
         let modal = this.modalCtrl.create(PrivacyPage);
         modal.present();
   }
-
+ goToRemindersPage(){
+        let modal = this.modalCtrl.create(RemindersPage);
+        modal.present();
+  }
+   goToNotificationsPage(){
+        let modal = this.modalCtrl.create(NotificationsPage);
+        modal.present();
+  }
   goToFeedbackPage(){
         let modal = this.modalCtrl.create(FeedbackPage);
         modal.present();

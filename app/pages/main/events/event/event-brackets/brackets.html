@@ -8,7 +8,7 @@
             </button>
         </ion-buttons>
 
-        <ion-title>ZG Beast of The East</ion-title>
+        <ion-title>{{SelectedTournamentName}}</ion-title>
 
         <ion-buttons end>
             <button (click)="openBracketImage()">
@@ -19,7 +19,7 @@
     </ion-navbar>
 
     <ion-toolbar no-border-top primary>
-        <button small light outline block (click)="presentPopover($event)">Boys 12U Division</button>
+         <button small light outline block (click)="presentPopover($event)">{{divisionFilter}}</button>
     </ion-toolbar>
 
 </ion-header>
@@ -29,22 +29,55 @@
     <ion-toolbar class="clear" no-border-top no-border-bottom>
         <ion-grid class="bracket-rounds">
             <ion-row>
-                <ion-col>
-                    <button small primary block>Round 1</button>
-                </ion-col>
-                <ion-col>
-                    <button small primary clear block>Round 2</button>
-                </ion-col>
-                <ion-col>
-                    <button small primary clear block>Round 3</button>
-                </ion-col>
+                <span item-left *ngFor="let i of maxround| fill ; let j=index">
+                           <button small primary  (click)="showBracketGames(j)">Round {{j+1}}</button>
+                </span>
             </ion-row>
         </ion-grid>
     </ion-toolbar>
 
-    <ion-list-header>A Bracket</ion-list-header>
+    <ion-card class="matchup" *ngFor="let game of bracketGamesOfRound">
+        <ion-list-header>Bracket B{{game.GameId}} <span *ngIf="game.title=='champion'" item-right light-gray>Championship</span></ion-list-header>
+       <ion-grid>
+            <ion-row>
+                <ion-col width-75>
+                    <ion-list no-wrap>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                              <h2 *ngIf="game.Team1Name==''" title>TBD</h2>
+                            <h2 *ngIf="((game.Team1Name!='')&&(game.Team1Name!='winner'))" title>{{game.Team1Name}}</h2>
+                             <h2 *ngIf="((game.Team1Name!='')&&(game.Team1Name=='winner'))" title>Winner of B{{game.GameId}}</h2>
+                            <p *ngIf="((game.Team1Name=='')&&(game.TournTeamId1==''))">{{game.Team1PoolName}} / B{{game.GameId}}</p>
+                            <p *ngIf="((game.Team1Name=='')&&(game.TournTeamId1!=''))">Winner of B{{game.GameId}}</p>
+                            <p *ngIf="game.Team1Name!=''">{{game.Coach1Name}}</p>
+                        </ion-item>
+                        <ion-item>
+                            <ion-avatar class="A-4" item-left>
+                                <img src="medal-shadow.png" alt="">
+                            </ion-avatar>
+                           <h2 *ngIf="game.Team2Name==''" title>TBD</h2>
+                           <h2 *ngIf="((game.Team2Name!='')&&(game.Team2Name!='winner'))" title>{{game.Team2Name}}</h2>
+                            <h2 *ngIf="((game.Team1Name!='')&&(game.Team1Name=='winner'))" title>Winner of B{{game.GameId}}</h2>
+                            <p *ngIf="((game.Team2Name=='')&&(game.TournTeamId2==''))">{{game.Team2PoolName}} / B{{game.GameId}}</p>
+                            <p *ngIf="((game.Team2Name=='')&&(game.TournTeamId2!=''))">Winner of B{{game.GameId}}</p>
+                            <p *ngIf="game.Team2Name!=''">{{game.Coach2Name}}</p>
+                        </ion-item>
+                    </ion-list> 
+                </ion-col>
+               <ion-col with-25 class="date-time">
+                <p>
+                        <span class="date">{{getDayOfDate(game.GameDate)}}</span>
+                        <br>
+                        <span class="time">{{game.StartShortTime}}</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
 
-    <ion-card class="matchup" *ngFor="let game of bracketGames.round1">
+   <!-- <ion-card class="matchup" *ngFor="let game of bracketGames1.round1">
         <ion-grid>
             <ion-row>
                 <ion-col width-75>
@@ -76,9 +109,9 @@
         </ion-grid>
     </ion-card>
 
-    <ion-list-header>B Bracket <span item-right light-gray>Round 1</span></ion-list-header>
+   <ion-list-header>B Bracket <span item-right light-gray>Round 1</span></ion-list-header>
 
-    <ion-card class="matchup" *ngFor="let game of bracketGames.round2">
+    <ion-card class="matchup" *ngFor="let game of bracketGames1.round2">
         <ion-grid>
             <ion-row>
                 <ion-col width-75>
@@ -114,7 +147,7 @@
     <ion-list-header>C Bracket <span item-right>Championship</span></ion-list-header>
 
 
-    <ion-card class="matchup" *ngFor="let game of bracketGames.round3">
+    <ion-card class="matchup" *ngFor="let game of bracketGames1.round3">
         <ion-grid>
             <ion-row>
                 <ion-col width-75>
@@ -144,6 +177,6 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-    </ion-card>
+    </ion-card>-->
 
 </ion-content>

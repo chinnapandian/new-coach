@@ -54,7 +54,7 @@
             </ion-card>
         </div>
        </div>
-         <div class="card" [style.display]="((FollowedTeams.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+         <div class="card" [style.display]="((FollowedTeams == null)&&(dataLoading==false))? 'visible' : 'none'">
             <div class="item">
             <h3>Click on the + icon at the top to start following Teams</h3>
       </div>
@@ -66,8 +66,7 @@
             <ion-list>
                 <a ion-item (click)="goToPlayerTabs(followedplayer)">
                     <ion-thumbnail class="circle" item-left>
-                        <img *ngIf="followedplayer.Gender=='M'" src="{{imagePath+'boys/'+followedplayer.Avatar}}" alt="">
-                        <img *ngIf="followedplayer.Gender=='F'" src="{{imagePath+'girls/'+followedplayer.Avatar}}" alt="">
+                        <img src="{{imagePath+''+followedplayer.Avatar}}" alt="">
                     </ion-thumbnail>
                     <h2 title>{{followedplayer.FirstName + " " + followedplayer.LastName}}</h2>
                     <h3>{{followedplayer.TeamName}}</h3>

@@ -20,12 +20,26 @@
 
     <ion-card>
         <ion-list>
-            <a ion-item>
+            <a ion-item (click)="goToProfile()">
                 <span>Username</span>
                 <ion-note item-right>{{userName}}</ion-note>
             </a>
             <a ion-item (click)="goToResetPasswordPage()">
                 Reset Password
+            </a>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Notifications</ion-list-header>
+
+
+    <ion-card>
+        <ion-list>
+            <a ion-item (click)="goToNotificationsPage()">
+                Alerts
+            </a>
+            <a ion-item (click)="goToRemindersPage()">
+                Reminders
             </a>
         </ion-list>
     </ion-card>

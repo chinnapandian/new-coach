@@ -46,11 +46,11 @@ export class LoginPage {
 
    this.getEmailForm = formBuilder.group({
         Email: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
-        Password: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
+        Password: ['', Validators.compose([Validators.maxLength(50), Validators.required])]
     });
   }
 
-  login(){
+  login(event){
     this._loginData.EmailAddress =  this.getEmailForm.controls['Email'].value;
     this._loginData.Password = this.getEmailForm.controls['Password'].value;
     this._loginData.DeviceId = localStorage.getItem('deviceId');
@@ -79,12 +79,12 @@ export class LoginPage {
               this._loginService.setUserInfo(data);
               this._loginService.setRegUserTournaments(data.RegUserTournaments);
               this._loginService.setRegUserPlayers(data.RegUserPlayers); 
+              localStorage.setItem('homeView','teams');
               this.navCtrl.setRoot(MainTabs);         
           }
           else
           {
               this.validUser='false';
-              this.Email='';
               this.Password='';
               
            } 

@@ -32,7 +32,7 @@ export class PlayerData {
 })
 
 export class UpdatePlayerPage {
-  private followedTeams = [];
+  private followedPlayers = [];
   private positions = [];
   private playerposition;
   private TeamId;
@@ -65,54 +65,41 @@ export class UpdatePlayerPage {
 
         this.SelectedAvatar = (this.navParams.get("SelectedAvatar")==null?"joe.svg":this.navParams.get("SelectedAvatar"));
         this.playerUserId = (localStorage.getItem("SelectedPlayerId")!=null?localStorage.getItem("SelectedPlayerId"):0);
-        this.followedTeams = this._loginService.getFollowedTeams();
+        this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
+        this.followedPlayers = this._loginService.getRegUserPlayers();
         this._playerposition.getPositionsList()
         .subscribe(data => {
               this.positions = data;
               this.fillPlayerData();
-              this.getImagePath();
               this.dataLoading=false;
         })
 
       
   }
-  getImagePath(){
-
-      var gender='';
-      this.avatars.getAvatarsList("boys")
-          .subscribe(data =>{
-              this.boyavatars = data;
-              this.boyavatars.forEach(avatar => {
-              if(avatar == this.SelectedAvatar){
-                gender='boys'; 
-              }      
-              });
-              gender = (gender=='')?'girls':'boys';
-              this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/" + gender + "/";
-              console.log(this.imagePath);
-          })  
-    }
-
+  
   fillPlayerData(){
     console.log(this.playerUserId);
-    this.followedTeams.forEach(team => {
-            if(team.PlayerUserId == this.playerUserId){
-               this.playerposition = team.Position;
-               this.TeamId = team.TeamId;
-               this.firstName = team.FirstName;
-               this.lastName = team.LastName;
-               this.Email = team.EmailAddress;
-               this.SelectedAvatar = team.Avatar;
-               this.JerseyNumber = team.JerseyNumber;
-               this.alerts=(team.SuspendAlerts==""||team.SuspendAlerts=='N')?false:true;
-               this.reminders=(team.SuspendNotification==""||team.SuspendNotification=='N')?false:true;
+    this.followedPlayers.forEach(player => {
+            if(player.PlayerUserId == this.playerUserId){
+               this.playerposition = player.Position;
+               this.TeamId = player.TeamId;
+               this.firstName = player.FirstName;
+               this.lastName = player.LastName;
+               this.Email = player.EmailAddress;
+               this.SelectedAvatar = player.Avatar;
+               this.JerseyNumber = player.JerseyNumber;
+               this.alerts=(player.SuspendAlerts==""||player.SuspendAlerts=='N')?false:true;
+               this.reminders=(player.SuspendNotification==""||player.SuspendNotification=='N')?false:true;
             }
           });
   }
 
   goToUpdatePlayerAvatarPage(){
 
-     let UpdatePlayerAvatarModal = this.modalCtrl.create(UpdatePlayerAvatarPage);
+     let UpdatePlayerAvatarModal = this.modalCtrl.create(UpdatePlayerAvatarPage,
+      {
+        SelectedAvatar : this.SelectedAvatar
+      });
      UpdatePlayerAvatarModal.present();
      UpdatePlayerAvatarModal.onDidDismiss(data =>
         {
@@ -121,12 +108,14 @@ export class UpdatePlayerPage {
   }
 
   dismiss() {
+    localStorage.setItem('homeView','players');
     this.viewCtrl.dismiss();
     this.navCtrl.setRoot(MainTabs);
   }
 
  savePlayer(status){
    this.save=1;
+   localStorage.setItem('homeView','players');
    console.log(this.validateData());
    if(this.validateData()==true)
    {

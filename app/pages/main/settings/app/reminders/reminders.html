@@ -1,0 +1,109 @@
+<ion-header>
+    <ion-navbar  no-border-bottom primary>
+
+        <ion-title>Reminders</ion-title>
+        <ion-buttons start>
+            <button (click)="SavePreference()">
+                <span>Save</span>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span>Close</span>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+<ion-content>
+
+    <ion-list-header>Send Reminders For...</ion-list-header>
+    <ion-list>
+      <ion-item>
+        <ion-label>Games</ion-label>
+        <ion-toggle [(ngModel)]="games"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Practices</ion-label>
+        <ion-toggle [(ngModel)]="practices"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-list>
+      <ion-list-header>Allow reminders to be sent by...</ion-list-header>
+
+      <ion-item>
+        <ion-label>Push</ion-label>
+        <ion-toggle [(ngModel)]="push"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>SMS</ion-label>
+        <ion-toggle [(ngModel)]="sms"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-toggle [(ngModel)]="email"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <!-- <div padding>
+      <ion-segment [(ngModel)]="timeView" secondary>
+        <ion-segment-button value="minutes">
+          Minutes
+        </ion-segment-button>
+        <ion-segment-button value="hours">
+          Hours
+        </ion-segment-button>
+        <ion-segment-button value="days">
+          Days
+        </ion-segment-button>
+      </ion-segment>
+    </div> -->
+    <ion-list>
+      <ion-list-header>Set Up To 3 Reminders</ion-list-header>
+      <ion-item>
+        <ion-label>30 minutes prior</ion-label>
+        <ion-checkbox [(ngModel)]="m30" checked="true"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>45 minutes prior</ion-label>
+        <ion-checkbox [(ngModel)]="m45" checked="true"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>1 hour prior</ion-label>
+        <ion-checkbox [(ngModel)]="h1"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>3 hours prior</ion-label>
+        <ion-checkbox [(ngModel)]="h3"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>5 hours prior</ion-label>
+        <ion-checkbox [(ngModel)]="h5"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>12 hours prior</ion-label>
+        <ion-checkbox [(ngModel)]="h12"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>1 day prior</ion-label>
+        <ion-checkbox [(ngModel)]="d1"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>2 days prior</ion-label>
+        <ion-checkbox [(ngModel)]="d2"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>3 days prior</ion-label>
+        <ion-checkbox [(ngModel)]="d3"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>1 week prior</ion-label>
+        <ion-checkbox [(ngModel)]="w1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+</ion-content>

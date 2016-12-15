@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-title>Alerts</ion-title>
+        <ion-buttons start>
+            <button (click)="SavePreference()">
+                <span>Save</span>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span>Close</span>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list text-wrap>
+      <ion-list-header>Allow alerts to be sent by...</ion-list-header>
+      <ion-item>
+        <ion-label>Push</ion-label>
+        <ion-toggle [(ngModel)]="push"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Text</ion-label>
+        <ion-toggle [(ngModel)]="sms"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-toggle [(ngModel)]="email"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-list text-wrap>
+      <ion-list-header>Alert me when...</ion-list-header>
+      <ion-item>
+        <ion-label>A games' date, time or location changes</ion-label>
+        <ion-toggle [(ngModel)]="game"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>My teams' score is finalized</ion-label>
+        <ion-toggle [(ngModel)]="score"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>A practice date, time or location changes</ion-label>
+        <ion-toggle [(ngModel)]="practice"></ion-toggle>
+      </ion-item>
+    </ion-list>
+     
+</ion-content>

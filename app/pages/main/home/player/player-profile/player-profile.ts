@@ -260,7 +260,7 @@ export class PlayerProfilePage {
 
 
     private SelectedPlayerId;
-    private followedTeams;
+    private followedPlayers;
     private SelectedPlayer;
     
     constructor(private navCtrl:NavController,
@@ -271,31 +271,16 @@ export class PlayerProfilePage {
                 private _config: MyPlayerConfigService) {
 
         this.SelectedPlayerId = localStorage.getItem("SelectedPlayerId");
-        this.followedTeams = this.loginService.getFollowedTeams();
-        this.followedTeams.forEach(player => {
-            if(player.PlayerUserId = this.SelectedPlayerId){
+           
+        this.followedPlayers = this.loginService.getRegUserPlayers();
+        this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
+        this.followedPlayers.forEach(player => {
+            if(player.PlayerUserId == this.SelectedPlayerId){
                 this.SelectedPlayer = player;
-                this.getImagePath();
             }
         });
     }
 
-    getImagePath(){
-
-      var gender='';
-      this.avatars.getAvatarsList("boys")
-          .subscribe(data =>{
-              this.boyavatars = data;
-              this.boyavatars.forEach(avatar => {
-              if(avatar == this.SelectedPlayer.Avatar){
-                gender='boys'; 
-              }      
-              });
-              gender = (gender=='')?'girls':'boys';
-              this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/" + gender + "/";
-              console.log(this.imagePath);
-          })  
-    }
      goToSelectedStatEventPage(){
        this.navCtrl.push(SelectedStatEventPage);
      }
@@ -305,10 +290,12 @@ export class PlayerProfilePage {
     }
     
     goToEditPlayer() {
-        this.navCtrl.push(UpdatePlayerPage);
+        let playerModal = this.modalCtrl.create(UpdatePlayerPage);
+        playerModal.present();
     }
 
     dismiss() {
         this.viewCtrl.dismiss();
+        localStorage.setItem("SelectedPlayerId",'');
     }
 }

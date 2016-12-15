@@ -13,9 +13,9 @@
 
     </ion-navbar>
 
-    <!--<ion-toolbar primary>-->
-    <!--<ion-searchbar (input)="getItems($event)"></ion-searchbar>-->
-    <!--</ion-toolbar>-->
+   <ion-toolbar no-border-top no-border-bottom class="clear">
+            <ion-searchbar [(ngModel)]="SearchKeyword" (input)="onInput($event)"></ion-searchbar>
+    </ion-toolbar>
 
 </ion-header>
 
@@ -39,10 +39,11 @@
     <div [ngSwitch]="teamGender">
      <div *ngSwitchCase="'boys'">
           <div *ngIf="dataLoading==false">
-            <ion-card text-wrap *ngFor="let boysteam of boysteams| groupboysteamsbyorgid">
-                <ion-list-header>{{boysteam.OrgName}}</ion-list-header>
-                <ion-list>
-                    <ion-item text-wrap *ngFor="let team of boysteam.boysteams">
+            <ion-card text-wrap *ngFor="let boysteam of boysteams | sortBy : 'OrgName' | searchteam : SearchKeyword | groupboysteamsbyorgid ; let bi=index">
+                <ion-list-header  *ngIf="showHideBoysHeader[bi]==true"  primary (click)="showhideBoysteam(bi)">{{boysteam.OrgName}}</ion-list-header>
+                 <ion-list-header  *ngIf="showHideBoysHeader[bi]==false" (click)="showhideBoysteam(bi)">{{boysteam.OrgName}}</ion-list-header>
+                <ion-list *ngIf="showHideBoysHeader[bi]==true">
+                    <ion-item text-wrap *ngFor="let team of boysteam.boysteams | sortBy : 'TeamName' | searchteam: SearchKeyword">
                             <h2 title>{{team.TeamName}}</h2>
                             <p>Coach {{team.CoachFirstName + ' ' + team.CoachLastName}} </p>
                             <button *ngIf="true == !checkBoysFollowedTeams(team.TeamId)" item-right  (click)="followBoysTeams(team)">Follow</button>
@@ -58,10 +59,11 @@
     </div>
     </div>
     <div *ngSwitchCase="'girls'">
-      <ion-card  text-wrap *ngFor="let girlsteam of girlsteams | groupgirlsteamsbyorgid">
-           <ion-list-header>{{girlsteam.OrgName}}</ion-list-header>
-           <ion-list>
-               <ion-item text-wrap *ngFor="let team of girlsteam.girlsteams">
+      <ion-card  text-wrap *ngFor="let girlsteam of girlsteams  | sortBy : 'OrgName'| searchteam: SearchKeyword | groupgirlsteamsbyorgid ; let gi=index">
+           <ion-list-header  *ngIf="showHideGirlsHeader[gi]==true" primary (click)="showhideGirlsteam(gi)">{{girlsteam.OrgName}}</ion-list-header>
+           <ion-list-header  *ngIf="showHideGirlsHeader[gi]==false"  (click)="showhideGirlsteam(gi)" bar bar-header bar-positive>{{girlsteam.OrgName}}</ion-list-header>
+           <ion-list *ngIf="showHideGirlsHeader[gi]==true">
+               <ion-item text-wrap *ngFor="let team of girlsteam.girlsteams | sortBy : 'TeamName' |searchteam: SearchKeyword">
                     <h2 title>{{team.TeamName}}</h2>
                     <p>Coach {{team.CoachFirstName + ' ' + team.CoachLastName}} </p>
                      <button *ngIf="true == !checkGirlsFollowedTeams(team.TeamId)" item-right  (click)="followGirlsTeams(team)">Follow</button>

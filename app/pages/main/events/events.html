@@ -80,7 +80,7 @@
             <ion-card  text-wrap *ngFor="let tournaments of currentTournaments | groupcurrenttournaments">
                 <ion-list-header>{{tournaments.SeasonName}}</ion-list-header>
                 <ion-list>
-                        <ion-item text-wrap  *ngFor="let tourn of currentTournaments">
+                        <ion-item text-wrap  *ngFor="let tourn of tournaments.currentTournaments">
                             <ion-avatar class="square" item-left>
                             <!--  <img src="{{tourn.img}}">-->
                             <ion-thumbnail item-left>
@@ -100,7 +100,7 @@
             <ion-card  text-wrap *ngFor="let tournaments of futureTournaments | groupfuturetournaments">
                 <ion-list-header>{{tournaments.SeasonName}}</ion-list-header>
                 <ion-list>
-                        <ion-item text-wrap  *ngFor="let tourn of futureTournaments">
+                        <ion-item text-wrap  *ngFor="let tourn of tournaments.futureTournaments">
                             <ion-avatar class="square" item-left>
                             <!--  <img src="{{tourn.img}}">-->
                             <ion-thumbnail item-left>
@@ -116,19 +116,19 @@
                     </ion-list>
             </ion-card>
             </div>
-            <div class="card" *ngSwitchCase="'completed'" [style.display]="((pastTournaments.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
-            <div class="item">
-                <h3>No completed tournament(s) found.</h3>
+            <div *ngSwitchCase="'completed'" [style.display]="((pastTournaments.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+            <div>
+                <h6 small>&nbsp;&nbsp;&nbsp;&nbsp;No completed tournament(s) found.</h6>
             </div>
             </div>
-            <div class="card" *ngSwitchCase="'ongoing'" [style.display]="((currentTournaments.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
-            <div class="item">
-                <h3>No ongoing tournament(s) found.</h3>
+            <div  *ngSwitchCase="'ongoing'" [style.display]="(currentTournaments.length == 0 && dataLoading==false)? 'visible' : 'none'">
+            <div>
+                <h6 small>&nbsp;&nbsp;&nbsp;&nbsp;No ongoing tournament(s) found.</h6>
             </div>
             </div>
-            <div class="card" *ngSwitchCase="'upcoming'" [style.display]="((futureTournaments.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
-            <div class="item">
-                <h3>No upcoming tournament(s) found.</h3>
+            <div *ngSwitchCase="'upcoming'" [style.display]="((futureTournaments.length == 0)&&(dataLoading==false))? 'visible' : 'none'">
+            <div>
+                <h6 small>&nbsp;&nbsp;&nbsp;&nbsp;No upcoming tournament(s) found.</h6>
             </div>
             </div>  
             </div>

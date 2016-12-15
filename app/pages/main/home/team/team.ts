@@ -22,6 +22,7 @@ export class TeamPage {
 unFollow(id)
 {
     console.log(id);
+    localStorage.setItem('homeView','teams');
     var team = {TeamId:id, UserId: this.loginService.getUserInfo().Context.User.UserId};
     console.log(team);
     this.unfollowTeamService.unfollowTeam(team)
@@ -29,6 +30,7 @@ unFollow(id)
       console.log(data);
       this.loginService.setRegUserTournaments(data.RegUserTournaments);
       this.loginService.setRegUserPlayers(data.RegUserPlayers);
+      this.loginService
       this.viewCtrl.dismiss();
       this.navCtrl.setRoot(MainTabs);
     })

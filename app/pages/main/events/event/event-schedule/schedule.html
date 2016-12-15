@@ -22,8 +22,8 @@
     <!--<ion-refresher (ionRefresh)="doRefresh($event)">-->
     <!--<ion-refresher-content></ion-refresher-content>-->
     <!--</ion-refresher>-->
-
-    <ion-list-header *ngIf="dataLoading==false">Completed Pool Games</ion-list-header>
+ <div *ngIf="dataLoading==false">
+    <ion-list-header>Completed Pool Games</ion-list-header>
 
     <ion-card class="matchup" *ngFor="let game of filteredCompletedPoolGames">
         <ion-grid>
@@ -51,13 +51,13 @@
             </ion-row>
         </ion-grid>
     </ion-card>
-    <div class="card" *ngIf="((filteredCompletedPoolGames.length == 0)&&(dataLoading==false))">
+    <div class="card" *ngIf="filteredCompletedPoolGames.length == 0">
        <div class="item">
           <h3 title>No Completed Pool Game(s) found.</h3>
        </div>
    </div>
  
-    <ion-list-header *ngIf="dataLoading==false">Ongoing Pool Games</ion-list-header>
+    <ion-list-header>Ongoing Pool Games</ion-list-header>
 
     <ion-card class="matchup" *ngFor="let game of filteredOngoingPoolGames" (click)="goToGameDetailsPage()">
         <ion-grid>
@@ -95,12 +95,12 @@
             <!--</ion-row>-->
         </ion-grid>
     </ion-card>
-    <div class="card" *ngIf="((filteredOngoingPoolGames.length == 0)&&(dataLoading==false))">
+    <div class="card" *ngIf="filteredOngoingPoolGames.length == 0">
        <div class="item">
           <h3 title>No Ongoing Pool Game(s) found.</h3>
        </div>
    </div>
-    <ion-list-header *ngIf="dataLoading==false">Upcoming Pool Games</ion-list-header>
+    <ion-list-header>Upcoming Pool Games</ion-list-header>
 
     <ion-card class="matchup" *ngFor="let game of filteredUpcomingPoolGames">
         <ion-grid>
@@ -138,10 +138,11 @@
             <!--</ion-row>-->
         </ion-grid>
     </ion-card>
-      <div class="card" *ngIf="((filteredUpcomingPoolGames.length == 0)&&(dataLoading==false))">
+      <div class="card" *ngIf="filteredUpcomingPoolGames.length == 0">
        <div class="item">
           <h3 title>No Upcoming Pool Game(s) found.</h3>
        </div>
+   </div>
    </div>
  <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

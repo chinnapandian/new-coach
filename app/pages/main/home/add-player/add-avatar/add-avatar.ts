@@ -13,10 +13,10 @@ import {TitlePipe} from  '../../../../../pipes/title';
 export class AddPlayerAvatarPage {
 
   private avatarGender: string = 'boys';
+  private avatarfiles =[];
   private boyavatars = [];
   private girlavatars = [];
-  private boysImagePath;
-  private girlsImagePath;
+  private imagePath;
   private selectedavatar;
   private tabview = 'boys';
 
@@ -28,38 +28,31 @@ export class AddPlayerAvatarPage {
       private navParams : NavParams,
       private _config: MyPlayerConfigService) {
 
-        this.boysImagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/boys/";
-        this.girlsImagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/girls/";
+        this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
+        console.log(this.imagePath);
 
-        this.avatars.getAvatarsList("boys")
+        this.avatars.getAvatarsList()
         .subscribe(data =>{
-            this.boyavatars = data;
-            this.setDefault('boys');
-        })
-        this.avatars.getAvatarsList("girls")
-        .subscribe(data =>{
-            this.girlavatars = data;
+            this.avatarfiles = data;
+            console.log(this.avatarfiles);
+            this.avatarfiles.forEach(avatarfile => {
+              if(avatarfile.toString().indexOf("boys")!=-1){
+                 this.boyavatars.push(avatarfile);
+              }
+              else{
+                 this.girlavatars.push(avatarfile);
+              }
+            });
+            console.log(this.boyavatars);
+            console.log(this.girlavatars);
+            this.selectedavatar = this.navParams.get("SelectedAvatar");
         })
        
 }
- 
- setDefault(name){
-  this.tabview = name;
-  if(this.tabview == 'boys')
-     this.selectedavatar = this.boyavatars[0];
-  else
-     this.selectedavatar = this.girlavatars[0];
-  console.log(this.selectedavatar);
- }
 
   dismiss() {
-    this.selectedavatar = this.selectedavatar.toString();
-  //  var avatarname = this.selectedavatar.substring(0,this.selectedavatar.indexOf('.'));
-  //  this.avatarname = avatarname.substring(0,1).toUpperCase() + avatarname.slice(1).toLowerCase();;
     console.log(this.selectedavatar);
+    this.selectedavatar = this.selectedavatar.toString();
     this.viewCtrl.dismiss(this.selectedavatar);
-   /* this.navCtrl.push(AddPlayerPage,{
-      SelectedAvatar : this.selectedavatar
-    });*/
   }
 }

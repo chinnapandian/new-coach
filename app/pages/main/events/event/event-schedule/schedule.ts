@@ -34,7 +34,6 @@ export class EventSchedulePage {
     private brackets = [];
     private standings = [];
     private followedTeams = [];
-    private followedTeamsSchedules = [];
     private tournamentId;
     private tournamentName;
     private teamFilter;
@@ -50,15 +49,18 @@ export class EventSchedulePage {
                 private teamPopoverCtrl: PopoverController,
                 private navParams: NavParams){
           // Get tournament data
+           this._tempCurrDate.getTempCurrDate()
+                            .subscribe(data => {
+                                this.today = data;  
+                            });
           this.tournamentId = localStorage.getItem('SelectedTournamentId');
           this.tournamentName = localStorage.getItem("SelectedTournamentName");
           this.followedTeams = this._loginService.getFollowedTeams();
           this.teamFilter=(this.navParams.get('teamFilter')==null?'All Teams':this.navParams.get('teamFilter'));
-          console.log(this.teamFilter);
-          console.log(this.tournamentId);
-       //   console.log(this.tournamentName);
-          console.log(this.followedTeams);
+ 
           this.getSelectedTournament();
+ 
+          
     }
 
     presentTeamPopover(teamEvent) {
@@ -99,70 +101,52 @@ export class EventSchedulePage {
     }
  
     getSelectedTournament() {
-      var orgid = this._loginService.getUserInfo().Context.User.OrgId;
-      var userid =  this._loginService.getUserInfo().Context.User.UserId;
-      var tournamentid = this.tournamentId;
-      var sports = "basketball";
-      console.log(tournamentid,userid);
-      this._tournamentData.getTournamentScheduleStandings(orgid,userid,tournamentid,sports)
-      .subscribe(
-        data => {
-        console.log(data);
-        this._loginService.setTournamentScheduleStandings(data.GameResults,data.Brackets, data.Standings);
-        this.schedules = this._loginService.getTournamentSchedules();
-        console.log(this._loginService.getTournamentSchedules());
-        console.log(this._loginService.getTournamentStandings());
-        console.log(this._loginService.getTournamentBrackets());
-        this.getTeamSchedules();
-        this.getTeamGames();
-      });  
-  }
-
-  getTeamSchedules(){
-     this.followedTeams.forEach(team => {
-        this.schedules.forEach(schedule => {
-          if((schedule.TeamId1==team.TeamId)||(schedule.TeamId2==team.TeamId)){
-              this.followedTeamsSchedules.push(schedule);
-          }
-        });
-     });
-     console.log(this.followedTeamsSchedules);
-  }
-
-  getTeamGames(){  
-    this._tempCurrDate.getTempCurrDate()
+      
+            var orgid = this._loginService.getUserInfo().Context.User.OrgId;
+            var userid =  this._loginService.getUserInfo().Context.User.UserId;
+            var tournamentid = this.tournamentId;
+            var sports = "basketball";
+            console.log(tournamentid,userid);
+            this._tournamentData.getTournamentScheduleStandings(orgid,userid,tournamentid,sports)
             .subscribe(data => {
-                this.today = data;  
-                console.log(this.today);
-                // Fill past, current and future tournaments in respective arrays
-                this.followedTeamsSchedules.forEach(schedule => {
-                   if ((schedule.GameDate < this.today)||
-                    (((schedule.GameDate == this.today))&&
-                    (schedule.EndDateTime.toString().substring(11,13)<new Date().toString().substring(16,18)))) {
-                    //to get all games of current tournaments
-                        this.completedPoolGames.push(schedule);                        
-                    }
-                    else if ((schedule.GameDate == this.today)&&
-                    (schedule.StartDateTime.toString().substring(11,13)<new Date().toString().substring(16,18))&&
-                    (schedule.EndDateTime.toString().substring(11,13)>new Date().toString().substring(16,18))){
-                        //to get all games of past tournaments
-                        this.ongoingPoolGames.push(schedule);
-                    }
-                    else  if ((schedule.GameDate > this.today)||
-                    (((schedule.GameDate == this.today))&&
-                    (schedule.StartDateTime.toString().substring(11,13)>new Date().toString().substring(16,18)))){
-                        //to get all games of future tournaments
-                        this.upcomingPoolGames.push(schedule);
-                    }
-                });
-                this.filteredCompletedPoolGames = this.completedPoolGames;
-                this.filteredOngoingPoolGames = this.ongoingPoolGames;
-                this.filteredUpcomingPoolGames = this.upcomingPoolGames;
-                this.dataLoading =  false;
-            });
-   // new Date().toString().substring(16,18) == this.gametimes[i].StartTime.toString().substring(11,13)
-
+                  console.log(data);
+                  this._loginService.setTournamentScheduleStandings(data.GameResults,data.Brackets, data.Standings);
+                  this.schedules = data.GameResults;
+                  ///////  getTeamSchedules();  //////
+                  this.followedTeams.forEach(team => {
+                        this.schedules.forEach(schedule => {
+                          if((schedule.TeamId1==team.TeamId)||(schedule.TeamId2==team.TeamId)){
+                               if ((schedule.GameDate < this.today)||
+                                    (((schedule.GameDate == this.today))&&
+                                    (schedule.EndDateTime.toString().substring(11,13)<new Date().toString().substring(16,18)))) {
+                                    //to get all games of current tournaments
+                                        this.completedPoolGames.push(schedule);                        
+                                    }
+                                    else if ((schedule.GameDate == this.today)&&
+                                    (schedule.StartDateTime.toString().substring(11,13)<new Date().toString().substring(16,18))&&
+                                    (schedule.EndDateTime.toString().substring(11,13)>new Date().toString().substring(16,18))){
+                                        //to get all games of past tournaments
+                                        this.ongoingPoolGames.push(schedule);
+                                    }
+                                    else  if ((schedule.GameDate > this.today)||
+                                    (((schedule.GameDate == this.today))&&
+                                    (schedule.StartDateTime.toString().substring(11,13)>new Date().toString().substring(16,18)))){
+                                        //to get all games of future tournaments
+                                        this.upcomingPoolGames.push(schedule);
+                                    }
+                          }
+                        });
+                    });
+                    this.filteredCompletedPoolGames = this.completedPoolGames;
+                    this.filteredOngoingPoolGames = this.ongoingPoolGames;
+                    this.filteredUpcomingPoolGames = this.upcomingPoolGames;
+                    console.log("done");
+                    
+           });
+           this.dataLoading=false;
+   
   }
+
   getDate(dt: string) {
     return this.getFormattedDate(new Date(dt.substr(0, 19)));
   }

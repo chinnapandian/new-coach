@@ -23,13 +23,13 @@ export class BracketImagePage {
       private navParams : NavParams,
       private _sanitizer: DomSanitizationService) {
      
-      var divisionid = this.navParams.get("SelectedDivision").DivisionId;
-      this.DivisionName =  this.navParams.get("SelectedDivision").DivisionName;
-      var tournamentid = this.navParams.get("SelectedTournament").TournamentId;
-      console.log(tournamentid);
-      console.log(divisionid);
-      this._bracketService.getBracketsDetails(tournamentid, divisionid, "BasketBall")
-     // this._bracketService.getBracketsDetails(25, 62, "BasketBall")
+   //   var divisionid = this.navParams.get("SelectedDivision").DivisionId;
+   //   this.DivisionName =  this.navParams.get("SelectedDivision").DivisionName;
+  //    var tournamentid = this.navParams.get("SelectedTournament").TournamentId;
+  //    console.log(tournamentid);
+  //    console.log(divisionid);
+   //   this._bracketService.getBracketsDetails(tournamentid, divisionid, "BasketBall")
+      this._bracketService.getBracketsDetails(13, 22, "BasketBall")
         .subscribe(data => {
            localStorage.setItem('bracketsdetails', data);
             console.log(data);
