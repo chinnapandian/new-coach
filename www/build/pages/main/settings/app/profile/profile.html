@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-title>Your Profile</ion-title>
+        <ion-buttons start>
+            <button (click)="save()">
+                <span>Save</span>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button (click)="close()">
+                <span>Close</span>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-list-header>
+            Edit your profile information
+        </ion-list-header>
+        <ion-item>
+            <ion-label stacked>First Name</ion-label>
+            <ion-input class="signup-name" [(ngModel)]="firstName" type="text" value=""></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Last Name</ion-label>
+            <ion-input class="signup-name" [(ngModel)]="lastName" type="text" value=""></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input class="signup-email" [(ngModel)]="email" type="email" value=""></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label class="my-label" stacked>Phone Carrier</ion-label>
+            <ion-select [(ngModel)]="CarrierId" #carrierName (change)="onChangeCarrier(phoneCarrier,carrierName)">
+                <ion-option *ngFor="#telcarrier of telcarriers" [value]="telcarrier.CarrierId">{{telcarrier.CarrierName}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Phone Number</ion-label>
+            <ion-input [(ngModel)]="phoneNumber" type="phone" value=""></ion-input>
+        </ion-item>
+
+        <ion-item style="text-align:center">
+        <a round  primary (click)="goToResetPassword()">Reset Password ?</a>
+    </ion-item>
+    </ion-list>
+
+</ion-content>

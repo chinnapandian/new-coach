@@ -1,0 +1,56 @@
+<ion-header>
+
+    <ion-navbar primary>
+        <ion-title>Update Avatar</ion-title>
+
+     <ion-buttons end>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+            </button>
+      </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="add-player">
+
+    <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
+        <ion-segment [(ngModel)]="avatarGender" class="wide" primary>
+            <ion-segment-button value="boys">
+                Boy Avatars
+            </ion-segment-button>
+            <ion-segment-button value="girls">
+                Girl Avatars
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+    <div [ngSwitch]="avatarGender">
+        <ion-card *ngSwitchCase="'boys'">
+            <ion-list radio-group  [(ngModel)]="selectedavatar">
+                <ion-item *ngFor="let avatar of boyavatars">
+                    <ion-thumbnail class="circle" item-right>
+                        <img src='{{imagePath}}{{avatar}}' alt="">
+                    </ion-thumbnail>
+                 <!--   <ion-label>{{(avatar.substring(avatar.indexOf('/')+1,avatar.indexOf('.'))) | title}}</ion-label>-->
+                    <ion-radio value="{{avatar}}"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+        <ion-card *ngSwitchCase="'girls'">
+            <ion-list radio-group  [(ngModel)]="selectedavatar">
+                <ion-item *ngFor="let avatar of girlavatars">
+                    <ion-thumbnail class="circle" item-right>
+                        <img src='{{imagePath}}{{avatar}}' alt="">
+                    </ion-thumbnail>
+                  <!--  <ion-label>{{(avatar.substring(avatar.indexOf('/')+1,avatar.indexOf('.'))) | title}}</ion-label>-->
+                    <ion-radio value="{{avatar}}"></ion-radio>
+                </ion-item>
+            </ion-list>
+
+        </ion-card>
+    </div>
+
+
+</ion-content>

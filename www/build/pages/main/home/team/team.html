@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-buttons start>
+        <button (click)="dismiss()">Cancel</button>
+        </ion-buttons>
+
+        <ion-title>{{SelectedTeam.TeamName}}</ion-title>
+
+        <!--<ion-buttons end>-->
+            <!--<button (tap)="presentPopover($event)">-->
+                <!--<ion-icon name="add-circle"></ion-icon>-->
+            <!--</button>-->
+        <!--</ion-buttons>-->
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-card class="team-card">
+        <ion-grid>
+            <ion-row class="team-img">
+                <!--<ion-col with-20></ion-col>-->
+                <ion-col width-60>
+                    <img src="medal-shadow.png" class="A-6" alt="">
+                </ion-col>
+                <!--<ion-col with-20>-->
+                    <!--<button small outline>Following</button>-->
+                <!--</ion-col>-->
+            </ion-row>
+            <ion-row class="team-info">
+                <ion-col>
+                    <h1 title>{{SelectedTeam.TeamName}}</h1>
+                    <p>{{SelectedTeam.CoachFirstName + ' ' + SelectedTeam.CoachLastName}}</p>
+                    <button small (click)="unFollow(SelectedTeam.TeamId)">UnFollow</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+
+</ion-content>

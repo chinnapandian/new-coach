@@ -1,0 +1,117 @@
+<ion-header>
+    <ion-navbar primary>
+        <ion-title>Full Player Stats</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="full-player-stats">
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-thumbnail class="circle large" item-left>
+                    <img src="avatars/boys/joe.svg" alt="">
+                </ion-thumbnail>
+                <h2 class="player">Timmy Smith</h2>
+                <p class="team">
+                    <!--<img src="medal.svg">-->
+                    Spartans Boys 12U | #34 G
+                </p>
+                <p>8 Games Played / 4 Recorded</p>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
+        <ion-segment [(ngModel)]="statsView" class="wide" primary>
+            <ion-segment-button value="total">
+                Total
+            </ion-segment-button>
+            <ion-segment-button value="per-game">
+                Per Game
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+
+    <ion-list-header>Scoring</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let points of x.points">
+                <h2 title>{{points}}</h2>
+                <h2 item-right>00</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let FG of x.FG">
+                <h2 title>{{FG}}</h2>
+                <h2 item-right>00</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let PT2 of x.PT2">
+                <h2 title>{{PT2}}</h2>
+                <h2 item-right>00</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let PT3 of x.PT3">
+                <h2 title>{{PT3}}</h2>
+                <h2 item-right>00</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let FT of x.FT">
+                <h2 title>{{FT}}</h2>
+                <h2 item-right>00</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Ball Controll</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let BC of x.BC">
+                <h2 title>{{BC}}</h2>
+                <h2 item-right>00</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Rebounds</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let RB of x.RB">
+                <h2 title>{{RB}}</h2>
+                <h2 item-right>00</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Fouls</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let Fouls of x.Fouls">
+                <h2 title>{{Fouls}}</h2>
+                <h2 item-right>00</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+</ion-content>

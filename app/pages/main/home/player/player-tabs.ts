@@ -12,7 +12,7 @@ export class PlayerTabs {
   PlayerProfileTab: any;
   StatEventsTab: any;
 
-  constructor() {
+  constructor(private navCtrl:NavController) {
     this.PlayerProfileTab = PlayerProfilePage;
     this.StatEventsTab = StatEventsPage;
   }

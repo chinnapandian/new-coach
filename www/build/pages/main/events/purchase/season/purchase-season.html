@@ -1,0 +1,106 @@
+<ion-header>
+    <ion-navbar primary>
+<!--ds-->
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Get Access</ion-title>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="purchase">
+
+    <ion-list-header>Tournament Access</ion-list-header>
+    <ion-card *ngFor="let tournament of tournament">
+        <ion-list text-wrap>
+            <ion-item>
+                <ion-avatar class="square" item-left>
+                    <img src="{{tournament.img}}">
+                </ion-avatar>
+                <h2 title>{{tournament.name}}</h2>
+                <p>{{tournament.date}}</p>
+                <button item-right round outline>$1.99</button>
+            </ion-item>
+            <!--<ion-list>-->
+                <!--<ion-item>-->
+                    <!--<p subtitle> &#45;&#45; Full Team Schedules</p>-->
+                    <!--<p subtitle> &#45;&#45; Divisional Brackets</p>-->
+                    <!--<p subtitle> &#45;&#45; Pool Standings</p>-->
+                    <!--<p subtitle> &#45;&#45; Score Updates</p>-->
+                    <!--<p subtitle> &#45;&#45; Pool & Bracket Updates</p>-->
+                    <!--<p subtitle> &#45;&#45; Schedule Change Notifications</p>-->
+                    <!--<p subtitle> &#45;&#45; Scorekeeper Access</p>-->
+                    <!--<button item-right outline>${{tournament.price}}</button>-->
+                <!--</ion-item>-->
+            <!--</ion-list>-->
+        </ion-list>
+        <ion-grid class="bullet-list">
+            <ion-row *ngFor="let item of bulletList">
+                <ion-col width-10 class="bullet">
+                    <div class="bullet-img">
+                        <img src="../../../../medal-check.svg">
+                    </div>
+                </ion-col>
+                <ion-col width-90 class="bullet-item">
+                    <h2 class="alinger-left">{{item}}</h2>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+    <ion-list-header>Full Season Access</ion-list-header>
+
+    <ion-card>
+        <ion-list text-wrap>
+            <ion-item>
+                <!--<ion-thumbnail item-left>-->
+                <!--<img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">-->
+                <!--</ion-thumbnail>-->
+                <h2 title>Zero Gravity Fall 2016 - New England Circuit</h2>
+                <p>6 tournaments</p>
+                <p>May 5 2016, July 26, 2016</p>
+                <button item-right round outline>$4.99</button>
+            </ion-item>
+            <ion-item *ngFor="let tournament of season">
+                <ion-thumbnail item-left>
+                    <img src="{{tournament.img}}">
+                </ion-thumbnail>
+                <h2 title>{{tournament.name}}</h2>
+                <p>{{tournament.date}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <!--<ion-list>-->
+    <!--<ion-item text-wrap *ngFor="let spartan of spartans" (click)="dismiss()">-->
+    <!--<ion-thumbnail item-left>-->
+    <!--<img src="{{spartan.img}}">-->
+    <!--</ion-thumbnail>-->
+    <!--<h2 title>{{spartan.name}}</h2>-->
+    <!--<p sub>May 2 - 3, 2016</p>-->
+    <!--</ion-item>-->
+    <!--</ion-list>-->
+
+    <!--<ion-card class="" *ngFor="let pack of packs">-->
+    <!--<ion-list text-wrap>-->
+    <!--<ion-item>-->
+    <!--<ion-avatar item-left>-->
+    <!--<img src="{{pack.img}}">-->
+    <!--</ion-avatar>-->
+    <!--<h2>{{pack.name}}</h2>-->
+    <!--<button item-right outline>${{pack.price}}</button>-->
+    <!--</ion-item>-->
+    <!--<ion-item>-->
+    <!--<b>{{pack.info}}</b>-->
+    <!--<p>{{pack.description}}</p>-->
+    <!--</ion-item>-->
+    <!--</ion-list>-->
+    <!--</ion-card>-->
+
+</ion-content>

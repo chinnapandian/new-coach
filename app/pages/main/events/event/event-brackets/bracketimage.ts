@@ -15,6 +15,8 @@ declare var brackets: any;
 export class BracketImagePage {
   public bracket: any;
   private DivisionName;
+  private SelectedTournamentName;
+  private SelectedTournamentId;
 
   constructor(
       private navCtrl: NavController,
@@ -29,7 +31,10 @@ export class BracketImagePage {
   //    console.log(tournamentid);
   //    console.log(divisionid);
    //   this._bracketService.getBracketsDetails(tournamentid, divisionid, "BasketBall")
-      this._bracketService.getBracketsDetails(13, 22, "BasketBall")
+      this.SelectedTournamentName = localStorage.getItem("SelectedTournamentName");
+      this.SelectedTournamentId = localStorage.getItem("SelectedTournamentId");
+      
+      this._bracketService.getBracketsDetails(this.SelectedTournamentId, null, "BasketBall")
         .subscribe(data => {
            localStorage.setItem('bracketsdetails', data);
             console.log(data);

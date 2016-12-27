@@ -7,7 +7,7 @@ import {MyPlayerConfigService} from './config';
 @Injectable()
 export class TempCurrDateService {
 
-  private apiPath = '/api/tempcurrdate/GetTempCurrDate';
+  private apiPath = '/api/tempcurrdate/GetTempCurrDate?App=Player';
 
   constructor(private _http: Http,
     private _config: MyPlayerConfigService) {

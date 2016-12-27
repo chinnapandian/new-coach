@@ -56,6 +56,7 @@ export class FollowTeamsPage {
         
          this.teamsList.getTeamsList(statecode, userid, 'basketball')
         .subscribe(data => {
+            console.log(data);
             this.teams = data;
             for(var i=0;i<this.teams.length;i++) {
                 if(this.teams[i].State == statecode) {

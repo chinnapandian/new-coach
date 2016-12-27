@@ -1,0 +1,36 @@
+<!--<ion-header>-->
+    <!--<ion-navbar primary>-->
+
+        <!--&lt;!&ndash;<ion-buttons start>&ndash;&gt;-->
+            <!--&lt;!&ndash;<button (click)="dismiss()">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span showWhen="ios">Done</span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ion-icon name="md-close" showWhen="android,windows"></ion-icon>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+        <!--&lt;!&ndash;</ion-buttons>&ndash;&gt;-->
+
+        <!--<ion-title>Select a Division</ion-title>-->
+
+        <!--&lt;!&ndash;<ion-buttons end>&ndash;&gt;-->
+            <!--&lt;!&ndash;<button (click)="dismiss()">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>Save</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+        <!--&lt;!&ndash;</ion-buttons>&ndash;&gt;-->
+
+    <!--</ion-navbar>-->
+
+<!--</ion-header>-->
+
+<!--<ion-content>-->
+
+    <!--<ion-card>-->
+        <ion-list radio-group>
+            <ion-item *ngFor="let division of divisions">
+                <ion-label (click)="dismiss()">
+                    <span>{{division.name}}</span>
+                </ion-label>
+                <ion-radio checked="false" value=""></ion-radio>
+            </ion-item>
+        </ion-list>
+    <!--</ion-card>-->
+
+<!--</ion-content>-->

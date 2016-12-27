@@ -38,6 +38,8 @@ export class RemindersPage {
   private w1: boolean = false;
   private m30: boolean =false;
   private m45: boolean=false;
+  private ReminderCount = 0;
+  private isMaxReminderCount = false;
 private userObj;
   constructor(private _viewController: ViewController,
               private _navController: NavController ,
@@ -238,7 +240,18 @@ if (this.w1== true )
                 }); 
      
   }
-
+   setRemindersCount(val){
+     if(val == true)
+        this.ReminderCount++;
+     else
+        this.ReminderCount--;
+     console.log(this.ReminderCount);
+     if(this.ReminderCount>=3){
+       this.isMaxReminderCount = true;
+     }else{
+       this.isMaxReminderCount = false;
+     }
+   }
    dismiss() {
     this._viewController.dismiss();
   }

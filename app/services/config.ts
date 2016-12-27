@@ -80,6 +80,25 @@ export class MyPlayerConfigService {
         localStorage.setItem('Password',password);        
     }
 
+    setCurrDate(data){
+         localStorage.setItem('currdate',data);
+    }
+    getCurrDate(){
+        return localStorage.getItem('currdate');
+      //  var today=this.addDays(currentDate,0).toJSON();
+     //   console.log(today);
+     //   return today;
+    }
+
+    addDays(theDate, days) {
+            return new Date(theDate.getTime() + days*24*60*60*1000);
+    }
+
+    toUTCDate(date){
+        var _utc = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),  date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+        return _utc;
+    };
+
     getDefaultHeaders() {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');

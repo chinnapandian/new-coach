@@ -68,8 +68,8 @@ export class AddPlayerPage {
         this._playerposition.getPositionsList()
         .subscribe(data => {
           this.positions = data;
-          this.playerposition = this.positions[0].Code;
-          this.TeamId = -1;
+       //   this.playerposition = this.positions[0].Code;
+       //   this.TeamId = -1;
           this.firstName="";
           this.lastName="";
           this.Email="";

@@ -1,0 +1,12 @@
+<ion-list [(ngModel)]="divisionFilter"  radio-group >
+
+    <ion-list-header>
+        Select a Division
+        <button item-right outline (click)="dismiss()">Apply</button>
+    </ion-list-header>
+
+    <ion-item *ngFor="let division of divisions">
+      <ion-label>{{division.DivisionName}}</ion-label>
+      <ion-radio  value={{division.DivisionName}}></ion-radio>
+    </ion-item>
+</ion-list>

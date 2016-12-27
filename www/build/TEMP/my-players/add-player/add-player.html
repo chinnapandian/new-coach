@@ -1,0 +1,112 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span>Cancel</span>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Add Player</ion-title>
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span>Save</span>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="add-player">
+
+    <!--<ion-list-header>Player Avatar</ion-list-header>-->
+
+    <ion-list-header>Player Profile</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-thumbnail class="circle-large" item-left>
+                    <img src="avatars/boys/sam.svg" alt="">
+                </ion-thumbnail>
+                <button item-right outline small (click)="goToAddPlayerAvatarPage()">
+                    <ion-icon name="refresh"></ion-icon>
+                    Swap Avatars</button>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label floating>First Name</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Last Name</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Email</ion-label>
+                <ion-input type="email"></ion-input>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Jersey Number</ion-label>
+                <ion-input type="number"></ion-input>
+            </ion-item>
+            <!--<ion-item>-->
+                <!--<ion-label>Position</ion-label>-->
+                <!--<ion-select [(ngModel)]="gaming">-->
+                    <!--<ion-option value="pg">Point Gaurd</ion-option>-->
+                    <!--<ion-option value="sg">Shooting Gaurd</ion-option>-->
+                    <!--<ion-option value="sf">Small Forward</ion-option>-->
+                    <!--<ion-option value="pf">Power Forward</ion-option>-->
+                    <!--<ion-option value="c">Center</ion-option>-->
+                <!--</ion-select>-->
+            <!--</ion-item>-->
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-list radio-group>
+
+            <ion-item>
+                <ion-label>
+                    <h2>Point Gaurd</h2>
+                </ion-label>
+                <ion-radio checked="true" value="pg"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Shooting Gaurd</ion-label>
+                <ion-radio value="sg"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Small Forward</ion-label>
+                <ion-radio value="sf"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Power Forward</ion-label>
+                <ion-radio value="pf"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Center</ion-label>
+                <ion-radio value="c"></ion-radio>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+
+
+</ion-content>

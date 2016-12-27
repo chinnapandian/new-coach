@@ -1,18 +1,22 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController, ModalController} from 'ionic-angular';
-import {SelectedStatEventPage} from "./selected-stat-event/selected-stat-event"
+import {NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
+import {SelectedStatEventPage} from "./selected-stat-event/selected-stat-event";
+import {LoginService} from "../../../../../services/login";
+import {MyPlayerConfigService} from "../../../../../services/config";
+import {GroupPastTournamentsPipe} from '../../../../../pipes/grouppasttournaments';
+import {GroupFutureTournamentsPipe} from '../../../../../pipes/groupfuturetournaments';
+import {GroupCurrentTournamentsPipe} from '../../../../../pipes/groupcurrenttournaments';
 
 @Component({
-    templateUrl: 'build/pages/main/home/player/stat-events/stat-events.html'
+    templateUrl: 'build/pages/main/home/player/stat-events/stat-events.html',
+    pipes : [GroupPastTournamentsPipe, GroupCurrentTournamentsPipe, GroupFutureTournamentsPipe]
 })
 
 export class StatEventsPage {
 
     private statsView:string = 'average';
 
-    private timeView:string = 'ongoing';
-
-    private eventView: string = 'tournament';
+    private scheduleView: string = 'tournament';
 
     private statsHeadings: any = [
         'PTS',
@@ -155,20 +159,96 @@ export class StatEventsPage {
     ];
 
 
-
+    private tournaments = [];
+    private playerEvents = [];
+    private timeView: string = 'ongoing'; 
+    private currentTournaments = [];
+    private pastTournaments = [];
+    private futureTournaments = []; 
+    private dataLoading = true;
+    private myLeagues:any = [];
+    private today;
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
-                private modalCtrl:ModalController) {
+                private modalCtrl:ModalController,
+                private navParams: NavParams,
+                private loginService:LoginService,
+                private config:MyPlayerConfigService) {
+
+        this.tournaments = this.loginService.getRegUserTournaments();
+        var teamId ;
+        teamId= localStorage.getItem("SelectedPlayerTeamId");
+        console.log(teamId);
+        console.log(this.tournaments);
+        this.tournaments.forEach(tourn => {
+            if(tourn.TeamId == teamId && tourn.isRegistered == 1){
+                this.playerEvents.push(tourn);
+            }
+            console.log(this.playerEvents);
+        });
+
+         this.today=this.config.getCurrDate();
+         console.log(this.today);
+         this.initialize();
     }
 
-    goToSelectedStatEventPage(){
-      this.navCtrl.push(SelectedStatEventPage);
+    addDays(theDate, days) {
+            return new Date(theDate.getTime() + days*24*60*60*1000);
+    }
+     initialize() {
+
+                console.log(this.playerEvents);
+                // Fill past, current and future tournaments in respective arrays
+                if(this.playerEvents == null){               
+                        this.dataLoading = false;
+                }else{
+                    for (var i = 0; i < this.playerEvents.length; i++) {
+                            if ((this.playerEvents[i].StartDate <= this.today) && (this.playerEvents[i].EndDate >= this.today)) {
+                            //to get all games of current tournaments
+                            this.currentTournaments.push(this.playerEvents[i]);                        
+                            }
+                            else if (this.playerEvents[i].EndDate < this.today){
+                                //to get all games of past tournaments
+                                this.pastTournaments.push(this.playerEvents[i]);
+                            }
+                            else if (this.playerEvents[i].StartDate > this.today){
+                                //to get all games of future tournaments
+                                this.futureTournaments.push(this.playerEvents[i]);
+                            }
+                    }
+                   
+                    console.log(this.currentTournaments.length);
+                    console.log(this.pastTournaments);
+                    console.log(this.futureTournaments); 
+                     this.dataLoading = false;
+                }                             
+    }
+
+    getDate(dt) {
+        let t = dt.substr(0, 10);
+        return this.getFormattedDate(new Date(t));
+    }
+    
+    getFormattedDate(date) {
+    var year = date.getFullYear();
+        var month = (1 + date.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+        var day = date.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        return month + '/' + day + '/' + year;
+    }
+
+    goToSelectedStatEventPage(tournament){
+        console.log(tournament);
+      this.navCtrl.push(SelectedStatEventPage,{
+          Stats_Tournament : tournament
+      });
     }
     
     // goToFullStatsPage(){
     //   this.navCtrl.push(FullPlayerStatsPage);
     // }
-
+ 
 
     dismiss() {
         this.viewCtrl.dismiss();

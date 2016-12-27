@@ -1,0 +1,43 @@
+<ion-header class="clear">
+    <ion-navbar primary class="clear" no-border-bottom>
+        <ion-title class="title-dark">
+            Step 2 of 2
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="signup">
+
+    <div>
+        <h1 class="big-message">
+            Create Username & Password
+        </h1>
+    </div>
+
+    <ion-list class="name auth-list">
+       <form   [formGroup]="getEmailForm" (ngSubmit)="onSubmit(getEmailForm.value)">
+        <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input  class="signup-email" [formControl]="getEmailForm.controls['Email']" type="email" value=""></ion-input>
+        </ion-item>
+        <div *ngIf ="getEmailForm.controls['Email'].touched">
+            <div *ngIf ="!getEmailForm.controls['Email'].valid" class = "alert-danger">
+            <strong>&nbsp;&nbsp;Invalid Email</strong>
+            </div>  
+        </div>
+        <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input  class="signup-password"  [formControl]="getEmailForm.controls['Password']"  type="password" value=""></ion-input>
+        </ion-item>
+        <div *ngIf ="getEmailForm.controls['Password'].touched">
+            <div *ngIf ="!getEmailForm.controls['Password'].valid" class = "alert-danger">
+            <strong>&nbsp;&nbsp;Password is required</strong>
+            </div> 
+        </div>
+          </form>
+    </ion-list>
+
+    <button  type="submit"  [disabled]="!getEmailForm.valid" round block light (click)="goToMyTeamsPage()">
+        All Done. Let's Get Started!
+    </button>
+</ion-content>

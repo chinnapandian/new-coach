@@ -1,0 +1,95 @@
+
+<ion-header>
+    <ion-navbar  no-border-bottom primary>
+
+        <ion-title>Settings</ion-title>
+
+        <ion-buttons end>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Done</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="settings-list ">
+
+    <ion-list-header>Profile</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <a ion-item (click)="goToProfile()">
+                <span>Username</span>
+                <ion-note item-right>{{userName}}</ion-note>
+            </a>
+            <a ion-item (click)="goToResetPasswordPage()">
+                Reset Password
+            </a>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Notifications</ion-list-header>
+
+
+    <ion-card>
+        <ion-list>
+            <a ion-item (click)="goToNotificationsPage()">
+                Alerts
+            </a>
+            <a ion-item (click)="goToRemindersPage()">
+                Reminders
+            </a>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Contact Us</ion-list-header>
+
+
+    <ion-card>
+        <ion-list>
+            <a ion-item (click)="goToFAQPage()">
+                Help & Support
+            </a>
+            <a ion-item (click)="goToFeedbackPage()">
+                Give Us Feedback
+            </a>
+            <a ion-item>
+                Share myLudus
+            </a>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Legal</ion-list-header>
+
+
+    <ion-card>
+        <ion-list>
+            <a ion-item (click)="goToPrivacyPage()">
+                Privacy Policy
+            </a>
+            <a ion-item (click)="goToTermsPage()">
+                Terms of Service
+            </a>
+            <a ion-item>
+                Licenses
+            </a>
+        </ion-list>
+    </ion-card>
+
+    <ion-list-header>Everything Else</ion-list-header>
+
+    <ion-card>
+        <ion-list>
+            <a ion-item (click)="logOut()">
+                Log Out
+            </a>
+        </ion-list>
+    </ion-card>
+
+    <div padding text-center class="login-logo-container">
+        <img src="medal.svg" class="login-logo" alt="">
+        <p label>Version 0.0.1</p>
+    </div>
+</ion-content>

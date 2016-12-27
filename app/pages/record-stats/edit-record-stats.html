@@ -1,0 +1,277 @@
+<ion-header>
+
+    <ion-navbar primary no-border-bottom>
+
+        <ion-title>Scorekeeper</ion-title>
+
+        <ion-buttons end>
+            <button ion-button (click)="saveStats()">
+                Save
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <ion-toolbar primary no-border-top class="stats-toolbar">
+        <ion-grid>
+            <ion-row class="grid-header">
+                <ion-col *ngFor="let header of statsHeadings">
+                    <span>{{header}}</span>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="grid-content">
+                <ion-col *ngFor="let stat of recordedStats">
+                    <span>{{stat}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content id="appcontent" class="record-stats">
+
+    <ion-card class="record-stats-header-card">
+        <ion-grid class="stats-matchup">
+
+            <ion-row class="player">
+                <ion-col>
+                    <img src="{{AvatarPath}}" alt="">
+                </ion-col>
+            </ion-row>
+
+       <!--     <ion-row class="player">
+                <ion-col>
+                    <p>
+                        <ion-icon name="radio-button-on" danger></ion-icon>
+                        <ion-icon name="radio-button-on" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                    </p>
+                </ion-col>
+            </ion-row> -->
+
+            <ion-row class="stats-matchup">
+
+                <ion-col width-50 class="left-team">
+                    <div>
+                        <img src="medal-shadow.png" alt="">
+                        <h2>{{Stats_Game.TeamA}}</h2>
+                    </div>
+                </ion-col>
+
+                <ion-col width-50 class="right-team">
+                    <div>
+                        <img src="medal-shadow.png" alt="">
+                        <h2>{{Stats_Game.TeamB}}</h2>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <!--<ion-grid class="stats-grid" padding-bottom>-->
+        <!--<ion-row class="grid-header">-->
+        <!--<ion-col *ngFor="let header of statsHeadings">-->
+        <!--<span>{{header}}</span>-->
+        <!--</ion-col>-->
+        <!--</ion-row>-->
+
+        <!--<ion-row class="grid-content">-->
+        <!--<ion-col *ngFor="let stat of recordedStats">-->
+        <!--<span>{{stat}}</span>-->
+        <!--</ion-col>-->
+        <!--</ion-row>-->
+        <!--</ion-grid>-->
+
+    </ion-card>
+
+    <ion-card>
+        <ion-list-header>Scoring</ion-list-header>
+        <ion-grid class="record-stats-grid">
+
+            <ion-row class="grid-content">
+                <ion-col width-50 >
+                <ion-item>
+                    <ion-label stacked>Made 2</ion-label>
+                    <ion-select [(ngModel)]="made2" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                   <ion-item block outline danger>
+                    <ion-label stacked>Missed 2</ion-label>
+                    <ion-select [(ngModel)]="missed2" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col width-50>
+                     <ion-item block outline success>
+                    <ion-label stacked>Made 3</ion-label>
+                    <ion-select [(ngModel)]="made3" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                     <ion-item block outline danger>
+                    <ion-label stacked>Missed 3</ion-label>
+                    <ion-select [(ngModel)]="missed3" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col width-50>
+                     <ion-item block outline success>
+                    <ion-label stacked>Made FT</ion-label>
+                    <ion-select [(ngModel)]="madeft" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                    <ion-item block outline danger>
+                    <ion-label stacked>Missed FT</ion-label>
+                    <ion-select [(ngModel)]="missedft" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    <!--</ion-card>-->
+    <!--<ion-card>-->
+        <ion-list-header>Ball Control</ion-list-header>
+
+        <ion-grid class="record-stats-grid">
+            <ion-row>
+                <ion-col width-25>
+                     <ion-item block outline orange>
+                    <ion-label stacked>Assist</ion-label>
+                    <ion-select [(ngModel)]="assist" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col width-25>
+                     <ion-item block outline orange>
+                    <ion-label stacked>Steal</ion-label>
+                    <ion-select [(ngModel)]="steal" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col width-25>
+                    <ion-item block outline orange>
+                    <ion-label stacked>Turn.</ion-label>
+                    <ion-select [(ngModel)]="turn" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col width-25>
+                     <ion-item block outline orange>
+                    <ion-label stacked>Block</ion-label>
+                    <ion-select [(ngModel)]="block" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
+        <ion-list-header>Rebounding</ion-list-header>
+
+        <!--<ion-card>-->
+        <ion-grid class="record-stats-grid">
+
+            <ion-row>
+                <ion-col width-50>
+                    <ion-item block outline secondary>
+                    <ion-label stacked>Def. Rebound</ion-label>
+                    <ion-select [(ngModel)]="defrebound" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                     <ion-item block outline secondary>
+                    <ion-label stacked>Off. Rebound</ion-label>
+                    <ion-select [(ngModel)]="offrebound" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+        <!--</ion-card>-->
+
+        <ion-list-header>Fouls</ion-list-header>
+
+        <!--<ion-card>-->
+        <ion-grid class="record-stats-grid">
+
+            <ion-row>
+                <ion-col block outline danger width-50>
+                     <ion-item >
+                    <ion-label stacked>Per Fouls</ion-label>
+                    <ion-select [(ngModel)]="perfouls" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                     <ion-item block outline danger>
+                    <ion-label stacked>Tech Fouls</ion-label>
+                    <ion-select [(ngModel)]="techfouls" (ionChange)="onChange()">
+                        <ion-option *ngFor="let r of range" [value]="r">{{r}}</ion-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+        <!--</ion-card>-->
+
+    </ion-card>
+
+</ion-content>
+
+
+<!--<ion-footer>-->
+<!--<ion-toolbar>-->
+
+<!--<ion-buttons Start>-->
+<!--<button ion-button danger>-->
+<!--<ion-icon name="undo"></ion-icon>-->
+<!--</button>-->
+<!--</ion-buttons>-->
+
+<!--<p>Timmy commited an offensive foul</p>-->
+
+<!--&lt;!&ndash;<ion-title>&ndash;&gt;-->
+<!--&lt;!&ndash;<ion-icon name="timer" dark-6></ion-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;Offensive Foul&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-title>&ndash;&gt;-->
+
+<!--<ion-buttons end>-->
+<!--<button ion-button menuToggle>-->
+<!--<ion-icon name="stats"></ion-icon>-->
+<!--</button>-->
+<!--</ion-buttons>-->
+
+<!--</ion-toolbar>-->
+<!--</ion-footer>-->
+

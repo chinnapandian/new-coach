@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar no-border-bottom primary>
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span>Close</span>
+            </button>
+        </ion-buttons>
+        <ion-title>{{SelectedTournamentName}}</ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top primary>
+        <button small light outline block (click)="goToSelectDivisionPage($event)">{{divisionFilter}}</button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="standings">
+    <ion-card *ngFor="let pool of followedTeamsStandings | groupteambypool">
+        <ion-list-header>
+            <b>{{pool.PoolName}}</b>
+        </ion-list-header>
+        <ion-card class="standings-card">
+            <ion-grid>
+                <ion-row class="standings-header">
+                    <ion-col class="team" width-45>TEAM</ion-col>
+                    <ion-col class="data" width-11>W</ion-col>
+                    <ion-col class="data" width-11>L</ion-col>
+                    <ion-col class="data" width-11>PS</ion-col>
+                    <ion-col class="data" width-11>PA</ion-col>
+                    <ion-col class="data" width-11>PD</ion-col>
+                </ion-row>
+                <ion-row class="standings-data" *ngFor="let team of pool.selectedTournStandings">
+                    <ion-col class="team" width-45>{{team.TeamName}}</ion-col>
+                    <ion-col class="data" width-11>{{team.WIN}}</ion-col>
+                    <ion-col class="data" width-11>{{team.LOSS}}</ion-col>
+                    <ion-col class="data" width-11>{{team.PS}}</ion-col>
+                    <ion-col class="data" width-11>{{team.PA}}</ion-col>
+                    <ion-col class="data" width-11>{{team.PD}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+    </ion-card>
+</ion-content>

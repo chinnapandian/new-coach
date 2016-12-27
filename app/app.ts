@@ -6,10 +6,11 @@ import {HomePage} from './pages/main/home/home';
 import {LandingPage} from './pages/auth/landing/landing'
 import {PurchaseEventPage} from './pages/main/events/purchase/event/purchase-event'
 import {RootPage} from './pages/root-page/root-page'
-import {RecordStatsPage} from './pages/record-stats/record-stats'
+import {EditStatsPage} from './pages/record-stats/edit-record-stats'
 import {MainTabs} from './pages/main/tabs/main-tabs'
 import {EventSchedulePage} from './pages/main/events/event/event-schedule/schedule';
 import {EventBracketsPage} from './pages/main/events/event/event-brackets/brackets';
+import {TempCurrDateService} from  './services/tempcurrdate';
 // import {SelectedPlayerPage} from 'pages/main/my-players/selected-player/tabs'
 import {MyPlayerConfigService} from './services/config';
 import {Device, Cordova} from 'ionic-native';
@@ -27,7 +28,7 @@ class SessionData{
 @Component({
   templateUrl: 'build/pages/root-page/root-page.html',
   providers: [
-    MyPlayerConfigService, LoginService
+    MyPlayerConfigService, LoginService, TempCurrDateService
   ],
 })
 
@@ -36,14 +37,25 @@ export class MyApp {
   public rootPage: any;
 
   constructor(private platform: Platform,
-              private _config: MyPlayerConfigService) {
+              private _config: MyPlayerConfigService,
+              private currdate:TempCurrDateService) {
     
     this.rootPage = LandingPage;
+  /*    document.addEventListener('resume', () => {
+      setTimeout(() => {
+         console.log("resume");
+        }, 0);
+      });*/
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-   
+      this.currdate.getTempCurrDate()
+      .subscribe(data => {
+        this._config.setCurrDate(data);
+        console.log(data);
+      });
+
       StatusBar.styleDefault();
       StatusBar.overlaysWebView(false);
       //check for the session of the user
@@ -83,7 +95,7 @@ export class MyApp {
            
     console.log(Device.device.uuid);
     console.log(Device.device.platform);
-   
+    
      
     if(this._config.getAuthToken() == null || this._config.getAuthToken() == '')    
           this.rootPage = LandingPage;
@@ -91,7 +103,7 @@ export class MyApp {
      {
         localStorage.setItem('homeView','teams');
          this.rootPage = MainTabs;
-      //this.rootPage = EventBracketsPage;
+      //  this.rootPage = EditStatsPage;
      }
          
   }

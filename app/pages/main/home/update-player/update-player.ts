@@ -50,6 +50,7 @@ export class UpdatePlayerPage {
   private imagePath;
   private boyavatars = [];
   private girlavatars = [];
+  private followedTeams = [];
 
   constructor(
       private navCtrl: NavController,
@@ -67,6 +68,7 @@ export class UpdatePlayerPage {
         this.playerUserId = (localStorage.getItem("SelectedPlayerId")!=null?localStorage.getItem("SelectedPlayerId"):0);
         this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
         this.followedPlayers = this._loginService.getRegUserPlayers();
+        this.followedTeams = this._loginService.getFollowedTeams();
         this._playerposition.getPositionsList()
         .subscribe(data => {
               this.positions = data;

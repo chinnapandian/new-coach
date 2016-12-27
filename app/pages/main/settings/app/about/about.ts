@@ -10,7 +10,7 @@ export class AboutPage {
               private _navController: NavController) {
   }
 
-  close() {
+  dismiss() {
     this._viewController.dismiss();
   }
 } // end class

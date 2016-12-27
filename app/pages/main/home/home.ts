@@ -9,10 +9,14 @@ import {TeamPage} from './team/team';
 import {LoginService} from '../../../services/login';
 import {AvatarsListService} from  '../../../services/getavatars';
 import {MyPlayerConfigService} from  '../../../services/config';
+import {GetPlayerStatsService} from  '../../../services/getplayerstats';
+import {TitlePipe} from  '../../../pipes/title';
+import {StatEventsPage} from './player/stat-events/stat-events';
 
 @Component({
   templateUrl: 'build/pages/main/home/home.html',
-  providers :[AvatarsListService]
+  providers :[AvatarsListService,GetPlayerStatsService],
+  pipes:[TitlePipe]
 })
 
 export class HomePage {
@@ -28,26 +32,32 @@ export class HomePage {
   private imagePath;
   private boyavatars = [];
   private girlavatars = [];
-
+  statValues = []
   private statCard: any = [
     {
       header: 'PPG',
-      value: '12.3'
+      value: '0'
     },{
       header: 'RPG',
-      value: '5.3'
+      value: '0'
     },{
       header: 'APG',
-      value: '2.9'
+      value: '0'
     },{
-      header: 'FG%',
-      value: '34.6%'
+      header: '2FG%',
+      value: '0'
     },{
-      header: '3P%',
-      value: '10.3%'
+      header: '3FG%',
+      value: '0'
     },{
-      header: 'FT%',
-      value: '72.1%'
+      header: 'STL',
+      value: '0'
+    },{
+      header: 'TO',
+      value: '0'
+    },{
+      header: 'BLK',
+      value: '0'
     }
   ];
   private teams : Object = []; private boysteams = []; private girlsteams = [];
@@ -58,7 +68,8 @@ export class HomePage {
               public asCtrl: ActionSheetController,
               private avatars : AvatarsListService,
               private loginService : LoginService,
-              private _config: MyPlayerConfigService) {
+              private _config: MyPlayerConfigService,
+              private playerstatsService:GetPlayerStatsService) {
                         
                     this.homeView = (localStorage.getItem('homeView')==null?this.homeView:localStorage.getItem('homeView'));
                     this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
@@ -69,6 +80,7 @@ export class HomePage {
                           this.loginService.setUserInfo(data);
                           this.loginService.setRegUserTournaments(data.RegUserTournaments);
                           this.loginService.setRegUserPlayers(data.RegUserPlayers); 
+                          
                           this.FollowedTeamsPlayers = this.loginService.getRegUserPlayers();
                           console.log(this.FollowedTeamsPlayers.length);
                           if(this.FollowedTeamsPlayers.length == 0)
@@ -81,17 +93,31 @@ export class HomePage {
                           {
                             this.FollowedTeams = this.removeDuplicates(this.FollowedTeamsPlayers, "TeamId");
                             this.loginService.setFollowedTeams(this.FollowedTeams);       
-                            this.FollowedTeamsPlayers.forEach(obj => {
+                       /*     this.FollowedTeamsPlayers.forEach(obj => {
                               if(obj.PlayerUserId!=0)
                                 this.FollowedPlayers.push(obj);
                                 console.log(this.FollowedPlayers);
                                 
-                            });  
-                            this.dataLoading = false;
+                            });  */
+                          
+                            //getPlayerStats
+                            console.log(data.Context.User.UserId);
+                            this.playerstatsService.getPlayerStats(data.Context.User.UserId,0,0,0)      
+                                      .subscribe(data => {
+                                        console.log(data);
+                                            this.FollowedPlayers = data.PlayerStatsinfo;
+                                            this.dataLoading = false;
+                                      });
+                           
                           }                          
                     });                                  
   }
- 
+
+ getStatValue(index1,index2){
+   var player = this.FollowedPlayers[index1];
+   var statvalues = [player.PPG, player.RPG, player.APG, player.FG2, player.FG3,player.STL,player.TO, player.BLK];
+   return statvalues[index2];
+ }
 
   // presentPopover() {
   //   let popover = this.popoverCtrl.create(PopoverPage);
@@ -121,8 +147,20 @@ export class HomePage {
 
   }
 
+ goToStatEventsPage(player){
+    localStorage.setItem("SelectedPlayerId", player.CustodianPlayer.PlayerUserId);
+    localStorage.setItem("SelectedPlayerTeamId", player.CustodianPlayer.TeamId);
+  //  localStorage.setItem("SelectedPlayerTeamId", '500');
+    localStorage.setItem("PlayerTabIndex", '1');
+    let playerModal = this.modalCtrl.create(PlayerTabs);
+    playerModal.present();
+ }
+
   goToPlayerTabs(player){
-    localStorage.setItem("SelectedPlayerId", player.PlayerUserId);
+    console.log(player);
+    localStorage.setItem("SelectedPlayerId", player.CustodianPlayer.PlayerUserId);
+    localStorage.setItem("PlayerTabIndex", '0');
+    localStorage.setItem("SelectedPlayerStats",JSON.stringify(player));
     let playerModal = this.modalCtrl.create(PlayerTabs);
     playerModal.present();
   }

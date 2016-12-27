@@ -1,0 +1,94 @@
+.record-stats {
+
+  .player {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+
+  ion-grid {
+    padding: 0px;
+  }
+
+
+  ion-col{
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: thick solid black;
+  }
+
+
+}
+
+ion-toolbar.stats-toolbar{
+  padding: 0px;
+
+  ion-grid{
+    //margin-top: 10px;
+    //padding: 0px;
+    //padding-left: 8px;
+    //padding-right: 8px;
+
+    padding-bottom: 2px;
+
+    // all rows
+    ion-row {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      background: #fff;
+    }
+
+    // all columns
+    ion-col {
+      font-size: 1.4rem;
+      text-align: center;
+      padding: 1px;
+      border: think solid black;
+      }
+      .has-min-width{
+        min-width: 60px;
+      }
+    }
+
+    ion-row.grid-header {
+      color: color($colors, gold);
+      //background: #fff;
+
+      // header cols
+      ion-col {
+        line-height: 1.6rem;
+        //font-size: 1.4rem;
+        letter-spacing: .04rem;
+        font-weight: 800;
+        border-bottom: 1px solid #0276b3;
+
+      }
+
+    }
+
+    ion-row.grid-content{
+      ion-col{
+        span{
+          font-size: 2rem;
+          color: color($colors, light);
+        }
+      }
+    }
+  }
+}
+//
+//.record-stats-header-card{
+//  position: relative;
+//  .card-bg {
+//    color: color($colors, gold);
+//    font-size: 9rem;
+//    position: absolute;
+//    top: 0;
+//    left: 0;
+//    bottom: 0;
+//    right: 0;
+//    z-index: -1;
+//    //overflow: hidden;
+//  }
+//
+//}

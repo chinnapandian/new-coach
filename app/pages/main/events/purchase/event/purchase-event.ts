@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController, ModalController} from 'ionic-angular';
+import {NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
+import {LoginService} from  '../../../../../services/login';
 
 @Component({
     templateUrl: 'build/pages/main/events/purchase/event/purchase-event.html'
@@ -59,49 +60,73 @@ export class PurchaseEventPage {
     //     },
     // ];
 
-    private season:any = [
-        {
-            name: 'Zero Gravity Battle of the Baskets',
-            img: 'medal-shadow.png',
-            date: 'September 12 - 13, 2016',
-            price: .99
-        }, {
-            name: 'Zero Gravity Fall Showdown',
-            img: 'http://admin.tourneymachine.com/TournamentFiles/h201606081959263159a61ea9a0d2b48/e326e697caa6d92dc37d10362b42e0ef_article_image_2301185-640.png',
-            date: 'September 28 - 29, 2016',
-            price: .99
-        }, {
-            name: 'Zero Gravity King of the Coast',
-            img: 'http://admin.tourneymachine.com/Public/CustomerFiles/h20140923064359771d8fd157e38db47/Indy.png',
-            date: 'November 3 - 4, 2016',
-            price: .99
-        }, {
-            name: 'Zero Gravity One Day Showcase',
-            img: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTAR3qx6-yKpW5k1DhLN07mU_athdfqnbe1b2riU5LXvmKiU7kX',
-            date: 'November 15 - 17, 2016',
-            price: .99
-        }, {
-            name: 'Zero Gravity Battle at the Border',
-            img: 'medal-shadow.png',
-            date: 'November 20 - 21, 2016',
-            price: .99
-        }, {
-            name: 'Annual Holiday Blast',
-            img: 'medal-shadow.png',
-            date: 'December 1 - 2, 2016',
-            price: .99
-        }
-    ];
+    private season:any = [];
 
 
     //      img: '../../../new-medal.svg',
+    private SelectedTournamentName;
+    private SelectedTournamentStartDate;
+    private SelectedTournamentEndDate;
+    private SelectedSeasonName;
+    private SelectedSeasonId;
+    private SelectedCircuitName;
+    private TournamentPurchasePrice;
+    private SeasonPurchasePrice;
 
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
-                private modalCtrl:ModalController) {
+                private modalCtrl:ModalController,
+                private navParams:NavParams,
+                private loginservice:LoginService) {
+       
+        var season =[];
+        this.SelectedTournamentName = this.navParams.get("SelectedTournament").TournamentName;
+        this.SelectedTournamentStartDate = this.navParams.get("SelectedTournament").StartDate;
+        this.SelectedTournamentEndDate = this.navParams.get("SelectedTournament").EndDate;
+        this.SelectedSeasonName = this.navParams.get("SelectedTournament").SeasonName;
+        this.SelectedCircuitName = this.navParams.get("SelectedTournament").CircuitName;
+        this.SelectedSeasonId = this.navParams.get("SelectedTournament").SeasonId;
+
+        this.TournamentPurchasePrice = this.navParams.get("TournamentPurchasePrice");
+        this.SeasonPurchasePrice = this.navParams.get("SeasonPurchasePrice");
+        var regusertournaments = this.loginservice.getRegUserTournaments();
+        regusertournaments.forEach(tourn => {
+            if(tourn.SeasonId ==  this.SelectedSeasonId)
+                season.push(tourn);
+            
+        });
+        this.season = this.removeDuplicates(season,"TournamentId");
+        console.log(this.TournamentPurchasePrice);
+       
+
     }
+getDate(dt) {
+    let t = dt.substr(0, 10);
+    return this.getFormattedDate(new Date(t));
+    }
+    
+    getFormattedDate(date) {
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    return month + '/' + day + '/' + year;
+    }
+ 
+ removeDuplicates(originalArray, prop) {
+      var newArray = [];
+      var lookupObject  = {};
 
+      for(var i in originalArray) {
+          lookupObject[originalArray[i][prop]] = originalArray[i];
+      }
 
+      for(i in lookupObject) {
+          newArray.push(lookupObject[i]);
+      }
+        return newArray;
+  }
     // goToTournamentPage() {
     //   this.navCtrl.pop();
     //

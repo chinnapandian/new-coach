@@ -10,6 +10,7 @@ export class GroupBoysTeamsByOrgPipe implements PipeTransform {
                                                                             CoachFirstName: o.CoachFirstName,
                                                                             CoachLastName : o.CoachLastName,
                                                                             Gender : o.Gender,
+                                                                            Grade : o.Grade,
                                                                             OrgId : o.OrgId,
                                                                             TeamId : o.TeamId,
                                                                             TeamName : o.TeamName,

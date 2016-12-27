@@ -7,6 +7,7 @@ import {LoginService} from '../../../../../services/login';
 import {SortPipe} from '../../../../../pipes/sort';
 // import {scorekeeperPage} from '../scorekeeper/scorekeeper';
 import {TempCurrDateService} from  '../../../../../services/tempcurrdate';
+import {MyPlayerConfigService} from  '../../../../../services/config';
 
 
 @Component({
@@ -47,22 +48,30 @@ export class EventSchedulePage {
                 private _navParams : NavParams,
                 private _tempCurrDate : TempCurrDateService,
                 private teamPopoverCtrl: PopoverController,
-                private navParams: NavParams){
+                private navParams: NavParams,
+                private config:MyPlayerConfigService){
           // Get tournament data
-           this._tempCurrDate.getTempCurrDate()
+         /*  this._tempCurrDate.getTempCurrDate()
                             .subscribe(data => {
                                 this.today = data;  
                             });
+           var currentDate = this.addDays(new Date(),0);           
+           currentDate.setHours(0, 0, 0, 0);
+          this.today=currentDate.toJSON();*/
+          
+          this.today = this.config.getCurrDate();
           this.tournamentId = localStorage.getItem('SelectedTournamentId');
           this.tournamentName = localStorage.getItem("SelectedTournamentName");
           this.followedTeams = this._loginService.getFollowedTeams();
+          console.log(this.followedTeams);
           this.teamFilter=(this.navParams.get('teamFilter')==null?'All Teams':this.navParams.get('teamFilter'));
  
-          this.getSelectedTournament();
- 
-          
+          this.getSelectedTournament();       
     }
 
+    addDays(theDate, days) {
+            return new Date(theDate.getTime() + days*24*60*60*1000);
+    }
     presentTeamPopover(teamEvent) {
        
         let teamPopover = this.teamPopoverCtrl.create(TeamFilterPage,{
@@ -116,6 +125,7 @@ export class EventSchedulePage {
                   this.followedTeams.forEach(team => {
                         this.schedules.forEach(schedule => {
                           if((schedule.TeamId1==team.TeamId)||(schedule.TeamId2==team.TeamId)){
+                          
                                if ((schedule.GameDate < this.today)||
                                     (((schedule.GameDate == this.today))&&
                                     (schedule.EndDateTime.toString().substring(11,13)<new Date().toString().substring(16,18)))) {

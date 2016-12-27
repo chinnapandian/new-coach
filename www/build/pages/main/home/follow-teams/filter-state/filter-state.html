@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Team State</ion-title>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="filter-state">
+    <ion-toolbar no-border-top no-border-bottom class="clear">
+            <ion-searchbar [(ngModel)]="SearchKeyword" (input)="onInput($event)"></ion-searchbar>
+    </ion-toolbar>
+
+    <ion-list-header>Where's your team from?</ion-list-header>
+    
+    <ion-card class="">
+        <ion-list>
+            <a ion-item text-wrap *ngFor="let state of states | searchstates : SearchKeyword" (click)="goToFollowTeamsPage(state)">
+                <h2>{{state.StateName}}</h2>
+                <!--<img item-left style="width: 20px;" src="../../../../wisconsin.svg">-->
+            </a>
+        </ion-list>
+    </ion-card>
+     <ion-spinner style="display:block;margin:auto" name="bubbles" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+</ion-content>

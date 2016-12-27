@@ -142,9 +142,7 @@ export class EventBracketsPage {
     }
 
     getBracketData(){
-     //   this.divisionFilter = 22;
-     //   this._bracketService.getBracketsDetails(25, 62, "BasketBall")
-        this._bracketService.getBracketsDetails(13, 22, "BasketBall")
+        this._bracketService.getBracketsDetails(this.SelectedTournamentId, null, "BasketBall")
                 .subscribe(data => {
                     this.bracketGames = data;
                     console.log(data);

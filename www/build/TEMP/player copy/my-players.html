@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-navbar primary>
+
+        <ion-buttons start>
+            <button (click)="dismiss()">
+                <span>Done</span>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Spartans Boys 12U</ion-title>
+
+        <ion-buttons end>
+            <button (click)="goToAddPlayerPage()">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="player">
+
+    <ion-card>
+        <ion-list>
+            <a ion-item (click)="goToSelectedPlayerPage()">
+                <ion-avatar class="A-7" item-left>
+                    <img src="avatars/boys/joe.svg" alt="">
+                </ion-avatar>
+                <h2 class="player">Timmy Smith</h2>
+                <p class="pos"><b>#34</b> | Point Guard</p>
+                <!--<p class="pos"><b>&nbsp;ID:</b> H34J7L</p>-->
+                <!--<p>8 Games Played | 4 Recorded</p>-->
+            </a>
+        </ion-list>
+
+        <ion-scroll class="stat-card" scrollX="true">
+            <ion-grid>
+                <ion-row>
+                    <ion-col *ngFor="let stat of statCard">
+                        <ion-card>
+                            <ion-grid>
+                                <ion-row class="stat-card-header">
+                                    <ion-col>
+                                        <div>{{stat.header}}</div>
+                                    </ion-col>
+                                </ion-row>
+
+                                <ion-row class="stat-card-data">
+                                    <ion-col>
+                                        <div>{{stat.value}}</div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col class="view-full-stats">
+                        <ion-card>
+                            <button block clear (click)="goToFullStatsPage()">
+                                Full Player Stats
+                                <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+                            </button>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </ion-scroll>
+
+        <div padding-thin b-t>
+            <button block danger small outline>Record Stats</button>
+        </div>
+
+    </ion-card>
+
+
+</ion-content>

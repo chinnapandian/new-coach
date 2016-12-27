@@ -1,0 +1,46 @@
+<ion-header class="clear">
+    <ion-navbar primary class="clear" no-border-bottom>
+        <ion-title>
+            Step 1 of 2
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="signup">
+
+    <div>
+        <h1 class="big-message">
+            What's your name?
+        </h1>
+    </div>
+
+    <ion-list class="auth-list">
+       <form   [formGroup]="getNameForm" (ngSubmit)="onSubmit(getNameForm.value)">
+        <ion-item>
+            <ion-label stacked>First Name</ion-label>
+            <ion-input  class="signup-name" [formControl]="getNameForm.controls['firstName']" type="text" value=""></ion-input>
+        </ion-item>
+        <div *ngIf ="getNameForm.controls['firstName'].touched">
+            <div *ngIf ="!getNameForm.controls['firstName'].valid" class = "alert-danger">
+            <strong>&nbsp;&nbsp;First name is required</strong>
+            </div>  
+        </div>
+        <ion-item>
+            <ion-label stacked>Last Name</ion-label>
+            <ion-input  class="signup-name"  [formControl]="getNameForm.controls['lastName']"  type="text" value=""></ion-input>
+        </ion-item>
+        <div *ngIf ="getNameForm.controls['lastName'].touched">
+            <div *ngIf ="!getNameForm.controls['lastName'].valid" class = "alert-danger">
+            <strong>&nbsp;&nbsp;Last name is required</strong>
+            </div>  
+        </div>
+          </form>
+    </ion-list>
+
+    <button type="submit"  [disabled]="!getNameForm.valid" round block light (click)="goToGetEmailPage()">
+        <span>Next</span>
+        <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+    </button>
+
+</ion-content>

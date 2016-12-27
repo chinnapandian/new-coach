@@ -1,38 +1,23 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController, ModalController} from 'ionic-angular';
-import {RecordStatsPage} from "../../../../../record-stats/record-stats"
+import {NavController, ViewController, ModalController, NavParams, AlertController} from 'ionic-angular';
+import {RecordStatsPage} from "../../../../../record-stats/record-stats";
+import {EditStatsPage} from "../../../../../record-stats/edit-record-stats";
+import {LoginService} from "../../../../../../services/login";
+import {MyPlayerConfigService} from "../../../../../../services/config";
+import {GetPlayerStatsService} from  '../../../../../../services/getplayerstats';
+import {TitlePipe} from  '../../../../../../pipes/title';
+var moment;
 
 @Component({
-    templateUrl: 'build/pages/main/home/player/stat-events/selected-stat-event/selected-stat-event.html'
+    templateUrl: 'build/pages/main/home/player/stat-events/selected-stat-event/selected-stat-event.html',
+    providers:[GetPlayerStatsService],
+    pipes: [TitlePipe]
 })
 
 export class SelectedStatEventPage {
 
     private statsView:string = 'total';
     private eventView: string = 'tournament';
-
-    private statCard: any = [
-        {
-            header: 'PPG',
-            value: '12.3'
-        },{
-            header: 'RPG',
-            value: '5.3'
-        },{
-            header: 'APG',
-            value: '2.9'
-        },{
-            header: 'FG%',
-            value: '34.6%'
-        },{
-            header: '3P%',
-            value: '10.3%'
-        },{
-            header: 'FT%',
-            value: '72.1%'
-        }
-    ];
-
     private basicHeadings: any = [
         'PTS',
         'REB',
@@ -143,46 +128,148 @@ export class SelectedStatEventPage {
         }
     ];
 
-    private poolGames:any = [
+    private poolGames:any = [];
+
+    private Stats_Tournament;
+    private PlayerUserId;
+    private PlayerFirstName;
+    private PlayerLastName;
+    private TeamId;
+    private UserId;
+    private FollowedPlayers;
+    private statValues = []
+    private statCard: any = [
         {
-            team2: 'BGCN Pride 10',
-            team2Coach: 'R. Pierce',
-            team2Rec: '(3 - 0)',
-            team1: 'Spartans Boys 12U',
-            team1Coach: 'F. Underwood',
-            team1Rec: '(3 - 1)',
-            team1Score: '',
-            team2Score: '',
-            dateStamp: 'Sun 10/20',
-            timeStamp: '12:30 PM',
-            facility: 'Madison Square Garden',
-            court: '5'
-        }, {
-            team2: 'C4 - Blue',
-            team2Coach: 'J. Danny',
-            team2Rec: '(0 - 2)',
-            team1: 'Spartans Boys 12U',
-            team1Coach: 'F. Coates',
-            team1Rec: '(3 - 1)',
-            team1Score: '',
-            team2Score: '',
-            dateStamp: 'Sun 10/20',
-            timeStamp: '5:30 PM',
-            facility: 'Above The RIM Sports Complex',
-            court: '3'
+        header: 'PPG',
+        value: '0'
+        },{
+        header: 'RPG',
+        value: '0'
+        },{
+        header: 'APG',
+        value: '0'
+        },{
+        header: '2FG%',
+        value: '0'
+        },{
+        header: '3FG%',
+        value: '0'
+        },{
+        header: 'STL',
+        value: '0'
+        },{
+        header: 'TO',
+        value: '0'
+        },{
+        header: 'BLK',
+        value: '0'
         }
     ];
-
-
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
-                private modalCtrl:ModalController) {
+                private modalCtrl:ModalController,
+                private navParams:NavParams,
+                private loginService:LoginService,
+                private playerstatsService:GetPlayerStatsService,
+                private alertCtrl:AlertController,
+                private config:MyPlayerConfigService) {
+
+            this.Stats_Tournament = this.navParams.get("Stats_Tournament");
+            this.PlayerUserId = localStorage.getItem("SelectedPlayerId");
+            this.TeamId = localStorage.getItem("SelectedPlayerTeamId");
+           //this.TeamId=500;
+            console.log(this.Stats_Tournament.TournamentId);
+            console.log(this.PlayerUserId);
+            console.log(this.TeamId);
+            this.UserId = this.loginService.getUserInfo().Context.User.UserId;
+            this.playerstatsService.getPlayerStats(this.UserId,this.Stats_Tournament.TournamentId,this.PlayerUserId,this.TeamId)    
+                 .subscribe(data => {
+                      console.log(data);
+                      this.FollowedPlayers = data.PlayerStatsinfo[0];   
+                      this.poolGames = data.PlayerGames;
+                      var player = this.FollowedPlayers;
+                      this.PlayerFirstName = player.CustodianPlayer.FirstName;
+                      this.PlayerLastName = player.CustodianPlayer.LastName;
+                      this.statValues = [player.PPG, player.RPG, player.APG, player.FG2, player.FG3, player.STL, player.TO, player.BLK];
+            });
+                           
+     }  
+
+    getStatValue(index2){   
+            return this.statValues[index2];
+        }
+
+    goToRecordStatsPage(game){
+        console.log("entered");
+      console.log(game);
+      var eventStartTime = new Date(game.StartDateTime);
+      console.log(eventStartTime.valueOf());
+      var eventEndTime = new Date();
+      console.log(eventEndTime.valueOf());
+      var dur = eventEndTime.valueOf() - eventStartTime.valueOf();
+      var duration = Math.round(((dur % 86400000) % 3600000) / 60000);
+      console.log(duration);
+      if(duration<=5){
+            this.navCtrl.push(RecordStatsPage,{
+                    Stats_TournamentId : this.navParams.get("Stats_Tournament").TournamentId,
+                    Stats_Game : game
+            });
+      }else{
+             let alert = this.alertCtrl.create({
+                                        title: 'Record Statistics',
+                                        subTitle: 'Stats can only be recorded for an ongoing game or if a game is about to start within the next 5 minutes',
+                                        buttons:[{
+                                            text : 'OK',
+                                            handler: () => {
+                                              }
+                                            }],     
+                                      });
+                      alert.present();
+      }
     }
 
-    goToRecordStatsPage(){
-      this.navCtrl.push(RecordStatsPage);
+  goToViewStatsPage(game){
+      this.navCtrl.push(EditStatsPage,{
+          Stats_TournamentId : this.navParams.get("Stats_Tournament").TournamentId,
+          Stats_Game : game
+      });
     }
 
+  getDate(dt) {
+        let t = dt.substr(0, 10);
+        let date=new Date(t);
+         var year = date.getFullYear();
+        var month = (1 + date.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+        var day = date.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        return month + '/' + day + '/' + year;
+    }
+    
+    getFormattedDate(dt) {
+       var date = new Date(dt.toString().substr(0,10));
+       var weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+       var months =['January','February','March','April','May','June','July','August','September','October','November','December'];
+        var year = date.getFullYear();
+        var month = (1 + date.getMonth()).toString();
+      //  month = month.length > 1 ? month : '0' + month;
+        var day = date.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        return (weekdays[date.getDay()]+ " " + day + "/" + month);
+    }
+
+  convertToAmPm(dt){
+          var ampm = (parseInt(dt.substr(0,2)) >= 12) ? "PM" : "AM";
+          var hours;
+          if (parseInt(dt.substr(0,2)) == 12)
+            hours = 12;
+          else if (parseInt(dt.substr(0,2)) > 12)
+            hours =  parseInt(dt.substr(0,2))-12;
+          else
+            hours = parseInt(dt.substr(0,2));
+          var min = dt.substr(2,3);
+          return(hours + "" + min + " " + ampm);
+   }
 
     dismiss() {
         this.viewCtrl.dismiss();

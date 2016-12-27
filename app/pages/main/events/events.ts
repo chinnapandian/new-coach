@@ -9,11 +9,14 @@ import {GroupPastTournamentsPipe} from '../../../pipes/grouppasttournaments';
 import {GroupFutureTournamentsPipe} from '../../../pipes/groupfuturetournaments';
 import {GroupCurrentTournamentsPipe} from '../../../pipes/groupcurrenttournaments';
 import {SelectedEventTabs} from "./event/tabs/event-tabs";
+import {SubscriptionListService} from  '../../../services/subscriptionlist';
+import {MyPlayerConfigService} from "../../../services/config";
+
 
 
 @Component({
     templateUrl: 'build/pages/main/events/events.html',
-    providers : [TempCurrDateService],
+    providers : [TempCurrDateService,SubscriptionListService],
     pipes : [GroupPastTournamentsPipe, GroupCurrentTournamentsPipe, GroupFutureTournamentsPipe]
 })
 
@@ -33,22 +36,28 @@ export class EventsPage {
                 private modalCtrl:ModalController,
                 private _loginService : LoginService,
                 private _tempCurrDate : TempCurrDateService,
-                private appCtrl : App) {
-         this.RegUserTournaments = this._loginService.getRegUserTournaments();
-         console.log(this.RegUserTournaments);
-         this.initialize();
+                private appCtrl : App,
+                private subscriptionlist:SubscriptionListService,
+                private config:MyPlayerConfigService) {
+
+          /*   var currentDate = this.addDays(new Date(),0);           
+             currentDate.setHours(0, 0, 0, 0);
+             this.today=currentDate.toJSON();*/
+             this.today = this.config.getCurrDate();
+             this.initialize();             
+    }
+
+    addDays(theDate, days) {
+            return new Date(theDate.getTime() + days*24*60*60*1000);
     }
 
     // goToMessageBoardPage(){
     //   this.navCtrl.push(MessageBoardPage);
     // }
-    initialize() {
-         //Get current date ( for testing ) from db
-        this._tempCurrDate.getTempCurrDate()
-            .subscribe(data => {
 
-                this.today = data;  
-                console.log(this.today);
+    initialize() {
+                var RegUserTournaments = this._loginService.getRegUserTournaments();
+                this.RegUserTournaments= this.removeDuplicates(RegUserTournaments,"TournamentId");
                 // Fill past, current and future tournaments in respective arrays
                 if(this.RegUserTournaments == null){               
                         this.dataLoading = false;
@@ -71,12 +80,24 @@ export class EventsPage {
                     console.log(this.currentTournaments.length);
                     console.log(this.pastTournaments);
                     console.log(this.futureTournaments); 
-                    this.dataLoading = false;
-                }                        
-            });
-              
-      
+                     this.dataLoading = false;
+                }                             
     }
+
+  removeDuplicates(originalArray, prop) {
+      var newArray = [];
+      var lookupObject  = {};
+
+      for(var i in originalArray) {
+          lookupObject[originalArray[i][prop]] = originalArray[i];
+      }
+
+      for(i in lookupObject) {
+          newArray.push(lookupObject[i]);
+      }
+        return newArray;
+  }
+
 
     getDate(dt) {
     let t = dt.substr(0, 10);
@@ -104,11 +125,32 @@ export class EventsPage {
     }
     
     goToSelectedEventPage(tourn) {
-        // this.navCtrl.push(SelectedEventPage);
+        console.log(tourn);
+        var TournamentPrice,SeasonPrice;
+        
         localStorage.setItem("SelectedTournamentId",tourn.TournamentId);
         localStorage.setItem("SelectedTournamentName",tourn.TournamentName);
-        let y = this.modalCtrl.create(SelectedEventTabs);
-        y.present();
+        if(tourn.isRegistered == 1){
+                let y = this.modalCtrl.create(SelectedEventTabs);
+                y.present();
+        }else{
+              this.subscriptionlist.getSubscriptionsList()
+                .subscribe(data =>{
+                    console.log(data);
+                     TournamentPrice = data[0].Rate;
+                     SeasonPrice = data[1].Rate;
+                    console.log(TournamentPrice);
+                    console.log(SeasonPrice);
+                    let purchaseEventModal = this.modalCtrl.create(PurchaseEventPage,
+                    {
+                        SelectedTournament : tourn,
+                        TournamentPurchasePrice : TournamentPrice,
+                        SeasonPurchasePrice : SeasonPrice
+                    });
+                    purchaseEventModal.present();
+            })
+        }
+        
     }
     dismiss() {
         this.viewCtrl.dismiss();
