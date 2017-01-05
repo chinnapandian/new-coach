@@ -1,9 +1,29 @@
-import {Component} from '@angular/core';
+import {Component,Injectable} from '@angular/core';
 import {NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
 import {LoginService} from  '../../../../../services/login';
+import {AddProductSubscriptionService} from  '../../../../../services/addproductsubscription';
+import {EventsPage} from '../../events';
+
+@Injectable()
+export class AddProductData {  
+  UserId;
+  SeasonId;
+  TournamentId;
+  TeamId;
+  ProductId;
+  Rate;
+  Promocode;
+  Discount;
+  PurchasePrice;
+  PlayerPromoCode;
+  PlayerDiscount;
+  PlayerPurchasePrice;
+  IsRedeemed;
+}
 
 @Component({
-    templateUrl: 'build/pages/main/events/purchase/event/purchase-event.html'
+    templateUrl: 'build/pages/main/events/purchase/event/purchase-event.html',
+    providers:[AddProductData, AddProductSubscriptionService],
 })
 
 export class PurchaseEventPage {
@@ -65,6 +85,7 @@ export class PurchaseEventPage {
 
     //      img: '../../../new-medal.svg',
     private SelectedTournamentName;
+    private SelectedTournamentId;
     private SelectedTournamentStartDate;
     private SelectedTournamentEndDate;
     private SelectedSeasonName;
@@ -72,20 +93,31 @@ export class PurchaseEventPage {
     private SelectedCircuitName;
     private TournamentPurchasePrice;
     private SeasonPurchasePrice;
+    private SeasonStartDate;
+    private SeasonEndDate;
+    private TournamentProductId;
+    private SeasonProductId;
 
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
                 private modalCtrl:ModalController,
                 private navParams:NavParams,
-                private loginservice:LoginService) {
+                private loginservice:LoginService,
+                private _addProductData:AddProductData,
+                private _addProductSubscription:AddProductSubscriptionService) {
        
         var season =[];
         this.SelectedTournamentName = this.navParams.get("SelectedTournament").TournamentName;
+        this.SelectedTournamentId = this.navParams.get("SelectedTournament").TournamentId;
         this.SelectedTournamentStartDate = this.navParams.get("SelectedTournament").StartDate;
         this.SelectedTournamentEndDate = this.navParams.get("SelectedTournament").EndDate;
         this.SelectedSeasonName = this.navParams.get("SelectedTournament").SeasonName;
         this.SelectedCircuitName = this.navParams.get("SelectedTournament").CircuitName;
         this.SelectedSeasonId = this.navParams.get("SelectedTournament").SeasonId;
+        this.TournamentProductId = this.navParams.get("TournamentProductId");
+        this.SeasonProductId = this.navParams.get("SeasonProductId");
+        this.SeasonStartDate = this.navParams.get("SelectedTournament").SeasonStartDate;
+        this.SeasonEndDate = this.navParams.get("SelectedTournament").SeasonEndDate;
 
         this.TournamentPurchasePrice = this.navParams.get("TournamentPurchasePrice");
         this.SeasonPurchasePrice = this.navParams.get("SeasonPurchasePrice");
@@ -100,7 +132,7 @@ export class PurchaseEventPage {
        
 
     }
-getDate(dt) {
+    getDate(dt) {
     let t = dt.substr(0, 10);
     return this.getFormattedDate(new Date(t));
     }
@@ -114,6 +146,17 @@ getDate(dt) {
     return month + '/' + day + '/' + year;
     }
  
+     getSeasonFormattedDate(d) {
+       var date = new Date(d.toString().substr(0,10));
+       var weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+       var months =['January','February','March','April','May','June','July','August','September','October','November','December'];
+        var year = date.getFullYear();
+        var month = (1 + date.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+        var day = date.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        return (months[date.getMonth()] + ' ' + day + ', ' + year);
+  }
  removeDuplicates(originalArray, prop) {
       var newArray = [];
       var lookupObject  = {};
@@ -138,5 +181,29 @@ getDate(dt) {
     dismiss() {
         this.viewCtrl.dismiss();
     }
+
+    checkout(productid, tournamentid, seasonid, productrate) {
+            this._addProductData.UserId=this.loginservice.getUserInfo().Context.User.UserId;
+            this._addProductData.SeasonId=seasonid;
+            this._addProductData.TournamentId=tournamentid;
+            this._addProductData.ProductId=productid;
+            this._addProductData.IsRedeemed=0
+            this._addProductData.Promocode="";
+            this._addProductData.Rate=productrate;
+            this._addProductData.PurchasePrice=0;
+            this._addProductData.PlayerPromoCode="";
+            this._addProductData.PlayerDiscount=0;
+            this._addProductData.PlayerPurchasePrice=0;
+            this._addProductData.TeamId = 0;
+            console.log(this._addProductData);
+            this._addProductSubscription.addProductSubscription(this._addProductData)
+            .subscribe(data=> {
+                    console.log(data);
+                    this.loginservice.setRegUserTournaments(data.RegUserTournaments);
+                    this.loginservice.setRegUserPlayers(data.RegUserPlayers);
+                    localStorage.setItem("TabIndex",'1');
+                    this.navCtrl.push(EventsPage);
+             })
+  }
 }
 

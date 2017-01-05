@@ -47,14 +47,14 @@
                       <!--  <ion-avatar item-left class="A-6-S">
                             <img [src]="team.img">
                         </ion-avatar> -->
-                        <h2 title>{{team.TeamName}} - {{team.Gender}} - Grade {{team.Grade}}</h2>
+                        <h2 title>{{team.TeamName}} ({{team.Grade}}/{{team.Gender}})</h2>
                         <p><b>Coach: </b>{{(team.CoachFirstName + " " + team.CoachLastName)|title}}</p>
                     </a>
                 </ion-list>
             </ion-card>
         </div>
        </div>
-         <div class="card" [style.display]="((FollowedTeams == null)&&(dataLoading==false))? 'visible' : 'none'">
+         <div class="card" *ngIf="error==true">
             <div class="item">
             <h3>Click on the + icon at the top to start following Teams</h3>
       </div>

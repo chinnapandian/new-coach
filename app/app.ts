@@ -50,11 +50,6 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.currdate.getTempCurrDate()
-      .subscribe(data => {
-        this._config.setCurrDate(data);
-        console.log(data);
-      });
 
       StatusBar.styleDefault();
       StatusBar.overlaysWebView(false);
@@ -95,14 +90,23 @@ export class MyApp {
            
     console.log(Device.device.uuid);
     console.log(Device.device.platform);
-    
-     
-    if(this._config.getAuthToken() == null || this._config.getAuthToken() == '')    
+    console.log(this._config.getAuthToken()); 
+    console.log(localStorage.length)
+    if(localStorage.getItem('AuthToken') ==null)
+  //  if(this._config.getAuthToken() == null || this._config.getAuthToken() == '' || this._config.getAuthToken() == 'null')    
           this.rootPage = LandingPage;
      else
      {
-        localStorage.setItem('homeView','teams');
-         this.rootPage = MainTabs;
+       localStorage.setItem('homeView','teams');
+       localStorage.setItem("TabIndex",'0');
+       this.rootPage = MainTabs;
+       this.currdate.getTempCurrDate()
+        .subscribe(data => {
+          this._config.setCurrDate(data.CurrDate);
+          console.log(data.CurrDate);
+          
+        });
+
       //  this.rootPage = EditStatsPage;
      }
          

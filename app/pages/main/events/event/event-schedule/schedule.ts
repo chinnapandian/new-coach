@@ -38,6 +38,7 @@ export class EventSchedulePage {
     private tournamentId;
     private tournamentName;
     private teamFilter;
+    private CurrTime;
 
     constructor(private viewCtrl:ViewController,
                 private modalCtrl:ModalController,
@@ -51,13 +52,11 @@ export class EventSchedulePage {
                 private navParams: NavParams,
                 private config:MyPlayerConfigService){
           // Get tournament data
-         /*  this._tempCurrDate.getTempCurrDate()
+           this._tempCurrDate.getTempCurrDate()
                             .subscribe(data => {
-                                this.today = data;  
+                                this.CurrTime = data.CurrTime;  
                             });
-           var currentDate = this.addDays(new Date(),0);           
-           currentDate.setHours(0, 0, 0, 0);
-          this.today=currentDate.toJSON();*/
+
           
           this.today = this.config.getCurrDate();
           this.tournamentId = localStorage.getItem('SelectedTournamentId');
@@ -121,12 +120,34 @@ export class EventSchedulePage {
                   console.log(data);
                   this._loginService.setTournamentScheduleStandings(data.GameResults,data.Brackets, data.Standings);
                   this.schedules = data.GameResults;
+
+                  /*  var eventStartTime = new Date(game.StartDateTime);
+            var eventEndTime = new Date(data.CurrTime);
+            var duration = eventStartTime.getTime() - eventEndTime.getTime();
+            var durationInMinutes =  Math.round(duration / 60000);*/
                   ///////  getTeamSchedules();  //////
                   this.followedTeams.forEach(team => {
                         this.schedules.forEach(schedule => {
                           if((schedule.TeamId1==team.TeamId)||(schedule.TeamId2==team.TeamId)){
-                          
                                if ((schedule.GameDate < this.today)||
+                                    (((schedule.GameDate == this.today))&&
+                                    ((new Date(schedule.EndDateTime).getTime())<(new Date(this.CurrTime).getTime())))) {
+                                    //to get all games of current tournaments
+                                        this.completedPoolGames.push(schedule);                        
+                                    }
+                                    else if ((schedule.GameDate == this.today)&&
+                                    ((new Date(schedule.StartDateTime).getTime())<(new Date(this.CurrTime).getTime()))&&
+                                    ((new Date(schedule.EndDateTime).getTime())>(new Date(this.CurrTime).getTime()))){
+                                        //to get all games of past tournaments
+                                        this.ongoingPoolGames.push(schedule);
+                                    }
+                                    else  if ((schedule.GameDate > this.today)||
+                                    (((schedule.GameDate == this.today))&&
+                                    ((new Date(schedule.StartDateTime).getTime())>(new Date(this.CurrTime).getTime())))){
+                                        //to get all games of future tournaments
+                                        this.upcomingPoolGames.push(schedule);
+                                    }
+                            /*   if ((schedule.GameDate < this.today)||
                                     (((schedule.GameDate == this.today))&&
                                     (schedule.EndDateTime.toString().substring(11,13)<new Date().toString().substring(16,18)))) {
                                     //to get all games of current tournaments
@@ -143,7 +164,7 @@ export class EventSchedulePage {
                                     (schedule.StartDateTime.toString().substring(11,13)>new Date().toString().substring(16,18)))){
                                         //to get all games of future tournaments
                                         this.upcomingPoolGames.push(schedule);
-                                    }
+                                    }*/
                           }
                         });
                     });
@@ -151,9 +172,10 @@ export class EventSchedulePage {
                     this.filteredOngoingPoolGames = this.ongoingPoolGames;
                     this.filteredUpcomingPoolGames = this.upcomingPoolGames;
                     console.log("done");
+                    this.dataLoading=false;
                     
            });
-           this.dataLoading=false;
+           
    
   }
 
@@ -272,6 +294,7 @@ export class EventSchedulePage {
   }
 
   close() {
+     localStorage.setItem("TabIndex",'1');
     this.viewCtrl.dismiss();
   }
 }

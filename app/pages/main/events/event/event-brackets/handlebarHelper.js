@@ -48,11 +48,14 @@ Handlebars.registerHelper('displayLocation', function (location, court, options)
 
 Handlebars.registerHelper('displayDateTime', function (date, time, options) {
     var   optDateTime = "";
-    console.log(date);
+                if(date=="Jan 1st"){
+                    optDateTime = "";
+                }
+
                 if (date && time) {
                     optDateTime =  date + ' / ' + time ;
                 }
-                else if (date & (date!='Jan 1st')) {
+                else if (date) {
                     optDateTime =  date;
                 }
                 else if (time) {

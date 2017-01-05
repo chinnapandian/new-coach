@@ -13,6 +13,7 @@ export class BracketDivisionsPage {
   private SelectedTournament;
   private selecteddivision;
   private divisionFilter;
+  private divisionId;
 
   constructor(
       private navCtrl: NavController,
@@ -20,6 +21,7 @@ export class BracketDivisionsPage {
       private navParams : NavParams) {
 
          this.selectedBracketGames = this.navParams.get("BracketGames");
+         console.log(this.selectedBracketGames);
          this.divisions.push({DivisionId:-1,DivisionName:'All Divisions'});
          this.uniqueDivisions = this.removeDuplicates(this.selectedBracketGames, "DivisionId");
          this.uniqueDivisions.forEach(t => {
@@ -47,13 +49,24 @@ export class BracketDivisionsPage {
 
 
  setSelectedDivision(division){
-       this.selecteddivision = division;
+       this.selecteddivision=division;
        this.divisionFilter = division;
+       if(division == "All Divisions")
+          this.divisionId = 0;
+       else {
+          this.divisions.forEach(d => {
+            if(d.DivisionName==division)
+              this.divisionId = d.DivisionId;
+          });
+       }
+
   }
 
   dismiss() {
     console.log(this.divisionFilter);
-    this.viewCtrl.dismiss(this.divisionFilter);
+    this.viewCtrl.dismiss({
+      DivisionName:this.divisionFilter,
+    DivisionId:this.divisionId});
   }
 
 }

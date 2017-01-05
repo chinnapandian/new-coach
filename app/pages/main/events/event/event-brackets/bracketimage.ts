@@ -15,6 +15,7 @@ declare var brackets: any;
 export class BracketImagePage {
   public bracket: any;
   private DivisionName;
+  private DivisionId;
   private SelectedTournamentName;
   private SelectedTournamentId;
 
@@ -25,16 +26,14 @@ export class BracketImagePage {
       private navParams : NavParams,
       private _sanitizer: DomSanitizationService) {
      
-   //   var divisionid = this.navParams.get("SelectedDivision").DivisionId;
-   //   this.DivisionName =  this.navParams.get("SelectedDivision").DivisionName;
-  //    var tournamentid = this.navParams.get("SelectedTournament").TournamentId;
-  //    console.log(tournamentid);
-  //    console.log(divisionid);
-   //   this._bracketService.getBracketsDetails(tournamentid, divisionid, "BasketBall")
+      this.DivisionId = this.navParams.get("SelectedDivisionId");
+      this.DivisionName =  this.navParams.get("SelectedDivisionName");
       this.SelectedTournamentName = localStorage.getItem("SelectedTournamentName");
       this.SelectedTournamentId = localStorage.getItem("SelectedTournamentId");
       
-      this._bracketService.getBracketsDetails(this.SelectedTournamentId, null, "BasketBall")
+       console.log(this.SelectedTournamentId);
+      console.log(this.DivisionId);
+      this._bracketService.getBracketsDetails(this.SelectedTournamentId, this.DivisionId ,"BasketBall")
         .subscribe(data => {
            localStorage.setItem('bracketsdetails', data);
             console.log(data);
@@ -83,7 +82,7 @@ export class BracketImagePage {
         });
 
       this.bracket = brackets.API;
-
+      console.log(this.bracket);
       var bracketTemp = '';
       
      Object.keys(teamSize).forEach(function(key) {
@@ -129,16 +128,12 @@ export class BracketImagePage {
                     'bracketSize': value
                 };
 
-       bracketTemp = bracketTemp + brackets.API.getHtmlTemplate(gamesData);
-        console.log(bracketTemp);
+           bracketTemp = bracketTemp + brackets.API.getHtmlTemplate(gamesData);
            });
-        this.bracket =  _sanitizer.bypassSecurityTrustHtml(bracketTemp);
-        
-    
-        }); 
-        
+           this.bracket = this._sanitizer.bypassSecurityTrustHtml('`' +  bracketTemp  + '`');
+        });        
   }
-
+  
     goToMenuPage() {
             this.navCtrl.remove(2);
             this.navCtrl.pop();   

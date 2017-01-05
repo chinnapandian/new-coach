@@ -6,6 +6,7 @@ import {MainTabs} from "../../main/tabs/main-tabs";
 import {MyPlayerConfigService} from '../../../services/config';
 import {SignupService} from '../../../services/signup';
 import {LoginService} from '../../../services/login';
+import {TempCurrDateService} from '../../../services/tempcurrdate';
 import {LandingPage} from "../../auth/landing/landing";
 import {ForgotPasswordPage} from './forgot-password/forgot-password';
 import {AddPlayerPage} from '../../../pages/main/home/add-player/add-player';
@@ -24,7 +25,7 @@ export class LoginData {
 
 @Component({
   templateUrl: 'build/pages/auth/login/login.html',
-  providers:[LoginData],
+  providers:[LoginData,TempCurrDateService],
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
 
@@ -42,7 +43,8 @@ export class LoginPage {
               private _loginData : LoginData,
               private _config: MyPlayerConfigService,
               private alertCtrl : AlertController,
-              private loadingCtrl : LoadingController) {
+              private loadingCtrl : LoadingController,
+              private currdate:TempCurrDateService) {
 
    this.getEmailForm = formBuilder.group({
         Email: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
@@ -80,7 +82,12 @@ export class LoginPage {
               this._loginService.setRegUserTournaments(data.RegUserTournaments);
               this._loginService.setRegUserPlayers(data.RegUserPlayers); 
               localStorage.setItem('homeView','teams');
-              this.navCtrl.setRoot(MainTabs);         
+              this.navCtrl.setRoot(MainTabs); 
+
+              this.currdate.getTempCurrDate()
+                .subscribe(data => {
+                this._config.setCurrDate(data.CurrDate);
+                });      
           }
           else
           {

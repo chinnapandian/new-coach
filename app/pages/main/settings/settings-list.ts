@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {App, NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
+import {App, NavController, ViewController, ModalController, NavParams, LoadingController} from 'ionic-angular';
 // import {SelectTeamPage} from '../tournament/select-team/select-team';
 import {ResetPasswordPage} from '../../auth/reset-password/reset-password';
 import {MyPlayerConfigService} from '../../../services/config';
@@ -28,7 +28,6 @@ export class SettingsListPage {
   private tournamentView: string = 'ongoing';
   private userInfo;
   private userName;
-
   constructor(private navCtrl: NavController,
               private viewCtrl: ViewController,
               private modalCtrl: ModalController,
@@ -36,7 +35,8 @@ export class SettingsListPage {
               private _config: MyPlayerConfigService,
               private _logoutService: LogoutService,
               private _loginService : LoginService,
-              private appCtrl : App) {
+              private appCtrl : App,
+              private loadingCtrl:LoadingController) {
 
      this.userInfo = this._loginService.getUserInfo();
      this.userName = this.userInfo.Context.User.UserName;
@@ -66,15 +66,20 @@ export class SettingsListPage {
        });
         modal.present();
    }
-     logOut() {
+  
+  logOut() {
+     let loader = this.loadingCtrl.create({
+                    content: "<div class='custom-spinner-container'><div class='custom-spinner-box'></div></div>"
+        });
+    loader.present();
         this._logoutService.logout()
           .subscribe(data => {
-            if (data) {
-                this._config.setAuthToken(null);
+                loader.dismiss();                
+                localStorage.clear();
+                this._config.setDeviceId(this._config.getDeviceId());
+                this._config.setDevice(this._config.getDevice());
+                this._config.setRegistrationId(this._config.getRegistrationId());
                 this.appCtrl.getRootNav().push(LandingPage);
-            } else {
-              
-            }
           });
     }
 

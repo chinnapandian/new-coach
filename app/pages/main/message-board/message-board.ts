@@ -1,72 +1,136 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, ModalController} from 'ionic-angular';
-import {ComposeMessagePage} from './compose/compose'
+import {ComposeMessagePage} from './compose/compose';
+import {SelectComposeMessageTeamPage} from './compose/select-team/select-team';
+import {ReplyMessagePage} from './compose/reply/reply';
+import {LoginService} from '../../../services/login';
+import {SearchMessagesPipe} from '../../../pipes/searchmessages';
+import {MessageBoardService} from '../../../services/messageboard';
+import {ViewCommentsPage} from './viewcomments/viewcomments';
 
 @Component({
-  templateUrl: 'build/pages/main/message-board/message-board.html'
+  templateUrl: 'build/pages/main/message-board/message-board.html',
+  providers : [MessageBoardService],
+  pipes :[SearchMessagesPipe]
 })
 
 export class MessageBoardPage {
-
-
-  private messages: any = [
-    {
-      title: 'Practice Canceled',
-      body: 'Practice has ben canceled today due to the snow storm. We will have our practice this tuesday at 5:00 instead.',
-      author: 'Ryan Thomas',
-      dateStamp: 'WED, 11/12',
-      timeStamp: '12:34 PM',
-      img: ''
-    },
-    {
-      title: 'Meetup Location' ,
-      body: 'Hey everyone! We are planning to meet in the 101a Walmart parking lot at 7:30 AM to carpool. If you do not plan to carpool then you do not have to come. See you Tomorrow!',
-      author: 'Ryan Thomas',
-      dateStamp: 'FRI, 11/12',
-      timeStamp: '3:12 PM',
-      img: ''
-    },{
-      title: 'Team Photo' ,
-      body: 'Mike Smith',
-      author: 'Ryan Thomas',
-      dateStamp: 'FRI, 11/12',
-      timeStamp: '10:01 AM',
-      img: '../../../../../kids-playing.jpg'
-    },
-    {
-      title: 'Tournament Entry Fee Needed For This Weekend',
-      body: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae. We will have our practice this tuesday at 5:00 instead.',
-      author: 'Ryan Thomas',
-      dateStamp: 'SAT, 11/12',
-      timeStamp: '12:34 PM',
-      img: ''
-    },
-    {
-      title: 'Pasta Party Details',
-      body: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. We will have our practice this tuesday at 5:00 instead.',
-      author: 'Frank Underwood',
-      dateStamp: 'SUN, 11/12',
-      timeStamp: '12:34 PM',
-      img: '../../../../../kids-playing.jpg'
-    },
-  ];
-
+  private followedTeams = [];
+  private filteredMessages = [];
+  private messages = [];
+  private TeamId;
+  private search = false;
+  private SearchKeyword = '';
+  private dataLoading = true;
 
   constructor(
       private navCtrl: NavController,
       private viewCtrl: ViewController,
-      private modalCtrl: ModalController) {
+      private modalCtrl: ModalController,
+      private _loginService: LoginService,
+      private msgBoard : MessageBoardService) {
+        this.followedTeams = this._loginService.getFollowedTeams();
+        this.TeamId = -1;
+        console.log(this.followedTeams);
+        this.getMessages();
+
+  }
+  getMessages(){
+       console.log("getmsgs");
+        this.msgBoard.getMessageList(this._loginService.getUserInfo().Context.User.UserId)
+        .subscribe(data => {
+          this.dataLoading = false;
+            console.log(data);
+            this.messages = data;
+            this.filteredMessages = this.messages;
+            
+        })
   }
 
-  // goToComposeMessagePage(){
-  //   this.navCtrl.push(ComposeMessagePage);
-  // }
+  filterTeam(){
+    this.filteredMessages = [];
+    if(this.TeamId != -1){
+     this.messages.forEach(msg => {
+       if(msg.MessageBoard.TeamId == this.TeamId){
+         this.filteredMessages.push(msg);
+       }        
+     });
+    }else{
+      this.filteredMessages = this.messages;
+    }
+
+  }
+
+  toggleSearch(){
+    this.search = this.search==false?true:false;
+  }
 
   goToComposeMessagePage() {
-    let composeMessageModal = this.modalCtrl.create(ComposeMessagePage);
-    composeMessageModal.present();
+    if(this.followedTeams.length==1){
+      let composeMessageModal = this.modalCtrl.create(ComposeMessagePage);
+      composeMessageModal.present();
+    }else{
+      let composeMessageModal = this.modalCtrl.create(SelectComposeMessageTeamPage);
+      composeMessageModal.present();
+    }
+    
   }
 
+  goToCommentsPage(message){
+      let commentModal = this.modalCtrl.create(ViewCommentsPage,{
+              Message : message
+            });
+       commentModal.present();
+  }
+
+  goToReplyMessagePage(message){
+      console.log("reply");
+      let replyMessageModal = this.modalCtrl.create(ReplyMessagePage,{
+         Message : message
+      });
+      replyMessageModal.present();
+  }
+
+   getCount(msgid){
+      var count = 0;
+      this.messages.forEach(msg => {
+        if(msg.MessageBoard.MsgId == msgid){
+            count = msg.MessageBoardReply.length;
+        }
+      });
+      return count;
+   }
+
+   getFormattedDate(dt) {
+        var date = new Date(dt);
+        var weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        return (weekdays[date.getDay()].toUpperCase() + ", " + (1 + date.getMonth()) + '/' + date.getDate());
+    }
+
+    convertToAmPm(dt){
+            var ampm = (parseInt(dt.substr(0,2)) >= 12) ? "PM" : "AM";
+            var hours;
+            if (parseInt(dt.substr(0,2)) == 12)
+              hours = 12;
+            else if (parseInt(dt.substr(0,2)) > 12)
+              hours =  parseInt(dt.substr(0,2))-12;
+            else
+              hours = parseInt(dt.substr(0,2));
+            var min = dt.substr(2,3);
+            return(hours + "" + min + " " + ampm);
+    }
+
+  onInput(key)
+    {
+      this.SearchKeyword = key.target.value.toString().toLowerCase();  
+      this.search = (this.SearchKeyword=='')?false:true;
+    }
+
+  onCancel(key)
+    {
+      console.log("cance");
+      this.search=false;
+    } 
   dismiss() {
     this.viewCtrl.dismiss();
   }

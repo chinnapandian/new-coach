@@ -34,12 +34,12 @@
             <ion-card class="">
                 <ion-list text-wrap>
                     <ion-item>
-                         <ion-avatar class="A-6-S" item-left>
+                   <!--      <ion-avatar class="A-6-S" item-left>
                             <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
-                        </ion-avatar>
+                        </ion-avatar>-->
                        <h2 title>{{SelectedTournamentName}}</h2>
                          <p subtitle>{{getDate(SelectedTournamentStartDate)}} - {{getDate(SelectedTournamentEndDate)}}</p>
-                        <button item-right primary outline>{{TournamentPurchasePrice | currency:'USD':true:'1.2-2'}}</button>
+                        <button item-right primary outline (click)="checkout(TournamentProductId, SelectedTournamentId, null, TournamentPurchasePrice)">{{TournamentPurchasePrice | currency:'USD':true:'1.2-2'}}</button>
                     </ion-item>
                 </ion-list>
                 <ion-list>
@@ -64,16 +64,16 @@
                         <!--<ion-avatar class="square" item-left>-->
                         <!--<img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">-->
                         <!--</ion-avatar>-->
-                        <h2 title>{{SelectedSeasonName}}  {{'-' + SelectedCircuitName}}</h2>
+                        <h2 title>{{SelectedSeasonName}}</h2>
                         <p>
-                            <span>May 5 2016</span>
+                            <span>{{getSeasonFormattedDate(SeasonStartDate)}}</span>
                             <small>
                                 <ion-icon md="md-arrow-round-forward" ios="md-arrow-round-forward"></ion-icon>
                             </small>
-                            <span>July 26, 2016</span>
+                            <span>{{getSeasonFormattedDate(SeasonEndDate)}}</span>
                         </p>
                         <!--<p>Presented by Zero Gravity</p>-->
-                        <button item-right outline>{{SeasonPurchasePrice | currency:'USD':true:'1.2-2'}}</button>
+                        <button item-right outline (click)="checkout(SeasonProductId, 0, SelectedSeasonId, SeasonPurchasePrice)">{{SeasonPurchasePrice | currency:'USD':true:'1.2-2'}}</button>
                     </ion-item>
                 </ion-list>
                 <br/>
@@ -81,9 +81,9 @@
                 <ion-list text-wrap>
                     <ion-list-header dark>Included Tournaments</ion-list-header>
                     <ion-item *ngFor="let tournament of season">
-                          <ion-avatar class="A-6-S" item-left>
+                       <!--   <ion-avatar class="A-6-S" item-left>
                             <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
-                        </ion-avatar>
+                        </ion-avatar> -->
                         <h2 title>{{tournament.TournamentName}}</h2>
                          <p subtitle>{{getDate(tournament.StartDate)}} - {{getDate(tournament.EndDate)}}</p>
                         <!--<button item-right outline>$.99</button>-->

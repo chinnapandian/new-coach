@@ -30,6 +30,7 @@ export class GameDetailsPage {
   }
 
   dismiss() {
+     localStorage.setItem("TabIndex",'1');
     this.viewCtrl.dismiss();
   }
 }

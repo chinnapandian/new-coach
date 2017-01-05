@@ -30,28 +30,32 @@
         <ion-grid class="bracket-rounds">
             <ion-row>
                 <span item-left *ngFor="let i of maxround| fill ; let j=index">
-                           <button small primary  (click)="showBracketGames(j)">Round {{j+1}}</button>
+                           <button small primary  *ngIf="RoundIndex==j" (click)="showBracketGames(j)">Round {{j+1}}</button>
+                           <button small outline  *ngIf="RoundIndex!=j" (click)="showBracketGames(j)">Round {{j+1}}</button>
                 </span>
             </ion-row>
         </ion-grid>
     </ion-toolbar>
 
-    <ion-card class="matchup" *ngFor="let game of bracketGamesOfRound">
-        <ion-list-header>Bracket B{{game.GameId}} <span *ngIf="game.title=='champion'" item-right light-gray>Championship</span></ion-list-header>
-       <ion-grid>
+    <ion-card class="matchup" *ngFor="let bracketgame of bracketGamesOfRound | groupbracketdata">
+          <ion-list-header *ngIf="bracketgame.Championship=='Y'"><p><b>{{bracketgame.DivisionName}} - {{bracketgame.Title}}</b></p></ion-list-header>
+       <ion-list-header  *ngIf="bracketgame.Championship=='N'"><p><b>{{bracketgame.DivisionName}}</b></p></ion-list-header>
+       <ion-grid *ngFor="let game of bracketgame.bracketGamesOfRound">
+   
             <ion-row>
-                <ion-col width-75>
+                <ion-col width-70>
+                    
                     <ion-list no-wrap>
                         <ion-item>
                             <ion-avatar class="A-4" item-left>
                                 <img src="medal-shadow.png" alt="">
                             </ion-avatar>
-                              <h2 *ngIf="game.Team1Name==''" title>TBD</h2>
-                            <h2 *ngIf="((game.Team1Name!='')&&(game.Team1Name!='winner'))" title>{{game.Team1Name}}</h2>
-                             <h2 *ngIf="((game.Team1Name!='')&&(game.Team1Name=='winner'))" title>Winner of B{{game.GameId}}</h2>
-                            <p *ngIf="((game.Team1Name=='')&&(game.TournTeamId1==''))">{{game.Team1PoolName}} / B{{game.GameId}}</p>
-                            <p *ngIf="((game.Team1Name=='')&&(game.TournTeamId1!=''))">Winner of B{{game.GameId}}</p>
-                            <p *ngIf="game.Team1Name!=''">{{game.Coach1Name}}</p>
+                                <h2 *ngIf="game.Team1Name==''" title>TBD</h2>
+                                <h2 *ngIf="((game.Team1Name!='')&&(game.Team1Name!='winner'))" title>{{game.Team1Name}}</h2>
+                                <h2 *ngIf="((game.Team1Name!='')&&(game.Team1Name=='winner'))" title>Winner of B{{game.PrevGameId1}}</h2>
+                                <p *ngIf="((game.Team1Name=='')&&(game.TournTeamId1==''))">{{game.Team1PoolName}} / {{getOrdinal(game.Team1PlaceHolder)}}</p>
+                                <p *ngIf="((game.Team1Name=='')&&(game.TournTeamId1!=''))">Winner of B{{game.GameId}}</p>
+                                <p *ngIf="game.Team1Name!=''">{{game.Coach1Name}}</p>
                         </ion-item>
                         <ion-item>
                             <ion-avatar class="A-4" item-left>
@@ -59,19 +63,28 @@
                             </ion-avatar>
                            <h2 *ngIf="game.Team2Name==''" title>TBD</h2>
                            <h2 *ngIf="((game.Team2Name!='')&&(game.Team2Name!='winner'))" title>{{game.Team2Name}}</h2>
-                            <h2 *ngIf="((game.Team1Name!='')&&(game.Team1Name=='winner'))" title>Winner of B{{game.GameId}}</h2>
-                            <p *ngIf="((game.Team2Name=='')&&(game.TournTeamId2==''))">{{game.Team2PoolName}} / B{{game.GameId}}</p>
+                            <h2 *ngIf="((game.Team2Name!='')&&(game.Team2Name=='winner'))" title>Winner of B{{game.PrevGameId2}}</h2>
+                            <p *ngIf="((game.Team2Name=='')&&(game.TournTeamId2==''))">{{game.Team2PoolName}} / {{getOrdinal(game.Team2PlaceHolder)}}</p>
                             <p *ngIf="((game.Team2Name=='')&&(game.TournTeamId2!=''))">Winner of B{{game.GameId}}</p>
                             <p *ngIf="game.Team2Name!=''">{{game.Coach2Name}}</p>
                         </ion-item>
                     </ion-list> 
                 </ion-col>
-               <ion-col with-25 class="date-time">
-                <p>
-                        <span class="date">{{getDayOfDate(game.GameDate)}}</span>
-                        <br>
-                        <span class="time">{{game.StartShortTime}}</span>
-                    </p>
+                 <ion-col width-30 class="date-time">
+                    <ion-list>
+                        <ion-item>
+                            <p *ngIf="game.StartShortTime!=null">
+                                <span class="bracketdate" >{{game.LocationAbb}} / </span></p>
+                                <span class="bracketdate">{{game.CourtName}}</span>
+                             <p style="text-align:left;color:green"><b>B{{game.GameId}}</b>
+                             </p>
+                            <p *ngIf="game.StartShortTime!=null"> <span class="bracketdate">{{getDayOfDate(game.GameDate)}}</span></p>
+
+                                <span class="bracketdate" *ngIf="game.StartShortTime!=null">{{game.StartShortTime}}</span>
+                                <span *ngIf="game.StartShortTime==null">Not <br>Scheduled</span>
+                        </ion-item>
+                    </ion-list> 
+                    <hr>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -178,5 +191,5 @@
             </ion-row>
         </ion-grid>
     </ion-card>-->
-
+ <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

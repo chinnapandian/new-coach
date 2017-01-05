@@ -23,6 +23,7 @@ export class HomePage {
 
   // Defining variable
   private dataLoading=true;
+  private error = false;
   private homeView: string = 'teams';
   public testRadioOpen: any = false;
   public testRadioResult: any;
@@ -71,7 +72,7 @@ export class HomePage {
               private _config: MyPlayerConfigService,
               private playerstatsService:GetPlayerStatsService) {
                         
-                    this.homeView = (localStorage.getItem('homeView')==null?this.homeView:localStorage.getItem('homeView'));
+                    this.homeView = (localStorage.getItem('homeView')==null?this.homeView:localStorage.getItem('homeView'));       
                     this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
                     this.loginService.login(this.loginService.getLoginData())      
                     .subscribe(data => {
@@ -87,6 +88,8 @@ export class HomePage {
                           {
                             this.dataLoading = false;
                             this.FollowedTeams = null;
+                            this.error=true;
+                            console.log("error="+ this.error);
                             this.loginService.setFollowedTeams(null); 
                           }  
                           else
@@ -106,7 +109,9 @@ export class HomePage {
                                       .subscribe(data => {
                                         console.log(data);
                                             this.FollowedPlayers = data.PlayerStatsinfo;
-                                            this.dataLoading = false;
+                                            this.dataLoading=false;
+                                            this.error=((this.FollowedTeams == null)&&(this.dataLoading==false))?true:false;
+                                            console.log("error="+ this.error);
                                       });
                            
                           }                          

@@ -175,6 +175,8 @@ export class StatEventsPage {
                 private loginService:LoginService,
                 private config:MyPlayerConfigService) {
 
+        this.today=this.config.getCurrDate();
+        console.log(this.today);
         this.tournaments = this.loginService.getRegUserTournaments();
         var teamId ;
         teamId= localStorage.getItem("SelectedPlayerTeamId");
@@ -185,10 +187,7 @@ export class StatEventsPage {
                 this.playerEvents.push(tourn);
             }
             console.log(this.playerEvents);
-        });
-
-         this.today=this.config.getCurrDate();
-         console.log(this.today);
+        });        
          this.initialize();
     }
 

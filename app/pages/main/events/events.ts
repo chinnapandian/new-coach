@@ -126,7 +126,7 @@ export class EventsPage {
     
     goToSelectedEventPage(tourn) {
         console.log(tourn);
-        var TournamentPrice,SeasonPrice;
+        var TournamentPrice,SeasonPrice,TournProdId,SeasonProdId;
         
         localStorage.setItem("SelectedTournamentId",tourn.TournamentId);
         localStorage.setItem("SelectedTournamentName",tourn.TournamentName);
@@ -139,13 +139,18 @@ export class EventsPage {
                     console.log(data);
                      TournamentPrice = data[0].Rate;
                      SeasonPrice = data[1].Rate;
+                     TournProdId = data[0].ProductId;
+                     SeasonProdId = data[1].ProductId;
+
                     console.log(TournamentPrice);
                     console.log(SeasonPrice);
                     let purchaseEventModal = this.modalCtrl.create(PurchaseEventPage,
                     {
                         SelectedTournament : tourn,
                         TournamentPurchasePrice : TournamentPrice,
-                        SeasonPurchasePrice : SeasonPrice
+                        SeasonPurchasePrice : SeasonPrice,
+                        TournamentProductId : TournProdId,
+                        SeasonProductId : SeasonProdId
                     });
                     purchaseEventModal.present();
             })

@@ -6,11 +6,12 @@ import {LoginService} from "../../../../../../services/login";
 import {MyPlayerConfigService} from "../../../../../../services/config";
 import {GetPlayerStatsService} from  '../../../../../../services/getplayerstats';
 import {TitlePipe} from  '../../../../../../pipes/title';
+import {TempCurrDateService} from  '../../../../../../services/tempcurrdate';
 var moment;
 
 @Component({
     templateUrl: 'build/pages/main/home/player/stat-events/selected-stat-event/selected-stat-event.html',
-    providers:[GetPlayerStatsService],
+    providers:[GetPlayerStatsService, TempCurrDateService],
     pipes: [TitlePipe]
 })
 
@@ -136,6 +137,7 @@ export class SelectedStatEventPage {
     private PlayerLastName;
     private TeamId;
     private UserId;
+    private today;
     private FollowedPlayers;
     private statValues = []
     private statCard: any = [
@@ -172,7 +174,8 @@ export class SelectedStatEventPage {
                 private loginService:LoginService,
                 private playerstatsService:GetPlayerStatsService,
                 private alertCtrl:AlertController,
-                private config:MyPlayerConfigService) {
+                private config:MyPlayerConfigService,
+                private currdate:TempCurrDateService) {
 
             this.Stats_Tournament = this.navParams.get("Stats_Tournament");
             this.PlayerUserId = localStorage.getItem("SelectedPlayerId");
@@ -200,32 +203,42 @@ export class SelectedStatEventPage {
         }
 
     goToRecordStatsPage(game){
-        console.log("entered");
-      console.log(game);
-      var eventStartTime = new Date(game.StartDateTime);
-      console.log(eventStartTime.valueOf());
-      var eventEndTime = new Date();
-      console.log(eventEndTime.valueOf());
-      var dur = eventEndTime.valueOf() - eventStartTime.valueOf();
-      var duration = Math.round(((dur % 86400000) % 3600000) / 60000);
-      console.log(duration);
-      if(duration<=5){
-            this.navCtrl.push(RecordStatsPage,{
-                    Stats_TournamentId : this.navParams.get("Stats_Tournament").TournamentId,
-                    Stats_Game : game
-            });
-      }else{
-             let alert = this.alertCtrl.create({
-                                        title: 'Record Statistics',
-                                        subTitle: 'Stats can only be recorded for an ongoing game or if a game is about to start within the next 5 minutes',
-                                        buttons:[{
-                                            text : 'OK',
-                                            handler: () => {
-                                              }
-                                            }],     
-                                      });
-                      alert.present();
-      }
+      this.currdate.getTempCurrDate()
+        .subscribe(data => {
+            console.log(data);
+            this.today = data.CurrDate;
+         /*  console.log(data.CurrTime);
+            var eventStartTime = new Date(game.StartDateTime);
+            console.log(eventStartTime.valueOf());
+            var eventEndTime = new Date(data.CurrTime);
+            console.log(eventEndTime.valueOf());
+            var dur = eventEndTime.valueOf() - eventStartTime.valueOf();
+            console.log(dur);
+            var duration = Math.round(((dur % 86400000) % 3600000) / 60000);
+            console.log(duration);*/
+            var eventStartTime = new Date(game.StartDateTime);
+            var eventEndTime = new Date(data.CurrTime);
+            var duration = eventStartTime.getTime() - eventEndTime.getTime();
+            var durationInMinutes =  Math.round(duration / 60000);
+            console.log(durationInMinutes);
+            if(durationInMinutes<=5){
+                    this.navCtrl.push(RecordStatsPage,{
+                            Stats_TournamentId : this.navParams.get("Stats_Tournament").TournamentId,
+                            Stats_Game : game
+                    });
+            }else{
+                    let alert = this.alertCtrl.create({
+                                                title: 'Record Statistics',
+                                                subTitle: 'Stats can only be recorded for an ongoing game or if a game is about to start within the next 5 minutes',
+                                                buttons:[{
+                                                    text : 'OK',
+                                                    handler: () => {
+                                                    }
+                                                    }],     
+                                            });
+                            alert.present();
+            }
+        })
     }
 
   goToViewStatsPage(game){
@@ -270,6 +283,7 @@ export class SelectedStatEventPage {
           var min = dt.substr(2,3);
           return(hours + "" + min + " " + ampm);
    }
+
 
     dismiss() {
         this.viewCtrl.dismiss();

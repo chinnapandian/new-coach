@@ -1,4 +1,5 @@
-<ion-list [(ngModel)]="divisionFilter"  radio-group >
+
+<ion-list [(ngModel)]="divisionFilter"  radio-group (ionChange)="setSelectedDivision(divisionFilter)">
 
     <ion-list-header>
         Select a Division
@@ -9,4 +10,4 @@
       <ion-label>{{division.DivisionName}}</ion-label>
       <ion-radio  value={{division.DivisionName}}></ion-radio>
     </ion-item>
-</ion-list>
+   

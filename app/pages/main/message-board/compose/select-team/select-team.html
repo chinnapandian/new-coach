@@ -7,27 +7,13 @@
 </ion-header>
 
 <ion-content>
-
-    <ion-card>
-        <ion-list>
-            <a ion-item>
-                <ion-avatar class="A-5" item-left>
-                    <img src="team-logos/spartans.jpeg" alt="">
-                </ion-avatar>
-                <h2>Spartans Boys 12U</h2>
-            </a>
-
-            <ion-item>
-                <ion-label floating>Subject</ion-label>
-                <ion-input type="text"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-label floating>Message</ion-label>
-                <ion-textarea rows="10"></ion-textarea>
-            </ion-item>
-
-        </ion-list>
-    </ion-card>
-
+<ion-card>
+    <ion-list>
+            <button ion-item detail-none *ngFor="let team of followedTeams"  (click)="goToComposeMessage(team)">
+                <h2>
+                {{team.TeamName.toUpperCase()}}
+                </h2>           
+            </button>
+    </ion-list>
+</ion-card>
 </ion-content>

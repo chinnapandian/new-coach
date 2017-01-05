@@ -17,9 +17,9 @@
     <ion-card>
         <ion-list text-wrap>
             <ion-item text-wrap>
-                <ion-avatar class="A-6-S" item-left>
+             <!--   <ion-avatar class="A-6-S" item-left>
                             <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
-                 </ion-avatar>
+                 </ion-avatar> -->
                 <h2 title>{{Stats_Tournament.TournamentName}}</h2>
                 <p subtitle>{{getDate(Stats_Tournament.StartDate)}} - {{getDate(Stats_Tournament.EndDate)}}</p>
             </ion-item>
@@ -78,7 +78,7 @@
 
             </ion-row>
             <!-- *ngIf="game.myPlayerStatsId==0"-->
-            <ion-row class="has-button" *ngIf="game.myPlayerStatsId==0" >
+            <ion-row class="has-button" *ngIf="game.myPlayerStatsId==0">
                 <button class="header-right" block small outline danger (click)="goToRecordStatsPage(game)">
                     Record Stats
                 </button>

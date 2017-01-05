@@ -24,6 +24,7 @@ export class EventStandingsPage {
   private divisionFilter;
   private followedTeams = [];
   private followedTeamsStandings = [];
+  private dataLoading = true;
   constructor(
       private navCtrl: NavController,
       private viewCtrl: ViewController,
@@ -39,7 +40,7 @@ export class EventStandingsPage {
 
           console.log(this.tournstandings);
           this.divisionFilter=(this.navParams.get('divisionFilter')==null?'All Divisions':this.navParams.get('divisionFilter'));
-          this.getTeamStandings();
+        //  this.getTeamStandings();
           this.getStandingsOfDivision(this.divisionFilter);
   }
 
@@ -57,14 +58,15 @@ export class EventStandingsPage {
   getStandingsOfDivision(divname){
        this.selectedTournStandings = [];
        if(this.divisionFilter != 'All Divisions'){
-          for(var i=0;i<this.followedTeamsStandings.length;i++){
-            if(this.followedTeamsStandings[i].DivisionName == divname)
-              this.selectedTournStandings.push(this.followedTeamsStandings[i]);
+          for(var i=0;i<this.tournstandings.length;i++){
+            if(this.tournstandings[i].DivisionName == divname)
+              this.selectedTournStandings.push(this.tournstandings[i]);
           }
        }
        else
-          this.selectedTournStandings = this.followedTeamsStandings;
+          this.selectedTournStandings = this.tournstandings;
        console.log(this.selectedTournStandings);
+       this.dataLoading=false;
   }
 
   goToSelectDivisionPage(divisionEvent) {
@@ -72,7 +74,7 @@ export class EventStandingsPage {
     //   this.navCtrl.pop();
 
         let divisionPopover = this.divisionPopoverCtrl.create(StandingsDivisionFilterPage,{
-            SelectedTournStandings : this.selectedTournStandings,
+            SelectedTournStandings : this.tournstandings,
             SelectedDivision : this.divisionFilter
         });
         divisionPopover.onDidDismiss(data => {
@@ -87,6 +89,7 @@ export class EventStandingsPage {
 
 
   dismiss() {
+     localStorage.setItem("TabIndex",'1');
     this.viewCtrl.dismiss();
   }
 }

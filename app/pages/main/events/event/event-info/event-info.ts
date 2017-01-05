@@ -19,6 +19,7 @@ export class EventInfoPage {
     private facilities: any = [];
     private facilitiesaddress = [];
     private uniqueLocations = [];
+    private dataLoading=true;
 
     constructor(private navCtrl : NavController,
                 private viewCtrl : ViewController,
@@ -54,7 +55,7 @@ export class EventInfoPage {
                                                         State : location.State,
                                                         Zip : location.Zip,
                                                         Country : location.Country,
-                                                        Address :location.Address1 + ", " + location.Address2 + ", " +       
+                                                        Address : location.Address1 + ", " +       
                                                                   location.City + ", " + location.State + ", " +
                                                                   location.Zip + ", " + location.Country})
                                    break;
@@ -62,6 +63,7 @@ export class EventInfoPage {
                           }
                         }
                         console.log(this.facilities);
+                        this.dataLoading = false;
                     });
     }
 
@@ -80,13 +82,17 @@ export class EventInfoPage {
     }
 
    loadMap(address){
-    console.log(address);
+   console.log(address);
     //convert address to latitude, longitude using GeoCoder
     var geocoder= new google.maps.Geocoder();
+    
+    console.log(geocoder);
     geocoder.geocode({ 'address': address }, function (results, status) {
+        console.log(results);
                         if (status == google.maps.GeocoderStatus.OK) {                         
                                 var lat = results[0].geometry.location.lat();
                                 var lng = results[0].geometry.location.lng();
+                                console.log(lat,lng);
                                 var myCenter=new google.maps.LatLng(lat,lng);
                                 //set map properties
                                   var mapProp = {
@@ -129,6 +135,7 @@ export class EventInfoPage {
     }
 
     dismiss() {
+         localStorage.setItem("TabIndex",'1');
         this.viewCtrl.dismiss();
     }
 

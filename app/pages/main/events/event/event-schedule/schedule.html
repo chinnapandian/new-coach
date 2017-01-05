@@ -36,7 +36,9 @@
                             </ion-avatar>
                             <h2 title>{{game.Team1Name}}</h2>
                             <p>{{game.Coach1Name}}</p>
-                            <h1 item-right class="winner">{{game.TournTeamId1Score}}</h1>
+                              <h1 item-right  class="winner" [hidden]="game.TournTeamId1Score<game.TournTeamId2Score">{{game.TournTeamId1Score}}</h1>
+                              <h1 item-right  class="" [hidden]="game.TournTeamId1Score>=game.TournTeamId2Score">{{game.TournTeamId1Score}}</h1>
+                          <!--  <h1 item-right class="winner">{{game.TournTeamId1Score}}</h1>-->
                         </ion-item>
                         <ion-item>
                             <ion-avatar class="A-4" item-left>
@@ -44,7 +46,8 @@
                             </ion-avatar>
                             <h2 title>{{game.Team2Name}}</h2>
                             <p>{{game.Coach2Name}}</p>
-                            <h1 item-right class="loser">{{game.TournTeamId2Score}}</h1>
+                             <h1 item-right  class="winner" [hidden]="game.TournTeamId2Score<game.TournTeamId1Score">{{game.TournTeamId2Score}}</h1>
+                             <h1 item-right  class="" [hidden]="game.TournTeamId2Score>=game.TournTeamId1Score">{{game.TournTeamId2Score}}</h1>
                         </ion-item>
                     </ion-list>
                 </ion-col>

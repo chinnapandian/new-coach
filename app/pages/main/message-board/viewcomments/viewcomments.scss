@@ -1,0 +1,188 @@
+.message-card {
+
+  // styles to apply to all rows
+  .message-header, .message-body, .message-title {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  // Date, Time and Team Info
+  ion-row.message-header {
+    border-bottom: 1px solid color($colors, line);
+    padding-left: 8px;
+    padding-right: 8px;
+
+    ion-col {
+      p{
+        color: color($colors, dark-8);
+        margin-top: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 1.3rem;
+        font-weight: 500;
+        line-height: 2rem;
+      }
+    }
+  }
+
+  ion-row.message-title{
+    margin-top: 8px;
+
+    ion-col{
+      padding-bottom: 3px;
+    }
+
+    ion-col[width-85]{
+      //border-bottom: 1px dashed color($colors, line);
+
+      h1{
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: color($colors, dark-3);
+      }
+
+      p{
+        font-size: 1.3rem;
+        line-height: 1rem;
+        color: color($colors, dark-6);
+      }
+
+      .accent-bar{
+        margin-top: 5px;
+        width: 60px;
+        height: 3px;
+        background-color: color($colors, gold);
+      }
+    }
+
+    ion-col[width-15]{
+      //border-bottom: 1px dashed color($colors, line);
+
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        width: 80%;
+        border-radius: 10rem;
+      }
+    }
+
+  }
+
+  ion-row.message-footer{
+    border-top: 1px solid color($colors, line);
+
+    button.message-comment{
+      text-align: right;
+      float: right;
+    }
+  }
+
+  ion-row.message-body {
+    padding-top: 8px;
+    padding-bottom: 16px;
+    //padding-left: 16px;
+
+    ion-col.team-logo{
+      text-align: center;
+
+      img {
+        width: 80%;
+      }
+    }
+
+    div.title {
+
+      h1{
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: color($colors, dark-2);
+      }
+
+      p{
+        font-size: 1.3rem;
+        line-height: 1rem;
+        color: color($colors, dark-a);
+        border-bottom: 3px solid color($colors, gold);
+      }
+
+
+      padding-bottom: 3px;
+      margin-bottom: 3px;
+      border-bottom: 1px dotted color($colors, line);
+
+      div.logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        float: right;
+        img{
+          width: 3rem;
+
+        }
+      }
+
+    }
+
+    p {
+      color: color($colors, secondary);
+      font-size: 1.6rem;
+      line-height: 2.1rem;
+      font-weight: 300;
+      //padding-left: 4px;
+      //border-left: 1px dotted color($colors, line);
+
+    }
+
+    p.message-author{
+      color: color($colors, dark-8);
+      font-size: 1.4rem;
+      float: right;
+      font-style: italic;
+    }
+  }
+
+}
+
+//.message-board {
+//
+//  . {
+//    padding: 8px;
+//  }
+//
+//  h1 {
+//    font-size: 2rem;
+//  }
+//
+//  .message-title {
+//    font-weight: bold;
+//    color: color($colors, primary) !important;
+//    font-size: 1.6rem;
+//  }
+//
+//  .message-body {
+//    color: color($colors, secondary);
+//    font-size: 1.4rem;
+//    line-height: 2.1rem;
+//    font-weight: 500;
+//  }
+//
+//  .message-author {
+//    text-align: right;
+//    font-style: italic;
+//    margin-top: 10px;
+//    font-size: 1.2rem;
+//    color: color($colors, gray);
+//  }
+//
+//  .message-timestamp {
+//    //color: color($colors, dark-6);
+//    color: #888;
+//    font-size: 1.2rem;
+//    margin-bottom: 10px;
+//    font-weight: 500;
+//  }
+//
+//}

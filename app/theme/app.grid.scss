@@ -15,6 +15,11 @@ ion-col.date-time {
   // left border
   border-left: 1px solid color($colors, line);
 
+  .bracketdate {
+      font-size: 1.4rem;
+      color: color($colors, primary);
+      
+    }
   //
   p {
     max-width: 90%;
@@ -24,6 +29,11 @@ ion-col.date-time {
       font-size: 1.8rem;
       color: color($colors, primary);
       text-transform: uppercase;
+    }
+     .bracketdate {
+      font-size: 1.4rem;
+      color: color($colors, primary);
+      
     }
     .time {
       color: color($colors, secondary);

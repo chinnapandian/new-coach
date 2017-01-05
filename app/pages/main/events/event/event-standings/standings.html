@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content class="standings">
-    <ion-card *ngFor="let pool of followedTeamsStandings | groupteambypool">
+    <ion-card *ngFor="let pool of selectedTournStandings | groupteambypool">
         <ion-list-header>
             <b>{{pool.PoolName}}</b>
         </ion-list-header>
@@ -38,4 +38,5 @@
             </ion-grid>
         </ion-card>
     </ion-card>
+     <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>
