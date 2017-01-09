@@ -126,7 +126,7 @@ export class AddPlayerPage {
                   {
                       console.log(data);
                    //   this._loginService.setRegUserTournaments(data.RegUserTournaments);
-                   //   this._loginService.setRegUserPlayers(data.RegUserPlayers); 
+                      this._loginService.setRegUserPlayers(data.RegUserPlayers); 
                       this.viewCtrl.dismiss();
                       this.navCtrl.setRoot(MainTabs);         
                   }

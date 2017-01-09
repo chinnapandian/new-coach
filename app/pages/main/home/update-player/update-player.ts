@@ -142,7 +142,7 @@ export class UpdatePlayerPage {
                 if(data.IsSuccess==true)
                   {
                       console.log(data);
-                      this._loginService.setRegUserTournaments(data.RegUserTournaments);
+                   //   this._loginService.setRegUserTournaments(data.RegUserTournaments);
                       this._loginService.setRegUserPlayers(data.RegUserPlayers); 
                       this.navCtrl.setRoot(MainTabs);         
                   }

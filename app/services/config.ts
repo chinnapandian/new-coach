@@ -66,7 +66,7 @@ export class MyPlayerConfigService {
         if(regId === 'undefined' || regId == ''|| regId==undefined)
             this.registrationId = this.defaultRegistrationId;
         else 
-             this.deviceId = regId;  
+             this.registrationId = regId;  
         localStorage.setItem("registrationId", this.registrationId);
     }
 

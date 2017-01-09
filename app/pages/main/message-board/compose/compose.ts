@@ -28,6 +28,7 @@ export class ComposeMessagePage {
   private message;
   private filteredMessages = [];
   private messages = [];
+  private save=0;
 
   constructor(
       private navCtrl: NavController,
@@ -57,17 +58,21 @@ export class ComposeMessagePage {
   }
 
   compose() {
-      var MsgObj = new Message();
-      MsgObj.TeamId = this.TeamId;
-      MsgObj.Subject = this.subject;
-      MsgObj.Message = this.message;
-      MsgObj.PostedUserId = this._loginService.getUserInfo().Context.User.UserId;
-      console.log(MsgObj);
-      this.msgboardService.addMessage(MsgObj)
-      .subscribe(data => {
-          console.log(data);
-          this.getMessages();                
-      })
+      this.save=1;
+      if(this.validateData()==true){
+        
+            var MsgObj = new Message();
+            MsgObj.TeamId = this.TeamId;
+            MsgObj.Subject = this.subject;
+            MsgObj.Message = this.message;
+            MsgObj.PostedUserId = this._loginService.getUserInfo().Context.User.UserId;
+            console.log(MsgObj);
+            this.msgboardService.addMessage(MsgObj)
+            .subscribe(data => {
+                console.log(data);
+                this.getMessages();                
+            })
+      }
 
   }
   getMessages(){
@@ -80,5 +85,12 @@ export class ComposeMessagePage {
             localStorage.setItem("TabIndex",'2'); 
             this.navCtrl.push(MainTabs);    
         })
+  }
+
+  validateData(){
+    if((this.subject!="")&&(this.message!="")&&(this.TeamId!=-1)&&(this.save==1))
+      return true;
+    else
+      return false;
   }
 }

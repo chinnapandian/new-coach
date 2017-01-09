@@ -74,13 +74,13 @@ export class HomePage {
                         
                     this.homeView = (localStorage.getItem('homeView')==null?this.homeView:localStorage.getItem('homeView'));       
                     this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
-                    this.loginService.login(this.loginService.getLoginData())      
+                 /*   this.loginService.login(this.loginService.getLoginData())      
                     .subscribe(data => {
                           console.log(data);
                           this._config.setAuthToken(data.AuthToken);
                           this.loginService.setUserInfo(data);
                           this.loginService.setRegUserTournaments(data.RegUserTournaments);
-                          this.loginService.setRegUserPlayers(data.RegUserPlayers); 
+                          this.loginService.setRegUserPlayers(data.RegUserPlayers); */
                           
                           this.FollowedTeamsPlayers = this.loginService.getRegUserPlayers();
                           console.log(this.FollowedTeamsPlayers.length);
@@ -95,6 +95,7 @@ export class HomePage {
                           else
                           {
                             this.FollowedTeams = this.removeDuplicates(this.FollowedTeamsPlayers, "TeamId");
+                            console.log(this.FollowedTeams);
                             this.loginService.setFollowedTeams(this.FollowedTeams);       
                        /*     this.FollowedTeamsPlayers.forEach(obj => {
                               if(obj.PlayerUserId!=0)
@@ -104,18 +105,19 @@ export class HomePage {
                             });  */
                           
                             //getPlayerStats
-                            console.log(data.Context.User.UserId);
-                            this.playerstatsService.getPlayerStats(data.Context.User.UserId,0,0,0)      
+                            console.log(this.loginService.getUserInfo().Context.User.UserId);
+                            this.playerstatsService.getPlayerStats(this.loginService.getUserInfo().Context.User.UserId,0,0,0)      
                                       .subscribe(data => {
                                         console.log(data);
                                             this.FollowedPlayers = data.PlayerStatsinfo;
+                                            console.log(this.FollowedPlayers);
                                             this.dataLoading=false;
                                             this.error=((this.FollowedTeams == null)&&(this.dataLoading==false))?true:false;
                                             console.log("error="+ this.error);
                                       });
                            
                           }                          
-                    });                                  
+                 //   });                                  
   }
 
  getStatValue(index1,index2){

@@ -28,7 +28,7 @@ unFollow(id)
     this.unfollowTeamService.unfollowTeam(team)
     .subscribe(data => {
       console.log(data);
-      this.loginService.setRegUserTournaments(data.RegUserTournaments);
+   //   this.loginService.setRegUserTournaments(data.RegUserTournaments);
       this.loginService.setRegUserPlayers(data.RegUserPlayers);
       this.loginService
       this.viewCtrl.dismiss();

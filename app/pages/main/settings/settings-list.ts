@@ -74,12 +74,13 @@ export class SettingsListPage {
     loader.present();
         this._logoutService.logout()
           .subscribe(data => {
-                loader.dismiss();                
+                loader.dismiss(); 
+                this.appCtrl.getRootNav().push(LandingPage);               
                 localStorage.clear();
                 this._config.setDeviceId(this._config.getDeviceId());
                 this._config.setDevice(this._config.getDevice());
                 this._config.setRegistrationId(this._config.getRegistrationId());
-                this.appCtrl.getRootNav().push(LandingPage);
+                
           });
     }
 

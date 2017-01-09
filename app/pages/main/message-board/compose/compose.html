@@ -35,11 +35,17 @@
                 <ion-label floating>Subject</ion-label>
                 <ion-input [(ngModel)]="subject" type="text"></ion-input>
             </ion-item>
+             <div *ngIf="((subject==null)&&(save==1))" style="color:red">
+                <strong>&nbsp;&nbsp;Subject is required</strong>
+            </div>
 
             <ion-item>
                 <ion-label floating>Message</ion-label>
                 <ion-textarea  [(ngModel)]="message" rows="10"></ion-textarea>
             </ion-item>
+             <div *ngIf="((message==null)&&(save==1))" style="color:red">
+                <strong>&nbsp;&nbsp;Message is required</strong>
+            </div>
 
         </ion-list>
     </ion-card>
