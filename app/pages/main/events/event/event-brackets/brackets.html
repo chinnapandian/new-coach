@@ -25,7 +25,9 @@
 </ion-header>
 
 <ion-content class="brackets">
-
+<div *ngIf="showImage==true && dataLoading==false" [innerHTML]="bracket" style="overflow-x: auto">
+</div>
+<div *ngIf="showImage==false && dataLoading==false">
     <ion-toolbar class="clear" no-border-top no-border-bottom>
         <ion-grid class="bracket-rounds">
             <ion-row>
@@ -36,7 +38,7 @@
             </ion-row>
         </ion-grid>
     </ion-toolbar>
-
+    
     <ion-card class="matchup" *ngFor="let bracketgame of bracketGamesOfRound | groupbracketdata">
           <ion-list-header *ngIf="bracketgame.Championship=='Y'"><p><b>{{bracketgame.DivisionName}} - {{bracketgame.Title}}</b></p></ion-list-header>
        <ion-list-header  *ngIf="bracketgame.Championship=='N'"><p><b>{{bracketgame.DivisionName}}</b></p></ion-list-header>
@@ -78,9 +80,9 @@
                                 <span class="bracketdate">{{game.CourtName}}</span>
                              <p style="text-align:left;color:green"><b>B{{game.GameId}}</b>
                              </p>
-                            <p *ngIf="game.StartShortTime!=null"> <span class="bracketdate">{{getDayOfDate(game.GameDate)}}</span></p>
+                            <p *ngIf="game.StartShortTime!=null"> <span class="date">{{getDayOfDate(game.GameDate)}}</span></p>
 
-                                <span class="bracketdate" *ngIf="game.StartShortTime!=null">{{game.StartShortTime}}</span>
+                                <span class="time" *ngIf="game.StartShortTime!=null">{{game.StartShortTime}}</span>
                                 <span *ngIf="game.StartShortTime==null">Not <br>Scheduled</span>
                         </ion-item>
                     </ion-list> 
@@ -89,7 +91,7 @@
             </ion-row>
         </ion-grid>
     </ion-card>
-
+</div>
    <!-- <ion-card class="matchup" *ngFor="let game of bracketGames1.round1">
         <ion-grid>
             <ion-row>
@@ -191,5 +193,6 @@
             </ion-row>
         </ion-grid>
     </ion-card>-->
+
  <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

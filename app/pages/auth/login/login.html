@@ -6,7 +6,7 @@
 <ion-content class="login">
 
 
-    <h1 class="big-message">LOG IN</h1>
+    <h1 class="big-message">Log In</h1>
     <ion-card class="error-message">
         <ion-list *ngIf="validUser=='false'">
             <ion-item>
@@ -19,19 +19,19 @@
        <form [formGroup]="getEmailForm" (submit)="login($event)">
         <ion-item>
             <ion-label stacked>Email</ion-label>
-            <ion-input  class="signup-email"  [(ngModel)]="Email" [formControl]="getEmailForm.controls['Email']" type="email" value=""></ion-input>
+            <ion-input  class="signup-email"  [(ngModel)]="Email" [formControl]="getEmailForm.controls['Email']" type="email"></ion-input>
         </ion-item>
         <div *ngIf ="getEmailForm.controls['Email'].touched">
-            <div *ngIf ="!getEmailForm.controls['Email'].valid && validUser==true" class = "alert-danger">
+            <div *ngIf ="!getEmailForm.controls['Email'].valid && validUser==true" class ="alert-danger">
             <strong>&nbsp;&nbsp;Invalid Email</strong>
             </div>  
         </div>
         <ion-item>
             <ion-label stacked>Password</ion-label>
-            <ion-input  class="signup-password"  [(ngModel)]="Password" [formControl]="getEmailForm.controls['Password']"  type="password" value=""></ion-input>
+            <ion-input  class="signup-password"  [(ngModel)]="Password" [formControl]="getEmailForm.controls['Password']"  type="password"></ion-input>
         </ion-item>
         <div *ngIf ="getEmailForm.controls['Password'].touched">
-            <div *ngIf ="!getEmailForm.controls['Password'].valid && validUser==true" class = "alert-danger">
+            <div *ngIf ="!getEmailForm.controls['Password'].valid && validUser==true" class ="alert-danger">
             <strong>&nbsp;&nbsp;Password is required</strong>
             </div> 
         </div>   

@@ -44,10 +44,10 @@
             <ion-card>
                 <ion-list no-wrap>
                     <a ion-item (click)="goToTeamPage(team)">
-                      <!--  <ion-avatar item-left class="A-6-S">
-                            <img [src]="team.img">
-                        </ion-avatar> -->
-                        <h2 title>{{team.TeamName}} ({{team.Grade}}/{{team.Gender}})</h2>
+                        <ion-avatar item-left class="A-6-S">
+                            <img [src]="'http://meltonbasketball.com.au/wp-content/uploads/2011/12/Spartans.jpg'">
+                        </ion-avatar> 
+                        <h2 title>{{team.TeamName}} ({{team.Grade}}/{{setGender(team.Gender)}})</h2>
                         <p><b>Coach: </b>{{(team.CoachFirstName + " " + team.CoachLastName)|title}}</p>
                     </a>
                 </ion-list>

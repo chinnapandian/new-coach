@@ -121,7 +121,9 @@ export class EventsPage {
     
     goToEventTabs(){
         console.log("entere");
-        this.navCtrl.setRoot(SelectedEventTabs);
+         let EventModal = this.modalCtrl.create(SelectedEventTabs);
+         EventModal.present();
+       // this.navCtrl.setRoot(SelectedEventTabs);
     }
     
     goToSelectedEventPage(tourn) {

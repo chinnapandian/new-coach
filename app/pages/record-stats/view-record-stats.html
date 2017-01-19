@@ -7,7 +7,7 @@
             </button>
         </ion-buttons>
 
-        <ion-title>Player Profile</ion-title>
+        <ion-title>Game Stats</ion-title>
 
         <ion-buttons end>
             <button (click)="goToEditPlayer()">
@@ -31,30 +31,34 @@
 </ion-header>
 
 <ion-content class="selected-player">
+ <ion-card class="record-stats-header-card">
+        <ion-grid class="stats-matchup">
 
-    <ion-card class="player-card">
-        <ion-grid>
-            <ion-row class="player-img">
-                <ion-col width-25>
-                    <h1 class="number" *ngIf="SelectedPlayer.JerseyNumber!=0">{{SelectedPlayer.JerseyNumber}}</h1>
-                </ion-col>
-                <ion-col width-50>
-                    <img src='{{imagePath}}{{SelectedPlayer.Avatar}}' alt=""> 
-                </ion-col>
-                <ion-col width-25>
-                    <h1 class="number">{{SelectedPlayer.Position}}</h1>
+            <ion-row class="player">
+                <ion-col>
+                    <img src="{{avatar}}" alt="">
                 </ion-col>
             </ion-row>
-            <ion-row class="player-info">
-                <ion-col>
-                    <h1>{{(SelectedPlayer.FirstName|title) + " " + (SelectedPlayer.LastName|title)}}</h1>
-                    <h2>{{SelectedPlayer.TeamName}}</h2>
-                    <!--<p class="pos"><b>#34</b> | Point Guard</p>
-                    <p>ID: 83H4K9</p>-->
+
+            <ion-row class="stats-matchup">
+
+                <ion-col width-50 class="left-team">
+                    <div>
+                        <img src="medal-shadow.png" alt="">
+                        <div text-wrap><b>{{Stats_Game.TeamA}}</b></div>
+                    </div>
+                </ion-col>
+
+                <ion-col width-50 class="right-team">
+                    <div>
+                        <img src="medal-shadow.png" alt="">
+                        <div text-wrap><b>{{Stats_Game.TeamB}}</b></div>
+                    </div>
                 </ion-col>
             </ion-row>
         </ion-grid>
     </ion-card>
+    
 
     <ion-grid>
         <ion-row>
@@ -84,8 +88,8 @@
             </ion-col>
 
             <!--right col-->
-            <ion-col>
-                <!--<ion-list-header>Games Played</ion-list-header>-->
+         <!--   <ion-col>
+                <!--<ion-list-header>Games Played</ion-list-header>
                 <ion-grid>
                     <ion-row>
                         <ion-col *ngFor="let stat of statGP">
@@ -107,7 +111,7 @@
                         </ion-col>
                     </ion-row>
                 </ion-grid>
-            </ion-col>
+            </ion-col> -->
         </ion-row>
     </ion-grid>
 

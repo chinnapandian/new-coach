@@ -80,14 +80,14 @@ ion-card.auth-form {
   h1.big-message {
     font-family: "co-headline", sans-serif;
     color: #fff;
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: 20px;
     margin-top: 10px;
 
     span.myludus {
-      font-size: 4rem;
+      font-size: 5rem;
       span.my {
-        font-weight: 600;
+        font-weight: 800;
         color: color($colors, dark-3);
       }
     }
@@ -110,7 +110,7 @@ ion-card.auth-form {
 
       ion-input > .text-input{
         color: color($colors, gold);
-        font-size: 2.1rem;
+        font-size: 2.8rem;
       }
 
       ion-input.signup-name {
@@ -140,8 +140,7 @@ ion-card.auth-form {
       font-size: 1.8rem;
       text-transform: uppercase;
     }
-  
-  .alert-danger{
+.alert-danger{
     color: #800;
   }
   }

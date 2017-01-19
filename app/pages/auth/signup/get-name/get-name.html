@@ -16,7 +16,7 @@
     </div>
 
     <ion-list class="auth-list">
-       <form   [formGroup]="getNameForm" (ngSubmit)="onSubmit(getNameForm.value)">
+       <form [formGroup]="getNameForm" (ngSubmit)="onSubmit(getNameForm.value)">
         <ion-item>
             <ion-label stacked>First Name</ion-label>
             <ion-input  class="signup-name" [formControl]="getNameForm.controls['firstName']" type="text" value=""></ion-input>

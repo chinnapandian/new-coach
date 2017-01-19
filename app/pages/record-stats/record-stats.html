@@ -11,7 +11,7 @@
         </ion-buttons>
 
     </ion-navbar>
-
+ 
     <ion-toolbar primary no-border-top class="stats-toolbar">
         <ion-grid>
             <ion-row class="grid-header">
@@ -41,24 +41,32 @@
                 </ion-col>
             </ion-row>
 
-       <!--     <ion-row class="player">
+            <ion-row class="player">
                 <ion-col>
                     <p>
-                        <ion-icon name="radio-button-on" danger></ion-icon>
-                        <ion-icon name="radio-button-on" danger></ion-icon>
-                        <ion-icon name="radio-button-off" danger></ion-icon>
-                        <ion-icon name="radio-button-off" danger></ion-icon>
-                        <ion-icon name="radio-button-off" danger></ion-icon>
+                        <span item-left *ngFor="let i of foulcount| fill">
+                            <ion-icon name="radio-button-on" danger></ion-icon>
+                        </span>
+                        <span item-left *ngFor="let i of (5-foulcount)| fill">
+                            <ion-icon name="radio-button-off" danger></ion-icon>
+                        </span>
                     </p>
+                <!--    <p>
+                        <ion-icon name="radio-button-on" danger></ion-icon>
+                        <ion-icon name="radio-button-on" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                        <ion-icon name="radio-button-off" danger></ion-icon>
+                    </p> -->
                 </ion-col>
-            </ion-row> -->
+            </ion-row> 
 
             <ion-row class="stats-matchup">
 
                 <ion-col width-50 class="left-team">
-                    <div>
+                    <div text-wrap>
                         <img src="medal-shadow.png" alt="">
-                        <h2>{{Game.TeamA}}</h2>
+                        <div text-wrap><b>{{Game.TeamA}}</b></div>
                    <!--     <p>(0 - 1)</p>-->
                     </div>
                 </ion-col>
@@ -66,7 +74,7 @@
                 <ion-col width-50 class="right-team">
                     <div>
                         <img src="medal-shadow.png" alt="">
-                        <h2>{{Game.TeamB}}</h2>
+                        <div text-wrap><b>{{Game.TeamB}}</b></div>
                        <!-- <p>(0 - 1)</p>-->
                     </div>
                 </ion-col>
@@ -95,13 +103,13 @@
 
             <ion-row>
                 <ion-col width-50>
-                    <button block outline success (click)="saveStats('pts2_Made')">
+                    <button block outline success (click)="saveStats('pts2_Made')"  [disabled]="foulcount>=5">
                         <!--<ion-icon ios="md-checkmark-circle" md="md-checkmark-circle"></ion-icon>-->
                         Made 2
                     </button>
                 </ion-col>
                 <ion-col width-50>
-                    <button block outline danger (click)="saveStats('pts2_Missed')">
+                    <button block outline danger (click)="saveStats('pts2_Missed')"  [disabled]="foulcount>=5">
                         <!--<ion-icon ios="md-close-circle" md="md-close-circle"></ion-icon>-->
                         Missed 2
                     </button>
@@ -110,13 +118,13 @@
 
             <ion-row>
                 <ion-col width-50>
-                    <button block outline success (click)="saveStats('pts3_Made')">
+                    <button block outline success (click)="saveStats('pts3_Made')"  [disabled]="foulcount>=5">
                         <!--<ion-icon ios="md-checkmark-circle" md="md-checkmark-circle"></ion-icon>-->
                         Made 3
                     </button>
                 </ion-col>
                 <ion-col width-50>
-                    <button block outline danger (click)="saveStats('pts3_Missed')">
+                    <button block outline danger (click)="saveStats('pts3_Missed')"  [disabled]="foulcount>=5">
                         <!--<ion-icon ios="md-close-circle" md="md-close-circle"></ion-icon>-->
                         Missed 3
                     </button>
@@ -125,13 +133,13 @@
 
             <ion-row>
                 <ion-col width-50>
-                    <button block outline success (click)="saveStats('FT_Made')">
+                    <button block outline success (click)="saveStats('FT_Made')"  [disabled]="foulcount>=5">
                         <!--<ion-icon ios="md-checkmark-circle" md="md-checkmark-circle"></ion-icon>-->
                         Made FT
                     </button>
                 </ion-col>
                 <ion-col width-50>
-                    <button block outline danger (click)="saveStats('FT_Missed')">
+                    <button block outline danger (click)="saveStats('FT_Missed')"  [disabled]="foulcount>=5">
                         <!--<ion-icon ios="md-close-circle" md="md-close-circle"></ion-icon>-->
                         Missed FT
                     </button>
@@ -146,16 +154,16 @@
         <ion-grid class="record-stats-grid">
             <ion-row>
                 <ion-col width-25>
-                    <button block outline orange (click)="saveStats('Assists')">Assist</button>
+                    <button block outline orange (click)="saveStats('Assists')"  [disabled]="foulcount>=5">Assist</button>
                 </ion-col>
                 <ion-col width-25>
-                    <button block outline orange (click)="saveStats('Steals')">Steal</button>
+                    <button block outline orange (click)="saveStats('Steals')"  [disabled]="foulcount>=5">Steal</button>
                 </ion-col>
                 <ion-col width-25>
-                    <button block outline orange (click)="saveStats('TurnOvers')">Turn.</button>
+                    <button block outline orange (click)="saveStats('TurnOvers')"  [disabled]="foulcount>=5">Turn.</button>
                 </ion-col>
                 <ion-col width-25>
-                    <button block outline orange (click)="saveStats('Blocks')">Block</button>
+                    <button block outline orange (click)="saveStats('Blocks')"  [disabled]="foulcount>=5">Block</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -168,13 +176,13 @@
 
             <ion-row>
                 <ion-col width-50>
-                    <button block outline secondary (click)="saveStats('Def_Rebounds')">
+                    <button block outline secondary (click)="saveStats('Def_Rebounds')"  [disabled]="foulcount>=5">
                         <!--<ion-icon ios="md-checkmark-circle" md="md-checkmark-circle"></ion-icon>-->
                         Def. Rebound
                     </button>
                 </ion-col>
                 <ion-col width-50>
-                    <button block outline primary (click)="saveStats('Off_Rebounds')">
+                    <button block outline primary (click)="saveStats('Off_Rebounds')"  [disabled]="foulcount>=5">
                         <!--<ion-icon ios="md-close-circle" md="md-close-circle"></ion-icon>-->
                         Off. Rebound
                     </button>
@@ -191,13 +199,13 @@
 
             <ion-row>
                 <ion-col width-50>
-                    <button block outline danger (click)="saveStats('Pers_Fouls')">
+                    <button block outline danger (click)="saveStats('Pers_Fouls')"  [disabled]="foulcount>=5">
                         <!--<ion-icon name="hand"></ion-icon>-->
                         Pers Foul
                     </button>
                 </ion-col>
                 <ion-col width-50>
-                    <button block outline danger (click)="saveStats('Tech_Fouls')">
+                    <button block outline danger (click)="saveStats('Tech_Fouls')"  [disabled]="foulcount>=5">
                         <!--<ion-icon name="hand"></ion-icon>-->
                         Tech Foul
                     </button>

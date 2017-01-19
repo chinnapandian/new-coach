@@ -84,6 +84,7 @@ export class FollowTeamsPage {
 
   onInput(key)
     {
+      console.log("input");
         this.SearchKeyword = key.target.value.toString().toLowerCase();
         if(this.SearchKeyword == ''){
            this.visibleBoysOrgInList(this.boysteams,false);
@@ -216,12 +217,32 @@ showhideGirlsteam(index){
     .subscribe(data =>
     {
       console.log(data);
-      this.loginService.setRegUserTournaments(data.RegUserTournaments);
+    //  this.loginService.setRegUserTournaments(data.RegUserTournaments);
       this.loginService.setRegUserPlayers(data.RegUserPlayers);
       this.navCtrl.push(MainTabs);
     })
   }
 
+   setGender(gender){
+                if(gender == 'M')
+                  return 'B';
+                else
+                  return 'G';  
+  }
+  clearsearch(){
+    this.SearchKeyword = '';
+    this.visibleBoysOrgInList(this.boysteams,false);
+    this.visibleGirlsOrgInList(this.girlsteams, false);
+  }
+  onCancel(ev){
+    console.log("event");
+    console.log(ev.target.value);
+  }
+  change(){
+        this.SearchKeyword = '';
+      this.visibleBoysOrgInList(this.boysteams,false);
+      this.visibleGirlsOrgInList(this.girlsteams, false);
+  }
   dismiss() {
     localStorage.setItem('homeView','teams');
     this.viewCtrl.dismiss();

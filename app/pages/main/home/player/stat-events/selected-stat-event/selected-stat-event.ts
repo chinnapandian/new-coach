@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {NavController, ViewController, ModalController, NavParams, AlertController} from 'ionic-angular';
+import {NavController, ViewController, LoadingController, ModalController, NavParams, AlertController} from 'ionic-angular';
 import {RecordStatsPage} from "../../../../../record-stats/record-stats";
-import {EditStatsPage} from "../../../../../record-stats/edit-record-stats";
+import {ViewRecordStats} from "../../../../../record-stats/view-record-stats";
 import {LoginService} from "../../../../../../services/login";
 import {MyPlayerConfigService} from "../../../../../../services/config";
 import {GetPlayerStatsService} from  '../../../../../../services/getplayerstats';
@@ -175,34 +175,48 @@ export class SelectedStatEventPage {
                 private playerstatsService:GetPlayerStatsService,
                 private alertCtrl:AlertController,
                 private config:MyPlayerConfigService,
-                private currdate:TempCurrDateService) {
+                private currdate:TempCurrDateService,
+                private loadingCtrl:LoadingController) {
 
-            this.Stats_Tournament = this.navParams.get("Stats_Tournament");
-            this.PlayerUserId = localStorage.getItem("SelectedPlayerId");
-            this.TeamId = localStorage.getItem("SelectedPlayerTeamId");
-           //this.TeamId=500;
-            console.log(this.Stats_Tournament.TournamentId);
-            console.log(this.PlayerUserId);
-            console.log(this.TeamId);
-            this.UserId = this.loginService.getUserInfo().Context.User.UserId;
-            this.playerstatsService.getPlayerStats(this.UserId,this.Stats_Tournament.TournamentId,this.PlayerUserId,this.TeamId)    
-                 .subscribe(data => {
-                      console.log(data);
-                      this.FollowedPlayers = data.PlayerStatsinfo[0];   
-                      this.poolGames = data.PlayerGames;
-                      var player = this.FollowedPlayers;
-                      this.PlayerFirstName = player.CustodianPlayer.FirstName;
-                      this.PlayerLastName = player.CustodianPlayer.LastName;
-                      this.statValues = [player.PPG, player.RPG, player.APG, player.FG2, player.FG3, player.STL, player.TO, player.BLK];
-            });
+                this.Stats_Tournament = this.navParams.get("Stats_Tournament");
+                this.PlayerUserId = localStorage.getItem("SelectedPlayerId");
+                this.TeamId = localStorage.getItem("SelectedPlayerTeamId");
+            //this.TeamId=500;
+                console.log(this.Stats_Tournament.TournamentId);
+                console.log(this.PlayerUserId);
+                console.log(this.TeamId);
+                this.UserId = this.loginService.getUserInfo().Context.User.UserId;
+                this.getPlayerStats();
                            
      }  
-
+    ionViewWillEnter() {
+        this.getPlayerStats();
+        localStorage.setItem("FoulCount","0");
+    }
+   
+   getPlayerStats(){
+      console.log(this.UserId);
+      console.log(this.Stats_Tournament.TournamentId);
+      console.log(this.PlayerUserId);
+      console.log(this.TeamId);
+      this.playerstatsService.getPlayerStats(this.UserId,this.Stats_Tournament.TournamentId,this.PlayerUserId,this.TeamId,0)    
+                    .subscribe(data => {
+                        console.log(data);
+                        this.FollowedPlayers = data.PlayerStatsinfo[0];   
+                        this.poolGames = data.PlayerGames;
+                        var player = this.FollowedPlayers;
+                        this.PlayerFirstName = player.CustodianPlayer.FirstName;
+                        this.PlayerLastName = player.CustodianPlayer.LastName;
+                        this.statValues = [player.PPG, player.RPG, player.APG, player.FG2, player.FG3, player.STL, player.TO, player.BLK];
+                });
+  }
     getStatValue(index2){   
             return this.statValues[index2];
         }
 
     goToRecordStatsPage(game){
+    if(this.navParams.get("Event_Type")=='ongoing')
+    {
       this.currdate.getTempCurrDate()
         .subscribe(data => {
             console.log(data);
@@ -237,12 +251,20 @@ export class SelectedStatEventPage {
                                                     }],     
                                             });
                             alert.present();
-            }
+           }
         })
+    }// newly record stats for ongoing games
+    else{
+        // go to view record stats page for completed games
+        this.navCtrl.push(ViewRecordStats,{
+                            Stats_TournamentId : this.navParams.get("Stats_Tournament").TournamentId,
+                            Stats_Game : game
+                    });
+    }
     }
 
   goToViewStatsPage(game){
-      this.navCtrl.push(EditStatsPage,{
+      this.navCtrl.push(ViewRecordStats,{
           Stats_TournamentId : this.navParams.get("Stats_Tournament").TournamentId,
           Stats_Game : game
       });

@@ -15,12 +15,13 @@
 </ion-header>
 
 <ion-content class="filter-state">
-    <ion-toolbar no-border-top no-border-bottom class="clear">
-            <ion-searchbar [(ngModel)]="SearchKeyword" (input)="onInput($event)"></ion-searchbar>
-    </ion-toolbar>
+    
 
     <ion-list-header>Where's your team from?</ion-list-header>
-    
+    <ion-toolbar no-border-top no-border-bottom class="clear">
+            <ion-searchbar [(ngModel)]="SearchKeyword" (input)="onInput($event)" (ionClear)="change()"
+                 (ionCancel)="change()"></ion-searchbar>
+    </ion-toolbar>
     <ion-card class="">
         <ion-list>
             <a ion-item text-wrap *ngFor="let state of states | searchstates : SearchKeyword" (click)="goToFollowTeamsPage(state)">

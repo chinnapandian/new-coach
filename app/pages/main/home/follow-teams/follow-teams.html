@@ -13,10 +13,6 @@
 
     </ion-navbar>
 
-   <ion-toolbar no-border-top no-border-bottom class="clear">
-            <ion-searchbar [(ngModel)]="SearchKeyword" (input)="onInput($event)"></ion-searchbar>
-    </ion-toolbar>
-
 </ion-header>
 
 <ion-content class="follow-teams">
@@ -27,15 +23,18 @@
 
     <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
         <ion-segment  [(ngModel)]="teamGender" class="wide" primary>
-            <ion-segment-button value="boys">
+            <ion-segment-button value="boys" (click)="clearsearch()">
                {{selectedState.StateCode}} Boys Teams
             </ion-segment-button>
-            <ion-segment-button value="girls">
+            <ion-segment-button value="girls" (click)="clearsearch()">
                {{selectedState.StateCode}} Girls Teams
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
-    
+    <ion-toolbar no-border-top no-border-bottom class="clear">
+            <ion-searchbar [(ngModel)]="SearchKeyword" (input)="onInput($event)" (ionClear)="change()"
+    (ionCancel)="change()"></ion-searchbar>
+    </ion-toolbar>
     <div [ngSwitch]="teamGender">
      <div *ngSwitchCase="'boys'">
           <div *ngIf="dataLoading==false">
@@ -48,7 +47,7 @@
                  </ion-list-header>
                 <ion-list *ngIf="showHideBoysHeader[bi]==true">
                     <ion-item text-wrap *ngFor="let team of boysteam.boysteams | sortBy : 'TeamName' | searchteam: SearchKeyword">
-                             <h2 title>{{team.TeamName}} ({{team.Grade}}/{{team.Gender}})</h2>
+                             <h2 title>{{team.TeamName}} ({{team.Grade}}/{{setGender(team.Gender)}})</h2>
                              <p><b>Coach:</b> {{team.CoachFirstName + ' ' + team.CoachLastName}} </p>
                             <button *ngIf="true == !checkBoysFollowedTeams(team.TeamId)" item-right  (click)="followBoysTeams(team)">Follow</button>
                             <button *ngIf="true == checkBoysFollowedTeams(team.TeamId)" primary item-right outline (click)="unfollowBoysTeams(team)">UnFollow</button>
@@ -72,7 +71,7 @@
            </ion-list-header>
            <ion-list *ngIf="showHideGirlsHeader[gi]==true">
                <ion-item text-wrap *ngFor="let team of girlsteam.girlsteams | sortBy : 'TeamName' |searchteam: SearchKeyword">
-                    <h2 title>{{team.TeamName}} ({{team.Grade}}/{{team.Gender}})</h2>
+                    <h2 title>{{team.TeamName}} ({{team.Grade}}/{{setGender(team.Gender)}})</h2>
                     <p><b>Coach:</b> {{team.CoachFirstName + ' ' + team.CoachLastName}} </p>
                      <button *ngIf="true == !checkGirlsFollowedTeams(team.TeamId)" item-right  (click)="followGirlsTeams(team)">Follow</button>
                      <button *ngIf="true == checkGirlsFollowedTeams(team.TeamId)" primary item-right outline (click)="unfollowGirlsTeams(team)">UnFollow</button>                                    

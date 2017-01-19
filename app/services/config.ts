@@ -20,7 +20,7 @@ export class MyPlayerConfigService {
     private device = localStorage.getItem("device");
     private registrationId =localStorage.getItem("registrationId");
 
-    private http = "http://";
+    private http = "https://";
 
 
     getHttp() {
@@ -28,7 +28,8 @@ export class MyPlayerConfigService {
     }
 
     getApiHost() {
-      return "stage.myludus.com:8050";
+        return "stage.myludus.com";
+    //  return "stage.myludus.com:8050";
     //  return "zerogravity.myludus.com";
       // return  "mygame.local";
     };
@@ -54,7 +55,8 @@ export class MyPlayerConfigService {
     }
     
     getAuthToken() {
-        return this.authToken!=undefined? this.authToken : '';
+        return (this.authToken==undefined)||(this.authToken=='')||(this.authToken=='undefined')||(this.authToken=='null')||(this.authToken==null) ? '' : this.authToken;
+    //    return this.authToken!=undefined? this.authToken : '';
     }
 
     setAuthToken(authToken) {

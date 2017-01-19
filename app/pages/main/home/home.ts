@@ -74,6 +74,7 @@ export class HomePage {
                         
                     this.homeView = (localStorage.getItem('homeView')==null?this.homeView:localStorage.getItem('homeView'));       
                     this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
+                    this.fillData();
                  /*   this.loginService.login(this.loginService.getLoginData())      
                     .subscribe(data => {
                           console.log(data);
@@ -81,9 +82,19 @@ export class HomePage {
                           this.loginService.setUserInfo(data);
                           this.loginService.setRegUserTournaments(data.RegUserTournaments);
                           this.loginService.setRegUserPlayers(data.RegUserPlayers); */
-                          
+              }
+              ionViewWillEnter(){
+                this.fillData();
+              }
+              setGender(gender){
+                if(gender == 'M')
+                  return 'B';
+                else
+                  return 'G';
+              }
+              fillData(){          
                           this.FollowedTeamsPlayers = this.loginService.getRegUserPlayers();
-                          console.log(this.FollowedTeamsPlayers.length);
+                          console.log(this.FollowedTeamsPlayers);
                           if(this.FollowedTeamsPlayers.length == 0)
                           {
                             this.dataLoading = false;
@@ -106,7 +117,7 @@ export class HomePage {
                           
                             //getPlayerStats
                             console.log(this.loginService.getUserInfo().Context.User.UserId);
-                            this.playerstatsService.getPlayerStats(this.loginService.getUserInfo().Context.User.UserId,0,0,0)      
+                            this.playerstatsService.getPlayerStats(this.loginService.getUserInfo().Context.User.UserId,0,0,0,0)      
                                       .subscribe(data => {
                                         console.log(data);
                                             this.FollowedPlayers = data.PlayerStatsinfo;
@@ -157,6 +168,8 @@ export class HomePage {
  goToStatEventsPage(player){
     localStorage.setItem("SelectedPlayerId", player.CustodianPlayer.PlayerUserId);
     localStorage.setItem("SelectedPlayerTeamId", player.CustodianPlayer.TeamId);
+    localStorage.setItem("SelectedPlayerStats",JSON.stringify(player));
+    console.log(player);
   //  localStorage.setItem("SelectedPlayerTeamId", '500');
     localStorage.setItem("PlayerTabIndex", '1');
     let playerModal = this.modalCtrl.create(PlayerTabs);

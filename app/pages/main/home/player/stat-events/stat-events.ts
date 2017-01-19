@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, ModalController, NavParams} from 'ionic-angular';
 import {SelectedStatEventPage} from "./selected-stat-event/selected-stat-event";
+import {HomePage} from "../../../home/home";
 import {LoginService} from "../../../../../services/login";
 import {MyPlayerConfigService} from "../../../../../services/config";
 import {GroupPastTournamentsPipe} from '../../../../../pipes/grouppasttournaments';
@@ -182,12 +183,14 @@ export class StatEventsPage {
         teamId= localStorage.getItem("SelectedPlayerTeamId");
         console.log(teamId);
         console.log(this.tournaments);
-        this.tournaments.forEach(tourn => {
-            if(tourn.TeamId == teamId && tourn.isRegistered == 1){
-                this.playerEvents.push(tourn);
-            }
-            console.log(this.playerEvents);
-        });        
+        if(this.tournaments!=null){
+            this.tournaments.forEach(tourn => {
+                if(tourn.TeamId == teamId && tourn.isRegistered == 1){
+                    this.playerEvents.push(tourn);
+                }
+                console.log(this.playerEvents);
+            });  
+        }      
          this.initialize();
     }
 
@@ -240,7 +243,8 @@ export class StatEventsPage {
     goToSelectedStatEventPage(tournament){
         console.log(tournament);
       this.navCtrl.push(SelectedStatEventPage,{
-          Stats_Tournament : tournament
+          Stats_Tournament : tournament,
+          Event_Type : this.timeView
       });
     }
     
@@ -250,6 +254,8 @@ export class StatEventsPage {
  
 
     dismiss() {
+        localStorage.setItem('homeView','players');
+     //   this.navCtrl.push(HomePage);
         this.viewCtrl.dismiss();
     }
 }

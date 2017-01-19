@@ -75,6 +75,7 @@ export class SettingsListPage {
         this._logoutService.logout()
           .subscribe(data => {
                 loader.dismiss(); 
+               // this.navCtrl.push(LandingPage);
                 this.appCtrl.getRootNav().push(LandingPage);               
                 localStorage.clear();
                 this._config.setDeviceId(this._config.getDeviceId());

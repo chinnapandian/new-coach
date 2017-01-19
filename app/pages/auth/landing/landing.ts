@@ -22,7 +22,8 @@ export class LandingPage {
   }
   
   goToLoginPage(){
-    this.navCtrl.setRoot(LoginPage);
+  //  this.navCtrl.setRoot(LoginPage);
+     this.navCtrl.push(LoginPage);
   }
 
 

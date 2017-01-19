@@ -48,18 +48,11 @@ Handlebars.registerHelper('displayLocation', function (location, court, options)
 
 Handlebars.registerHelper('displayDateTime', function (date, time, options) {
     var   optDateTime = "";
-                if(date=="Jan 1st"){
-                    optDateTime = "";
-                }
-
                 if (date && time) {
                     optDateTime =  date + ' / ' + time ;
                 }
-                else if (date) {
-                    optDateTime =  date;
-                }
-                else if (time) {
-                    optDateTime =  time;
+                else {
+                    optDateTime =  "";
                 }
 
     return optDateTime;

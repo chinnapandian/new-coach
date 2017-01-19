@@ -220,6 +220,7 @@ export class EventSchedulePage {
   }
 
   goToGameDetails(gameId) {
+    
    /* console.log(gameId);
     this.gameDetails = this.schedules.filter((v) => {
 

@@ -45,7 +45,9 @@ export class FilterTeamStatePage {
         this.SearchKeyword = key.target.value;
         console.log(this.SearchKeyword);
     }
-
+  change(){
+    this.SearchKeyword = '';
+  }
   dismiss() {
     localStorage.setItem('homeView','teams');
     this.navCtrl.setRoot(MainTabs);

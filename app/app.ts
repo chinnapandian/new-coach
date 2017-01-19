@@ -40,7 +40,7 @@ export class MyApp {
               private _config: MyPlayerConfigService,
               private currdate:TempCurrDateService) {
     
-    this.rootPage = LandingPage;
+  //  this.rootPage = LandingPage;
   /*    document.addEventListener('resume', () => {
       setTimeout(() => {
          console.log("resume");
@@ -56,9 +56,29 @@ export class MyApp {
       //check for the session of the user
     //  localStorage.setItem("device", Device.device.platform);
     //  localStorage.setItem("deviceId", Device.device.uuid);
+
       this._config.setDeviceId(Device.device.uuid);
       this._config.setDevice(Device.device.platform);
       this._config.setRegistrationId('');
+
+ //    if(localStorage.getItem('AuthToken') ==null)
+     if(this._config.getAuthToken() == null || this._config.getAuthToken() == '' || this._config.getAuthToken() == 'null')    
+            this.rootPage = LandingPage;
+      else
+      {
+        localStorage.setItem('homeView','teams');
+        localStorage.setItem("TabIndex",'0');
+        this.rootPage = MainTabs;
+        this.currdate.getTempCurrDate()
+          .subscribe(data => {
+            this._config.setCurrDate(data.CurrDate);
+            console.log(data.CurrDate);
+            
+          });
+
+        //  this.rootPage = EditStatsPage;
+      }
+      
       var push = Push.init({
         android: {
           senderID: "908682344630"
@@ -70,6 +90,7 @@ export class MyApp {
         },
         windows: {}
       });
+
       if (push) {
         push.on('registration', (data) => {
        //   localStorage.setItem("registrationId", data.registrationId);
@@ -88,27 +109,7 @@ export class MyApp {
       }
     });
            
-    console.log(Device.device.uuid);
-    console.log(Device.device.platform);
-    console.log(this._config.getAuthToken()); 
-    console.log(localStorage.length)
-    if(localStorage.getItem('AuthToken') ==null)
-  //  if(this._config.getAuthToken() == null || this._config.getAuthToken() == '' || this._config.getAuthToken() == 'null')    
-          this.rootPage = LandingPage;
-     else
-     {
-       localStorage.setItem('homeView','teams');
-       localStorage.setItem("TabIndex",'0');
-       this.rootPage = MainTabs;
-       this.currdate.getTempCurrDate()
-        .subscribe(data => {
-          this._config.setCurrDate(data.CurrDate);
-          console.log(data.CurrDate);
-          
-        });
-
-      //  this.rootPage = EditStatsPage;
-     }
+   
          
   }
 

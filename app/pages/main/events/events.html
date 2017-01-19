@@ -61,9 +61,9 @@
                 <ion-list-header>{{tournaments.SeasonName}}</ion-list-header>
                 <ion-card>
                         <ion-item text-wrap  *ngFor="let tourn of tournaments.pastTournaments">
-                         <!--  <ion-avatar class="A-6-S" item-left>
+                           <ion-avatar class="A-6-S" item-left>
                             <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
-                        </ion-avatar> -->
+                        </ion-avatar> 
                         <a (click)="goToSelectedEventPage(tourn)">
                             <h2 title>{{tourn.TournamentName}}</h2>
                             <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
@@ -78,9 +78,9 @@
                 <ion-list-header>{{tournaments.SeasonName}}</ion-list-header>
                 <ion-card>
                         <ion-item text-wrap  *ngFor="let tourn of tournaments.currentTournaments">
-                         <!--   <ion-avatar class="A-6-S" item-left>
+                            <ion-avatar class="A-6-S" item-left>
                             <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
-                        </ion-avatar> -->
+                        </ion-avatar> 
                         <a (click)="goToSelectedEventPage(tourn)">
                             <h2 title>{{tourn.TournamentName}}</h2>
                             <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
@@ -95,9 +95,9 @@
                 <ion-list-header>{{tournaments.SeasonName}}</ion-list-header>
                 <ion-card>
                         <ion-item text-wrap  *ngFor="let tourn of tournaments.futureTournaments">
-                        <!-- <ion-avatar class="A-6-S" item-left>
+                         <ion-avatar class="A-6-S" item-left>
                             <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
-                        </ion-avatar> -->
+                        </ion-avatar> 
                         <a (click)="goToSelectedEventPage(tourn)">
                             <h2 title>{{tourn.TournamentName}}</h2>
                             <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>

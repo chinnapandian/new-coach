@@ -62,6 +62,7 @@ export class RecordStatsMenuPage {
     private statsHistory: any = [];
     private statsvariables = [];
     private statsvalues = [];
+    private updatedStats = [];
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
                 private modalCtrl:ModalController,
@@ -122,10 +123,17 @@ export class RecordStatsMenuPage {
                                                     this.deletestats.deletePlayerStats(historyid)
                                                         .subscribe(data => {
                                                             console.log(data);
+                                                            this.updatedStats = data;
+                                                            localStorage.setItem("UpdatedStats",JSON.stringify(this.updatedStats));
                                                             this.statsHistory.splice(index,1);
-                                                            this.navCtrl.remove(2);
+                                                            console.log(text.indexOf('Foul'));
+                                                           if(text.indexOf('Foul')!=-1){
+                                                               var foulcount = parseInt(localStorage.getItem('FoulCount'));
+                                                               localStorage.setItem('FoulCount',(foulcount-1).toString());
+                                                            }
+                                                          /*  this.navCtrl.remove(2);
                                                             this.navCtrl.remove(1);
-                                                            this.navCtrl.pop();
+                                                            this.navCtrl.pop();*/
                                                          //   this.navCtrl.push(RecordStatsPage);
                                                         })
                                               }
