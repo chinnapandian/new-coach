@@ -99,8 +99,12 @@ export class EventSchedulePage {
         
    }
 
-    goToGameDetailsPage() {
-        let detailsModal = this.modalCtrl.create(GameDetailsPage);
+    goToGameDetailsPage(game, eventtype) {
+        let detailsModal = this.modalCtrl.create(GameDetailsPage,
+        {
+          SelectedGame : game,
+          EventType : eventtype
+        });
         detailsModal.present();
     };
 
@@ -121,10 +125,6 @@ export class EventSchedulePage {
                   this._loginService.setTournamentScheduleStandings(data.GameResults,data.Brackets, data.Standings);
                   this.schedules = data.GameResults;
 
-                  /*  var eventStartTime = new Date(game.StartDateTime);
-            var eventEndTime = new Date(data.CurrTime);
-            var duration = eventStartTime.getTime() - eventEndTime.getTime();
-            var durationInMinutes =  Math.round(duration / 60000);*/
                   ///////  getTeamSchedules();  //////
                   this.followedTeams.forEach(team => {
                         this.schedules.forEach(schedule => {
@@ -147,24 +147,6 @@ export class EventSchedulePage {
                                         //to get all games of future tournaments
                                         this.upcomingPoolGames.push(schedule);
                                     }
-                            /*   if ((schedule.GameDate < this.today)||
-                                    (((schedule.GameDate == this.today))&&
-                                    (schedule.EndDateTime.toString().substring(11,13)<new Date().toString().substring(16,18)))) {
-                                    //to get all games of current tournaments
-                                        this.completedPoolGames.push(schedule);                        
-                                    }
-                                    else if ((schedule.GameDate == this.today)&&
-                                    (schedule.StartDateTime.toString().substring(11,13)<new Date().toString().substring(16,18))&&
-                                    (schedule.EndDateTime.toString().substring(11,13)>new Date().toString().substring(16,18))){
-                                        //to get all games of past tournaments
-                                        this.ongoingPoolGames.push(schedule);
-                                    }
-                                    else  if ((schedule.GameDate > this.today)||
-                                    (((schedule.GameDate == this.today))&&
-                                    (schedule.StartDateTime.toString().substring(11,13)>new Date().toString().substring(16,18)))){
-                                        //to get all games of future tournaments
-                                        this.upcomingPoolGames.push(schedule);
-                                    }*/
                           }
                         });
                     });
@@ -218,6 +200,7 @@ export class EventSchedulePage {
   getLoss(record: string) {
     return record.split('-')[1];
   }
+
 
   goToGameDetails(gameId) {
     

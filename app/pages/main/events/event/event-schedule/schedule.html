@@ -25,7 +25,7 @@
  <div *ngIf="filteredCompletedPoolGames.length != 0">
     <ion-list-header>Completed Pool Games</ion-list-header>
 
-    <ion-card class="matchup" *ngFor="let game of filteredCompletedPoolGames">
+    <ion-card class="matchup" *ngFor="let game of filteredCompletedPoolGames" (click)="goToGameDetailsPage(game,'completed')">
         <ion-grid>
             <ion-row>
                 <ion-col>
@@ -63,7 +63,7 @@
   <div *ngIf="filteredOngoingPoolGames.length != 0">
     <ion-list-header>Ongoing Pool Games</ion-list-header>
 
-    <ion-card class="matchup" *ngFor="let game of filteredOngoingPoolGames" (click)="goToGameDetailsPage()">
+    <ion-card class="matchup" *ngFor="let game of filteredOngoingPoolGames" (click)="goToGameDetailsPage(game,'ongoing')">
         <ion-grid>
             <ion-row>
                 <ion-col width-75>
@@ -108,7 +108,7 @@
     <div *ngIf="filteredUpcomingPoolGames.length != 0">
     <ion-list-header>Upcoming Pool Games</ion-list-header>
 
-    <ion-card class="matchup" *ngFor="let game of filteredUpcomingPoolGames">
+    <ion-card class="matchup" *ngFor="let game of filteredUpcomingPoolGames" (click)="goToGameDetailsPage(game,'upcoming')">
         <ion-grid>
             <ion-row>
                 <ion-col width-75>
