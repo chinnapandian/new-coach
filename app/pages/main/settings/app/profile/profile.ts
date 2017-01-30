@@ -43,7 +43,7 @@ export class ProfilePage {
   }
 
   getProfile() {
-    this._settingsService.getProfile(this._loginService.getUserInfo().Context.User.EmailAddress)
+    this._settingsService.getProfile(this._loginService.getUserInfo().Context.User.UserId)
       .subscribe(data => {
         console.log(data);
         this.userObj = data;
@@ -65,6 +65,9 @@ export class ProfilePage {
     this._settingsService.saveProfile(this.userObj)
     .subscribe(data => { 
       console.log(data);
+      if(data ==1){
+         localStorage.setItem("UserName",(this.firstName+ " "+  this.lastName));  
+      }
       let title = '';
       let msg = '';
 

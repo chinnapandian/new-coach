@@ -29,10 +29,10 @@
         <ion-card *ngSwitchCase="'boys'">
             <ion-list radio-group  [(ngModel)]="selectedavatar">
                 <ion-item *ngFor="let avatar of boyavatars">
-                    <ion-thumbnail class="circle" item-right>
+                    <ion-thumbnail class="circle" item-left>
                         <img src='{{imagePath}}{{avatar}}' alt="">
                     </ion-thumbnail>
-                  <!--  <ion-label>{{(avatar.substring(avatar.indexOf('/')+1,avatar.indexOf('.'))) | title}}</ion-label>-->
+                    <ion-label>Avatar {{(avatar.substring(avatar.indexOf('/')+1,avatar.indexOf('.'))) | title}}</ion-label>
                     <ion-radio value="{{avatar}}"></ion-radio>
                 </ion-item>
             </ion-list>
@@ -41,10 +41,10 @@
         <ion-card *ngSwitchCase="'girls'">
             <ion-list radio-group  [(ngModel)]="selectedavatar">
                 <ion-item *ngFor="let avatar of girlavatars">
-                    <ion-thumbnail class="circle" item-right>
+                    <ion-thumbnail class="circle" item-left>
                         <img src='{{imagePath}}{{avatar}}' alt="">
                     </ion-thumbnail>
-                  <!--  <ion-label>{{(avatar.substring(avatar.indexOf('/')+1,avatar.indexOf('.'))) | title}}</ion-label>-->
+                    <ion-label>Avatar {{(avatar.substring(avatar.indexOf('/')+1,avatar.indexOf('.'))) | title}}</ion-label>
                     <ion-radio value="{{avatar}}"></ion-radio>
                 </ion-item>
             </ion-list>

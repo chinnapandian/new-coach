@@ -1,5 +1,5 @@
 import {Component,Injectable} from '@angular/core';
-import {Page, Modal, NavController, ModalController,AlertController,LoadingController, ViewController, Alert, NavParams} from 'ionic-angular';
+import {Page, Modal, NavController, ModalController,App,AlertController,LoadingController, ViewController, Alert, NavParams} from 'ionic-angular';
 import {TeamsListService} from "../../../../services/getteamsofstate";
 import {MyPlayerConfigService} from '../../../../services/config';
 import {LoginService} from '../../../../services/login';
@@ -43,7 +43,8 @@ export class FollowTeamsPage {
       private teamsList : TeamsListService,
       private config : MyPlayerConfigService,
       private loginService : LoginService,
-      private followTeamsService : FollowTeamsService) {                
+      private followTeamsService : FollowTeamsService,
+      private appCtrl:App) {                
                 this.fillteams();
       }
 
@@ -210,6 +211,7 @@ showhideGirlsteam(index){
   
   saveFollowedTeams(){
     localStorage.setItem('homeView','teams');
+    localStorage.setItem("TabIndex",'0');
     var followTeamObj = new FollowTeam();
     followTeamObj.FollowUpTeams = this.boysteamsFollowed.concat(this.girlsteamsFollowed);
     console.log(followTeamObj);
@@ -217,10 +219,15 @@ showhideGirlsteam(index){
     .subscribe(data =>
     {
       console.log(data);
-    //  this.loginService.setRegUserTournaments(data.RegUserTournaments);
-      this.loginService.setRegUserPlayers(data.RegUserPlayers);
-      this.navCtrl.push(MainTabs);
+      this.loginService.setRegUserTournaments(data.RegUserTournaments);
+      this.loginService.setRegUserPlayers(data.RegUserPlayers); 
+       this.viewCtrl.dismiss();
+       this.navCtrl.remove(this.viewCtrl.index);
+       this.navCtrl.remove(this.viewCtrl.index-1);
+       this.navCtrl.pop();
+     // this.navCtrl.setRoot(MainTabs);
     })
+    
   }
 
    setGender(gender){
@@ -245,6 +252,7 @@ showhideGirlsteam(index){
   }
   dismiss() {
     localStorage.setItem('homeView','teams');
+     localStorage.setItem('TabIndex','0');
     this.viewCtrl.dismiss();
   }
 }

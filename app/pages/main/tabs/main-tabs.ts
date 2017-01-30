@@ -17,14 +17,16 @@ export class MainTabs {
   MessageBoardTab: any;
   SettingsTab: any;
   private tabIndex = 0;
-  constructor() {
+  private tabBarElement;
+  constructor(private nav:NavController) {
     this.HomeTab = HomePage;
     this.EventsTab = EventsPage;
     this.MessageBoardTab = MessageBoardPage;
     this.SettingsTab = SettingsListPage;
 
   }
-  ionViewDidEnter() {
+
+  ionViewDidEnter() {   
       this.tabIndex = (localStorage.getItem("TabIndex")==null)?this.tabIndex:parseInt(localStorage.getItem("TabIndex"));
       this.tabRef.select(this.tabIndex);
  }

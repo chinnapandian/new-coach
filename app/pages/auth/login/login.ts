@@ -60,7 +60,8 @@ export class LoginPage {
     this._loginData.AppId = 'myLudus PlayerWatch';
     this._loginData.RegistrationId = localStorage.getItem('registrationId');
     this._loginData.Authtoken = '';
-    this._config.setDeviceId(this._loginData.DeviceId);
+   this._config.setDeviceId(this._loginData.DeviceId);
+  //  localStorage.setItem("deviceId", this._loginData.DeviceId);
     this._loginService.setLoginData(this._loginData);
     console.log(this._loginData);
 
@@ -75,13 +76,17 @@ export class LoginPage {
           if(data.IsSuccess==true)
           {
               console.log(data.AuthToken);
-              this._config.setAuthToken(data.AuthToken);
+          //    this._config.setAuthToken(data.AuthToken);
+              localStorage.setItem('AuthToken',data.AuthToken);
               this._config.setUserNamePassword(this.getEmailForm.controls['Email'].value,this.getEmailForm.controls['Password'].value);
               this.validUser='true';
               this._loginService.setUserInfo(data);
               this._loginService.setRegUserTournaments(data.RegUserTournaments);
               this._loginService.setRegUserPlayers(data.RegUserPlayers); 
+              localStorage.setItem("UserName",data.Context.User.UserName);
               localStorage.setItem('homeView','teams');
+              localStorage.setItem("TabIndex",'0');
+              localStorage.setItem("logout","false");
               this.navCtrl.setRoot(MainTabs); 
 
               this.currdate.getTempCurrDate()

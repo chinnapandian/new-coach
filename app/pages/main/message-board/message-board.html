@@ -11,11 +11,11 @@
                 <ion-icon name="create"></ion-icon>
             </button>
         </ion-buttons>
-       <ion-buttons end>
-                <button (click)="toggleSearch()">
+        <ion-buttons end>
+            <button (click)="toggleSearch()">
                     <ion-icon name="search"></ion-icon>
                 </button>
-            </ion-buttons>
+        </ion-buttons>
     </ion-navbar>
 
     <!--<ion-toolbar primary no-border-top>-->
@@ -29,22 +29,20 @@
 
 <ion-content class="message-board">
 
-    <ion-toolbar class="clear" no-border-top no-border-bottom>
-        
-            <ion-searchbar *ngIf="search==true" [(ngModel)]="SearchKeyword" (input)="onInput($event)" (cancel)="onCancel($event)"></ion-searchbar>
-           <ion-card> 
-            <ion-item *ngIf="search==false">
-                <ion-label stacked>Choose a Team</ion-label>
-                <ion-select [(ngModel)]="TeamId" placeholder="All Teams" (ionChange)="filterTeam()">
-                    <ion-option value="-1">All Teams
-                    </ion-option>
-                    <ion-option *ngFor="let team of followedTeams" [value]="team.TeamId">{{team.TeamName}}
-                    </ion-option>
-                </ion-select>
-                
-            </ion-item>
-        </ion-card>
-    </ion-toolbar>
+
+    <ion-searchbar *ngIf="search==true" [(ngModel)]="SearchKeyword" (input)="onInput($event)" (cancel)="onCancel($event)"></ion-searchbar>
+    <ion-card>
+        <ion-item *ngIf="search==false">
+            <ion-label stacked>Choose a Team</ion-label>
+            <ion-select [(ngModel)]="TeamId" placeholder="All Teams" (ionChange)="filterTeam()">
+                <ion-option value="-1">All Teams
+                </ion-option>
+                <ion-option *ngFor="let team of followedTeams" [value]="team.TeamId">{{team.TeamName}}
+                </ion-option>
+            </ion-select>
+
+        </ion-item>
+    </ion-card>
 
     <ion-card class="message-card" *ngFor="let message of filteredMessages | searchmessages : SearchKeyword">
         <ion-grid>
@@ -53,16 +51,14 @@
                     <p>
                         <small>
                             <ion-icon name="md-calendar"></ion-icon>
-                        </small>
-                        {{getFormattedDate(message.MessageBoard.Created)}}
+                        </small> {{getFormattedDate(message.MessageBoard.Created)}}
                     </p>
                 </ion-col>
                 <ion-col width-30>
                     <p>
                         <small>
                             <ion-icon name="ios-clock"></ion-icon>
-                        </small>
-                        {{convertToAmPm(message.MessageBoard.Created.substring(11,16))}}
+                        </small> {{convertToAmPm(message.MessageBoard.Created.substring(11,16))}}
                     </p>
                 </ion-col>
                 <ion-col width-40 class="">
@@ -96,14 +92,15 @@
             </ion-row>
             <ion-row class="message-footer">
                 <ion-col width-50>
-                    <button class="message-comment" clear small (click)="goToReplyMessagePage(message)">
+                    <button item-left class="message-comment" clear small (click)="goToReplyMessagePage(message)">
                         <ion-icon name="undo"></ion-icon>
-                        Reply
+                        <span>Reply</span>
                     </button>
-                </ion-col><ion-col width-50>
-                    <button class="message-comment" clear primary small (click)="goToCommentsPage(message)">
+                </ion-col>
+                <ion-col width-50>
+                    <button item-left class="message-comment" clear primary small (click)="goToCommentsPage(message)">
                         <ion-icon name="chatbubbles"></ion-icon>
-                        {{getCount(message.MessageBoard.MsgId)}} comment(s)
+                        <span>{{getCount(message.MessageBoard.MsgId)}} comment(s)</span>
                     </button>
 
                 </ion-col>
@@ -127,6 +124,5 @@
             <!--</ion-row>-->
         </ion-grid>
     </ion-card>
-     <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+    <ion-spinner name="bubbles" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>
-

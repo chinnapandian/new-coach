@@ -37,7 +37,7 @@
         <ion-item>
             <ion-label class="my-label" stacked>Phone Carrier</ion-label>
             <ion-select [(ngModel)]="CarrierId" #carrierName (change)="onChangeCarrier(phoneCarrier,carrierName)">
-                <ion-option *ngFor="#telcarrier of telcarriers" [value]="telcarrier.CarrierId">{{telcarrier.CarrierName}}</ion-option>
+                <ion-option *ngFor="let telcarrier of telcarriers" [value]="telcarrier.CarrierId">{{telcarrier.CarrierName}}</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>

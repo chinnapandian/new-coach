@@ -45,7 +45,7 @@
                 <ion-list no-wrap>
                     <a ion-item (click)="goToTeamPage(team)">
                         <ion-avatar item-left class="A-6-S">
-                            <img [src]="'http://meltonbasketball.com.au/wp-content/uploads/2011/12/Spartans.jpg'">
+                            <img [src]="'medal-shadow.png'">
                         </ion-avatar> 
                         <h2 title>{{team.TeamName}} ({{team.Grade}}/{{setGender(team.Gender)}})</h2>
                         <p><b>Coach: </b>{{(team.CoachFirstName + " " + team.CoachLastName)|title}}</p>
@@ -54,14 +54,15 @@
             </ion-card>
         </div>
        </div>
-         <div class="card" *ngIf="error==true">
-            <div class="item">
-            <h3>Click on the + icon at the top to start following Teams</h3>
+         <div  text-wrap *ngIf="error==true">
+            <div>
+            <h6><b>CLICK ON THE + SYMBOL AT THE TOP RIGHT TO START FOLLOWING TEAMS</b></h6>
       </div>
     </div> 
     </div>
 
     <div *ngSwitchCase="'players'">
+        <div *ngIf="dataLoading==false">
         <ion-card *ngFor="let followedplayer of FollowedPlayers; let i =index">
             <ion-list>
                 <a ion-item (click)="goToPlayerTabs(followedplayer)">
@@ -113,6 +114,12 @@
             </div>
 
         </ion-card>
+        </div>
+        <div  text-wrap *ngIf="playererror==true">
+            <div>
+            <h6><b>CLICK ON THE + SYMBOL AT THE TOP RIGHT TO ADD PLAYER</b></h6>
+            </div>
+      </div>
     </div>
 
 

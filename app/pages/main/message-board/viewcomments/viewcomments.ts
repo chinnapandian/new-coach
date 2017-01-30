@@ -28,9 +28,11 @@ export class ViewCommentsPage {
       private navParams : NavParams) {
         this.SelectedMessage = this.navParams.get("Message");
         console.log(this.SelectedMessage);
-        this.getMessages();
-  }
 
+  }
+  ionViewWillEnter(){
+          this.getMessages();
+  }
   getMessages(){
         this.msgBoard.getMessageList(this._loginService.getUserInfo().Context.User.UserId)
         .subscribe(data => {
@@ -76,6 +78,7 @@ export class ViewCommentsPage {
 
 
   dismiss() {
+    localStorage.setItem("TabIndex",'2'); 
     this.viewCtrl.dismiss();
   }
 }

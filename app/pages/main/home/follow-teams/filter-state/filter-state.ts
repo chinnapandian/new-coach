@@ -24,17 +24,25 @@ export class FilterTeamStatePage {
       private viewCtrl: ViewController,
       private modalCtrl: ModalController,
       private statesList : StatesListService) {
+        this.getData();
+   
+  }
+ionViewWillEnter(){
+       this.getData();
+}
 
+getData(){ 
         this.statesList.getStatesList()
         .subscribe(data=>{
             console.log(data);
             this.states = data;
             this.dataLoading = false;
-        });    
-  }
-
+        }); 
+  
+}
  
   goToFollowTeamsPage(state){
+    
     this.navCtrl.push(FollowTeamsPage,{
       SelectedState : state
     });
@@ -50,6 +58,7 @@ export class FilterTeamStatePage {
   }
   dismiss() {
     localStorage.setItem('homeView','teams');
-    this.navCtrl.setRoot(MainTabs);
+    localStorage.setItem("TabIndex",'0');
+    this.navCtrl.pop();
   }
 }

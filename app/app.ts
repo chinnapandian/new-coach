@@ -13,6 +13,8 @@ import {EventBracketsPage} from './pages/main/events/event/event-brackets/bracke
 import {TempCurrDateService} from  './services/tempcurrdate';
 // import {SelectedPlayerPage} from 'pages/main/my-players/selected-player/tabs'
 import {MyPlayerConfigService} from './services/config';
+import {SettingsService} from './services/settings';
+import {TelCarriersListService} from './services/telcarrierslist';
 import {Device, Cordova} from 'ionic-native';
 import {Push} from 'ionic-native';
 import {LoginService} from  './services/login';
@@ -28,7 +30,7 @@ class SessionData{
 @Component({
   templateUrl: 'build/pages/root-page/root-page.html',
   providers: [
-    MyPlayerConfigService, LoginService, TempCurrDateService
+    MyPlayerConfigService, LoginService, TempCurrDateService,SettingsService,TelCarriersListService
   ],
 })
 
@@ -54,20 +56,20 @@ export class MyApp {
       StatusBar.styleDefault();
       StatusBar.overlaysWebView(false);
       //check for the session of the user
-    //  localStorage.setItem("device", Device.device.platform);
-    //  localStorage.setItem("deviceId", Device.device.uuid);
-
+    /*  localStorage.setItem("device", Device.device.platform);
+      localStorage.setItem("deviceId", Device.device.uuid);
+      localStorage.setItem("registrationId", '');*/
       this._config.setDeviceId(Device.device.uuid);
       this._config.setDevice(Device.device.platform);
       this._config.setRegistrationId('');
-
- //    if(localStorage.getItem('AuthToken') ==null)
-     if(this._config.getAuthToken() == null || this._config.getAuthToken() == '' || this._config.getAuthToken() == 'null')    
+      var authtoken = localStorage.getItem('AuthToken');
+     if(authtoken == null || authtoken == '' || authtoken == 'null' || authtoken == undefined || authtoken == 'undefined')    
             this.rootPage = LandingPage;
       else
       {
         localStorage.setItem('homeView','teams');
-        localStorage.setItem("TabIndex",'0');
+        localStorage.setItem("TabIndex","0");
+        localStorage.setItem("addteams","0");
         this.rootPage = MainTabs;
         this.currdate.getTempCurrDate()
           .subscribe(data => {
@@ -93,8 +95,8 @@ export class MyApp {
 
       if (push) {
         push.on('registration', (data) => {
-       //   localStorage.setItem("registrationId", data.registrationId);
-          this._config.setRegistrationId(data.registrationId);
+          localStorage.setItem("registrationId", data.registrationId);
+       //   this._config.setRegistrationId(data.registrationId);
         });
         push.on('notification', (data) => {
           console.log(data);
@@ -115,4 +117,4 @@ export class MyApp {
 
 
 }
-ionicBootstrap(MyApp, [ MyPlayerConfigService, LoginService ]);
+ionicBootstrap(MyApp, [ MyPlayerConfigService, LoginService, TempCurrDateService,SettingsService,TelCarriersListService ]);

@@ -95,12 +95,18 @@ export class AddPlayerPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
-    this.navCtrl.setRoot(MainTabs);
+    localStorage.setItem('TabIndex','0');
+    localStorage.setItem('homeView','players');
+     this.viewCtrl.dismiss();
+     this.navCtrl.remove(this.viewCtrl.index);
+     this.navCtrl.pop();
+  //  this.navCtrl.setRoot(MainTabs);
   }
 
  savePlayer(){
    this.save=1;
    localStorage.setItem('homeView','players');
+    localStorage.setItem('TabIndex','0');
    console.log(this.validateData());
    if(this.validateData()==true)
    {
@@ -125,10 +131,10 @@ export class AddPlayerPage {
                 if(data.IsSuccess==true)
                   {
                       console.log(data);
-                   //   this._loginService.setRegUserTournaments(data.RegUserTournaments);
+                 //     this._loginService.setRegUserTournaments(data.RegUserTournaments);
                       this._loginService.setRegUserPlayers(data.RegUserPlayers); 
                       this.viewCtrl.dismiss();
-                      this.navCtrl.setRoot(MainTabs);         
+                    //  this.navCtrl.setRoot(MainTabs);         
                   }
                   else
                   {

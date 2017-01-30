@@ -20,7 +20,7 @@ export class MyPlayerConfigService {
     private device = localStorage.getItem("device");
     private registrationId =localStorage.getItem("registrationId");
 
-    private http = "https://";
+    private http = "http://";
 
 
     getHttp() {
@@ -28,9 +28,8 @@ export class MyPlayerConfigService {
     }
 
     getApiHost() {
-        return "stage.myludus.com";
-    //  return "stage.myludus.com:8050";
-    //  return "zerogravity.myludus.com";
+    //    return "stage.myludus.com";
+      return "zerogravity.myludus.com";
       // return  "mygame.local";
     };
 
@@ -47,7 +46,7 @@ export class MyPlayerConfigService {
     }
 
     setDeviceId(devId) {
-        if(devId === 'undefined' || devId == ''|| devId==undefined)
+        if(devId === 'undefined' || devId == ''|| devId == undefined)
             this.deviceId = this.defaultDeviceId;
         else 
              this.deviceId = devId;  
@@ -55,11 +54,13 @@ export class MyPlayerConfigService {
     }
     
     getAuthToken() {
+        console.log("config get token"+ this.authToken);
         return (this.authToken==undefined)||(this.authToken=='')||(this.authToken=='undefined')||(this.authToken=='null')||(this.authToken==null) ? '' : this.authToken;
     //    return this.authToken!=undefined? this.authToken : '';
     }
 
     setAuthToken(authToken) {
+        console.log("config set token"+ authToken);
         this.authToken = authToken;
         localStorage.setItem('AuthToken',this.authToken);
     }
@@ -104,7 +105,7 @@ export class MyPlayerConfigService {
     getDefaultHeaders() {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        headers.append("AuthToken", this.getAuthToken());
+        headers.append("AuthToken", localStorage.getItem('AuthToken'));
         headers.append("DeviceId", this.getDeviceId());
         return headers;
     }

@@ -2,12 +2,13 @@ import {Component} from '@angular/core';
 import {NavController, ViewController, NavParams} from 'ionic-angular';
 import {LocationsListService} from "../../../../../services/getlocations";
 import {LoginService} from "../../../../../services/login";
+import {GetPlayerStatsService} from  '../../../../../services/getplayerstats';
 import {Geolocation} from 'ionic-native';
 declare var google;
 
 @Component({
   templateUrl: 'build/pages/main/events/event/game-details/game-details.html',
-    providers : [LocationsListService]
+    providers : [LocationsListService,GetPlayerStatsService]
 })
 
 export class GameDetailsPage {
@@ -37,12 +38,18 @@ export class GameDetailsPage {
       private viewCtrl: ViewController,
       private navParams : NavParams,
       private _locationsListService : LocationsListService,
-      private _loginService : LoginService) {
+      private _loginService : LoginService,
+      private playerstatsService:GetPlayerStatsService) {
+
         this.SelectedGame = this.navParams.get("SelectedGame");
         this.EventType = this.navParams.get("EventType");
         console.log(this.SelectedGame);
         console.log(this.EventType);
-
+      /* var UserId = this._loginService.getUserInfo().Context.User.UserId;
+        this.playerstatsService.getPlayerStats(UserId,this.SelectedGame.TournamentId,0,0,this.SelectedGame.GameId)    
+                    .subscribe(data => {
+                      console.log(data);
+                    })*/
          this._locationsListService.getLocationsList()
                     .subscribe(data => {
                         this.facilitiesaddress=data;
@@ -54,6 +61,7 @@ export class GameDetailsPage {
                                   this.facilityaddress = location.Address1 + ", " +       
                                                                   location.City + ", " + location.State + ", " +
                                                                   location.Zip + ", " + location.Country;
+                                  this.loadMap();
                                    break;
                                 }
                           }
@@ -101,19 +109,19 @@ export class GameDetailsPage {
    }
   goToRecordStatsPage(){
     
-  }
-    loadMap(address){
-   console.log(address);
+  }                                                      
+
+  loadMap(){
+   var address= this.facilityaddress;
     //convert address to latitude, longitude using GeoCoder
     var geocoder= new google.maps.Geocoder();
-    
+    var lat,lng;
     console.log(geocoder);
     geocoder.geocode({ 'address': address }, function (results, status) {
         console.log(results);
                         if (status == google.maps.GeocoderStatus.OK) {                         
-                                var lat = results[0].geometry.location.lat();
-                                var lng = results[0].geometry.location.lng();
-                                console.log(lat,lng);
+                                lat = results[0].geometry.location.lat();
+                                lng = results[0].geometry.location.lng();
                                 var myCenter=new google.maps.LatLng(lat,lng);
                                 //set map properties
                                   var mapProp = {
@@ -127,33 +135,92 @@ export class GameDetailsPage {
                                   };
                                   console.log(lat);
                                   console.log(lng);
-
-                                  var url;
+                                  // TO DISPLAY THE MAP INSIDE THE DIV
+                                  var mapp = new google.maps.Map(document.getElementById("map"), mapProp);  
+                                    // add pushpin in the specific address
+                                    let marker= new google.maps.Marker({
+                                            map : mapp,
+                                            animation : google.maps.Animation.DROP,
+                                            position : new google.maps.LatLng(lat,lng)
+                                          });
+                                        // add Information Window on the pushpin
+                                 /*   let content="<h6> " + address + " </h6>";
+                                    let infoWindow = new google.maps.InfoWindow({
+                                                content : content
+                                          })
+                                      infoWindow.open(mapp, marker);*/
+                                                               }                         
+                        });
+  }
+  
+  showDirection(address){
+    console.log(address);
+    //convert address to latitude, longitude using GeoCoder
+    var geocoder= new google.maps.Geocoder();
+    geocoder.geocode({ 'address': address }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {                         
+                                var lat = results[0].geometry.location.lat();
+                                var lng = results[0].geometry.location.lng();
+                                var myCenter=new google.maps.LatLng(lat,lng);
+                                //set map properties
+                                  var mapProp = {
+                                    center:myCenter,
+                                    zoom:15,
+                                    zoomControl:true,
+                                    zoomControlOptions: {
+                                      style:google.maps.ZoomControlStyle.SMALL
+                                    },
+                                    mapTypeId:google.maps.MapTypeId.ROADMAP
+                                  };
+                                  console.log(lat);
+                                  console.log(lng);
+                                
                                   if (navigator.geolocation) {
                                             navigator.geolocation.getCurrentPosition(
                                                 function(details) {
                                                     // success!
-                                                      url= 'http://maps.google.com/maps?saddr='+lat+','+lng+'&daddr='+details.coords.latitude+','+details.coords.longitude+'&dirflg=d';
+                                                      var url= 'http://maps.google.com/maps?saddr='+lat+','+lng+'&daddr='+details.coords.latitude+','+details.coords.longitude+'&dirflg=d';
                                                                       console.log(url);
-                                                                      window.open(url,'_system', 'location=yes');
+                                                                      window.open(url, '_system', 'location=yes');
                                                 },
                                                 function() {
                                                     // failed to get a GPS location before timeout!
-                                                    url = "http://www.google.com/maps/place/" + lat + "," + lng + "/@" + lat + "," + lng + ",12z/data=!3m1!4b1";
+                                                    var url = "http://www.google.com/maps/place/" + lat + "," + lng + "/@" + lat + "," + lng + ",12z/data=!3m1!4b1";
                                                     window.open(url, '_system', 'location=yes');
                                                 }, {
                                                     enableHighAccuracy: false,
                                                     timeout: 5000,
                                                     maximumAge: 10000
-                                                }); 
-                                                console.log(url);
+                                                });
                                         } else {
-                                                url = "http://www.google.com/maps/place/" + lat + "," + lng + "/@" + lat + "," + lng + ",12z/data=!3m1!4b1";
-                                                window.open(url, '_system', 'location=yes');
+                                          console.log("error");
+                                          
                                         }
                                 }                         
                         });
+  }
+
+  showHideRecordStats(){
+    if(this.EventType=='completed'){
+        return true;
+    }else if(this.EventType=='ongoing'){
+      
+    }else{
+
     }
+  }
+
+  showHideViewStats(){
+    console.log("adf");
+   if(this.EventType=='completed'){
+    
+    }else if(this.EventType=='ongoing'){
+      
+    }else{
+      
+    } 
+  }  
+
   dismiss() {
      localStorage.setItem("TabIndex",'1');
     this.viewCtrl.dismiss();

@@ -75,6 +75,7 @@ export class GetEmailPage {
           {
               console.log(data);
               this._config.setAuthToken(data.AuthToken);
+               localStorage.setItem("UserName",data.Context.User.UserName);
               this._config.setUserNamePassword(this.getEmailForm.controls['Email'].value,this.getEmailForm.controls['Password'].value);
             
               this._LoginService.setUserInfo(data);

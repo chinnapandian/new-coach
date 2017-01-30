@@ -31,9 +31,9 @@ export class SettingsService {
       .catch(this.handleError);
   }
 
-  getProfile(queryParam) {
-    let apiPath = '/api/User/GetUserByUserName?Username=';
-    return this._http.get(this._config.getHttp() + this._config.getApiHost() + apiPath + queryParam,
+  getProfile(userid) {
+    let apiPath = '/api/User/GetUserById?UserId=';
+    return this._http.get(this._config.getHttp() + this._config.getApiHost() + apiPath + userid,
       { headers: this._config.getDefaultHeaders() })
       .map(res => res.json())
       .catch(this.handleError);

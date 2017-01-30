@@ -29,18 +29,20 @@ export class MessageBoardPage {
       private modalCtrl: ModalController,
       private _loginService: LoginService,
       private msgBoard : MessageBoardService) {
+        localStorage.setItem("TabIndex","2");
         this.followedTeams = this._loginService.getFollowedTeams();
         this.TeamId = -1;
         console.log(this.followedTeams);
-        this.getMessages();
 
+  }
+  ionViewWillEnter(){
+       this.getMessages();
   }
   getMessages(){
        console.log("getmsgs");
         this.msgBoard.getMessageList(this._loginService.getUserInfo().Context.User.UserId)
         .subscribe(data => {
           this.dataLoading = false;
-            console.log(data);
             this.messages = data;
             this.filteredMessages = this.messages;
             
@@ -132,6 +134,7 @@ export class MessageBoardPage {
       this.search=false;
     } 
   dismiss() {
+    localStorage.setItem("TabIndex",'2'); 
     this.viewCtrl.dismiss();
   }
 }

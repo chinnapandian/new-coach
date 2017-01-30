@@ -7,6 +7,7 @@ import {LogoutService} from '../../../services/logout';
 import {LoginService} from '../../../services/login';
 import {HomePage} from '../../main/home/home';
 import {LandingPage} from '../../auth/landing/landing';
+import {MainTabs} from '../../main/tabs/main-tabs';
 import {PrivacyPage} from "./app/privacy/privacy";
 import {ProfilePage} from "./app/profile/profile";
 import {TermsPage} from "./app/terms/terms";
@@ -37,15 +38,20 @@ export class SettingsListPage {
               private _loginService : LoginService,
               private appCtrl : App,
               private loadingCtrl:LoadingController) {
+    localStorage.setItem("TabIndex","3"); 
+  }
 
-     this.userInfo = this._loginService.getUserInfo();
-     this.userName = this.userInfo.Context.User.UserName;
+  ionViewDidEnter(){
+    console.log("test");
+    this.userName = localStorage.getItem("UserName");
+    console.log(this.userName);
   }
 
   dismiss() {
     var t = this.navCtrl.parent;
     t.select(0);
-    this.navCtrl.setRoot(HomePage);
+   // this.navCtrl.setRoot(HomePage);
+   this.viewCtrl.dismiss();
     
   }
 
@@ -68,21 +74,36 @@ export class SettingsListPage {
    }
   
   logOut() {
+             
+             // this.navCtrl.setRoot(MainTabs);
+              // this.viewCtrl.dismiss();
+                            
+               
+                
+
      let loader = this.loadingCtrl.create({
                     content: "<div class='custom-spinner-container'><div class='custom-spinner-box'></div></div>"
         });
     loader.present();
         this._logoutService.logout()
           .subscribe(data => {
-                loader.dismiss(); 
-               // this.navCtrl.push(LandingPage);
-                this.appCtrl.getRootNav().push(LandingPage);               
-                localStorage.clear();
-                this._config.setDeviceId(this._config.getDeviceId());
-                this._config.setDevice(this._config.getDevice());
-                this._config.setRegistrationId(this._config.getRegistrationId());
-                
+                 var deviceid = this._config.getDeviceId();
+                var device = this._config.getDevice();
+                var regid = this._config.getRegistrationId();
+                localStorage.clear(); 
+             //   console.log("settingspage"+this._config.getAuthToken());  
+                console.log("settingspage"+localStorage.getItem('AuthToken'));    
+                localStorage.setItem("device", device);
+                localStorage.setItem("deviceId", deviceid);
+                localStorage.setItem("registrationId", regid);       
+            //    this._config.setDeviceId(deviceid);
+            //    this._config.setDevice(device);
+            //    this._config.setRegistrationId(regid); 
+                loader.dismiss();
+                this.viewCtrl.dismiss();           
+                this.appCtrl.getRootNav().setRoot(LandingPage);
           });
+
     }
 
   goToPrivacyPage(){

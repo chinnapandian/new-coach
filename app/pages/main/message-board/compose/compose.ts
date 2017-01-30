@@ -50,11 +50,11 @@ export class ComposeMessagePage {
   }
   
   dismiss() {    
-     /* this.viewCtrl.dismiss();
-      this.navCtrl.remove(1);
+     this.viewCtrl.dismiss();
+     /* this.navCtrl.remove(1);
       this.navCtrl.pop();*/
-      localStorage.setItem("TabIndex",'2'); 
-      this.navCtrl.push(MainTabs);
+  /*    localStorage.setItem("TabIndex",'2'); 
+      this.navCtrl.setRoot(MainTabs);*/
   }
 
   compose() {

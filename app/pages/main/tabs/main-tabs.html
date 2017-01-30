@@ -1,6 +1,7 @@
-<ion-tabs #myTabs>
+<ion-tabs #myTabs id="tabs">
     <ion-tab [root]="HomeTab" tabIcon="home" tabTitle="Home"></ion-tab>
     <ion-tab [root]="EventsTab" tabIcon="albums" tabTitle="Events"></ion-tab>
-    <ion-tab [root]="MessageBoardTab" tabIcon="chatboxes" tabTitle="Message Board" tabBadge="3" tabBadgeStyle="danger"></ion-tab>
+  <!--  <ion-tab [root]="MessageBoardTab" tabIcon="chatboxes" tabTitle="Message Board" tabBadge="3" tabBadgeStyle="danger"></ion-tab>-->
+     <ion-tab [root]="MessageBoardTab" tabIcon="chatboxes" tabTitle="Message Board"></ion-tab>
     <ion-tab [root]="SettingsTab" tabIcon="settings" tabTitle="Settings"></ion-tab>
 </ion-tabs>

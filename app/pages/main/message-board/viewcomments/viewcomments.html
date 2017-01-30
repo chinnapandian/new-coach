@@ -28,7 +28,56 @@
 </ion-header>
 
 <ion-content class="message-board">
-
+    <ion-list-header>Message</ion-list-header>
+    <ion-card class="message-card">
+        <ion-grid>
+            <ion-row class="message-header">
+                <ion-col width-30>
+                    <p>
+                        <small>
+                            <ion-icon name="md-calendar"></ion-icon>
+                        </small> {{getFormattedDate(SelectedMessage.MessageBoard.Created)}}
+                    </p>
+                </ion-col>
+                <ion-col width-30>
+                    <p>
+                        <small>
+                            <ion-icon name="ios-clock"></ion-icon>
+                        </small> {{convertToAmPm(SelectedMessage.MessageBoard.Created.substring(11,16))}}
+                    </p>
+                </ion-col>
+                <ion-col width-40 class="">
+                    <p>
+                        <small>
+                            <ion-icon name="md-basketball"></ion-icon>
+                        </small>
+                        <span>{{SelectedMessage.MessageBoard.TeamName}}</span>
+                    </p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="message-title">
+                <ion-col width-85>
+                    <h1>{{SelectedMessage.MessageBoard.Subject}}</h1>
+                    <p class="message-info">
+                        <small>
+                            <ion-icon name="md-person"></ion-icon>
+                        </small>
+                        <span>{{SelectedMessage.MessageBoard.FirstName}} {{SelectedMessage.MessageBoard.LastName}}</span>
+                    </p>
+                    <div class="accent-bar"></div>
+                </ion-col>
+                <ion-col width-15>
+                    <img src="medal-shadow.png" class="A-3" alt="">
+                </ion-col>
+            </ion-row>
+            <ion-row class="message-body">
+                <ion-col>
+                    <p>{{SelectedMessage.MessageBoard.Message}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <ion-list-header>Comments</ion-list-header>
     <ion-card class="message-card" *ngFor="let message of comments">
         <ion-grid>
             <ion-row class="message-header">

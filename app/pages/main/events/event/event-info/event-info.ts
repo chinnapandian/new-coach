@@ -41,11 +41,13 @@ export class EventInfoPage {
        this._locationsListService.getLocationsList()
                     .subscribe(data => {
                         this.facilitiesaddress=data;
-                        for(var i=0;i<this.uniqueLocations.length;i++)
+                        console.log(this.facilitiesaddress);
+                          for(var i=0;i<this.uniqueLocations.length;i++)
                         {
                           for(var j=0;j<this.facilitiesaddress.length;j++)
                           {
-                                if(this.uniqueLocations[i].LocationName.toLowerCase().trim() == this.facilitiesaddress[j].Name.toLowerCase().trim())
+                               if(this.uniqueLocations[i].LocationId == this.facilitiesaddress[j].LocationId)
+                             //   if(this.uniqueLocations[i].LocationName.toLowerCase().trim() == this.facilitiesaddress[j].Name.toLowerCase().trim())
                                 {
                                   var location = this.facilitiesaddress[j];
                                   this.facilities.push({LocationName : location.Name,
@@ -55,7 +57,7 @@ export class EventInfoPage {
                                                         State : location.State,
                                                         Zip : location.Zip,
                                                         Country : location.Country,
-                                                        Address : location.Address1 + ", " +       
+                                                        Address :location.Address1 + ", "  +       
                                                                   location.City + ", " + location.State + ", " +
                                                                   location.Zip + ", " + location.Country})
                                    break;

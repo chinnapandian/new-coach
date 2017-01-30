@@ -39,6 +39,7 @@ export class EventSchedulePage {
     private tournamentName;
     private teamFilter;
     private CurrTime;
+    private scheduleerror="";
 
     constructor(private viewCtrl:ViewController,
                 private modalCtrl:ModalController,
@@ -72,27 +73,37 @@ export class EventSchedulePage {
             return new Date(theDate.getTime() + days*24*60*60*1000);
     }
     presentTeamPopover(teamEvent) {
-       
+        var filterdata =(this._navParams.get('TeamFilter')==null)?'-1':filterdata;
         let teamPopover = this.teamPopoverCtrl.create(TeamFilterPage,{
-        TeamFilter : this.teamFilter
+        TeamFilter : filterdata
         });
         teamPopover.onDidDismiss(data => {
             console.log(data);
-            this.teamFilter=data;
-            this.filteredCompletedPoolGames = this.filterTeam(this.completedPoolGames);
-            this.filteredOngoingPoolGames = this.filterTeam(this.ongoingPoolGames);
-            this.filteredUpcomingPoolGames = this.filterTeam(this.upcomingPoolGames);          
+            filterdata = data.TeamId;
+            this.teamFilter = data.TeamName;
+            this.filteredCompletedPoolGames = this.filterTeam(this.completedPoolGames,filterdata);
+            this.filteredOngoingPoolGames = this.filterTeam(this.ongoingPoolGames,filterdata);
+            this.filteredUpcomingPoolGames = this.filterTeam(this.upcomingPoolGames,filterdata); 
+            console.log(this.filteredUpcomingPoolGames);         
         });
         teamPopover.present({
         ev: teamEvent
         });
    }
 
-   filterTeam(games){
-     if(this.teamFilter!='All Teams'){
-        return games.filter(item => 
+   filterTeam(games, filterdata){
+     var filteredgames = [];
+     if(this.teamFilter!='-1'){
+       games.forEach(element => {
+          if((element.TeamId1 == parseInt(filterdata))||(element.TeamId2 == parseInt(filterdata))){
+            filteredgames.push(element);
+          }
+       });
+       return filteredgames;
+       /* return games.filter(item => 
+        
                       (item.Team1Name.toLowerCase().indexOf(this.teamFilter.toString().toLowerCase()) > -1)||
-                      (item.Team2Name.toLowerCase().indexOf(this.teamFilter.toString().toLowerCase()) > -1));
+                      (item.Team2Name.toLowerCase().indexOf(this.teamFilter.toString().toLowerCase()) > -1));*/
      }
      else
         return games;
@@ -118,45 +129,56 @@ export class EventSchedulePage {
             var userid =  this._loginService.getUserInfo().Context.User.UserId;
             var tournamentid = this.tournamentId;
             var sports = "basketball";
-            console.log(tournamentid,userid);
             this._tournamentData.getTournamentScheduleStandings(orgid,userid,tournamentid,sports)
             .subscribe(data => {
                   console.log(data);
                   this._loginService.setTournamentScheduleStandings(data.GameResults,data.Brackets, data.Standings);
-                  this.schedules = data.GameResults;
-
-                  ///////  getTeamSchedules();  //////
-                  this.followedTeams.forEach(team => {
-                        this.schedules.forEach(schedule => {
-                          if((schedule.TeamId1==team.TeamId)||(schedule.TeamId2==team.TeamId)){
-                               if ((schedule.GameDate < this.today)||
-                                    (((schedule.GameDate == this.today))&&
-                                    ((new Date(schedule.EndDateTime).getTime())<(new Date(this.CurrTime).getTime())))) {
-                                    //to get all games of current tournaments
-                                        this.completedPoolGames.push(schedule);                        
-                                    }
-                                    else if ((schedule.GameDate == this.today)&&
-                                    ((new Date(schedule.StartDateTime).getTime())<(new Date(this.CurrTime).getTime()))&&
-                                    ((new Date(schedule.EndDateTime).getTime())>(new Date(this.CurrTime).getTime()))){
-                                        //to get all games of past tournaments
-                                        this.ongoingPoolGames.push(schedule);
-                                    }
-                                    else  if ((schedule.GameDate > this.today)||
-                                    (((schedule.GameDate == this.today))&&
-                                    ((new Date(schedule.StartDateTime).getTime())>(new Date(this.CurrTime).getTime())))){
-                                        //to get all games of future tournaments
-                                        this.upcomingPoolGames.push(schedule);
-                                    }
-                          }
-                        });
-                    });
-                    this.filteredCompletedPoolGames = this.completedPoolGames;
-                    this.filteredOngoingPoolGames = this.ongoingPoolGames;
-                    this.filteredUpcomingPoolGames = this.upcomingPoolGames;
-                    console.log("done");
+                  console.log(data.ErrorMessage);
+                  if(data.ErrorMessage == "")
+                  {                
+                        this.schedules = data.GameResults;
+                        this.scheduleerror ="";
+                        ///////  getTeamSchedules();  //////
+                        this.followedTeams.forEach(team => {
+                              this.schedules.forEach(schedule => {
+                                if((schedule.TeamId1==team.TeamId)||(schedule.TeamId2==team.TeamId)){
+                                    if ((schedule.GameDate < this.today)||
+                                          (((schedule.GameDate == this.today))&&
+                                          ((new Date(schedule.EndDateTime).getTime())<(new Date(this.CurrTime).getTime())))) {
+                                          //to get all games of current tournaments
+                                              this.completedPoolGames.push(schedule);                        
+                                          }
+                                          else if ((schedule.GameDate == this.today)&&
+                                          ((new Date(schedule.StartDateTime).getTime())<(new Date(this.CurrTime).getTime()))&&
+                                          ((new Date(schedule.EndDateTime).getTime())>(new Date(this.CurrTime).getTime()))){
+                                              //to get all games of past tournaments
+                                              this.ongoingPoolGames.push(schedule);
+                                          }
+                                          else  if ((schedule.GameDate > this.today)||
+                                          (((schedule.GameDate == this.today))&&
+                                          ((new Date(schedule.StartDateTime).getTime())>(new Date(this.CurrTime).getTime())))){
+                                              //to get all games of future tournaments
+                                              this.upcomingPoolGames.push(schedule);
+                                          }
+                                }
+                              });
+                          });
+                          this.filteredCompletedPoolGames = this.completedPoolGames;
+                          this.filteredOngoingPoolGames = this.ongoingPoolGames;
+                          this.filteredUpcomingPoolGames = this.upcomingPoolGames;
+                          console.log(this.filteredCompletedPoolGames.length);
+                           console.log(this.filteredOngoingPoolGames.length);
+                            console.log(this.filteredUpcomingPoolGames.length);
+                          console.log("done");
+                          this.dataLoading=false;
+                  }
+                  else{
+                    this.scheduleerror = data.ErrorMessage;
+                    console.log(this.scheduleerror);
                     this.dataLoading=false;
-                    
+                  }       
            });
+            
            
    
   }

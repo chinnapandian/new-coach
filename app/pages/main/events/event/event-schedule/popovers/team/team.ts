@@ -21,9 +21,10 @@ export class TeamFilterPage {
               private loginService : LoginService) {
 
         this.followedTeams = this.loginService.getFollowedTeams();
-        this.teams.push({TeamId:-1,TeamName:'All Teams'});
+        this.teams.push({TeamId:-1, TeamName:'All Teams'});
         this.followedTeams.forEach(t => {
-          this.teams.push({TeamId: t.TeamId, TeamName: t.TeamName});
+          var gender = (t.Gender =='M' ? 'B' :'G');
+          this.teams.push({TeamId: t.TeamId, TeamName: (t.TeamName + "(" + t.Grade + "/" + gender + ")")});
         });
         this.setDefaultFilterData();
       }
@@ -32,13 +33,14 @@ export class TeamFilterPage {
      this.teamFilter = this.navParams.get("TeamFilter");
      console.log(this.teamFilter);
   }
-   setSelectedTeam(team){
-       this.selectedteam = team;
+   setSelectedTeam(team, teamname){
+     console.log(teamname);
+       this.selectedteam = teamname;
        this.teamFilter = team;
   }
 
   dismiss() {
-     this.viewCtrl.dismiss(this.teamFilter.toString());
+     this.viewCtrl.dismiss({TeamId: this.teamFilter, TeamName:this.selectedteam});
   }
 
 

@@ -5,6 +5,7 @@ import {AddPopoverPage} from './add-popover/add-popover';
 import {PlayerTabs} from './player/player-tabs';
 import {AddPlayerPage} from './add-player/add-player';
 import {LoginPage} from '../../../pages/auth/login/login';
+import {LandingPage} from '../../../pages/auth/landing/landing';
 import {TeamPage} from './team/team';
 import {LoginService} from '../../../services/login';
 import {AvatarsListService} from  '../../../services/getavatars';
@@ -24,6 +25,7 @@ export class HomePage {
   // Defining variable
   private dataLoading=true;
   private error = false;
+  private playererror = false;
   private homeView: string = 'teams';
   public testRadioOpen: any = false;
   public testRadioResult: any;
@@ -71,20 +73,16 @@ export class HomePage {
               private loginService : LoginService,
               private _config: MyPlayerConfigService,
               private playerstatsService:GetPlayerStatsService) {
-                        
+                    localStorage.setItem("TabIndex","0");
+                     this.homeView = (localStorage.getItem('homeView')==null?this.homeView:localStorage.getItem('homeView'));       
+                    this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
+                    this.fillData();  
+              }
+              ionViewWillEnter(){
+                   localStorage.setItem("TabIndex","0");
                     this.homeView = (localStorage.getItem('homeView')==null?this.homeView:localStorage.getItem('homeView'));       
                     this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
                     this.fillData();
-                 /*   this.loginService.login(this.loginService.getLoginData())      
-                    .subscribe(data => {
-                          console.log(data);
-                          this._config.setAuthToken(data.AuthToken);
-                          this.loginService.setUserInfo(data);
-                          this.loginService.setRegUserTournaments(data.RegUserTournaments);
-                          this.loginService.setRegUserPlayers(data.RegUserPlayers); */
-              }
-              ionViewWillEnter(){
-                this.fillData();
               }
               setGender(gender){
                 if(gender == 'M')
@@ -100,7 +98,8 @@ export class HomePage {
                             this.dataLoading = false;
                             this.FollowedTeams = null;
                             this.error=true;
-                            console.log("error="+ this.error);
+                            this.playererror=true;
+                            
                             this.loginService.setFollowedTeams(null); 
                           }  
                           else
@@ -123,8 +122,9 @@ export class HomePage {
                                             this.FollowedPlayers = data.PlayerStatsinfo;
                                             console.log(this.FollowedPlayers);
                                             this.dataLoading=false;
-                                            this.error=((this.FollowedTeams == null)&&(this.dataLoading==false))?true:false;
-                                            console.log("error="+ this.error);
+                                            this.error=(this.FollowedTeams == null)?true:false;
+                                            this.playererror=(this.FollowedPlayers.length ==0)?true:false;
+                                            console.log("playererror="+ this.playererror);
                                       });
                            
                           }                          

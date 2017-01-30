@@ -1,4 +1,4 @@
-<ion-list [(ngModel)]="teamFilter"  radio-group   (ionChange)="setSelectedTeam(teamFilter)">
+<ion-list [(ngModel)]="teamFilter" #teamname radio-group>
 
     <ion-list-header>
         Teams 
@@ -7,7 +7,7 @@
 
     <ion-item *ngFor="let team of teams">
       <ion-label>{{team.TeamName}}</ion-label>
-      <ion-radio  value={{team.TeamName}}></ion-radio>
+      <ion-radio  value={{team.TeamId}} (click)="setSelectedTeam(team.TeamId,team.TeamName)"></ion-radio>
     </ion-item>
    
 </ion-list>

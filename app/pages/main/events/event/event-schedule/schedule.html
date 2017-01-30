@@ -145,9 +145,12 @@
         </ion-grid>
     </ion-card>
     </div>
-      <div  *ngIf="((filteredUpcomingPoolGames.length == 0)&&(filteredOngoingPoolGames.length==0)&&(filteredCompletedPoolGames.length==0)&&(dataLoading==false))">
+      <div  *ngIf="((filteredUpcomingPoolGames.length == 0)&&(filteredOngoingPoolGames.length==0)&&(filteredCompletedPoolGames.length==0)&&(dataLoading==false)&&(scheduleerror==''))">
           <h6>No schedule found.</h6>
    </div> 
+   <div  *ngIf="((filteredUpcomingPoolGames.length == 0)&&(filteredOngoingPoolGames.length==0)&&(filteredCompletedPoolGames.length==0)&&(dataLoading==false)&&(scheduleerror!=''))">
+          <h6>{{scheduleerror}}</h6>
+   </div>
  <!-- </div> -->
  <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

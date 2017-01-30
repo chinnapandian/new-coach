@@ -255,6 +255,7 @@ export class StatEventsPage {
 
     dismiss() {
         localStorage.setItem('homeView','players');
+        localStorage.setItem('TabIndex','0');
      //   this.navCtrl.push(HomePage);
         this.viewCtrl.dismiss();
     }

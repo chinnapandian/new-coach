@@ -43,10 +43,14 @@ export class EventsPage {
           /*   var currentDate = this.addDays(new Date(),0);           
              currentDate.setHours(0, 0, 0, 0);
              this.today=currentDate.toJSON();*/
+             localStorage.setItem("TabIndex","1");
              this.today = this.config.getCurrDate();
-             this.initialize();             
+             this.initialize();   
     }
-
+    ionViewWillEnter(){
+        this.initialize();  
+    }
+    
     addDays(theDate, days) {
             return new Date(theDate.getTime() + days*24*60*60*1000);
     }
@@ -56,24 +60,31 @@ export class EventsPage {
     // }
 
     initialize() {
-                var RegUserTournaments = this._loginService.getRegUserTournaments();
-                this.RegUserTournaments= this.removeDuplicates(RegUserTournaments,"TournamentId");
+                this.timeView='ongoing';
+                var RegUserTournaments=[];
+                this.currentTournaments=[];
+                this.pastTournaments=[];
+                this.futureTournaments=[];
                 // Fill past, current and future tournaments in respective arrays
-                if(this.RegUserTournaments == null){               
+                if(this._loginService.getRegUserTournaments() == null){         
+                        this.currentTournaments = []; 
+                        this.pastTournaments=[];
+                        this.futureTournaments=[];     
                         this.dataLoading = false;
                 }else{
-                    for (var i = 0; i < this.RegUserTournaments.length; i++) {
-                            if ((this.RegUserTournaments[i].StartDate <= this.today) && (this.RegUserTournaments[i].EndDate >= this.today)) {
+                    RegUserTournaments = this.removeDuplicates(this._loginService.getRegUserTournaments(),"TournamentId");
+                    for (var i = 0; i < RegUserTournaments.length; i++) {
+                            if ((RegUserTournaments[i].StartDate <= this.today) && (RegUserTournaments[i].EndDate >= this.today)) {
                             //to get all games of current tournaments
-                            this.currentTournaments.push(this.RegUserTournaments[i]);                        
+                            this.currentTournaments.push(RegUserTournaments[i]);                        
                             }
-                            else if (this.RegUserTournaments[i].EndDate < this.today){
+                            else if (RegUserTournaments[i].EndDate < this.today){
                                 //to get all games of past tournaments
-                                this.pastTournaments.push(this.RegUserTournaments[i]);
+                                this.pastTournaments.push(RegUserTournaments[i]);
                             }
-                            else if (this.RegUserTournaments[i].StartDate > this.today){
+                            else if (RegUserTournaments[i].StartDate > this.today){
                                 //to get all games of future tournaments
-                                this.futureTournaments.push(this.RegUserTournaments[i]);
+                                this.futureTournaments.push(RegUserTournaments[i]);
                             }
                     }
                     

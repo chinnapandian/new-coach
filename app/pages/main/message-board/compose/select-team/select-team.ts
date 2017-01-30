@@ -16,6 +16,10 @@ export class SelectComposeMessageTeamPage {
          this.followedTeams = this._loginService.getFollowedTeams();
           console.log(this.followedTeams);
   }
+  
+ dismiss() {    
+    this.viewCtrl.dismiss();
+  }
 
   goToComposeMessage(team) {
     this.navCtrl.push(ComposeMessagePage,

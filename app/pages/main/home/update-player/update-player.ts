@@ -111,13 +111,17 @@ export class UpdatePlayerPage {
 
   dismiss() {
     localStorage.setItem('homeView','players');
+     localStorage.setItem('TabIndex','0');
     this.viewCtrl.dismiss();
-    this.navCtrl.setRoot(MainTabs);
+    this.navCtrl.remove(this.viewCtrl.index);
+    this.navCtrl.remove(this.viewCtrl.index-1);
+   // this.navCtrl.setRoot(MainTabs);
   }
 
  savePlayer(status){
    this.save=1;
    localStorage.setItem('homeView','players');
+    localStorage.setItem('TabIndex','0');
    console.log(this.validateData());
    if(this.validateData()==true)
    {
@@ -142,9 +146,13 @@ export class UpdatePlayerPage {
                 if(data.IsSuccess==true)
                   {
                       console.log(data);
-                   //   this._loginService.setRegUserTournaments(data.RegUserTournaments);
+                     // this._loginService.setRegUserTournaments(data.RegUserTournaments);
                       this._loginService.setRegUserPlayers(data.RegUserPlayers); 
-                      this.navCtrl.setRoot(MainTabs);         
+                      this.viewCtrl.dismiss();
+                       this.navCtrl.remove(this.viewCtrl.index);
+                       this.navCtrl.remove(this.viewCtrl.index-1);
+                       this.navCtrl.pop();
+                    //  this.navCtrl.setRoot(MainTabs);         
                   }
                   else
                   {
