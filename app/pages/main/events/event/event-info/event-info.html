@@ -28,28 +28,6 @@
 
     <ion-list-header>Facilities</ion-list-header>
 
-    <!--<ion-card>
-        <div class="map">
-            <button><ion-icon name="navigate"></ion-icon></button>
-        </div>
-        <ion-list radio-group>
-            <ion-item>
-                <ion-label>Madison Square Garden</ion-label>
-                <ion-radio checked="true" value="go"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>TD Bank Garden</ion-label>
-                <ion-radio value="rust"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Amway Arena</ion-label>
-                <ion-radio value="python"></ion-radio>
-            </ion-item>
-        </ion-list>
-    </ion-card>-->
-
   <div *ngFor="let facility of facilities">
         <ion-list-header>{{facility.LocationName}}</ion-list-header>
 

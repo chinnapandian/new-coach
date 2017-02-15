@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {TeamFilterPage} from './popovers/team/team';
 import {GameDetailsPage} from '../game-details/game-details';
+import {MainTabs} from '../../../../main/tabs/main-tabs';
 import {Page, Modal, NavController, ViewController, ModalController,PopoverController, ActionSheetController, ActionSheet, NavParams, Alert} from 'ionic-angular';
 import {TournamentDataService} from '../../../../../services/tournament';
 import {LoginService} from '../../../../../services/login';
@@ -120,7 +121,14 @@ export class EventSchedulePage {
     };
 
     dismiss() {
-        this.viewCtrl.dismiss();
+         localStorage.setItem("TabIndex","1");
+         if(localStorage.getItem("FromEventsTab")=="true"){
+              this.viewCtrl.dismiss();
+         }else{        
+               this.viewCtrl.dismiss();
+                this.navCtrl.push(MainTabs);
+         }
+         localStorage.setItem("FromEventsTab","false");          
     }
  
     getSelectedTournament() {

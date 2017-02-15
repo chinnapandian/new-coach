@@ -6,11 +6,11 @@
             <!--<ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>-->
         </ion-title>
 
-        <ion-buttons end>
+     <!--   <ion-buttons end>
             <button (click)="goToComposeMessagePage()">
                 <ion-icon name="create"></ion-icon>
             </button>
-        </ion-buttons>
+        </ion-buttons>-->
         <ion-buttons end>
             <button (click)="toggleSearch()">
                     <ion-icon name="search"></ion-icon>
@@ -90,7 +90,7 @@
                     <p>{{message.MessageBoard.Message}}</p>
                 </ion-col>
             </ion-row>
-            <ion-row class="message-footer">
+     <!--       <ion-row class="message-footer">
                 <ion-col width-50>
                     <button item-left class="message-comment" clear small (click)="goToReplyMessagePage(message)">
                         <ion-icon name="undo"></ion-icon>
@@ -104,24 +104,7 @@
                     </button>
 
                 </ion-col>
-            </ion-row>
-            <!--<ion-row class="message-body">-->
-            <!--<ion-col width-15 class="team-logo">-->
-            <!--<img src="team-logos/spartans.jpeg" class="A-3" alt="">-->
-            <!--</ion-col>-->
-            <!--<ion-col width-85>-->
-            <!--<div class="title">-->
-            <!--<h1>{{message.title}}</h1>-->
-            <!--<p class="message-info">-->
-            <!--<small>-->
-            <!--<ion-icon name="md-person"></ion-icon>-->
-            <!--</small>-->
-            <!--<span>{{message.author}}</span>-->
-            <!--</p>-->
-            <!--</div>-->
-            <!--<p>{{message.body}}</p>-->
-            <!--</ion-col>-->
-            <!--</ion-row>-->
+            </ion-row>-->
         </ion-grid>
     </ion-card>
     <ion-spinner name="bubbles" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>

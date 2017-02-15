@@ -83,16 +83,18 @@ export class LoginPage {
               this._loginService.setUserInfo(data);
               this._loginService.setRegUserTournaments(data.RegUserTournaments);
               this._loginService.setRegUserPlayers(data.RegUserPlayers); 
+              this._loginService.setCustodianTeam(data.CustodianTeams);
               localStorage.setItem("UserName",data.Context.User.UserName);
               localStorage.setItem('homeView','teams');
               localStorage.setItem("TabIndex",'0');
               localStorage.setItem("logout","false");
-              this.navCtrl.setRoot(MainTabs); 
-
               this.currdate.getTempCurrDate()
                 .subscribe(data => {
                 this._config.setCurrDate(data.CurrDate);
-                });      
+                }); 
+              this.navCtrl.setRoot(MainTabs); 
+
+                   
           }
           else
           {

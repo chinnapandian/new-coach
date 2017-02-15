@@ -37,7 +37,8 @@ unFollow(id)
       console.log(data);
       this.loginService.setRegUserTournaments(data.RegUserTournaments);
       this.loginService.setRegUserPlayers(data.RegUserPlayers);
-      this.viewCtrl.dismiss();
+      this.loginService.setCustodianTeam(data.CustodianTeams);
+      this.viewCtrl.dismiss(data.CustodianTeams);
        this.navCtrl.remove(this.viewCtrl.index);
        this.navCtrl.pop();
    //   this.navCtrl.setRoot(MainTabs);

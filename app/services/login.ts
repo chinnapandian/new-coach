@@ -8,11 +8,12 @@ import {MyPlayerConfigService} from './config';
 export class LoginService {
 
   private apiPath;
-  private userInfo;
-  private loginData;
-  private regUserTournaments;
-  private regUserPlayers;
-  private playerTeams;
+  private userInfo=[];
+  private loginData=[];
+  private regUserTournaments=[];
+  private regUserPlayers=[];
+  private playerTeams=[];
+  private custodianTeams=[];
 
   constructor(private _http: Http,
     private _config: MyPlayerConfigService) {
@@ -61,16 +62,29 @@ export class LoginService {
   {
       return JSON.parse(localStorage.getItem("regUserTournaments"))? JSON.parse(localStorage.getItem("regUserTournaments")) : this.regUserTournaments;
   }
+  
+ setCustodianTeam(setCustTeams)
+  {
+  //  this.custodianTeams = setCustTeams;
+    localStorage.setItem("CustodianTeams",JSON.stringify(setCustTeams));
+  }
+
+  getCustodianTeam()
+  {
+     return JSON.parse(localStorage.getItem("CustodianTeams"));
+     // return JSON.parse(localStorage.getItem("CustodianTeams"))? JSON.parse(localStorage.getItem("CustodianTeams")) : this.custodianTeams;
+  }
 
   setRegUserPlayers(setUsrPlyrs)
   {
-    this.regUserPlayers = setUsrPlyrs;
-     localStorage.setItem("regUserPlayers",JSON.stringify(this.regUserPlayers));
+  //  this.regUserPlayers = setUsrPlyrs;
+     localStorage.setItem("regUserPlayers",JSON.stringify(setUsrPlyrs));
   }
 
   getRegUserPlayers()
   {
-     return JSON.parse(localStorage.getItem("regUserPlayers"))? JSON.parse(localStorage.getItem("regUserPlayers")) : this.regUserPlayers;
+    return JSON.parse(localStorage.getItem("regUserPlayers"));
+    // return JSON.parse(localStorage.getItem("regUserPlayers"))? JSON.parse(localStorage.getItem("regUserPlayers")) : this.regUserPlayers;
   }
 
   setPlayerTeams(setPlyrTeams)

@@ -2,20 +2,20 @@ import {Component} from '@angular/core';
 import {NavController, ViewController, ModalController, LoadingController} from 'ionic-angular';
 import {FollowTeamsPage} from '../follow-teams';
 import {MainTabs} from '../../../tabs/main-tabs';
-import {StatesListService} from "../../../../../services/getstates";
-import {SearchStatesPipe} from '../../../../../pipes/searchstates';
+import {EventOperatorsListService} from "../../../../../services/geteventoperators";
+import {SearchEventOperatorsPipe} from '../../../../../pipes/searcheventoperators';
 
 
 @Component({
   templateUrl: 'build/pages/main/home/follow-teams/filter-state/filter-state.html',
-  providers: [StatesListService],
-  pipes : [SearchStatesPipe]
+  providers: [EventOperatorsListService],
+  pipes : [SearchEventOperatorsPipe]
 })
 
 
 export class FilterTeamStatePage {
 
-  private states: any = [];
+  private eventoperators: any = [];
   private SearchKeyword='';
   private dataLoading =true;
 
@@ -23,7 +23,7 @@ export class FilterTeamStatePage {
       private navCtrl: NavController,
       private viewCtrl: ViewController,
       private modalCtrl: ModalController,
-      private statesList : StatesListService) {
+      private eventOperatorsList : EventOperatorsListService) {
         this.getData();
    
   }
@@ -32,19 +32,19 @@ ionViewWillEnter(){
 }
 
 getData(){ 
-        this.statesList.getStatesList()
+        this.eventOperatorsList.getEventOperators()
         .subscribe(data=>{
             console.log(data);
-            this.states = data;
+            this.eventoperators = data;
             this.dataLoading = false;
         }); 
   
 }
  
-  goToFollowTeamsPage(state){
+  goToFollowTeamsPage(eventoperator){
     
     this.navCtrl.push(FollowTeamsPage,{
-      SelectedState : state
+      SelectedOperator : eventoperator
     });
   }
 

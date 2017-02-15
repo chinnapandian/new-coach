@@ -13,6 +13,7 @@ export class GroupFutureTournamentsPipe implements PipeTransform {
                                                               TournamentStartDate : o.TournamentStartDate,
                                                               TournamentEndDate : o.TournamentEndDate,
                                                               LocationName : o.LocationName,
+                                                              isRegistered : o.isRegistered,
                                                               futureTournaments: [] };
       grouptournaments[groupid].futureTournaments.push(o);  
     });        

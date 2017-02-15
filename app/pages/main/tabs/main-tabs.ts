@@ -16,7 +16,7 @@ export class MainTabs {
   EventsTab: any;
   MessageBoardTab: any;
   SettingsTab: any;
-  private tabIndex = 0;
+  private tabIndex;
   private tabBarElement;
   constructor(private nav:NavController) {
     this.HomeTab = HomePage;
@@ -27,7 +27,9 @@ export class MainTabs {
   }
 
   ionViewDidEnter() {   
-      this.tabIndex = (localStorage.getItem("TabIndex")==null)?this.tabIndex:parseInt(localStorage.getItem("TabIndex"));
+    console.log("ls"+parseInt(localStorage.getItem("TabIndex")));
+      this.tabIndex = (localStorage.getItem("TabIndex")==null)?0:parseInt(localStorage.getItem("TabIndex"));
+      console.log(this.tabIndex);
       this.tabRef.select(this.tabIndex);
  }
 }

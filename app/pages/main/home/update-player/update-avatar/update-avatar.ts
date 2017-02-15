@@ -4,6 +4,7 @@ import {AvatarsListService} from  '../../../../../services/getavatars';
 import {MyPlayerConfigService} from  '../../../../../services/config';
 import {UpdatePlayerPage} from "../../update-player/update-player";
 import {TitlePipe} from  '../../../../../pipes/title';
+import {LoginService} from  '../../../../../services/login';
 
 @Component({
   templateUrl: 'build/pages/main/home/add-player/add-avatar/add-avatar.html',
@@ -19,6 +20,7 @@ export class UpdatePlayerAvatarPage {
   private imagePath;
   private selectedavatar;
   private tabview = 'boys';
+  private teamGender;
 
  constructor(
       private navCtrl: NavController,
@@ -26,7 +28,25 @@ export class UpdatePlayerAvatarPage {
       private modalCtrl: ModalController,
       private avatars : AvatarsListService,
       private navParams : NavParams,
-      private _config: MyPlayerConfigService) {
+      private _config: MyPlayerConfigService,
+      private _loginService:LoginService) {
+
+        var followedTeams = this._loginService.getFollowedTeams();
+        var teamId;
+        teamId = this.navParams.get("SelectedTeamId");
+        console.log(teamId);
+       followedTeams.forEach(team => {
+          if(team.TeamId == parseInt(teamId))
+          {
+              this.teamGender = team.Gender;
+              this.avatarGender = (this.teamGender=='M')?'boys':'girls';
+              this.selectedavatar = (this.navParams.get("SelectedAvatar")!="")?this.navParams.get("SelectedAvatar"):
+                                    ((this.teamGender=='M')?"boys/joe.svg":"girls/caroline.svg");
+
+          }
+            
+        });
+
 
         this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
         console.log(this.imagePath);

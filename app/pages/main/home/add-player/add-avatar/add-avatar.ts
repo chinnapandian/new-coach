@@ -4,6 +4,7 @@ import {AvatarsListService} from  '../../../../../services/getavatars';
 import {MyPlayerConfigService} from  '../../../../../services/config';
 import {AddPlayerPage} from "../../add-player/add-player";
 import {TitlePipe} from  '../../../../../pipes/title';
+import {LoginService} from  '../../../../../services/login';
 
 @Component({
   templateUrl: 'build/pages/main/home/add-player/add-avatar/add-avatar.html',
@@ -12,13 +13,14 @@ import {TitlePipe} from  '../../../../../pipes/title';
 })
 export class AddPlayerAvatarPage {
 
-  private avatarGender: string = 'boys';
+  private avatarGender: string;
   private avatarfiles =[];
   private boyavatars = [];
   private girlavatars = [];
   private imagePath;
   private selectedavatar;
   private tabview = 'boys';
+  private teamGender;
 
   constructor(
       private navCtrl: NavController,
@@ -26,8 +28,23 @@ export class AddPlayerAvatarPage {
       private modalCtrl: ModalController,
       private avatars : AvatarsListService,
       private navParams : NavParams,
-      private _config: MyPlayerConfigService) {
+      private _config: MyPlayerConfigService,
+      private _loginService:LoginService) {
 
+
+        var followedTeams = this._loginService.getFollowedTeams();
+        followedTeams.forEach(team => {
+          if(team.TeamId == parseInt(this.navParams.get("SelectedTeamId")))
+          {
+              this.teamGender = team.Gender;
+              this.avatarGender = (this.teamGender=='M')?'boys':'girls';
+              this.selectedavatar = (this.navParams.get("SelectedAvatar")!="")?this.navParams.get("SelectedAvatar"):
+                                    ((this.teamGender=='M')?"boys/joe.svg":"girls/caroline.svg");
+
+          }
+            
+        });
+        console.log(this.teamGender);
         this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
         console.log(this.imagePath);
 
@@ -45,7 +62,7 @@ export class AddPlayerAvatarPage {
             });
             console.log(this.boyavatars);
             console.log(this.girlavatars);
-            this.selectedavatar = this.navParams.get("SelectedAvatar");
+            
         })
        
 }

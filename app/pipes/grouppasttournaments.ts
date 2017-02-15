@@ -14,7 +14,8 @@ export class GroupPastTournamentsPipe implements PipeTransform {
                                                               TournamentStartDate : o.TournamentStartDate,
                                                               TournamentEndDate : o.TournamentEndDate,
                                                               LocationName : o.LocationName,
-                                                              pastTournaments: [] };
+                                                              pastTournaments: [],
+                                                              isRegistered:o.isRegistered };
       grouptournaments[groupid].pastTournaments.push(o);  
     });        
     return Object.keys(grouptournaments).map(function (key) {return grouptournaments[key]});

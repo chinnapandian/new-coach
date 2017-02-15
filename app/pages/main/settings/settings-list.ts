@@ -92,7 +92,7 @@ export class SettingsListPage {
                 var regid = this._config.getRegistrationId();
                 localStorage.clear(); 
              //   console.log("settingspage"+this._config.getAuthToken());  
-                console.log("settingspage"+localStorage.getItem('AuthToken'));    
+                console.log("settingspage" + localStorage.getItem('AuthToken'));    
                 localStorage.setItem("device", device);
                 localStorage.setItem("deviceId", deviceid);
                 localStorage.setItem("registrationId", regid);       

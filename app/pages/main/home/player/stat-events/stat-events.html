@@ -17,7 +17,7 @@
 
     </ion-navbar>
 
-    <ion-toolbar class="has-segment" no-border-top primary>
+ <!--   <ion-toolbar class="has-segment" no-border-top primary>
         <ion-segment [(ngModel)]="scheduleView" class="wide" light>
             <ion-segment-button value="tournament">
                 Tournaments
@@ -26,15 +26,15 @@
                 Leagues
             </ion-segment-button>
         </ion-segment>
-    </ion-toolbar>
+    </ion-toolbar> -->
 
 </ion-header>
 
 <ion-content class="stat-events">
 
-  <div [ngSwitch]="scheduleView">
+<!--  <div [ngSwitch]="scheduleView"> -->
 
-    <div *ngSwitchCase="'tournament'">
+    <div>
     <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
         <ion-segment [(ngModel)]="timeView" class="wide" dark-6>
             <ion-segment-button value="completed">
@@ -118,8 +118,8 @@
     </div>
      <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
     </div>
-       <div *ngSwitchCase="'league'">
-          <!--  <ion-list-header text-wrap>Zero Gravity Fall 2016 - New England Circut</ion-list-header>
+    <!--    <div *ngSwitchCase="'league'">
+           <ion-list-header text-wrap>Zero Gravity Fall 2016 - New England Circut</ion-list-header>
 
             <ion-card class="">
                 <ion-list>
@@ -146,9 +146,9 @@
                         <p subtitle>{{league.date}}</p>
                     </a>
                 </ion-list>
-            </ion-card>-->
-        </div>
-  </div>
+            </ion-card>
+        </div>-->
+<!--  </div>-->
 
     <!--<ion-list-header>Zero Gravity 2016 Fall Season - NE Circuit</ion-list-header>
     <ion-card>

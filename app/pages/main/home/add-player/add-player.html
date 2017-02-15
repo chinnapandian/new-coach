@@ -21,54 +21,71 @@
 
 <ion-content class="add-player">
     <ion-list-header>Player Profile</ion-list-header>
-
-    <ion-card>
-        <ion-list>
-            <ion-item>
-                <ion-thumbnail class="circle-large" item-left>
-                      <img src='{{imagePath}}{{SelectedAvatar}}' alt="">
-                </ion-thumbnail>
-                <button item-right outline small (click)="goToAddPlayerAvatarPage()">
-                    <ion-icon name="refresh"></ion-icon>
-                    Swap Avatars</button>
-            </ion-item>
-        </ion-list>
-    </ion-card>
       <ion-card>
             <ion-list>
                 <ion-item>
                     <ion-label stacked>Team Name</ion-label>
-                    <ion-select  [(ngModel)]="TeamId" placeholder="Choose a Team">
+                    <ion-select  [(ngModel)]="TeamId" placeholder="Choose a Team" (ionChange)="onTeamChange()">
                       <!--  <ion-option value="-1">Choose a Team
                         </ion-option>-->
                         <ion-option *ngFor="let team of followedTeams" [value]="team.TeamId">{{team.TeamName}}
                         </ion-option>
                     </ion-select>
                 </ion-item>
-                <div *ngIf="((TeamId==-1)&&(save==1))" style="color:red">
-                            <strong>&nbsp;&nbsp;Team name is required</strong>
+                <div *ngIf="(teamerror==1)" style="color:red">
+                            <strong>&nbsp;&nbsp;Only 1 Player can be added to a Team</strong>
                     </div>
             </ion-list>
         </ion-card>
+         <ion-card *ngIf="otherCustodiansFollowedPlayers.length!=0 && playererror==0">
+            <ion-list>
+                <ion-item>
+                    <ion-label floating>Choose Player</ion-label>
+                    <ion-select  [(ngModel)]="playerUserId" (ionChange)="onPlayerChange(playerUserId)" [disabled]="newplayer!=0">
+                        <ion-option *ngFor="let player of otherCustodiansFollowedPlayers" [value]="player.PlayerUserId">{{player.FirstName 
+                            +' ' + player.LastName}}
+                        </ion-option>
+                    </ion-select>
+                     </ion-item>
+                     <ion-item item-right>
+                           <button outline  (click)="goToNewPlayer()" [disabled]="TeamId==-1 || playererror==1">
+                    <ion-icon name="add"></ion-icon>
+                    New Player</button>
+                     </ion-item>
+            </ion-list>
+        </ion-card>
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-thumbnail class="circle-large" item-left>
+                      <img src='{{imagePath}}' alt="">
+                </ion-thumbnail>
+                <button item-right outline small (click)="goToAddPlayerAvatarPage()" [disabled]="teamerror==1">
+                    <ion-icon name="refresh"></ion-icon>
+                    Swap Avatars</button>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
          <ion-card>
             <ion-list>
                 <ion-item>
                     <ion-label stacked>First Name</ion-label>
-                    <ion-input class="signup-name" [(ngModel)]="firstName" type="text" value=""></ion-input>
+                    <ion-input class="signup-name" [(ngModel)]="firstName" type="text" value="" [disabled]="teamerror==1 || newplayer==0"></ion-input>
                 </ion-item>
                 <div *ngIf="((firstName=='')&&(save==1))" style="color:red">
                         <strong>&nbsp;&nbsp;First name is required</strong>
                 </div>
                 <ion-item>
                     <ion-label stacked>Last Name</ion-label>
-                    <ion-input class="signup-name" [(ngModel)]="lastName" type="text" value=""></ion-input>
+                    <ion-input class="signup-name" [(ngModel)]="lastName" type="text" value="" [disabled]="teamerror==1 || newplayer==0"></ion-input>
                 </ion-item>
                 <div *ngIf="((lastName=='')&&(save==1))" style="color:red">
                             <strong>&nbsp;&nbsp;Last name is required</strong>
                     </div>
                 <ion-item>
                     <ion-label stacked>Email</ion-label>
-                    <ion-input class="signup-email" [(ngModel)]="Email" type="email" value=""></ion-input>
+                    <ion-input class="signup-email" [(ngModel)]="Email" type="email" value="" [disabled]="teamerror==1 || newplayer==0"></ion-input>
                 </ion-item>
                 <div *ngIf="((Email=='')&&(save==1))" style="color:red">
                         <strong>&nbsp;&nbsp;Email is required</strong>
@@ -81,7 +98,7 @@
             <ion-list>
                 <ion-item>
                     <ion-label stacked >Jersey Number</ion-label>
-                    <ion-input type="number" [(ngModel)]="JerseyNumber" value=""></ion-input>
+                    <ion-input type="number" [(ngModel)]="JerseyNumber" value="" [disabled]="teamerror==1 || newplayer==0"></ion-input>
                 </ion-item>
             </ion-list>
         </ion-card>
@@ -91,7 +108,7 @@
             <ion-list radio-group [(ngModel)]="playerposition" *ngFor="let position of positions">
                 <ion-item>
                     <ion-label >{{position.Name}}</ion-label>
-                    <ion-radio value={{position.Code}}></ion-radio>
+                    <ion-radio value={{position.Code}} [disabled]="teamerror==1 || newplayer==0"></ion-radio>
                 </ion-item>
             </ion-list>
         </ion-card>

@@ -5,9 +5,11 @@
         <!--<ion-searchbar (input)="getItems($event)" placeholder="Find Your Team"></ion-searchbar>-->
 
         <ion-buttons end>
-            <button *ngIf="((boysteamsFollowed.length!=0)||(girlsteamsFollowed.length!==0))" (click)="saveFollowedTeams()">
-                <span showWhen="ios">Done</span>
-                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+            
+            <button *ngIf="((boysteamsFollowed.length!=0)||(girlsteamsFollowed.length!=0))" (click)="saveFollowedTeams()">
+                <b>Done</b>
+              <!--  <span showWhen="ios">Done</span>
+                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>-->
             </button>
         </ion-buttons>
 
@@ -24,10 +26,10 @@
     <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
         <ion-segment  [(ngModel)]="teamGender" class="wide" primary>
             <ion-segment-button value="boys" (click)="clearsearch()">
-               {{selectedState.StateCode}} Boys Teams
+               Boys Teams
             </ion-segment-button>
             <ion-segment-button value="girls" (click)="clearsearch()">
-               {{selectedState.StateCode}} Girls Teams
+               Girls Teams
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>

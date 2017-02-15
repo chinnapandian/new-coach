@@ -5,10 +5,10 @@
 
      <ion-buttons end>
             <button (click)="dismiss()">
-                <span showWhen="ios">Done</span>
-                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+                Done
             </button>
       </ion-buttons>
+      
     </ion-navbar>
 </ion-header>
 
@@ -16,17 +16,17 @@
 
     <ion-toolbar class="clear has-segment" no-border-top no-border-bottom>
         <ion-segment [(ngModel)]="avatarGender" class="wide" primary>
-            <ion-segment-button value="boys">
+            <ion-segment-button value="boys" [hidden]="teamGender=='F'">
                 Boy Avatars
             </ion-segment-button>
-            <ion-segment-button value="girls">
+            <ion-segment-button value="girls" [hidden]="teamGender=='M'">
                 Girl Avatars
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
 
     <div [ngSwitch]="avatarGender">
-        <ion-card *ngSwitchCase="'boys'">
+        <ion-card *ngSwitchCase="'boys'" [hidden]="teamGender=='F'">
             <ion-list radio-group  [(ngModel)]="selectedavatar">
                 <ion-item *ngFor="let avatar of boyavatars">
                     <ion-thumbnail class="circle" item-left>
@@ -38,7 +38,7 @@
             </ion-list>
         </ion-card>
 
-        <ion-card *ngSwitchCase="'girls'">
+        <ion-card *ngSwitchCase="'girls'" [hidden]="teamGender=='M'">
             <ion-list radio-group  [(ngModel)]="selectedavatar">
                 <ion-item *ngFor="let avatar of girlavatars">
                     <ion-thumbnail class="circle" item-left>
@@ -50,6 +50,7 @@
             </ion-list>
 
         </ion-card>
-    </div>
+         </div>
+
 
 </ion-content>

@@ -3,6 +3,7 @@ import {NavController, ViewController, ModalController, NavParams, PopoverContro
 import {StandingsDivisionFilterPage} from './division-filter/division-filter'
 import {GroupTeamsPipe} from '../../../../../pipes/groupteambypool';
 import {LoginService} from '../../../../../services/login';
+import {MainTabs} from '../../../../main/tabs/main-tabs';
 
 @Component({
   templateUrl: 'build/pages/main/events/event/event-standings/standings.html',
@@ -89,7 +90,13 @@ export class EventStandingsPage {
 
 
   dismiss() {
-     localStorage.setItem("TabIndex",'1');
-    this.viewCtrl.dismiss();
+       localStorage.setItem("TabIndex","1");
+         if(localStorage.getItem("FromEventsTab")=="true"){
+              this.viewCtrl.dismiss();
+         }else{        
+               this.viewCtrl.dismiss();
+                this.navCtrl.push(MainTabs);
+         }
+         localStorage.setItem("FromEventsTab","false");  
   }
 }

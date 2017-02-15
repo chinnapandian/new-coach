@@ -20,7 +20,7 @@ export class MyPlayerConfigService {
     private device = localStorage.getItem("device");
     private registrationId =localStorage.getItem("registrationId");
 
-    private http = "http://";
+    private http = "https://";
 
 
     getHttp() {
@@ -28,8 +28,8 @@ export class MyPlayerConfigService {
     }
 
     getApiHost() {
-    //    return "stage.myludus.com";
-      return "zerogravity.myludus.com";
+        return "stage.myludus.com";
+    //  return "zerogravity.myludus.com";
       // return  "mygame.local";
     };
 

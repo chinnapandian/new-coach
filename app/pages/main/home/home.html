@@ -36,19 +36,19 @@
 </ion-header>
 
 <ion-content [ngSwitch]="homeView">
-
+ 
     <div *ngSwitchCase="'teams'">
        <div *ngIf="dataLoading==false">
-        <div *ngFor="let team of FollowedTeams">
-            <!--<ion-list-header>{{team.org}}</ion-list-header>-->
+        <div  *ngFor="let team of FollowedTeams | groupfollowedteamsbyorgid">
+            <ion-list-header>{{team.OrgName}}</ion-list-header>
             <ion-card>
-                <ion-list no-wrap>
-                    <a ion-item (click)="goToTeamPage(team)">
+                <ion-list no-wrap text-wrap *ngFor="let t of team.FollowedTeams">
+                    <a ion-item (click)="goToTeamPage(t)">
                         <ion-avatar item-left class="A-6-S">
                             <img [src]="'medal-shadow.png'">
                         </ion-avatar> 
-                        <h2 title>{{team.TeamName}} ({{team.Grade}}/{{setGender(team.Gender)}})</h2>
-                        <p><b>Coach: </b>{{(team.CoachFirstName + " " + team.CoachLastName)|title}}</p>
+                        <h2 title>{{t.TeamName}} ({{t.Grade}}/{{setGender(t.Gender)}})</h2>
+                        <p><b>Coach: </b>{{(t.CoachFirstName + " " + t.CoachLastName)|title}}</p>
                     </a>
                 </ion-list>
             </ion-card>
@@ -62,7 +62,7 @@
     </div>
 
     <div *ngSwitchCase="'players'">
-        <div *ngIf="dataLoading==false">
+        <div *ngIf="playerdataLoading==false">
         <ion-card *ngFor="let followedplayer of FollowedPlayers; let i =index">
             <ion-list>
                 <a ion-item (click)="goToPlayerTabs(followedplayer)">

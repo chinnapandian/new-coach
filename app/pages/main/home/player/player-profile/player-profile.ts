@@ -324,12 +324,19 @@ export class PlayerProfilePage {
     }
     
     goToEditPlayer() {
-        let playerModal = this.modalCtrl.create(UpdatePlayerPage);
+        let playerModal = this.modalCtrl.create(UpdatePlayerPage,{
+            
+        });
         playerModal.present();
     }
 
     dismiss() {
-        this.viewCtrl.dismiss();
+    localStorage.setItem('TabIndex', '0');
+    localStorage.setItem('homeView', 'players');
+
         localStorage.setItem("SelectedPlayerId",'');
+         this.viewCtrl.dismiss();
+              this.navCtrl.remove(this.viewCtrl.index);
+              this.navCtrl.pop();
     }
 }

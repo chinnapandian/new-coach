@@ -7,6 +7,7 @@ import {LoginService} from '../../../../../services/login';
 import {FillPipe} from '../../../../../pipes/fill';
 import {GroupBracketData} from '../../../../../pipes/groupbracketdata';
 import {DomSanitizationService} from '@angular/platform-browser';
+import {MainTabs} from '../../../../main/tabs/main-tabs';
 import * as moment from 'moment';
 
 declare var brackets: any;
@@ -329,8 +330,14 @@ export class EventBracketsPage {
     }
 
     dismiss() {
-        localStorage.setItem("TabIndex",'1');
-        this.viewCtrl.dismiss();
+          localStorage.setItem("TabIndex","1");
+         if(localStorage.getItem("FromEventsTab")=="true"){
+              this.viewCtrl.dismiss();
+         }else{        
+               this.viewCtrl.dismiss();
+                this.navCtrl.push(MainTabs);
+         }
+         localStorage.setItem("FromEventsTab","false");  
     }
 
     showBracketGames(roundindex){

@@ -1,9 +1,10 @@
 <ion-header>
-    <ion-navbar primary no-border-bottom>
+    <ion-navbar primary no-border-bottom hideBackButton="true">
         <ion-buttons start>
             <button (click)="dismiss()">
-                <span showWhen="ios">Cancel</span>
-                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+                Done
+              <!--  <span showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon> -->
             </button>
         </ion-buttons>
         <ion-title>Get Access</ion-title>
@@ -28,59 +29,120 @@
 
     <div [ngSwitch]="purchaseView">
         <div *ngSwitchCase="'tournament'">
-            <ion-list-header>
-                <span>Tournament Access</span>
-            </ion-list-header>
+
             <ion-card class="">
-                <ion-list text-wrap>
-                    <ion-item>
-                   <!--      <ion-avatar class="A-6-S" item-left>
-                            <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
-                        </ion-avatar>-->
-                       <h2 title>{{SelectedTournamentName}}</h2>
-                         <p subtitle>{{getDate(SelectedTournamentStartDate)}} - {{getDate(SelectedTournamentEndDate)}}</p>
-                        <button item-right primary outline (click)="checkout(TournamentProductId, SelectedTournamentId, null, TournamentPurchasePrice)">{{TournamentPurchasePrice | currency:'USD':true:'1.2-2'}}</button>
-                    </ion-item>
-                </ion-list>
-                <ion-list>
-                    <ion-list-header padding-top dark>Tournament Features</ion-list-header>
+               <ion-list-header  *ngIf="showHideTournFeaturesHeader==true"  primary (click)="showHideTournFeatures()">Tournament Access Features
+                         <ion-icon item-right name="arrow-dropup"></ion-icon>
+                </ion-list-header>
+                 <ion-list-header  *ngIf="showHideTournFeaturesHeader==false" (click)="showHideTournFeatures()">Tournament Access Features
+                        <ion-icon item-right name="arrow-dropdown"></ion-icon>
+                 </ion-list-header>
+                  <ion-list *ngIf="showHideTournFeaturesHeader==true">
                     <ion-item *ngFor="let item of bulletList">
                         <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
                         <h2>{{item}}</h2>
                     </ion-item>
                 </ion-list>
+            </ion-card>
+
+            <ion-card class="">
+                <ion-list text-wrap>
+                    <ion-item *ngFor="let tourn of tournamentsList">
+                   <!--      <ion-avatar class="A-6-S" item-left>
+                            <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
+                        </ion-avatar>-->
+                       <h2 title>{{tourn.TournamentName}}</h2>
+                         <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
+                         <button item-right primary outline *ngIf="tourn.isRegistered==1" (click)="goToEventPage(tourn)">Go to Event</button>
+                        <button item-right primary outline  *ngIf="tourn.isRegistered==0" (click)="checkout(TournamentProductId,tourn.TournamentId, null, TournamentPurchasePrice)">{{TournamentPurchasePrice | currency:'USD':true:'1.2-2'}}</button>
+                    </ion-item>
+                </ion-list>
+
                 <!--<button block outline>Get Access</button>-->
             </ion-card>
         </div>
 
         <div *ngSwitchCase="'season'">
-            <ion-list-header>
-                Full Season Access
-            </ion-list-header>
 
-            <ion-card class="">
+            <ion-card>
+                    <ion-list-header  *ngIf="showHideSeasonFeaturesHeader==true"  primary (click)="showHideSeasonFeatures()">Season Access Features
+                            <ion-icon item-right name="arrow-dropup"></ion-icon>
+                    </ion-list-header>
+                    <ion-list-header  *ngIf="showHideSeasonFeaturesHeader==false" (click)="showHideSeasonFeatures()">Season Access Features
+                            <ion-icon item-right name="arrow-dropdown"></ion-icon>
+                    </ion-list-header>
+                    <ion-list text-wrap *ngIf="showHideSeasonFeaturesHeader==true">
+                        <ion-list-header orange>What Is A Season Pass?</ion-list-header>
+                        <ion-item>
+                            <!--<ion-icon item-left name="help-circle" primary></ion-icon>-->
+                            <h2>
+                                A Season Pass is a collection of tournaments within a given date range.
+                            </h2>
+                        </ion-item>
+                    </ion-list>
+
+                    <ion-list text-wrap *ngIf="showHideSeasonFeaturesHeader==true">
+                        <ion-list-header padding-top orange>Who Is A Season Pass For?</ion-list-header>
+                        <ion-item>
+                            <!--<ion-icon item-left name="help-circle" primary></ion-icon>-->
+                            <h2>
+                                A Season Pass is for anyone planning to
+                                attend three or more tournaments within a defined season.
+                            </h2>
+                        </ion-item>
+                    </ion-list>
+
+                    <ion-list text-wrap *ngIf="showHideSeasonFeaturesHeader==true">
+                        <ion-list-header padding-top orange>Why Season Pass?</ion-list-header>
+                        <ion-item>
+                            <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
+                            <h2>
+                                Save time by purchasing all of your tournaments at once
+                            </h2>
+                        </ion-item>
+                        <ion-item>
+                            <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
+                            <h2>
+                                Save money by paying a low one-time rate
+                            </h2>
+                        </ion-item>
+                        <ion-item>
+                            <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
+
+                            <h2>
+                                Stay informed by receiving tournament updates as soon as they're ready
+                            </h2>
+                        </ion-item>
+                    </ion-list>
+            </ion-card>
+
+            <ion-card class=""  *ngFor="let season of seasonsList ; let i=index">
                 <ion-list text-wrap>
                     <ion-item no-lines>
                         <!--<ion-avatar class="square" item-left>-->
                         <!--<img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">-->
                         <!--</ion-avatar>-->
-                        <h2 title>{{SelectedSeasonName}}</h2>
+                        <h2 title>{{season.SeasonName}}</h2>
                         <p>
-                            <span>{{getSeasonFormattedDate(SeasonStartDate)}}</span>
+                            <span>{{getSeasonFormattedDate(season.SeasonStartDate)}}</span>
                             <small>
                                 <ion-icon md="md-arrow-round-forward" ios="md-arrow-round-forward"></ion-icon>
                             </small>
-                            <span>{{getSeasonFormattedDate(SeasonEndDate)}}</span>
+                            <span>{{getSeasonFormattedDate(season.SeasonEndDate)}}</span>
                         </p>
                         <!--<p>Presented by Zero Gravity</p>-->
-                        <button item-right outline (click)="checkout(SeasonProductId, 0, SelectedSeasonId, SeasonPurchasePrice)">{{SeasonPurchasePrice | currency:'USD':true:'1.2-2'}}</button>
+                         <button item-right primary outline *ngIf="season.RegisteredSeasonId!=0" (click)="goToAllEvents()">Go to Event</button>
+                        <button item-right primary outline  *ngIf="season.RegisteredSeasonId==0" (click)="checkout(SeasonProductId, 0, season.SeasonId, SeasonPurchasePrice)">{{SeasonPurchasePrice | currency:'USD':true:'1.2-2'}}</button>
                     </ion-item>
                 </ion-list>
-                <br/>
-                
-                <ion-list text-wrap>
-                    <ion-list-header dark>Included Tournaments</ion-list-header>
-                    <ion-item *ngFor="let tournament of season">
+                    <ion-list-header dark *ngIf="showHideIncludedTournsHeader[i]==true"  primary (click)="showHideIncludedTournsFeatures(i)">Included Tournaments
+                            <ion-icon item-right name="arrow-dropup"></ion-icon>
+                    </ion-list-header>
+                    <ion-list-header  *ngIf="showHideIncludedTournsHeader[i]==false" (click)="showHideIncludedTournsFeatures(i)">Included Tournaments
+                            <ion-icon item-right name="arrow-dropdown"></ion-icon>
+                    </ion-list-header>
+                <ion-list text-wrap *ngIf="showHideIncludedTournsHeader[i]==true">
+                    <ion-item *ngFor="let tournament of tournamentsList | filtertournament : season.SeasonId">
                        <!--   <ion-avatar class="A-6-S" item-left>
                             <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
                         </ion-avatar> -->
@@ -90,54 +152,7 @@
                     </ion-item>
                 </ion-list>
             </ion-card>
-            <ion-list-header>
-                <span>Frequently Asked Questions</span>
-            </ion-list-header>
-            <ion-card>
-                <ion-list text-wrap>
-                    <ion-list-header orange>What Is A Season Pass?</ion-list-header>
-                    <ion-item>
-                        <!--<ion-icon item-left name="help-circle" primary></ion-icon>-->
-                        <h2>
-                            A Season Pass is a collection of tournaments within a given date range.
-                        </h2>
-                    </ion-item>
-                </ion-list>
 
-                <ion-list text-wrap>
-                    <ion-list-header padding-top orange>Who Is A Season Pass For?</ion-list-header>
-                    <ion-item>
-                        <!--<ion-icon item-left name="help-circle" primary></ion-icon>-->
-                        <h2>
-                            A Season Pass is for anyone planning to
-                            attend three or more tournaments within a defined season.
-                        </h2>
-                    </ion-item>
-                </ion-list>
-
-                <ion-list text-wrap>
-                    <ion-list-header padding-top orange>Why Season Pass?</ion-list-header>
-                    <ion-item>
-                        <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
-                        <h2>
-                            Save time by purchasing all of your tournaments at once
-                        </h2>
-                    </ion-item>
-                    <ion-item>
-                        <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
-                        <h2>
-                            Save money by paying a low one-time rate
-                        </h2>
-                    </ion-item>
-                    <ion-item>
-                        <ion-icon item-left name="checkmark-circle-outline" secondary></ion-icon>
-
-                        <h2>
-                            Stay informed by receiving tournament updates as soon as they're ready
-                        </h2>
-                    </ion-item>
-                </ion-list>
-            </ion-card>
         </div>
     </div>
 

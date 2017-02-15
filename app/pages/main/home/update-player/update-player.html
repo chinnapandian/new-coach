@@ -20,9 +20,25 @@
 </ion-header>
 
 <ion-content class="add-player">
-    <ion-list-header>Player Profile</ion-list-header>
-
+    <ion-list-header>Player Profile</ion-list-header>  
     <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label stacked>Team Name</ion-label>
+                <!--(ionChange)="checkPlayerCountPerTeam()"-->
+                <ion-select [(ngModel)]="TeamId" placeholder="Choose a Team" multiple="true" >
+                  <!--  <ion-option value="-1">Choose a Team
+                    </ion-option> -->
+                    <ion-option *ngFor="let team of followedTeams" [value]="team.TeamId">{{team.TeamName}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+            <div *ngIf="(teamerror==1)" style="color:red">
+                            <strong>&nbsp;&nbsp;Only 1 Player can be added to a Team</strong>
+                    </div>
+        </ion-list>
+    </ion-card>
+     <ion-card>
         <ion-list>
             <ion-item>
                   <ion-thumbnail class="circle-large" item-left>
@@ -32,22 +48,6 @@
                     <ion-icon name="refresh"></ion-icon>
                     Swap Avatars</button>
             </ion-item>
-        </ion-list>
-    </ion-card>
-    <ion-card>
-        <ion-list>
-            <ion-item>
-                <ion-label stacked>Team Name</ion-label>
-                <ion-select [(ngModel)]="TeamId" placeholder="Choose a Team">
-                  <!--  <ion-option value="-1">Choose a Team
-                    </ion-option> -->
-                    <ion-option *ngFor="let team of followedTeams" [value]="team.TeamId">{{team.TeamName}}
-                    </ion-option>
-                </ion-select>
-            </ion-item>
-            <div *ngIf="((TeamId==-1)&&(save==1))" style="color:red">
-                <strong>&nbsp;&nbsp;Team name is required</strong>
-            </div>
         </ion-list>
     </ion-card>
     <ion-card>

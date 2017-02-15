@@ -3,6 +3,10 @@ import {NavController, ViewController, ModalController, NavParams} from 'ionic-a
 import {LoginService} from  '../../../../../services/login';
 import {AddProductSubscriptionService} from  '../../../../../services/addproductsubscription';
 import {EventsPage} from '../../events';
+import {MainTabs} from '../../../tabs/main-tabs';
+import {SubscriptionListService} from  '../../../../../services/subscriptionlist';
+import {FilterTournamentsPipe} from  '../../../../../pipes/filtertournament';
+import {SelectedEventTabs} from "../../event/tabs/event-tabs";
 
 @Injectable()
 export class AddProductData {  
@@ -23,7 +27,8 @@ export class AddProductData {
 
 @Component({
     templateUrl: 'build/pages/main/events/purchase/event/purchase-event.html',
-    providers:[AddProductData, AddProductSubscriptionService],
+    providers:[AddProductData, AddProductSubscriptionService,SubscriptionListService],
+    pipes:[FilterTournamentsPipe]
 })
 
 export class PurchaseEventPage {
@@ -97,40 +102,100 @@ export class PurchaseEventPage {
     private SeasonEndDate;
     private TournamentProductId;
     private SeasonProductId;
+    private showHideTournFeaturesHeader=false;
+     private showHideSeasonFeaturesHeader=false;
+     private showHideIncludedTournsHeader= [];
+     private tournamentsList =[];
+     private seasonsList =[];
 
     constructor(private navCtrl:NavController,
                 private viewCtrl:ViewController,
                 private modalCtrl:ModalController,
                 private navParams:NavParams,
                 private loginservice:LoginService,
+                private subscriptionlist:SubscriptionListService,
                 private _addProductData:AddProductData,
                 private _addProductSubscription:AddProductSubscriptionService) {
        
-        var season =[];
-        this.SelectedTournamentName = this.navParams.get("SelectedTournament").TournamentName;
-        this.SelectedTournamentId = this.navParams.get("SelectedTournament").TournamentId;
-        this.SelectedTournamentStartDate = this.navParams.get("SelectedTournament").StartDate;
-        this.SelectedTournamentEndDate = this.navParams.get("SelectedTournament").EndDate;
-        this.SelectedSeasonName = this.navParams.get("SelectedTournament").SeasonName;
-        this.SelectedCircuitName = this.navParams.get("SelectedTournament").CircuitName;
-        this.SelectedSeasonId = this.navParams.get("SelectedTournament").SeasonId;
-        this.TournamentProductId = this.navParams.get("TournamentProductId");
-        this.SeasonProductId = this.navParams.get("SeasonProductId");
-        this.SeasonStartDate = this.navParams.get("SelectedTournament").SeasonStartDate;
-        this.SeasonEndDate = this.navParams.get("SelectedTournament").SeasonEndDate;
+       var seasons =[];this.tournamentsList =[];
+        var TournamentPrice,SeasonPrice,TournProdId,SeasonProdId;
 
-        this.TournamentPurchasePrice = this.navParams.get("TournamentPurchasePrice");
-        this.SeasonPurchasePrice = this.navParams.get("SeasonPurchasePrice");
-        var regusertournaments = this.loginservice.getRegUserTournaments();
+       console.log(this.navParams.get('Ongoing_Upcoming_Tourns'));      
+       if(this.navParams.get("SelectedTournament")!=null){
+          this.tournamentsList.push(this.navParams.get("SelectedTournament"));
+       } else if(this.navParams.get("Ongoing_Upcoming_Tourns")!=null){
+           this.tournamentsList = this.navParams.get("Ongoing_Upcoming_Tourns");
+       }
+          this.tournamentsList.forEach(tourn => {
+                seasons.push({SeasonId : tourn.SeasonId,
+                                        SeasonName : tourn.SeasonName,
+                                        CircuitName : tourn.CircuitName,
+                                        SeasonStartDate : tourn.SeasonStartDate,
+                                        SeasonEndDate : tourn.SeasonEndDate,
+                                        RegisteredSeasonId:tourn.RegisteredSeasonId})           
+            });
+            this.seasonsList = this.removeDuplicates(seasons,"SeasonId");
+            console.log(this.seasonsList);
+           var index=0;
+           this.seasonsList.forEach(team => {
+             this.showHideIncludedTournsHeader[index]=false;
+             index++;
+           });
+   /*    if(this.navParams.get("SelectedTournament")!=null){
+                this.SelectedSeasonName = this.navParams.get("SelectedTournament").SeasonName;
+                this.SelectedCircuitName = this.navParams.get("SelectedTournament").CircuitName;
+                this.SelectedSeasonId = this.navParams.get("SelectedTournament").SeasonId;
+
+                this.SeasonStartDate = this.navParams.get("SelectedTournament").SeasonStartDate;
+                this.SeasonEndDate = this.navParams.get("SelectedTournament").SeasonEndDate;
+       }*/
+
+        this.subscriptionlist.getSubscriptionsList()
+                        .subscribe(data =>{
+                            console.log(data);
+                            this.TournamentPurchasePrice = data[0].Rate;
+                            this.SeasonPurchasePrice = data[1].Rate;
+                            this.TournamentProductId = data[0].ProductId;
+                            this.SeasonProductId = data[1].ProductId;
+
+                            console.log(this.TournamentPurchasePrice);
+                            console.log(this.SeasonPurchasePrice);
+            });
+
+        
+    /*    var regusertournaments = this.loginservice.getRegUserTournaments();
+        console.log(regusertournaments);
         regusertournaments.forEach(tourn => {
             if(tourn.SeasonId ==  this.SelectedSeasonId)
                 season.push(tourn);
             
         });
-        this.season = this.removeDuplicates(season,"TournamentId");
-        console.log(this.TournamentPurchasePrice);
+        this.season = this.removeDuplicates(season,"TournamentId");*/
+
        
 
+    }
+
+    showHideTournFeatures(){
+        if(this.showHideTournFeaturesHeader==false)
+            this.showHideTournFeaturesHeader=true;
+        else
+            this.showHideTournFeaturesHeader=false;
+        return this.showHideTournFeaturesHeader;
+    }
+     showHideSeasonFeatures(){
+        if(this.showHideSeasonFeaturesHeader==false)
+            this.showHideSeasonFeaturesHeader=true;
+        else
+            this.showHideSeasonFeaturesHeader=false;
+        return this.showHideSeasonFeaturesHeader;
+    }
+showHideIncludedTournsFeatures(index){
+        if(this.showHideIncludedTournsHeader[index]==false)
+            this.showHideIncludedTournsHeader[index]=true;
+        else
+            this.showHideIncludedTournsHeader[index]=false;
+        return this.showHideIncludedTournsHeader[index];
     }
     getDate(dt) {
     let t = dt.substr(0, 10);
@@ -179,7 +244,10 @@ export class PurchaseEventPage {
     // };
 
     dismiss() {
-        this.viewCtrl.dismiss();
+        //this.viewCtrl.dismiss();
+         localStorage.setItem("TabIndex","1");
+         console.log(parseInt(localStorage.getItem("TabIndex")));
+         this.navCtrl.push(MainTabs);
     }
 
     checkout(productid, tournamentid, seasonid, productrate) {
@@ -201,9 +269,23 @@ export class PurchaseEventPage {
                     console.log(data);
                     this.loginservice.setRegUserTournaments(data.RegUserTournaments);
                     this.loginservice.setRegUserPlayers(data.RegUserPlayers);
-                    localStorage.setItem("TabIndex",'1');
-                    this.navCtrl.push(EventsPage);
+                    localStorage.setItem("TabIndex","1");
+                    this.navCtrl.push(MainTabs);
              })
+  }
+
+  goToAllEvents(){
+        localStorage.setItem("TabIndex","1");
+        this.navCtrl.push(MainTabs);
+  }
+
+  goToEventPage(tourn){
+       localStorage.setItem("SelectedTournamentId", tourn.TournamentId);
+       localStorage.setItem("SelectedTournamentName", tourn.TournamentName);
+       localStorage.setItem("FromEventsTab","false");
+       let EventModal = this.modalCtrl.create(SelectedEventTabs);
+         EventModal.present();
+
   }
 }
 

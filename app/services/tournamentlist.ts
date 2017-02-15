@@ -5,22 +5,18 @@ import 'rxjs/Rx';
 import {MyPlayerConfigService} from './config';
 
 @Injectable()
-export class SavePlayerService {
+export class TournamentsListService {
 
-  private apiPath;
-  private userInfo;
+  private apiPath = '/api/User/GetRegUserFollowupTournaments';
 
   constructor(private _http: Http,
     private _config: MyPlayerConfigService) {
     this._http = _http;
-    this.apiPath = '/api/CustodianPlayer/UpdateCustodianplayerdetails?Sports=basketball';
   }
 
-  savePlayer(queryParam) {
-
-    let body = JSON.stringify(queryParam)
-    return this._http.post(this._config.getHttp() + this._config.getApiHost() + this.apiPath,
-      body,
+  getTournamentsList(userid,userrole) {
+    var params = '?userId=' + userid + '&Userrole=' + userrole;
+    return this._http.get(this._config.getHttp() + this._config.getApiHost() + this.apiPath + params,
       { headers: this._config.getDefaultHeaders() })
       .map(res => res.json())
       .catch(this.handleError);
@@ -30,7 +26,5 @@ export class SavePlayerService {
     console.error(JSON.stringify(error));
     return Observable.throw(error.json().error || 'Server error');
   }
-
-
 }
 
