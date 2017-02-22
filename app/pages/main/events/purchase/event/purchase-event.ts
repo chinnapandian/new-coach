@@ -244,10 +244,16 @@ showHideIncludedTournsFeatures(index){
     // };
 
     dismiss() {
-        //this.viewCtrl.dismiss();
-         localStorage.setItem("TabIndex","1");
+        this.viewCtrl.dismiss();
+        localStorage.setItem("TabIndex","1");
          console.log(parseInt(localStorage.getItem("TabIndex")));
-         this.navCtrl.push(MainTabs);
+         this.navCtrl.setRoot(MainTabs);
+      /*     this.viewCtrl.dismiss();
+            this.navCtrl.remove(this.viewCtrl.index);
+           this.navCtrl.remove(this.viewCtrl.index-1);
+           this.navCtrl.remove(this.viewCtrl.index-2);
+            this.navCtrl.remove(this.viewCtrl.index-3);*/
+
     }
 
     checkout(productid, tournamentid, seasonid, productrate) {
@@ -269,14 +275,17 @@ showHideIncludedTournsFeatures(index){
                     console.log(data);
                     this.loginservice.setRegUserTournaments(data.RegUserTournaments);
                     this.loginservice.setRegUserPlayers(data.RegUserPlayers);
+                   this.viewCtrl.dismiss();
                     localStorage.setItem("TabIndex","1");
-                    this.navCtrl.push(MainTabs);
+                    this.navCtrl.setRoot(MainTabs);
+
              })
   }
 
   goToAllEvents(){
         localStorage.setItem("TabIndex","1");
-        this.navCtrl.push(MainTabs);
+        this.viewCtrl.dismiss();
+        this.navCtrl.setRoot(MainTabs);
   }
 
   goToEventPage(tourn){

@@ -83,6 +83,7 @@ export class AddPlayerPage {
 
     this._playerposition.getPositionsList()
       .subscribe(data => {
+        this.dataLoading = false;
         this.positions = data;
         //   this.playerposition = this.positions[0].Code;
         //   this.TeamId = -1;
@@ -90,7 +91,7 @@ export class AddPlayerPage {
         this.lastName = "";
         this.Email = "";
         this.JerseyNumber = "";
-        this.dataLoading = false;
+        
 
       })
   }
@@ -258,7 +259,7 @@ goToNewPlayer(){
     this._custPlayersService.getPlayersList(this.TeamId,this._loginService.getUserInfo().Context.User.UserId,'BasketBall')
     .subscribe(data =>{
       console.log(data);
-      this.otherCustodiansFollowedPlayers = data;
+      this.otherCustodiansFollowedPlayers = this.removeDuplicates(data,"PlayerUserId");
       if (this.otherCustodiansFollowedPlayers==null){
         this.playerUserId =0;
         this.playererror=1;
@@ -266,8 +267,15 @@ goToNewPlayer(){
       }
       else
       {
-      this.playererror=0; 
-       this.newplayer=0;
+        if (this.otherCustodiansFollowedPlayers.length==0){
+              this.playerUserId =0;
+              this.playererror=1;
+              this.newplayer=1;
+        }
+        else{
+            this.playererror=0; 
+            this.newplayer=0;
+          }
       }
       
           

@@ -11,14 +11,17 @@
             <ion-segment-button value="teams">
                 My Teams
             </ion-segment-button>
-            <ion-segment-button value="players">
+            <ion-segment-button value="players" *ngIf="UserRole=='custodian'">
                 My Players
+            </ion-segment-button>
+            <ion-segment-button value="profile" *ngIf="UserRole=='player'">
+                My Profile
             </ion-segment-button>
         </ion-segment>
 
         <!--<ion-title>My Teams</ion-title>-->
 
-        <ion-buttons end>
+        <ion-buttons end *ngIf="UserRole=='custodian'">
             <button (tap)="presentPopover($event)">
                 <ion-icon name="add-circle"></ion-icon>
             </button>
@@ -35,69 +38,76 @@
 
 </ion-header>
 
-<ion-content [ngSwitch]="homeView">
- 
+<ion-content [ngSwitch]="homeView" class="selected-player">
+
     <div *ngSwitchCase="'teams'">
-       <div *ngIf="dataLoading==false">
-        <div  *ngFor="let team of FollowedTeams | groupfollowedteamsbyorgid">
-            <ion-list-header>{{team.OrgName}}</ion-list-header>
-            <ion-card>
-                <ion-list no-wrap text-wrap *ngFor="let t of team.FollowedTeams">
-                    <a ion-item (click)="goToTeamPage(t)">
-                        <ion-avatar item-left class="A-6-S">
-                            <img [src]="'medal-shadow.png'">
-                        </ion-avatar> 
-                        <h2 title>{{t.TeamName}} ({{t.Grade}}/{{setGender(t.Gender)}})</h2>
-                        <p><b>Coach: </b>{{(t.CoachFirstName + " " + t.CoachLastName)|title}}</p>
-                    </a>
-                </ion-list>
-            </ion-card>
+        <div *ngIf="dataLoading==false && FollowedTeams!=null">
+            <div *ngFor="let team of FollowedTeams | groupfollowedteamsbyorgid">
+                <ion-list-header>{{team.OrgName}}</ion-list-header>
+                <ion-card>
+                    <ion-list no-wrap text-wrap *ngFor="let t of team.FollowedTeams">
+                        <a ion-item (click)="goToTeamPage(t)" *ngIf="UserRole=='custodian'">
+                            <ion-avatar item-left class="A-6-S">
+                                <img [src]="'medal-shadow.png'">
+                            </ion-avatar>
+                            <h2 title>{{t.TeamName}} ({{t.Grade}}/{{setGender(t.Gender)}})</h2>
+                            <p><b>Coach: </b>{{(t.CoachFirstName + " " + t.CoachLastName)|title}}</p>
+                        </a>
+                        <a ion-item *ngIf="UserRole=='player'">
+                            <ion-avatar item-left class="A-6-S">
+                                <img [src]="'medal-shadow.png'">
+                            </ion-avatar>
+                            <h2 title>{{t.TeamName}} ({{t.Grade}}/{{setGender(t.Gender)}})</h2>
+                            <p><b>Coach: </b>{{(t.CoachFirstName + " " + t.CoachLastName)|title}}</p>
+                        </a>
+                    </ion-list>
+                </ion-card>
+            </div>
         </div>
-       </div>
-         <div  text-wrap *ngIf="error==true">
+        <div text-wrap *ngIf="error==true">
             <div>
-            <h6><b>CLICK ON THE + SYMBOL AT THE TOP RIGHT TO START FOLLOWING TEAMS</b></h6>
-      </div>
-    </div> 
+                <h6><b>CLICK ON THE + SYMBOL AT THE TOP RIGHT TO START FOLLOWING TEAMS</b></h6>
+            </div>
+        </div>
     </div>
 
     <div *ngSwitchCase="'players'">
         <div *ngIf="playerdataLoading==false">
-        <ion-card *ngFor="let followedplayer of FollowedPlayers; let i =index">
-            <ion-list>
-                <a ion-item (click)="goToPlayerTabs(followedplayer)">
-                    <ion-thumbnail class="circle" item-left>
-                        <img src="{{imagePath+''+followedplayer.CustodianPlayer.Avatar}}" alt="">
-                    </ion-thumbnail>
-                    <h2 title>{{(followedplayer.CustodianPlayer.FirstName|title) + " " + (followedplayer.CustodianPlayer.LastName|title)}}</h2>
-                    <h3>{{followedplayer.CustodianPlayer.TeamName}}</h3>
-                    <p class="pos"><b>#{{followedplayer.CustodianPlayer.JerseyNumber}}</b> | {{followedplayer.CustodianPlayer.Position}}</p>
-                    <!--<p class="pos"><b>&nbsp;ID:</b> H34J7L</p>-->
-                    <!--<p>8 Games Played | 4 Recorded</p>-->
-                </a>
-            </ion-list>
-                    
-             <ion-scroll class="stat-cards" scrollX="true">
-                <ion-grid>
-                    <ion-row>
-                        <ion-col *ngFor="let stat of statCard; let j=index">
-                            <ion-card>
-                                <ion-grid>
-                                    <ion-row class="stat-card-header">
-                                        <ion-col>
-                                            <div>{{stat.header}}</div>
-                                        </ion-col>
-                                    </ion-row>
+            <ion-card *ngFor="let followedplayer of FollowedPlayers; let i =index">
+                <ion-list>
+                    <a ion-item (click)="goToPlayerTabs(followedplayer)">
+                        <ion-thumbnail class="circle" item-left>
+                            <img src="{{imagePath+''+followedplayer.CustodianPlayer.Avatar}}" alt="">
+                        </ion-thumbnail>
+                        <h2 title>{{(followedplayer.CustodianPlayer.FirstName|title) + " " + (followedplayer.CustodianPlayer.LastName|title)}}</h2>
+                        <h3>{{followedplayer.CustodianPlayer.TeamName}}</h3>
+                        <p class="pos"><b>#{{followedplayer.CustodianPlayer.JerseyNumber}}</b> | {{followedplayer.CustodianPlayer.Position}}</p>
+                        <!--<p class="pos"><b>&nbsp;ID:</b> H34J7L</p>-->
+                        <!--<p>8 Games Played | 4 Recorded</p>-->
+                    </a>
+                </ion-list>
 
-                                    <ion-row class="stat-card-data">
-                                        <ion-col>
-                                            <div>{{getStatValue(i,j)}}</div>
-                                        </ion-col>
-                                    </ion-row>
-                                </ion-grid>
-                            </ion-card>
-                        </ion-col>
-                      <!--  <ion-col class="view-full-stats">
+                <ion-scroll class="stat-cards" scrollX="true">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col *ngFor="let stat of statCard; let j=index">
+                                <ion-card>
+                                    <ion-grid>
+                                        <ion-row class="stat-card-header">
+                                            <ion-col>
+                                                <div>{{stat.header}}</div>
+                                            </ion-col>
+                                        </ion-row>
+
+                                        <ion-row class="stat-card-data">
+                                            <ion-col>
+                                                <div>{{getStatValue(i,j)}}</div>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </ion-card>
+                            </ion-col>
+                            <!--  <ion-col class="view-full-stats">
                             <ion-card>
                                 <button block clear (click)="goToFullStatsPage()">
                                     Full Player Stats
@@ -105,23 +115,241 @@
                                 </button>
                             </ion-card>
                         </ion-col>-->
-                    </ion-row>
-                </ion-grid>
-            </ion-scroll>
+                        </ion-row>
+                    </ion-grid>
+                </ion-scroll>
 
-            <div padding-thin b-t>
-                <button block danger small outline (click)="goToStatEventsPage(followedplayer)">Record Stats</button>
-            </div>
+                <div padding-thin b-t>
+                    <button block danger small outline (click)="goToStatEventsPage(followedplayer)">Record Stats</button>
+                </div>
 
-        </ion-card>
+            </ion-card>
         </div>
-        <div  text-wrap *ngIf="playererror==true">
+        <div text-wrap *ngIf="playererror==true">
             <div>
-            <h6><b>CLICK ON THE + SYMBOL AT THE TOP RIGHT TO ADD PLAYER</b></h6>
+                <h6><b>CLICK ON THE + SYMBOL AT THE TOP RIGHT TO ADD PLAYER</b></h6>
             </div>
-      </div>
+        </div>
     </div>
 
+    <div *ngSwitchCase="'profile'">
+        <ion-card class="player-card">
+            <ion-grid>
+                <ion-row class="player-img">
+                    <ion-col width-25>
+                        <h1 class="number" *ngIf="SelectedPlayer.JerseyNumber!=0">{{SelectedPlayer.JerseyNumber}}</h1>
+                    </ion-col>
+                    <ion-col width-50>
+                        <img src='{{imagePath}}{{SelectedPlayer.Avatar}}' alt="">
+                    </ion-col>
+                    <ion-col width-25>
+                        <h1 class="number">{{SelectedPlayer.Code}}</h1>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="player-info">
+                    <ion-col>
+                        <h1>{{(SelectedPlayer.FirstName|title) + " " + (SelectedPlayer.LastName|title)}}</h1>
+                        <h2>{{SelectedPlayer.TeamName}}</h2>
+                        <!--<p class="pos"><b>#34</b> | Point Guard</p>
+                    <p>ID: 83H4K9</p>-->
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <!--<ion-list-header>Points</ion-list-header>-->
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col *ngFor="let stat of statPTS">
+                                <ion-card class="stat-card">
+                                    <ion-grid>
+                                        <ion-row class="stat-card-header">
+                                            <ion-col>
+                                                <div>{{stat.header}}</div>
+                                            </ion-col>
+                                        </ion-row>
+
+                                        <ion-row class="stat-card-data">
+                                            <ion-col>
+                                                <div>{{stat.value}}</div>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-col>
+
+                <!--right col-->
+                <ion-col>
+                    <!--<ion-list-header>Games Played</ion-list-header>-->
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col *ngFor="let stat of statGP">
+                                <ion-card class="stat-card">
+                                    <ion-grid>
+                                        <ion-row class="stat-card-header">
+                                            <ion-col>
+                                                <div>{{stat.header}}</div>
+                                            </ion-col>
+                                        </ion-row>
+
+                                        <ion-row class="stat-card-data">
+                                            <ion-col>
+                                                <div>{{stat.value}}</div>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list-header>2-Point Shooting</ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let stat of statFG2">
+                    <ion-card class="stat-card">
+                        <ion-grid>
+                            <ion-row class="stat-card-header">
+                                <ion-col>
+                                    <div>{{stat.header}}</div>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row class="stat-card-data">
+                                <ion-col>
+                                    <div>{{stat.value}}</div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list-header>3-Point Shooting</ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let stat of statFG3">
+                    <ion-card class="stat-card">
+                        <ion-grid>
+                            <ion-row class="stat-card-header">
+                                <ion-col>
+                                    <div>{{stat.header}}</div>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row class="stat-card-data">
+                                <ion-col>
+                                    <div>{{stat.value}}</div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list-header>Combine Shooting</ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let stat of statFG">
+                    <ion-card class="stat-card">
+                        <ion-grid>
+                            <ion-row class="stat-card-header">
+                                <ion-col>
+                                    <div>{{stat.header}}</div>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row class="stat-card-data">
+                                <ion-col>
+                                    <div>{{stat.value}}</div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list-header>Free Throw Shooting</ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let stat of statFT">
+                    <ion-card class="stat-card">
+                        <ion-grid>
+                            <ion-row class="stat-card-header">
+                                <ion-col>
+                                    <div>{{stat.header}}</div>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row class="stat-card-data">
+                                <ion-col>
+                                    <div>{{stat.value}}</div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list-header>Rebounding</ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let stat of statRB">
+                    <ion-card class="stat-card">
+                        <ion-grid>
+                            <ion-row class="stat-card-header">
+                                <ion-col>
+                                    <div>{{stat.header}}</div>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row class="stat-card-data">
+                                <ion-col>
+                                    <div>{{stat.value}}</div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list-header>Ball Control</ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let stat of statBC">
+                    <ion-card class="stat-card">
+                        <ion-grid>
+                            <ion-row class="stat-card-header">
+                                <ion-col>
+                                    <div>{{stat.header}}</div>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row class="stat-card-data">
+                                <ion-col>
+                                    <div>{{stat.value}}</div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 
     <!--<div padding-horizontal>-->
     <!--<button outline block small>-->
@@ -129,5 +357,5 @@
     <!--<span>Add Another Team</span>-->
     <!--</button>-->
     <!--</div>-->
-    <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+    <ion-spinner name="ios-small" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

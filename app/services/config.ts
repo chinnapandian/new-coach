@@ -28,8 +28,8 @@ export class MyPlayerConfigService {
     }
 
     getApiHost() {
-        return "stage.myludus.com";
-    //  return "zerogravity.myludus.com";
+      // return "stage.myludus.com";
+     return "zerogravity.myludus.com";
       // return  "mygame.local";
     };
 

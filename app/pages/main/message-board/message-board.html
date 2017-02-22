@@ -16,6 +16,11 @@
                     <ion-icon name="search"></ion-icon>
                 </button>
         </ion-buttons>
+          <ion-buttons start>
+            <button (click)="doRefresh()">
+                <ion-icon ios="ios-refresh" md="md-refresh"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 
     <!--<ion-toolbar primary no-border-top>-->
@@ -107,5 +112,5 @@
             </ion-row>-->
         </ion-grid>
     </ion-card>
-    <ion-spinner name="bubbles" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+    <ion-spinner name="ios-small" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

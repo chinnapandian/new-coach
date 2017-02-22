@@ -3,7 +3,7 @@ import { NavController, ViewController, ModalController, NavParams } from 'ionic
 import { LocationsListService } from "../../../../../services/getlocations";
 import { LoginService } from "../../../../../services/login";
 import { Geolocation } from 'ionic-native';
-import {MainTabs} from '../../../../main/tabs/main-tabs';
+import { MainTabs } from '../../../../main/tabs/main-tabs';
 declare var google;
 
 @Component({
@@ -32,7 +32,7 @@ export class EventInfoPage {
         this.SelectedTournamentId = localStorage.getItem("SelectedTournamentId");
         this.SelectedTournamentName = localStorage.getItem("SelectedTournamentName");
         this.tourngames = this._loginService.getTournamentSchedules();
-        if(this.tourngames!=null){
+        if (this.tourngames != null) {
             for (var i = 0; i < this.tourngames.length; i++) {
                 if (this.tourngames[i].TournamentId == this.SelectedTournamentId)
                     this.selectedTournGames.push(this.tourngames[i]);
@@ -45,6 +45,7 @@ export class EventInfoPage {
 
         this._locationsListService.getLocationsList()
             .subscribe(data => {
+                this.dataLoading = false;
                 this.facilitiesaddress = data;
                 console.log(this.facilitiesaddress);
                 for (var i = 0; i < this.uniqueLocations.length; i++) {
@@ -70,7 +71,7 @@ export class EventInfoPage {
                     }
                 }
                 console.log(this.facilities);
-                this.dataLoading = false;
+
             });
     }
 
@@ -142,14 +143,17 @@ export class EventInfoPage {
     }
 
     dismiss() {
-        localStorage.setItem("TabIndex","1");
-         if(localStorage.getItem("FromEventsTab")=="true"){
-              this.viewCtrl.dismiss();
-         }else{        
-               this.viewCtrl.dismiss();
+        localStorage.setItem("TabIndex", "1");
+        if (localStorage.getItem("FromEventsTab") == "true") {
+            this.viewCtrl.dismiss();
+        } else {
+            this.viewCtrl.dismiss();
+            if (localStorage.getItem('device').toLowerCase() == "android")
                 this.navCtrl.push(MainTabs);
-         }
-         localStorage.setItem("FromEventsTab","false");  
+            else
+                this.navCtrl.setRoot(MainTabs);
+        }
+        localStorage.setItem("FromEventsTab", "false");
     }
 
 

@@ -16,8 +16,8 @@ export class GetPlayerStatsService {
     this._http = _http;
   }
 
-  getPlayerStats(userid, tournid, playeruserid, teamid, gameid) {  
-    var params = '?userId=' + userid + '&TournamentId=' + tournid + '&PlayerUserId=' + playeruserid + '&TeamId=' + teamid+ '&GameId=' + gameid + '&sports=basketball'; 
+  getPlayerStats(userid, tournid, playeruserid, teamid, gameid, userrole) {  
+    var params = '?userId=' + userid + '&TournamentId=' + tournid + '&PlayerUserId=' + playeruserid + '&TeamId=' + teamid+ '&GameId=' + gameid + '&sports=basketball' + '&UserRole=' + userrole; 
     console.log(params);
     return this._http.get(this._config.getHttp() + this._config.getApiHost() + this.apiPath + params,
       { headers: this._config.getDefaultHeaders() })

@@ -16,6 +16,7 @@ export class TournamentsListService {
 
   getTournamentsList(userid,userrole) {
     var params = '?userId=' + userid + '&Userrole=' + userrole;
+    console.log(this._config.getHttp() + this._config.getApiHost() + this.apiPath + params);
     return this._http.get(this._config.getHttp() + this._config.getApiHost() + this.apiPath + params,
       { headers: this._config.getDefaultHeaders() })
       .map(res => res.json())

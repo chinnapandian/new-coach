@@ -75,7 +75,7 @@ export class LoginPage {
           loader.dismiss();
           if(data.IsSuccess==true)
           {
-              console.log(data.AuthToken);
+              console.log(data);
           //    this._config.setAuthToken(data.AuthToken);
               localStorage.setItem('AuthToken',data.AuthToken);
               this._config.setUserNamePassword(this.getEmailForm.controls['Email'].value,this.getEmailForm.controls['Password'].value);
@@ -92,7 +92,7 @@ export class LoginPage {
                 .subscribe(data => {
                 this._config.setCurrDate(data.CurrDate);
                 }); 
-              this.navCtrl.setRoot(MainTabs); 
+              this.navCtrl.push(MainTabs); 
 
                    
           }

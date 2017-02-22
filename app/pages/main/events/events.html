@@ -17,6 +17,11 @@
                 <ion-icon name="search"></ion-icon>
             </button>
         </ion-buttons>
+        <ion-buttons start>
+            <button (click)="doRefresh()">
+                <ion-icon ios="ios-refresh" md="md-refresh"></ion-icon>
+            </button>
+        </ion-buttons>
 
     </ion-navbar>
 
@@ -51,13 +56,16 @@
                             <ion-avatar class="A-6-S" item-left>
                                 <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
                             </ion-avatar>
-                            <a>
+                           <a *ngIf="UserRole=='custodian'">
                                 <h2 title>{{tourn.TournamentName}}</h2>
                                 <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
                             </a>
-                            <button item-right primary outline *ngIf="tourn.isRegistered==1" (click)="goToSelectedEventPage(tourn)">View</button>
-                            <button item-right primary outline *ngIf="tourn.isRegistered==0" (click)="goToPurchaseEventPage(tourn)">Buy</button>
-
+                            <button item-right primary outline *ngIf="tourn.isRegistered==1 && UserRole=='custodian'" (click)="goToSelectedEventPage(tourn)">View</button>
+                            <button item-right primary outline *ngIf="tourn.isRegistered==0 && UserRole=='custodian'" (click)="goToPurchaseEventPage(tourn)">Buy</button>
+                            <a  (click)="goToSelectedEventPage(tourn)" *ngIf="UserRole=='player'">
+                                <h2 title>{{tourn.TournamentName}}</h2>
+                                <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
+                            </a>
                         </ion-item>
                     </ion-card>
                 </div>
@@ -74,13 +82,16 @@
                                 <ion-avatar class="A-6-S" item-left>
                                     <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
                                 </ion-avatar>
-                                <a>
-                                    <h2 title>{{tourn.TournamentName}}</h2>
-                                    <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
-                                </a>
-                                <button item-right primary outline *ngIf="tourn.isRegistered==1" (click)="goToSelectedEventPage(tourn)">View</button>
-                                <button item-right primary outline *ngIf="tourn.isRegistered==0" (click)="goToPurchaseEventPage(tourn)">Buy</button>
-
+                                <a *ngIf="UserRole=='custodian'">
+                                <h2 title>{{tourn.TournamentName}}</h2>
+                                <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
+                            </a>
+                            <button item-right primary outline *ngIf="tourn.isRegistered==1 && UserRole=='custodian'" (click)="goToSelectedEventPage(tourn)">View</button>
+                            <button item-right primary outline *ngIf="tourn.isRegistered==0 && UserRole=='custodian'" (click)="goToPurchaseEventPage(tourn)">Buy</button>
+                            <a  (click)="goToSelectedEventPage(tourn)" *ngIf="UserRole=='player'">
+                                <h2 title>{{tourn.TournamentName}}</h2>
+                                <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
+                            </a>
                             </ion-item>
                         </ion-card>
                     </div>
@@ -97,13 +108,16 @@
                             <ion-avatar class="A-6-S" item-left>
                                 <img src="http://admin.tourneymachine.com/Public/CustomerFiles/h201310220800267707a0d3c45337b49/ZG%20Desktop%20Logo.png">
                             </ion-avatar>
-                            <a>
+                            <a *ngIf="UserRole=='custodian'">
                                 <h2 title>{{tourn.TournamentName}}</h2>
                                 <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
                             </a>
-                            <button item-right primary outline *ngIf="tourn.isRegistered==1" (click)="goToSelectedEventPage(tourn)">View</button>
-                            <button item-right primary outline *ngIf="tourn.isRegistered==0" (click)="goToPurchaseEventPage(tourn)">Buy</button>
-
+                            <button item-right primary outline *ngIf="tourn.isRegistered==1 && UserRole=='custodian'" (click)="goToSelectedEventPage(tourn)">View</button>
+                            <button item-right primary outline *ngIf="tourn.isRegistered==0 && UserRole=='custodian'" (click)="goToPurchaseEventPage(tourn)">Buy</button>
+                            <a  (click)="goToSelectedEventPage(tourn)" *ngIf="UserRole=='player'">
+                                <h2 title>{{tourn.TournamentName}}</h2>
+                                <p subtitle>{{getDate(tourn.StartDate)}} - {{getDate(tourn.EndDate)}}</p>
+                            </a>
                         </ion-item>
                     </ion-card>
                 </div>
@@ -215,10 +229,10 @@
                     </a>
                 </ion-list>
             </ion-card>-->
-    <ion-spinner name="bubbles" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+    <ion-spinner name="ios-small" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 
 
-<!--    <div *ngSwitchCase="'league'">
+    <!--    <div *ngSwitchCase="'league'">
            <ion-list-header text-wrap>Zero Gravity Fall 2016 - New England Circut</ion-list-header>
 
             <ion-card class="">
@@ -279,10 +293,10 @@
                 </ion-list>
             </ion-card>
             <!--<h1 help text-center padding-top>Oh No!</h1>-->
-<!--<h3 padding text-center>Your coach hasn't input the practice schedule.</h3>-->
-<!--<div class="padding">-->
-<!--<button block>Create Practice Schedule</button>-->
-<!--</div>
+    <!--<h3 padding text-center>Your coach hasn't input the practice schedule.</h3>-->
+    <!--<div class="padding">-->
+    <!--<button block>Create Practice Schedule</button>-->
+    <!--</div>
         </div>-->
 
 

@@ -28,14 +28,14 @@ export class FollowTeamsPage {
   private teams = [];
   private boysteams = [];
   private girlsteams = [];
-  private selectedState;
+  private selectedOperator;
   private boysteamsFollowed = [];
   private girlsteamsFollowed = [];
   private dataLoading = true;
   private SearchKeyword = '';
   private showHideBoysHeader = [];
   private showHideGirlsHeader = [];
-  private maxTeamsToFollow = 3;
+  private maxTeamsToFollow = 10;
   private today;
 
   constructor(
@@ -53,8 +53,8 @@ export class FollowTeamsPage {
   }
 
   fillteams() {
-    this.selectedState = this.navParams.get('SelectedOperator');
-    var orgid = this.selectedState.OrgId;
+    this.selectedOperator = this.navParams.get('SelectedOperator');
+    var orgid = this.selectedOperator.OrgId;
     console.log(this.loginService.getUserInfo());
     this.today = this.config.getCurrDate();
     var userid = this.loginService.getUserInfo().Context.User.UserId;
@@ -62,6 +62,7 @@ export class FollowTeamsPage {
 
     this.teamsList.getTeamsList(orgid, userid, 'basketball')
       .subscribe(data => {
+         this.dataLoading = false;
         console.log(data);
         this.teams = data;
         for (var i = 0; i < this.teams.length; i++) {
@@ -81,7 +82,7 @@ export class FollowTeamsPage {
           this.showHideGirlsHeader[gindex] = false;
           gindex++;
         });
-        this.dataLoading = false;
+       
       })
 
   }
@@ -137,7 +138,7 @@ export class FollowTeamsPage {
     else {
       let alert = this.alertCtrl.create({
         title: 'Follow Teams',
-        subTitle: 'You can only follow a maximum of 3 Teams at a time',
+        subTitle: 'You can only follow a maximum of '+ this.maxTeamsToFollow + ' Teams at a time',
         buttons: [{
           text: 'OK',
           handler: () => {

@@ -89,7 +89,7 @@ export class GetEmailPage {
                 this._config.setCurrDate(data.CurrDate);
                 console.log(this._config.getCurrDate());
                 }); 
-              this.navCtrl.setRoot(MainTabs);         
+              this.navCtrl.push(MainTabs);         
           }
           else
           {
@@ -100,7 +100,7 @@ export class GetEmailPage {
                                     text : 'OK',
                                     handler: () => {
                                       loader.dismiss();
-                                      this.navCtrl.setRoot(LandingPage);
+                                      this.navCtrl.push(LandingPage);
                                       }
                                     }],     
                               });

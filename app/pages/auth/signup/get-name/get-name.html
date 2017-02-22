@@ -9,14 +9,13 @@
 
 <ion-content class="signup">
 
-    <div>
-        <h1 class="big-message">
+        <h1 class="signup-message">
             What's your name?
         </h1>
-    </div>
 
-    <ion-list class="auth-list">
-       <form [formGroup]="getNameForm" (ngSubmit)="onSubmit(getNameForm.value)">
+   
+       <form [formGroup]="getNameForm" (submit)="goToGetEmailPage()">
+            <ion-list class="auth-list">
         <ion-item>
             <ion-label stacked>First Name</ion-label>
             <ion-input  class="signup-name" [formControl]="getNameForm.controls['firstName']" type="text" value=""></ion-input>
@@ -35,12 +34,14 @@
             <strong>&nbsp;&nbsp;Last name is required</strong>
             </div>  
         </div>
-          </form>
-    </ion-list>
-
-    <button type="submit"  [disabled]="!getNameForm.valid" round block light (click)="goToGetEmailPage()">
-        <span>Next</span>
+      <br/>
+       <button type="submit"  [disabled]="!getNameForm.valid" round block light>
+                <span>Next</span>
         <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
-    </button>
+       </button>
+        
+        </ion-list>
+          </form>
+    
 
 </ion-content>

@@ -38,6 +38,7 @@ export class EventsPage {
     private today;
     private hideSearchBar = true;
     private SearchKeyword = '';
+    private UserRole;
     constructor(private navCtrl: NavController,
         private viewCtrl: ViewController,
         private modalCtrl: ModalController,
@@ -53,10 +54,14 @@ export class EventsPage {
            this.today=currentDate.toJSON();*/
         localStorage.setItem("TabIndex", "1");
         this.today = this.config.getCurrDate();
+        this.UserRole = this._loginService.getUserInfo().Context.User.UserRole.toLowerCase();
     }
     ionViewWillEnter() {
         this.initialize();
     }
+doRefresh(){
+   this.initialize(); 
+}
 
     addDays(theDate, days) {
         return new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
@@ -74,10 +79,11 @@ export class EventsPage {
         this.futureTournaments = [];
         this.tournlist.getTournamentsList(this._loginService.getUserInfo().Context.User.UserId,this._loginService.getUserInfo().Context.User.UserRole)
         .subscribe(data => {
+                    this.dataLoading = false;
                     RegUserTournaments = data;
             // Fill past, current and future tournaments in respective arrays
                     if (RegUserTournaments == null) {
-                        this.dataLoading = false;
+                        
                         this.currentTournaments = [];
                         this.pastTournaments = [];
                         this.futureTournaments = [];
@@ -106,7 +112,7 @@ export class EventsPage {
                         console.log(this.currentTournaments.length);
                         console.log(this.pastTournaments);
                         console.log(this.futureTournaments);
-                        this.dataLoading = false;
+                        
                     }
         })
        
@@ -153,8 +159,8 @@ export class EventsPage {
         localStorage.setItem("SelectedTournamentId", tourn.TournamentId);
         localStorage.setItem("SelectedTournamentName", tourn.TournamentName);
         localStorage.setItem("FromEventsTab","true");
-        let y = this.modalCtrl.create(SelectedEventTabs);
-        y.present();
+        let SelectedEventTabsModal = this.modalCtrl.create(SelectedEventTabs);
+        SelectedEventTabsModal.present();
 
 
     }

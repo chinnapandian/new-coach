@@ -16,6 +16,7 @@ export class TeamsListService {
 
   getTeamsList(orgid, userid, sports) {  
     var params = '?OrgId=' + orgid + '&UserId=' + userid + '&Sports=' + sports;
+    console.log(this._config.getHttp() + this._config.getApiHost() + this.apiPath + params);
     return this._http.get(this._config.getHttp() + this._config.getApiHost() + this.apiPath + params,
       { headers: this._config.getDefaultHeaders() })
       .map(res => res.json())

@@ -306,7 +306,7 @@ getplayerstats(){
     this.TeamId = localStorage.getItem("SelectedPlayerTeamId");
     //this.TeamId=500;
     this.UserId = this.loginService.getUserInfo().Context.User.UserId;
-    this.playerstatsService.getPlayerStats(this.UserId,this.Stats_TournamentId,this.PlayerUserId,this.TeamId,this.Stats_Game.GameId)    
+    this.playerstatsService.getPlayerStats(this.UserId,this.Stats_TournamentId,this.PlayerUserId,this.TeamId,this.Stats_Game.GameId,this.loginService.getUserInfo().Context.User.UserRole)    
                     .subscribe(data => {
                     this.SelectedPlayerStats=data.PlayerStatsinfo[0];
                     this.fillData();

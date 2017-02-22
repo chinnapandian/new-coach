@@ -9,13 +9,13 @@
 <ion-content class="signup">
 
     <div>
-        <h1 class="big-message">
-             Create your username and password
+        <h1 class="signup-message">
+             Create your username <br/>and password
         </h1>
     </div>
 
     <ion-list class="name auth-list">
-       <form   [formGroup]="getEmailForm" (ngSubmit)="onSubmit(getEmailForm.value)">
+       <form   [formGroup]="getEmailForm" (submit)="goToMyTeamsPage()">
         <ion-item>
             <ion-label stacked>Email</ion-label>
             <ion-input  class="signup-email" [formControl]="getEmailForm.controls['Email']" type="email" value=""></ion-input>
@@ -34,10 +34,12 @@
             <strong>&nbsp;&nbsp;Password is required</strong>
             </div> 
         </div>
+        <br/>
+        <button  type="submit"  [disabled]="!getEmailForm.valid" round block light>
+        All Done. Let's Get Started!
+    </button>
           </form>
     </ion-list>
 
-    <button  type="submit"  [disabled]="!getEmailForm.valid" round block light (click)="goToMyTeamsPage()">
-        All Done. Let's Get Started!
-    </button>
+    
 </ion-content>

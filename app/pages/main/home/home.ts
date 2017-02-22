@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ActionSheetController, Loading, AlertController, PopoverController } from 'ionic-angular';
+import { NavController, ModalController, ActionSheetController, Loading, ViewController, AlertController, PopoverController } from 'ionic-angular';
 import { FilterTeamStatePage } from './follow-teams/filter-state/filter-state';
 import { AddPopoverPage } from './add-popover/add-popover';
 import { PlayerTabs } from './player/player-tabs';
@@ -23,7 +23,6 @@ import { GroupFollowedTeamsByOrgPipe } from '../../../pipes/groupfollowedteamsby
 })
 
 export class HomePage {
-
   // Defining variable
   private dataLoading = true;
   private playerdataLoading = true;
@@ -67,6 +66,123 @@ export class HomePage {
     }
   ];
   private teams: Object = []; private boysteams = []; private girlsteams = [];
+
+  private statsHeadings: any = [
+    'PTS',
+    'REB',
+    'AST',
+    'STL',
+    'TO',
+    'BLK',
+  ];
+
+  private quickStatsHeadings: any = [
+    'PPG',
+    'FG%',
+    '3P%',
+    'FT%',
+    'RPG',
+    'APG',
+  ];
+
+  private statGP: any = [
+    {
+      header: 'Games Played',
+      value: '0'
+    }
+  ];
+
+  private statPTS: any = [
+    {
+      header: 'Points',
+      value: '0'
+    }
+  ];
+
+  private statFG: any = [
+    {
+      header: 'FGM',
+      value: '0'
+    }, {
+      header: 'FGA',
+      value: '0'
+    }, {
+      header: 'FG%',
+      value: '0'
+    }
+  ];
+
+  private statFG2: any = [
+    {
+      header: '2PM',
+      value: '0'
+    }, {
+      header: '2PA',
+      value: '0'
+    }, {
+      header: '2P%',
+      value: '0'
+    }
+  ];
+
+  private statFG3: any = [
+    {
+      header: '3PM',
+      value: '0'
+    }, {
+      header: '3PA',
+      value: '0'
+    }, {
+      header: '3P%',
+      value: '0'
+    }
+  ];
+
+  private statFT: any = [
+    {
+      header: 'FTM',
+      value: '0'
+    }, {
+      header: 'FTA',
+      value: '0'
+    }, {
+      header: 'FT%',
+      value: '0'
+    }
+  ];
+
+  private statRB: any = [
+    {
+      header: 'OREB',
+      value: '0'
+    }, {
+      header: 'DREB',
+      value: '0'
+    }, {
+      header: 'REB%',
+      value: '0'
+    }
+  ];
+
+  private statBC: any = [
+    {
+      header: 'AST',
+      value: '0'
+    }, {
+      header: 'STL',
+      value: '0'
+    }, {
+      header: 'TOV',
+      value: '0'
+    }, {
+      header: 'BLK',
+      value: '0'
+    }
+  ];
+  private SelectedPlayer;
+  private SelectedPlayerStats;
+  private UserRole;
+
   constructor(private navCtrl: NavController,
     public modalCtrl: ModalController,
     public popoverCtrl: PopoverController,
@@ -75,17 +191,25 @@ export class HomePage {
     private avatars: AvatarsListService,
     private loginService: LoginService,
     private _config: MyPlayerConfigService,
-    private playerstatsService: GetPlayerStatsService) {
-    //  localStorage.setItem("TabIndex","0");
+    private playerstatsService: GetPlayerStatsService,
+    private viewCtrl:ViewController) {
+//  localStorage.setItem("TabIndex","0");
+  /*  if(document.getElementsByTagName("ion-modal").length!=0)
+       this.navCtrl.remove(this.viewCtrl.index);*/
     this.homeView = (localStorage.getItem('homeView') == null ? this.homeView : localStorage.getItem('homeView'));
     this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
     this.fillData();
+    if(this.UserRole == 'player')
+    this.getPlayerProfile();
   }
   ionViewWillEnter() {
-    //  localStorage.setItem("TabIndex","0");
+//  localStorage.setItem("TabIndex","0");
+    
     this.homeView = (localStorage.getItem('homeView') == null ? this.homeView : localStorage.getItem('homeView'));
     this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
     this.fillData();
+    if(this.UserRole == 'player')
+        this.getPlayerProfile();
   }
   setGender(gender) {
     if (gender == 'M')
@@ -94,23 +218,21 @@ export class HomePage {
       return 'G';
   }
   fillData() {
+    this.UserRole = this.loginService.getUserInfo().Context.User.UserRole.toLowerCase();
     this.FollowedTeamsPlayers = this.loginService.getCustodianTeam();
     console.log(this.FollowedTeamsPlayers);
+    this.dataLoading = false;
     if (this.FollowedTeamsPlayers == null) {
-      this.dataLoading = false;
       this.FollowedTeams = null;
       this.error = true;
       this.playererror = true;
-
       this.loginService.setFollowedTeams(null);
     }
     else {
-      if (this.FollowedTeamsPlayers.length==0) {
-        this.dataLoading = false;
+      if (this.FollowedTeamsPlayers.length == 0) {
         this.FollowedTeams = null;
         this.error = true;
         this.playererror = true;
-
         this.loginService.setFollowedTeams(null);
       }
       else {
@@ -118,7 +240,6 @@ export class HomePage {
         // console.log(this.FollowedTeams);
         this.FollowedTeams = this.FollowedTeamsPlayers;
         this.loginService.setFollowedTeams(this.FollowedTeams);
-        this.dataLoading = false;
         /*     this.FollowedTeamsPlayers.forEach(obj => {
                if(obj.PlayerUserId!=0)
                  this.FollowedPlayers.push(obj);
@@ -128,7 +249,7 @@ export class HomePage {
 
         //getPlayerStats
         console.log(this.loginService.getUserInfo().Context.User.UserId);
-        this.playerstatsService.getPlayerStats(this.loginService.getUserInfo().Context.User.UserId, 0, 0, 0, 0)
+        this.playerstatsService.getPlayerStats(this.loginService.getUserInfo().Context.User.UserId, 0, 0, 0, 0,this.loginService.getUserInfo().Context.User.UserRole)
           .subscribe(data => {
             console.log(data);
             this.FollowedPlayers = data.PlayerStatsinfo;
@@ -203,12 +324,7 @@ export class HomePage {
       SelectedTeam: team
     });
     teamModal.onDidDismiss(data => {
-      this.FollowedTeams = data;
-      if (this.FollowedTeams == null) {
-        this.error = true;
-        this.playererror = true;
-      }
-
+      this.fillData();
     })
     teamModal.present();
   }
@@ -247,6 +363,44 @@ export class HomePage {
     });
 
     actionSheet.present();
+  }
+
+  getPlayerProfile() {
+    this.imagePath = this._config.getHttp() + this._config.getApiHost() + "/assets/images/Avathar/";
+    this.playerstatsService.getPlayerStats(this.loginService.getUserInfo().Context.User.UserId, 0, 0, 0, 0,this.loginService.getUserInfo().Context.User.UserRole)
+      .subscribe(data => {
+        console.log(data);
+        this.SelectedPlayer = data.PlayerStatsinfo[0].CustodianPlayer;
+        console.log(this.SelectedPlayer);
+        this.SelectedPlayerStats = data.PlayerStatsinfo[0];
+        console.log(this.SelectedPlayerStats);
+        // set player statistics
+        var statCardValues = [this.SelectedPlayerStats.PPG, this.SelectedPlayerStats.RPG, this.SelectedPlayerStats.APG,
+        this.SelectedPlayerStats.FGPerCent, this.SelectedPlayerStats.P3PerCent, this.SelectedPlayerStats.FTPerCent];
+        for (let i = 0; i < this.statCard.length; i++)
+          this.statCard[i].value = statCardValues[i];
+        this.statGP[0].value = this.SelectedPlayerStats.GamesPlayed;
+        this.statPTS[0].value = this.SelectedPlayerStats.Points;
+        var statFGValues = [this.SelectedPlayerStats.FGM, this.SelectedPlayerStats.FGA, this.SelectedPlayerStats.FGPerCent];
+        for (let i = 0; i < this.statFG.length; i++)
+          this.statFG[i].value = statFGValues[i];
+        var statFG2Values = [this.SelectedPlayerStats.PM2, this.SelectedPlayerStats.PA2, this.SelectedPlayerStats.P2PerCent];
+        for (let i = 0; i < this.statFG2.length; i++)
+          this.statFG2[i].value = statFG2Values[i];
+        var statFG3Values = [this.SelectedPlayerStats.PM3, this.SelectedPlayerStats.PA3, this.SelectedPlayerStats.P3PerCent];
+        for (let i = 0; i < this.statFG3.length; i++)
+          this.statFG3[i].value = statFG3Values[i];
+        var statFTValues = [this.SelectedPlayerStats.FTM, this.SelectedPlayerStats.FTA, this.SelectedPlayerStats.FTPercent];
+        for (let i = 0; i < this.statFT.length; i++)
+          this.statFT[i].value = statFTValues[i];
+        var statRBValues = [this.SelectedPlayerStats.OREB, this.SelectedPlayerStats.DREB, this.SelectedPlayerStats.REBPercent];
+        for (let i = 0; i < this.statRB.length; i++)
+          this.statRB[i].value = statRBValues[i];
+        var statBCValues = [this.SelectedPlayerStats.ASTCount, this.SelectedPlayerStats.STLCount, this.SelectedPlayerStats.TOCount, this.SelectedPlayerStats.BLKCount];
+        for (let i = 0; i < this.statBC.length; i++)
+          this.statBC[i].value = statBCValues[i];
+      })
+
   }
 
 }

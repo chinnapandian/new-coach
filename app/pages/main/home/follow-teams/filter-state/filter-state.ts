@@ -34,9 +34,10 @@ ionViewWillEnter(){
 getData(){ 
         this.eventOperatorsList.getEventOperators()
         .subscribe(data=>{
+           this.dataLoading = false;
             console.log(data);
             this.eventoperators = data;
-            this.dataLoading = false;
+           
         }); 
   
 }

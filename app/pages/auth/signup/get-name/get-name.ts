@@ -16,8 +16,8 @@ export class GetNamePage {
               private formBuilder: FormBuilder) {
      
     this.getNameForm = formBuilder.group({
-        firstName: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-        lastName: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+        firstName: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[0-9a-zA-Z ]*'), Validators.required])],
+        lastName: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[0-9a-zA-Z ]*'), Validators.required])],
     });
   
   }

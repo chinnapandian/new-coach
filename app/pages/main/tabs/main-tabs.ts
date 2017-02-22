@@ -31,5 +31,6 @@ export class MainTabs {
       this.tabIndex = (localStorage.getItem("TabIndex")==null)?0:parseInt(localStorage.getItem("TabIndex"));
       console.log(this.tabIndex);
       this.tabRef.select(this.tabIndex);
+      
  }
 }

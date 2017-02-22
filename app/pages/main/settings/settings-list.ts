@@ -29,6 +29,7 @@ export class SettingsListPage {
   private tournamentView: string = 'ongoing';
   private userInfo;
   private userName;
+
   constructor(private navCtrl: NavController,
               private viewCtrl: ViewController,
               private modalCtrl: ModalController,
@@ -47,13 +48,13 @@ export class SettingsListPage {
     console.log(this.userName);
   }
 
-  dismiss() {
+ /* dismiss() {
     var t = this.navCtrl.parent;
     t.select(0);
-   // this.navCtrl.setRoot(HomePage);
-   this.viewCtrl.dismiss();
+    this.navCtrl.setRoot(HomePage);
+ //  this.viewCtrl.dismiss();
     
-  }
+  }*/
 
    goToResetPasswordPage() {
        console.log("resetpassword");
@@ -100,8 +101,13 @@ export class SettingsListPage {
             //    this._config.setDevice(device);
             //    this._config.setRegistrationId(regid); 
                 loader.dismiss();
-                this.viewCtrl.dismiss();           
-                this.appCtrl.getRootNav().setRoot(LandingPage);
+            //     localStorage.setItem("hidetabs", "true");  
+                 window.location.reload(false);    
+              //  this.navCtrl.setRoot(LandingPage);
+            //    this.appCtrl.getRootNav().setRoot(LandingPage);
+               // this.appCtrl.getRootNav().popToRoot();
+
+                 
           });
 
     }

@@ -41,8 +41,8 @@
      <div *ngSwitchCase="'boys'">
           <div *ngIf="dataLoading==false">
             <ion-card text-wrap *ngFor="let boysteam of boysteams | sortBy : 'OrgName' | searchteam : SearchKeyword | groupboysteamsbyorgid ; let bi=index">
-                <ion-list-header  *ngIf="showHideBoysHeader[bi]==true"  primary (click)="showhideBoysteam(bi)">{{boysteam.OrgName}}
-                         <ion-icon item-right name="arrow-dropup"></ion-icon>
+                <ion-list-header *ngIf="showHideBoysHeader[bi]==true" (click)="showhideBoysteam(bi)" primary>{{boysteam.OrgName}}
+                        <ion-icon item-right name="arrow-dropup"></ion-icon>
                 </ion-list-header>
                  <ion-list-header  *ngIf="showHideBoysHeader[bi]==false" (click)="showhideBoysteam(bi)">{{boysteam.OrgName}}
                         <ion-icon item-right name="arrow-dropdown"></ion-icon>
@@ -65,12 +65,12 @@
     </div>
     <div *ngSwitchCase="'girls'">
       <ion-card  text-wrap *ngFor="let girlsteam of girlsteams  | sortBy : 'OrgName'| searchteam: SearchKeyword | groupgirlsteamsbyorgid ; let gi=index">
-           <ion-list-header  *ngIf="showHideGirlsHeader[gi]==true" primary (click)="showhideGirlsteam(gi)">{{girlsteam.OrgName}}
-               <ion-icon item-right name="arrow-dropup"></ion-icon>
-           </ion-list-header>
-           <ion-list-header  *ngIf="showHideGirlsHeader[gi]==false"  (click)="showhideGirlsteam(gi)" bar bar-header bar-positive>{{girlsteam.OrgName}}
-               <ion-icon item-right name="arrow-dropdown"></ion-icon>
-           </ion-list-header>
+           <ion-list-header *ngIf="showHideGirlsHeader[gi]==true" (click)="showhideGirlsteam(gi)" primary>{{girlsteam.OrgName}}
+                         <ion-icon item-right name="arrow-dropup"></ion-icon>
+                </ion-list-header>
+                 <ion-list-header  *ngIf="showHideGirlsHeader[gi]==false" (click)="showhideGirlsteam(gi)">{{girlsteam.OrgName}}
+                        <ion-icon item-right name="arrow-dropdown"></ion-icon>
+                 </ion-list-header>
            <ion-list *ngIf="showHideGirlsHeader[gi]==true">
                <ion-item text-wrap *ngFor="let team of girlsteam.girlsteams | sortBy : 'TeamName' |searchteam: SearchKeyword">
                     <h2 title>{{team.TeamName}} ({{team.Grade}}/{{setGender(team.Gender)}})</h2>
@@ -88,5 +88,5 @@
 
  </div> 
  </div>  
-  <ion-spinner name="bubbles"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+  <ion-spinner name="ios-small"  style="display:block;margin:auto"  [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 </ion-content>

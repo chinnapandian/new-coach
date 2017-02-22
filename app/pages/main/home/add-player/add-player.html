@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar primary>
+    <ion-navbar primary hideBackButton>
 
         <ion-buttons start>
             <button (click)="dismiss()">
@@ -112,6 +112,6 @@
                 </ion-item>
             </ion-list>
         </ion-card>
-    <ion-spinner name="bubbles" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
+    <ion-spinner name="ios-small" style="display:block;margin:auto" [style.visibility]="dataLoading? 'visible' : 'hidden'"></ion-spinner>
 
 </ion-content>

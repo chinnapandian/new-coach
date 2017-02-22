@@ -30,7 +30,7 @@ export class MessageBoardPage {
       private _loginService: LoginService,
       private msgBoard : MessageBoardService) {
         localStorage.setItem("TabIndex","2");
-        this.followedTeams = this._loginService.getFollowedTeams();
+        this.followedTeams = this.removeDuplicates(this._loginService.getFollowedTeams(),"TeamId");
         this.TeamId = -1;
         console.log(this.followedTeams);
 
@@ -38,6 +38,10 @@ export class MessageBoardPage {
   ionViewWillEnter(){
        this.getMessages();
   }
+  doRefresh(){
+     this.getMessages();
+  }
+
   getMessages(){
        console.log("getmsgs");
         this.msgBoard.getMessageList(this._loginService.getUserInfo().Context.User.UserId)
@@ -121,6 +125,19 @@ export class MessageBoardPage {
             var min = dt.substr(2,3);
             return(hours + "" + min + " " + ampm);
     }
+ removeDuplicates(originalArray, prop) {
+    var newArray = [];
+    var lookupObject = {};
+
+    for (var i in originalArray) {
+      lookupObject[originalArray[i][prop]] = originalArray[i];
+    }
+
+    for (i in lookupObject) {
+      newArray.push(lookupObject[i]);
+    }
+    return newArray;
+  }
 
   onInput(key)
     {

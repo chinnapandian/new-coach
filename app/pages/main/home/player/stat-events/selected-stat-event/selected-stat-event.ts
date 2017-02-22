@@ -199,7 +199,7 @@ export class SelectedStatEventPage {
       console.log(this.Stats_Tournament.TournamentId);
       console.log(this.PlayerUserId);
       console.log(this.TeamId);
-      this.playerstatsService.getPlayerStats(this.UserId,this.Stats_Tournament.TournamentId,this.PlayerUserId,this.TeamId,0)    
+      this.playerstatsService.getPlayerStats(this.UserId,this.Stats_Tournament.TournamentId,this.PlayerUserId,this.TeamId,0,this.loginService.getUserInfo().Context.User.UserRole)    
                     .subscribe(data => {
                         console.log(data);
                         this.FollowedPlayers = data.PlayerStatsinfo[0];   
